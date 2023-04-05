@@ -1,0 +1,7 @@
+addkeysection "Hell Mutation" hellmutation
+addmenukey "Use DNA" hm_dna
+
+alias hm_dna "openmenu HM_DnaMenu"
+
+defaultbind N hm_dna
+
