@@ -28,21 +28,16 @@ class HM_GlobalEventHandler : EventHandler
         RemovedMutations = Dictionary.Create();
     }
 
-    override void WorldThingDied(WorldEvent e)
-    {
-		//if (e.thing) // Check that the Actor is valid
-		//	console.printf("%s DIED", e.thing.GetClassName());
-    }
-
 	  override void WorldThingSpawned(WorldEvent e)
 	  {
-		  //if (e.thing) // Check that the Actor is valid
-			//  console.printf("SPAWNED %s", e.thing.GetClassName());
-       if(e.thing is "PlayerPawn") {
-          console.printf("PLAYER PAWN SPAWNED %s", e.thing.GetClassName());
+		    //if (e.thing) // Check that the Actor is valid
+			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
-          e.thing.ACS_NamedExecute("hm_hud", 0);
-       }
+        if(e.thing is "PlayerPawn")
+        {
+            // Run HUD script for each player
+            e.thing.ACS_NamedExecute("hm_hud", 0);
+        }
 	  }
 
     override void NetworkProcess(consoleevent e)
@@ -50,30 +45,26 @@ class HM_GlobalEventHandler : EventHandler
         if (e.name.IndexOf("HM_RemoveMutation:") >= 0) // sent by DNA menu
         {
             Array <String> parts;
-			e.name.split(parts, ":");
+			      e.name.split(parts, ":");
 
+            let playerNumber = e.args[0];
             let mutationName = parts[1];
-            console.printf("REMOVED MUTATION %s", mutationName);
+            console.printf("REMOVED MUTATION %s BY PLAYER %d", mutationName, playerNumber);
 
             RemovedMutations.Insert(mutationName, "1");
+
+            let playerPawn = players[playerNumber].mo;
+            playerPawn.TakeInventory("HM_Dna", 1);
         }
-    }
-    
-    override void PlayerEntered(PlayerEvent e)
-    {
-        console.printf("PLAYER RESPAWNED");
     }
 
     override void WorldUnloaded(WorldEvent e) 
     {
-        console.printf("World unloaded");
         globalThinker.RemovedMutations = RemovedMutations;
-        console.printf("World unloaded");
     }
 
     override void WorldLoaded(WorldEvent e) 
     {
-        console.printf("World Loaded");
         globalThinker = HM_GlobalThinker.Get();
         RemovedMutations = globalThinker.RemovedMutations;
         if(RemovedMutations == null)
@@ -102,9 +93,6 @@ class HM_GlobalEventHandler : EventHandler
         {
             console.printf("Could not find place to spawn second DNA.");
         }
-        
-
-        console.printf("World Loaded");
     }
     
     clearscope bool IsMutationRemoved(string mutationName)

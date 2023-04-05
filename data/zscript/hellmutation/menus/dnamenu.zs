@@ -36,7 +36,7 @@ class HM_DnaMenuHandler : HM_ZFHandler
     {
         console.printf("COMMAND CLICK %s", command);
 
-		    EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s", command));
+		    EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s:", command));
         link.Close();
     }
 }
@@ -65,6 +65,8 @@ class HM_DnaMenu : HM_ZFGenericMenu
     override void Init (Menu parent)
     {
         globalHandler = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+
+        let plr = players[consoleplayer].mo;
 
         Vector2 baseRes = (640, 400);
 
