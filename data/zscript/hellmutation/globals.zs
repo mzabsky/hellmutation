@@ -71,6 +71,29 @@ class HM_GlobalEventHandler : EventHandler
             RemovedMutations = Dictionary.Create();
         }
 
+        let firstDnaPlace = FindPlaceForFirstDna();
+        if(firstDnaPlace != null)
+        {
+            firstDnaPlace.Spawn("HM_Dna", firstDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
+            console.printf("Spawned first DNA.");
+        }
+        else
+        {
+            console.printf("Could not find place to spawn first DNA.");
+        }
+
+        let secondDnaPlace = FindPlaceForSecondDna();
+        if(secondDnaPlace != null)
+        {
+            secondDnaPlace.Spawn("HM_Dna", secondDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
+            console.printf("Spawned second DNA.");
+        }
+        else
+        {
+            console.printf("Could not find place to spawn second DNA.");
+        }
+        
+
         console.printf("World Loaded");
     }
     
@@ -81,5 +104,75 @@ class HM_GlobalEventHandler : EventHandler
 
         console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
         return isRemoved;
+    }
+
+    private Actor FindPlaceForFirstDna()
+    {
+        let finder = ThinkerIterator.Create("MegasphereHealth");
+        let actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("Soulsphere");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("BFG9000");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("PlasmaRifle");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("RocketLauncher");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        return null;
+    }
+
+    private Actor FindPlaceForSecondDna()
+    {
+        let finder = ThinkerIterator.Create("Shotgun");
+        let actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("Chaingun");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("SuperShotgun");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("Medikit");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("Stimpack");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        return null;
     }
 }
