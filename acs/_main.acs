@@ -8,7 +8,13 @@
 # define COOPERATIVE (GameType() == GAME_NET_COOPERATIVE || GameType() == GAME_SINGLE_PLAYER)
 # define COMPETITIVE (GameType() == GAME_NET_DEATHMATCH)
 
-script "hm_enter" ENTER 
-{
-    DamageThing(10); // Damage the player as soon as he spawns. How evil!
+script "hm_hud" (void) CLIENTSIDE {
+    while(true){
+        if(CheckInventory("HM_Dna") > 0) {
+            SetFont("DOOMFONT");
+	        HudMessage(s:"You have \c[Red]", d:CheckInventory("HM_Dna"), s:"\c[Yellow] unused DNA. Press \c[White]", k:"hm_dna", s:"\c[Yellow] to remove a mutation from the monsters!"; HUDMSG_PLAIN,785,CR_YELLOW,0.5,0.9,0.5,0);
+        }
+
+        delay(7);
+    }
 }

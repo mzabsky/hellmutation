@@ -36,8 +36,13 @@ class HM_GlobalEventHandler : EventHandler
 
 	  override void WorldThingSpawned(WorldEvent e)
 	  {
-		  if (e.thing) // Check that the Actor is valid
-			  console.printf("SPAWNED %s", e.thing.GetClassName());
+		  //if (e.thing) // Check that the Actor is valid
+			//  console.printf("SPAWNED %s", e.thing.GetClassName());
+       if(e.thing is "PlayerPawn") {
+          console.printf("PLAYER PAWN SPAWNED %s", e.thing.GetClassName());
+
+          e.thing.ACS_NamedExecute("hm_hud", 0);
+       }
 	  }
 
     override void NetworkProcess(consoleevent e)
@@ -52,6 +57,11 @@ class HM_GlobalEventHandler : EventHandler
 
             RemovedMutations.Insert(mutationName, "1");
         }
+    }
+    
+    override void PlayerEntered(PlayerEvent e)
+    {
+        console.printf("PLAYER RESPAWNED");
     }
 
     override void WorldUnloaded(WorldEvent e) 
