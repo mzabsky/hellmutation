@@ -37,7 +37,7 @@ class HM_GlobalEventHandler : EventHandler
 
     override void PlayerSpawned (PlayerEvent e)
     {
-        console.printf("PLAYER SPAWNED %d", e.playerNumber);
+        //console.printf("PLAYER SPAWNED %d", e.playerNumber);
 		    //if (e.thing) // Check that the Actor is valid
 			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
@@ -53,8 +53,7 @@ class HM_GlobalEventHandler : EventHandler
 
             let playerNumber = e.args[0];
             let mutationName = parts[1];
-            console.printf("REMOVED MUTATION %s BY PLAYER %d", mutationName, playerNumber);
-
+            console.printf("%s REMOVED MUTATION %s", players[playerNumber].GetUserName(), mutationName);
             ActiveMutations.Insert(mutationName, "0");
 
             let playerPawn = players[playerNumber].mo;
@@ -70,7 +69,7 @@ class HM_GlobalEventHandler : EventHandler
         MapNumber = globalThinker.MapNumber;
         ActiveMutations = globalThinker.ActiveMutations;
 
-        console.printf("WORLD LOADED MAP %d", MapNumber);
+        //console.printf("WORLD LOADED MAP %d", MapNumber);
 
         if(ActiveMutations == null)
         {
@@ -114,7 +113,7 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldUnloaded(WorldEvent e) 
     {
-        console.printf("WORLD UNLOADED MAP %d", MapNumber);
+        //console.printf("WORLD UNLOADED MAP %d", MapNumber);
 
         MapNumber++;
 
@@ -127,7 +126,7 @@ class HM_GlobalEventHandler : EventHandler
         let foundValue = ActiveMutations.At(mutationName);
         let isRemoved = foundValue != "1";
 
-        console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
+        //console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
         return isRemoved;
     }
 

@@ -42,7 +42,7 @@ class HM_DnaMenuHandler : HM_ZFHandler
             return;
         }
 
-        console.printf("COMMAND CLICK %s", command);
+        //console.printf("COMMAND CLICK %s", command);
 
 		EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s", command), consoleplayer);
         link.Close();
