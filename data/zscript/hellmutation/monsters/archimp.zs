@@ -15,8 +15,6 @@ class HM_ArchImp : DoomImp
 		PainChance 100;
     }
 
-    HM_GlobalEventHandler global;
-
     States
 	{
         Spawn:
@@ -64,11 +62,6 @@ class HM_ArchImp : DoomImp
         Raise:
             HELN TSRQPON 6;
             goto See;
-    }
-
-    override void PostBeginPlay()
-    {
-        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
     }
 }
 

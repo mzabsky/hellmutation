@@ -1,11 +1,11 @@
 class HM_ZombieMan : ZombieMan replaces ZombieMan
 {
+    mixin RefToHandler;
+
     Default
     {
     }
 
-    HM_GlobalEventHandler global;
-    bool CollisionDisabled;
     Actor Spawnee;
 
     States
@@ -32,7 +32,6 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
             POSS J 5 {
                 if(global.IsMutationActive("Decapitation"))
                 {
-                    CollisionDisabled = true;
                     Spawnee = Spawn("LostSoul", Vec3Offset(0, 0, 0), ALLOW_REPLACE);
                     Spawnee.A_Look();
                     Spawnee.A_FaceTarget();
@@ -50,20 +49,5 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
             POSS PQRST 5;
             POSS U -1;
             Stop;
-    }
-
-    override void PostBeginPlay()
-    {
-        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
-    }
-
-    override bool CanCollideWith(Actor other, bool passive)
-    {
-        if (CollisionDisabled)
-        {
-            return false;
-        }
-
-        return Super.CanCollideWIth(other, passive);
     }
 }
