@@ -31,7 +31,7 @@ extend class HM_GlobalEventHandler
             "IMPS WHO SCORE A HIT ON A PLAYER BECOME ARCH-IMPS."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "HyperFuel",
             "Hyper-Fuel",
             0,

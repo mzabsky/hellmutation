@@ -1,4 +1,6 @@
 #include "./archimp.zs"
+#include "./cyberdemon.zs"
 #include "./demon.zs"
+#include "./revenant.zs"
 #include "./spectre.zs"
 #include "./zombieman.zs"
