@@ -60,7 +60,7 @@ extend class HM_GlobalEventHandler
             "Pinkies and their variants become fully healed whenever they deal damage."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Ego",
             "Ego",
             1,
