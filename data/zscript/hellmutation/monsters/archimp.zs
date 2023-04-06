@@ -12,13 +12,13 @@ class HM_ArchImp : DoomImp
         deathsound "monster/hlndth";
         activesound "monster/hlnact";
         Health 100;
-		    PainChance 100;
+		PainChance 100;
     }
 
     HM_GlobalEventHandler global;
 
     States
-	  {
+	{
         Spawn:
             HELN A 0;
             HELN AB 10 A_Look;
