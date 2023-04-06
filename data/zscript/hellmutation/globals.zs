@@ -1,6 +1,7 @@
 class HM_GlobalThinker : Thinker
 {
-    Dictionary RemovedMutations;
+    int MapNumber;
+    Dictionary ActiveMutations;
 
     static HM_GlobalThinker Get()
     {
@@ -16,16 +17,22 @@ class HM_GlobalThinker : Thinker
     }
 }
 
-
 class HM_GlobalEventHandler : EventHandler
 {
-    Dictionary RemovedMutations;
+    // This could be better done with associative arrays, once their const methods are in stable version
+    Array<HM_MutationDefinition> mutationDefinitions;
+
+    int MapNumber;
+    Dictionary ActiveMutations;
+    Array<string> MutationRemovalsOnOffer;
+
     HM_GlobalThinker globalThinker;
 
     override void NewGame()
     {
-        globalThinker = HM_GlobalThinker.Get();
-        RemovedMutations = Dictionary.Create();
+        MapNumber = 0;
+        ActiveMutations = Dictionary.Create();
+        //MutationRemovalsOnOffer = new Array<string>();
     }
 
 	  override void WorldThingSpawned(WorldEvent e)
@@ -51,25 +58,38 @@ class HM_GlobalEventHandler : EventHandler
             let mutationName = parts[1];
             console.printf("REMOVED MUTATION %s BY PLAYER %d", mutationName, playerNumber);
 
-            RemovedMutations.Insert(mutationName, "1");
+            ActiveMutations.Insert(mutationName, "0");
 
             let playerPawn = players[playerNumber].mo;
             playerPawn.TakeInventory("HM_Dna", 1);
         }
     }
 
-    override void WorldUnloaded(WorldEvent e) 
-    {
-        globalThinker.RemovedMutations = RemovedMutations;
-    }
-
     override void WorldLoaded(WorldEvent e) 
     {
+        CreateMutationDefinitions();
+
         globalThinker = HM_GlobalThinker.Get();
-        RemovedMutations = globalThinker.RemovedMutations;
-        if(RemovedMutations == null)
+        MapNumber = globalThinker.MapNumber;
+        ActiveMutations = globalThinker.ActiveMutations;
+
+        console.printf("WORLD LOADED MAP %d", MapNumber);
+
+        if(ActiveMutations == null)
         {
-            RemovedMutations = Dictionary.Create();
+            ActiveMutations = Dictionary.Create();
+        }
+
+        for (let i = 0; i < MutationDefinitions.Size(); i++)
+        {
+            let mutationDefinition = MutationDefinitions[i];
+            if(mutationDefinition.MapNumber != MapNumber)
+            {
+                continue;
+            }
+
+            MutationRemovalsOnOffer.Push(mutationDefinition.Key);
+            ActiveMutations.Insert(mutationDefinition.Key, "1");
         }
 
         let firstDnaPlace = FindPlaceForFirstDna();
@@ -94,14 +114,43 @@ class HM_GlobalEventHandler : EventHandler
             console.printf("Could not find place to spawn second DNA.");
         }
     }
+
+    override void WorldUnloaded(WorldEvent e) 
+    {
+        console.printf("WORLD UNLOADED MAP %d", MapNumber);
+
+        MapNumber++;
+
+        globalThinker.MapNumber = MapNumber;
+        globalThinker.ActiveMutations = ActiveMutations;
+    }
     
     clearscope bool IsMutationRemoved(string mutationName)
     {
-        let foundValue = RemovedMutations.At(mutationName);
-        let isRemoved = foundValue == "1";
+        let foundValue = ActiveMutations.At(mutationName);
+        let isRemoved = foundValue != "1";
 
         console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
         return isRemoved;
+    }
+
+    clearscope void GetMutationRemovalOnOffer(int index, out HM_MutationDefinition mutationDefinition) const
+    {
+        let mutationKey = MutationRemovalsOnOffer[index];
+        for(let i = 0; i < MutationDefinitions.Size(); i++)
+        {
+            let currentMutationDefinition = MutationDefinitions[i];
+            if(currentMutationDefinition.Key == mutationKey)
+            {
+                mutationDefinition = currentMutationDefinition;
+                return;
+            }
+        }
+    }
+
+    clearscope int GetMutationRemovalOnOfferCount() const
+    {
+        return MutationRemovalsOnOffer.Size();
     }
 
     private Actor FindPlaceForFirstDna()

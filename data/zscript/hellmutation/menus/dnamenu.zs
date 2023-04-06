@@ -36,7 +36,7 @@ class HM_DnaMenuHandler : HM_ZFHandler
     {
         console.printf("COMMAND CLICK %s", command);
 
-		    EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s:", command));
+		    EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s", command), consoleplayer);
         link.Close();
     }
 }
@@ -66,8 +66,6 @@ class HM_DnaMenu : HM_ZFGenericMenu
     {
         globalHandler = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
 
-        let plr = players[consoleplayer].mo;
-
         Vector2 baseRes = (640, 400);
 
         // Call GenericMenu's 'Init' function to do some required initialization.
@@ -86,7 +84,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         handler.link = self;
 
         // Add a background.
-        background = HM_ZFImage.Create
+        /*background = HM_ZFImage.Create
         (
             // Position
             (0, 0),
@@ -98,10 +96,10 @@ class HM_DnaMenu : HM_ZFGenericMenu
             HM_ZFImage.AlignType_TopLeft
         );
         // Add the image element into the main frame.
-        background.Pack (mainFrame);
+        background.Pack (mainFrame);*/
 
         // Create the box image's textures.
-        let boxTexture = HM_ZFBoxTextures.CreateTexturePixels
+        /*let boxTexture = HM_ZFBoxTextures.CreateTexturePixels
         (
             // The texture itself.
             "graphics/ZFormsExamples/BoxTexture.png",
@@ -128,10 +126,10 @@ class HM_DnaMenu : HM_ZFGenericMenu
             (0.25, 0.25)
         );
         // Add the box image element into the main frame.
-        aBoxImage.Pack (mainFrame);
+        aBoxImage.Pack (mainFrame);*/
 
         // Create the button's textures.
-        let buttonIdle = HM_ZFBoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonIdle.png", true);
+        /*let buttonIdle = HM_ZFBoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonIdle.png", true);
         let buttonHover = HM_ZFBoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonHovered.png", false);
         let buttonClick = HM_ZFBoxTextures.CreateSingleTexture ("graphics/ZFormsExamples/SmallButtonClicked.png", false);
         // Add a button.
@@ -151,10 +149,10 @@ class HM_DnaMenu : HM_ZFGenericMenu
             click: buttonClick
         );
         // Add the button element into the main frame.
-        aButton.Pack (mainFrame);
+        aButton.Pack (mainFrame);*/
 
         // Add a label.
-        aLabel = HM_ZFLabel.Create
+        /*aLabel = HM_ZFLabel.Create
         (
             // Position
             (0, aButton.GetPosY () + aButton.GetHeight () + 4),
@@ -174,7 +172,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         // Calculate the horizontal position for the label so that it's centered on the screen.
         aLabel.SetPosX ((baseRes.x - smallFont.stringWidth (aLabel.GetText ())) / 2.);
         // Add the label element to the main frame.
-        aLabel.Pack (mainFrame);
+        aLabel.Pack (mainFrame);*/
 
 
         
@@ -192,103 +190,43 @@ class HM_DnaMenu : HM_ZFGenericMenu
         aLabel.SetPosX ((baseRes.x - bigFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
         aLabel.Pack (mainFrame);
         
-        // Decapitation
-        if(globalHandler.IsMutationRemoved("Decapitation"))
+        let offeredMutationCount = globalHandler.GetMutationRemovalOnOfferCount();
+        for(let i = 0; i < offeredMutationCount; i++)
         {
-            buttonColor = Font.CR_BLACK;
-        }
-        else {
-            buttonColor = Font.CR_WHITE;
-        }
-        aButton = HM_ZFButton.Create
-        (
-            (25, aLabel.GetPosY() + aLabel.GetHeight() + 15),
-            (300, bigFont.GetHeight ()),
-            text: "DECAPITATION",
-            cmdHandler: handler,
-            command: "Decapitation",
-            fnt: bigFont,
-            textColor: buttonColor,
-            alignment: HM_ZFButton.AlignType_TopLeft
-        );
-        aButton.Pack (mainFrame);
-        
-        aLabel = HM_ZFLabel.Create
-        (
-            (35, aButton.GetPosY() + aButton.GetHeight() + 5),
-            (0, conFont.GetHeight () * 2),
-            text: "FORMER HUMANS AND THEIR VARIANTS MAY SPAWN A LOST SOUL AFTER DYING,\nUNLESS GIBBED.",
-            fnt: conFont,
-            wrap: false,
-            autoSize: true,
-            textColor: Font.CR_WHITE
-        );
-        aLabel.Pack (mainFrame);
+            HM_MutationDefinition mutationDefinition;
+            globalHandler.GetMutationRemovalOnOffer(i, mutationDefinition);
 
-        // Fiends
-        if(globalHandler.IsMutationRemoved("Fiends"))
-        {
-            buttonColor = Font.CR_BLACK;
+            if(globalHandler.IsMutationRemoved(mutationDefinition.Key))
+            {
+                buttonColor = Font.CR_BLACK;
+            }
+            else {
+                buttonColor = Font.CR_WHITE;
+            }
+            aButton = HM_ZFButton.Create
+            (
+                (25, aLabel.GetPosY() + aLabel.GetHeight() + 15),
+                (300, bigFont.GetHeight ()),
+                text: mutationDefinition.Name,
+                cmdHandler: handler,
+                command: mutationDefinition.Key,
+                fnt: bigFont,
+                textColor: buttonColor,
+                alignment: HM_ZFButton.AlignType_TopLeft
+            );
+            aButton.Pack (mainFrame);
+            
+            aLabel = HM_ZFLabel.Create
+            (
+                (35, aButton.GetPosY() + aButton.GetHeight() + 5),
+                (0, conFont.GetHeight () * 2),
+                text: mutationDefinition.Description,
+                fnt: conFont,
+                wrap: false,
+                autoSize: true,
+                textColor: Font.CR_WHITE
+            );
+            aLabel.Pack (mainFrame);
         }
-        else {
-            buttonColor = Font.CR_WHITE;
-        }
-        aButton = HM_ZFButton.Create
-        (
-            (25, aLabel.GetPosY() + aLabel.GetHeight() + 15),
-            (300, bigFont.GetHeight ()),
-            text: "FIENDS",
-            cmdHandler: handler,
-            command: "Fiends",
-            fnt: bigFont,
-            textColor: buttonColor,
-            alignment: HM_ZFButton.AlignType_TopLeft
-        );
-        aButton.Pack (mainFrame);
-        
-        aLabel = HM_ZFLabel.Create
-        (
-            (35, aButton.GetPosY() + aButton.GetHeight() + 5),
-            (0, conFont.GetHeight ()),
-            text: "IMPS AS WELL AS THEIR PROJECTILES ARE FASTER.",
-            fnt: conFont,
-            wrap: false,
-            autoSize: true,
-            textColor: Font.CR_WHITE
-        );
-        aLabel.Pack (mainFrame);
-        
-        // Bloodlust
-        if(globalHandler.IsMutationRemoved("Bloodlust"))
-        {
-            buttonColor = Font.CR_BLACK;
-        }
-        else {
-            buttonColor = Font.CR_WHITE;
-        }
-        aButton = HM_ZFButton.Create
-        (
-            (25, aLabel.GetPosY() + aLabel.GetHeight() + 15),
-            (300, bigFont.GetHeight ()),
-            text: "BLOODLUST",
-            cmdHandler: handler,
-            command: "Bloodlust",
-            fnt: bigFont,
-            textColor: buttonColor,
-            alignment: HM_ZFButton.AlignType_TopLeft
-        );
-        aButton.Pack (mainFrame);
-        
-        aLabel = HM_ZFLabel.Create
-        (
-            (35, aButton.GetPosY() + aButton.GetHeight() + 5),
-            (0, conFont.GetHeight ()),
-            text: "PINKIES GAIN THE ABILITY TO POUNCE FROM DISTANCE AND ACROSS GAPS.",
-            fnt: conFont,
-            wrap: false,
-            autoSize: true,
-            textColor: Font.CR_WHITE
-        );
-        aLabel.Pack (mainFrame);
     }
 }
