@@ -121,6 +121,16 @@ class HM_GlobalEventHandler : EventHandler
         globalThinker.ActiveMutations = ActiveMutations;
     }
 
+    override void WorldThingSpawned(WorldEvent e)
+    {
+        // Insomnia
+        if(e.thing.bIsMonster && players.Size() > 0 && players[0].mo != null && IsMutationActive("Insomnia"))
+        {
+            e.thing.target = players[0].mo;
+            e.thing.A_AlertMonsters();
+        }
+    }
+
     override void WorldThingDamaged(WorldEvent e)
     {
         if(e.thing is "PlayerPawn")

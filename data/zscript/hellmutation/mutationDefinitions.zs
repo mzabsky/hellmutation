@@ -39,7 +39,7 @@ extend class HM_GlobalEventHandler
         );
 
         // Level 1
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Insomnia",
             "Insomnia",
             1,
