@@ -120,6 +120,24 @@ class HM_GlobalEventHandler : EventHandler
         globalThinker.MapNumber = MapNumber;
         globalThinker.ActiveMutations = ActiveMutations;
     }
+
+    override void WorldThingDamaged(WorldEvent e)
+    {
+        if(e.thing is "PlayerPawn")
+        {
+            if(e.inflictor is "DoomImpBall" && e.inflictor.target != null && IsMutationActive("Desecration"))
+            {
+                let original = e.inflictor.target;
+
+                original.A_NoBlocking();
+                let spawnee = original.Spawn("HM_ArchImp", original.Vec3Offset(0, 0, 0), ALLOW_REPLACE);
+                original.Destroy();
+
+                spawnee.A_Face(e.thing);
+                spawnee.A_Look();
+            }
+        }
+    }
     
     clearscope bool IsMutationRemoved(string mutationName)
     {

@@ -20,14 +20,21 @@ extend class HM_GlobalEventHandler
             "Fiends",
             "Fiends",
             0,
-            "IMPS AS WELL AS THEIR PROJECTILES ARE FASTER."
+            "IMPS, THEIR VARIANTS AS WELL AS THEIR PROJECTILES ARE FASTER."
         );
 
         AddMutationDefinition(
             "Bloodlust",
             "Bloodlust",
             0,
-            "PINKIES GAIN THE ABILITY TO POUNCE FROM DISTANCE AND ACROSS GAPS."
+            "PINKIES GAIN THE ABILITY TO POUNCE FROM A DISTANCE AND ACROSS GAPS."
+        );
+
+        AddMutationDefinition(
+            "Desecration",
+            "Desecration",
+            0,
+            "IMPS WHO SCORE A HIT ON A PLAYER BECOME ARCH-IMPS."
         );
 
         AddMutationDefinition(
