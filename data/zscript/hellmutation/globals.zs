@@ -42,14 +42,6 @@ class HM_GlobalEventHandler : EventHandler
 			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
         players[e.playerNumber].mo.ACS_NamedExecute("hm_hud", 0);
-
-        let isNewGame = 1;
-        let preliminaryGlobalThinker = HM_GlobalThinker.Get(); // WorldLoaded might not have loaded yed
-        if(preliminaryGlobalThinker != null && preliminaryGlobalThinker.MapNumber > 0)
-        {
-            isNewGame = 0;
-        }
-        players[e.playerNumber].mo.ACS_NamedExecute("hm_announce", 0, isNewGame);
     }
 
     override void NetworkProcess(consoleevent e)
@@ -99,15 +91,12 @@ class HM_GlobalEventHandler : EventHandler
             newMutationsInEffect++;
         }
 
-        console.printf("%d new mutations in effect", newMutationsInEffect);
-        if(newMutationsInEffect > 0)
+        // Diplay the title card
+        for (let i = 0; i < players.Size(); i++)
         {
-            for(let i = 0; i < players.Size(); i++)
+            if (players[i].mo != null)
             {
-                if (players[i].mo != null)
-                {
-                    players[i].mo.ACS_NamedExecute("hm_announce", newMutationsInEffect);
-                }
+                players[i].mo.ACS_NamedExecute("hm_announce", 0, globalThinker.MapNumber == 0, newMutationsInEffect);
             }
         }
 
