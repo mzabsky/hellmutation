@@ -42,6 +42,14 @@ class HM_GlobalEventHandler : EventHandler
 			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
         players[e.playerNumber].mo.ACS_NamedExecute("hm_hud", 0);
+
+        let isNewGame = 1;
+        let preliminaryGlobalThinker = HM_GlobalThinker.Get(); // WorldLoaded might not have loaded yed
+        if(preliminaryGlobalThinker != null && preliminaryGlobalThinker.MapNumber > 0)
+        {
+            isNewGame = 0;
+        }
+        players[e.playerNumber].mo.ACS_NamedExecute("hm_announce", 0, isNewGame);
     }
 
     override void NetworkProcess(consoleevent e)
@@ -76,6 +84,7 @@ class HM_GlobalEventHandler : EventHandler
             ActiveMutations = Dictionary.Create();
         }
 
+        int newMutationsInEffect = 0;
         for (let i = 0; i < MutationDefinitions.Size(); i++)
         {
             let mutationDefinition = MutationDefinitions[i];
@@ -86,6 +95,20 @@ class HM_GlobalEventHandler : EventHandler
 
             MutationRemovalsOnOffer.Push(mutationDefinition.Key);
             ActiveMutations.Insert(mutationDefinition.Key, "1");
+
+            newMutationsInEffect++;
+        }
+
+        console.printf("%d new mutations in effect", newMutationsInEffect);
+        if(newMutationsInEffect > 0)
+        {
+            for(let i = 0; i < players.Size(); i++)
+            {
+                if (players[i].mo != null)
+                {
+                    players[i].mo.ACS_NamedExecute("hm_announce", newMutationsInEffect);
+                }
+            }
         }
 
         let firstDnaPlace = FindPlaceForFirstDna();

@@ -7,7 +7,6 @@
 
 # define COOPERATIVE (GameType() == GAME_NET_COOPERATIVE || GameType() == GAME_SINGLE_PLAYER)
 # define COMPETITIVE (GameType() == GAME_NET_DEATHMATCH)
-
 script "hm_hud" (void) CLIENTSIDE {
     while(true){
         if(CheckInventory("HM_Dna") > 0) {
@@ -16,5 +15,30 @@ script "hm_hud" (void) CLIENTSIDE {
         }
 
         delay(7);
+ 
+    }
+}
+
+script "hm_announce" (int isNewGame) CLIENTSIDE {
+    if(isNewGame)
+    {
+        SetFont("BIGFONT");
+        HudMessage(s:"\c[Purple]:: \c[Red]HELL \c[Purple]::"; HUDMSG_FADEOUT,0,CR_BLUE,0.5,0.3,2.0,0.5);
+        HudMessage(s:"\c[Purple]:: \c[Red]MUTATION \c[Purple]::"; HUDMSG_FADEOUT,0,CR_BLUE,0.5,0.35,2.0,0.5);
+        SetFont("DOOMFONT");
+        HudMessage(s:"\c[Yellow]Version 0.1"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.4,2.0,0.5);
+        HudMessage(s:"\ccBy \cvKlaxxon"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.45,2.0,0.5);
+    }
+
+    SetFont("BIGFONT");
+    HudMessage(s:"\c[Red]4\c[Yellow] NEW MUTATIONS IN EFFECT!"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.7,5.0,0.5);
+    SetFont("DOOMFONT");
+    HudMessage(s:"\c[Yellow]Press \c[White]", k:"hm_dna", s:"\c[Yellow] to see the mutations"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.75,6.0,1.0);
+
+    if(isNewGame)
+    {
+        HudMessage(s:"\c[Yellow]New mutations get added at the start of each level"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.78,7.0,1.0);
+        HudMessage(s:"\c[Yellow]Find \c[Purple]DNA\c[Yellow] to remove these mutations"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.81,8.0,1.0);
+        HudMessage(s:"\c[Yellow]Mutations not removed by the end of the level become permanent!"; HUDMSG_FADEOUT,0,CR_YELLOW,0.5,0.84,9.0,1.0);
     }
 }
