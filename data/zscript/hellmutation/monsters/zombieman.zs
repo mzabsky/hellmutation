@@ -20,6 +20,7 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
                     CollisionDisabled = true;
                     Spawnee = Spawn("LostSoul", Vec3Offset(0, 0, 0), ALLOW_REPLACE);
                     Spawnee.A_Look();
+                    Spawnee.A_FaceTarget();
                     SetState(FindState("XDeath+2"));
                 }
             }
