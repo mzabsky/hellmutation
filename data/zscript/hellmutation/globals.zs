@@ -35,17 +35,14 @@ class HM_GlobalEventHandler : EventHandler
         //MutationRemovalsOnOffer = new Array<string>();
     }
 
-	  override void WorldThingSpawned(WorldEvent e)
-	  {
+    override void PlayerSpawned (PlayerEvent e)
+    {
+        console.printf("PLAYER SPAWNED %d", e.playerNumber);
 		    //if (e.thing) // Check that the Actor is valid
 			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
-        if(e.thing is "PlayerPawn")
-        {
-            // Run HUD script for each player
-            e.thing.ACS_NamedExecute("hm_hud", 0);
-        }
-	  }
+        players[e.playerNumber].mo.ACS_NamedExecute("hm_hud", 0);
+    }
 
     override void NetworkProcess(consoleevent e)
     {
