@@ -53,7 +53,7 @@ extend class HM_GlobalEventHandler
             "BASIC ZOMBIEMEN WHO SCORE A HIT ON A PLAYER BECOME SHOTGUNNERS."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Hematophagy",
             "Hematophagy",
             1,

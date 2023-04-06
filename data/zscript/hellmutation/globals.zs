@@ -145,6 +145,14 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldThingDamaged(WorldEvent e)
     {
+        //console.printf("Thing damaged: %s, Health: %d", e.thing.GetClassName(), e.thing.health);
+
+        // Hematophagy
+        if(e.inflictor is "Demon" && IsMutationActive("Hematophagy"))
+        {
+            e.inflictor.A_ResetHealth();
+        }
+
         if(e.thing is "PlayerPawn")
         {
             console.printf("Player was damaged by %s", e.inflictor.GetClassName());
