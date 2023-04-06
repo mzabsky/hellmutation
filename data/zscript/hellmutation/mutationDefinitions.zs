@@ -69,8 +69,8 @@ extend class HM_GlobalEventHandler
         
         // Level 2
         AddMutationDefinition( // Not implemented
-            "Fiends",
-            "Fiends",
+            "Hellions",
+            "Hellions",
             2,
             "IMPS, THEIR VARIANTS AS WELL AS THEIR PROJECTILES ARE FASTER."
         );
@@ -83,8 +83,8 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition( // Not implemented
-            "Claws",
-            "Claws",
+            "HellsCaress",
+            "Hell's Caress",
             2,
             "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell and their\nvariants are much more powerful."
         );
