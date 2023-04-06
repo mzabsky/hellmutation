@@ -9,6 +9,7 @@ class HM_MutationDefinition
 extend class HM_GlobalEventHandler
 {
     void CreateMutationDefinitions() {
+        // Level 0
         AddMutationDefinition(
             "Stormtroopers",
             "Stormtroopers",
@@ -16,16 +17,9 @@ extend class HM_GlobalEventHandler
             "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE SHOTS."
         );
 
-        AddMutationDefinition(
-            "Fiends",
-            "Fiends",
-            0,
-            "IMPS, THEIR VARIANTS AS WELL AS THEIR PROJECTILES ARE FASTER."
-        );
-
-        AddMutationDefinition(
-            "Bloodlust",
-            "Bloodlust",
+        AddMutationDefinition( // Not implemented
+            "Macropods",
+            "Macropods",
             0,
             "PINKIES GAIN THE ABILITY TO POUNCE FROM A DISTANCE AND ACROSS GAPS."
         );
@@ -37,11 +31,69 @@ extend class HM_GlobalEventHandler
             "IMPS WHO SCORE A HIT ON A PLAYER BECOME ARCH-IMPS."
         );
 
-        AddMutationDefinition(
-            "Decapitation",
-            "Decapitation",
+        AddMutationDefinition( // Not implemented
+            "HyperFuel",
+            "Hyper-Fuel",
+            0,
+            "ALL ROCKETS (INCLUDING GUIDED ROCKETS) FIRED BY MONSTERS ARE MUCH FASTER."
+        );
+
+        // Level 1
+        AddMutationDefinition( // Not implemented
+            "Insomnia",
+            "Insomnia",
             1,
-            "FORMER HUMANS AND THEIR VARIANTS MAY SPAWN A LOST SOUL AFTER DYING,\nUNLESS GIBBED."
+            "MONSTERS DO NOT START THE LEVEL ASLEEP."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "Promotion",
+            "Promotion",
+            1,
+            "BASIC ZOMBIEMEN WHO SCORE A HIT ON A PLAYER BECOME SHOTGUNNERS."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "Hematophagy",
+            "Hematophagy",
+            1,
+            "Pinkies and their variants become fully healed whenever they deal damage."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "Ego",
+            "Ego",
+            1,
+            "Lost souls deal and take much more damage."
+        );
+        
+        // Level 2
+        AddMutationDefinition( // Not implemented
+            "Fiends",
+            "Fiends",
+            2,
+            "IMPS, THEIR VARIANTS AS WELL AS THEIR PROJECTILES ARE FASTER."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "Decapitation",
+            "Decapitation",
+            2,
+            "ZOMBIEMEN, SHOTGUNNERS AND THEIR VARIANTS MAY SPAWN A LOST SOUL AFTER DYING,\nUNLESS GIBBED."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "Claws",
+            "Claws",
+            2,
+            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell and their\nvariants are much more powerful."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "Cacoblasters",
+            "Cacoblasters",
+            2,
+            "Cacodemons always fire two additional projectiles."
         );
 
     }
