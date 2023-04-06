@@ -10,10 +10,10 @@ extend class HM_GlobalEventHandler
 {
     void CreateMutationDefinitions() {
         AddMutationDefinition(
-            "Decapitation",
-            "Decapitation",
+            "Stormtroopers",
+            "Stormtroopers",
             0,
-            "FORMER HUMANS AND THEIR VARIANTS MAY SPAWN A LOST SOUL AFTER DYING,\nUNLESS GIBBED."
+            "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE SHOTS."
         );
 
         AddMutationDefinition(
@@ -29,6 +29,14 @@ extend class HM_GlobalEventHandler
             0,
             "PINKIES GAIN THE ABILITY TO POUNCE FROM DISTANCE AND ACROSS GAPS."
         );
+
+        AddMutationDefinition(
+            "Decapitation",
+            "Decapitation",
+            1,
+            "FORMER HUMANS AND THEIR VARIANTS MAY SPAWN A LOST SOUL AFTER DYING,\nUNLESS GIBBED."
+        );
+
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, string description)

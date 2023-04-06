@@ -10,6 +10,21 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
 
     States
 	{
+         Missile:
+            POSS E 0 {
+                if(global.IsMutationActive("Stormtroopers")) {
+                    SetState(FindState("StormTrooperMissile"));
+                }
+            }
+            POSS E 10 A_FaceTarget;
+            POSS F 8 A_PosAttack;
+            POSS E 8;
+            goto See;
+        StormTrooperMissile:
+            POSS E 10 A_FaceTarget;
+            POSS F 8 A_CustomBulletAttack(5, 0, 1, random(1,5)*3, "BulletPuff", 0, CBAF_NORANDOM);
+            POSS E 8;
+            goto See;
         Death:
             POSS H 5;
             POSS I 5 A_Scream;

@@ -129,6 +129,15 @@ class HM_GlobalEventHandler : EventHandler
         //console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
         return isRemoved;
     }
+    
+    clearscope bool IsMutationActive(string mutationName)
+    {
+        let foundValue = ActiveMutations.At(mutationName);
+        let isActive = foundValue == "1";
+
+        //console.printf("IS MUTATION ACTIVE %s %i", mutationName, isActive);
+        return isActive;
+    }
 
     clearscope void GetMutationRemovalOnOffer(int index, out HM_MutationDefinition mutationDefinition) const
     {
