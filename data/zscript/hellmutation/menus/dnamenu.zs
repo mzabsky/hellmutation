@@ -9,6 +9,10 @@ class HM_DnaMenuHandler : HM_ZFHandler
 
     override void elementHoverChanged(HM_ZFElement caller, Name command, bool unhovered)
     {
+        if(!link.canRemoveMutation) {
+            return;
+        }
+
         if(caller is "HM_ZFButton") {
             let button = HM_ZFButton(caller);
 
@@ -34,9 +38,13 @@ class HM_DnaMenuHandler : HM_ZFHandler
 
     override void buttonClickCommand (HM_ZFButton caller, Name command)
     {
+        if(!link.canRemoveMutation) {
+            return;
+        }
+
         console.printf("COMMAND CLICK %s", command);
 
-		    EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s", command), consoleplayer);
+		EventHandler.SendNetworkEvent(String.Format("HM_RemoveMutation:%s", command), consoleplayer);
         link.Close();
     }
 }
@@ -48,6 +56,8 @@ class HM_DnaMenu : HM_ZFGenericMenu
     // The menu's command handler.
     // We need a command handler so we can make our menu interactable.
     HM_DnaMenuHandler handler;
+
+    bool canRemoveMutation;
 
     // A font to use for text.
     Font smallFont;
@@ -64,6 +74,9 @@ class HM_DnaMenu : HM_ZFGenericMenu
 
     override void Init (Menu parent)
     {
+        let dna = HM_Dna(players[consoleplayer].mo.FindInventory("HM_Dna"));
+        canRemoveMutation = !!dna;
+
         globalHandler = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
 
         Vector2 baseRes = (640, 400);
@@ -179,7 +192,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         // Add a label.
         aLabel = HM_ZFLabel.Create
         (
-            (0, 10),
+            (0, 40),
             (0, bigFont.GetHeight ()),
             text: "REMOVE A MUTATION",
             fnt: bigFont,
@@ -190,6 +203,34 @@ class HM_DnaMenu : HM_ZFGenericMenu
         aLabel.SetPosX ((baseRes.x - bigFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
         aLabel.Pack (mainFrame);
         
+        if(!canRemoveMutation) {
+            aLabel = HM_ZFLabel.Create
+            (
+                (0, aLabel.GetPosY() + 40),
+                (0, bigFont.GetHeight ()),
+                text: "YOU HAVE NO \c[Purple]DNA\c[Red]",
+                fnt: bigFont,
+                wrap: false,
+                autoSize: true,
+                textColor: Font.CR_RED
+            );
+            aLabel.SetPosX ((baseRes.x - bigFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+            aLabel.Pack (mainFrame);
+
+            aLabel = HM_ZFLabel.Create
+            (
+                (0, aLabel.GetPosY() + 20),
+                (0, bigFont.GetHeight ()),
+                text: "FIND \c[Purple]DNA\c[Red] TO REMOVE A MUTATION",
+                fnt: bigFont,
+                wrap: false,
+                autoSize: true,
+                textColor: Font.CR_RED
+            );
+            aLabel.SetPosX ((baseRes.x - bigFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+            aLabel.Pack (mainFrame);
+        }
+
         let offeredMutationCount = globalHandler.GetMutationRemovalOnOfferCount();
         for(let i = 0; i < offeredMutationCount; i++)
         {
