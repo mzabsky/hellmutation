@@ -3,4 +3,5 @@
 #include "./monsters/_index.zs"
 
 #include "./globals.zs"
+#include "./helpers.zs"
 #include "./mutationDefinitions.zs"

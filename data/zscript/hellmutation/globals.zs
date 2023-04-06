@@ -125,16 +125,18 @@ class HM_GlobalEventHandler : EventHandler
     {
         if(e.thing is "PlayerPawn")
         {
+            console.printf("Player was damaged by %s", e.inflictor.GetClassName());
+
+            // Desecration - player was damaged by an imp fireball
             if(e.inflictor is "DoomImpBall" && e.inflictor.target != null && IsMutationActive("Desecration"))
             {
-                let original = e.inflictor.target;
-
-                original.A_NoBlocking();
-                let spawnee = original.Spawn("HM_ArchImp", original.Vec3Offset(0, 0, 0), ALLOW_REPLACE);
-                original.Destroy();
-
-                spawnee.A_Face(e.thing);
-                spawnee.A_Look();
+                ReplaceActor(e.inflictor.target, "HM_ArchImp", e.thing);
+            }
+            
+            // Desecration - player was damaged by imp melee attack
+            if(e.inflictor is "DoomImp" && IsMutationActive("Desecration"))
+            {
+                ReplaceActor(e.inflictor, "HM_ArchImp", e.thing);
             }
         }
     }
