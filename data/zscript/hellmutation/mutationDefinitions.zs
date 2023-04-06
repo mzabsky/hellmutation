@@ -17,7 +17,7 @@ extend class HM_GlobalEventHandler
             "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE SHOTS."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Macropods",
             "Macropods",
             0,
