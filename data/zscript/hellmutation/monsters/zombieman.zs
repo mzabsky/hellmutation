@@ -28,19 +28,27 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
         Death:
             POSS H 5;
             POSS I 5 A_Scream;
-            POSS J 5 A_NoBlocking;
-            POSS K 0 {
-                if(!global.IsMutationRemoved("Decapitation"))
+            POSS J 0 A_NoBlocking;
+            POSS J 5 {
+                if(global.IsMutationActive("Decapitation"))
                 {
                     CollisionDisabled = true;
                     Spawnee = Spawn("LostSoul", Vec3Offset(0, 0, 0), ALLOW_REPLACE);
                     Spawnee.A_Look();
                     Spawnee.A_FaceTarget();
-                    SetState(FindState("XDeath+2"));
+                    SetState(FindState("XDeathFromDecapitation"));
                 }
             }
             POSS K 5;
             POSS L -1;
+            Stop;
+        XDeath:
+            POSS M 5;
+        XDeathFromDecapitation:
+            POSS N 5 A_XScream;
+            POSS O 5 A_NoBlocking;
+            POSS PQRST 5;
+            POSS U -1;
             Stop;
     }
 
