@@ -1,4 +1,5 @@
 #include "./archimp.zs"
+#include "./cacodemon.zs"
 #include "./cyberdemon.zs"
 #include "./demon.zs"
 #include "./lostsoul.zs"

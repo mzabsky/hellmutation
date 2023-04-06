@@ -89,7 +89,7 @@ extend class HM_GlobalEventHandler
             "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell and their\nvariants are much more powerful."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Cacoblasters",
             "Cacoblasters",
             2,
