@@ -1,13 +1,19 @@
 class HM_DoomImp : DoomImp replaces DoomImp
 {
     mixin HM_GlobalRef;
-    
+
     States
     {
+        See:
+            TROO A 0 {
+                bAlwaysFast = global.IsMutationActive("Brightfire");
+            }
+            TROO AABBCCDD 3 FAST A_Chase;
+            Loop;
         Melee:
         Missile:
-            TROO EF 8 A_FaceTarget;
-            TROO G 6 HM_A_TroopAttack;
+            TROO EF 8 FAST A_FaceTarget;
+            TROO G 6 FAST HM_A_TroopAttack;
             Goto See;
 
     }

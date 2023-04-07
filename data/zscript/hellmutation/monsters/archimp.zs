@@ -2,6 +2,8 @@ class HM_ArchImp : DoomImp
 {
     // The replacement of Imp is done by the global event handler -> WorldThingDamaged.
 
+    mixin HM_GlobalRef;
+
     Default
     {
         Tag "Arch-Imp";
@@ -22,22 +24,25 @@ class HM_ArchImp : DoomImp
             HELN AB 10 A_Look;
             goto Spawn;
         See:
-            HELN AABBCCDDEEFF 2 A_Chase("Melee", "Missile", CHF_RESURRECT);
+            HELN A 0 {
+                bAlwaysFast = global.IsMutationActive("Brightfire");
+            }
+            HELN AABBCCDDEEFF 2 FAST A_Chase("Melee", "Missile", CHF_RESURRECT);
             loop;
         Heal:
             HELN G 30 BRIGHT;
             Goto See;
         Melee:
         Missile:
-            HELN G 0 A_VileStart;
-            HELN GHIJK 6 Bright A_FaceTarget;
-            HELN L 6 Bright;
+            HELN G 0 FAST A_VileStart;
+            HELN GHIJK 6 Bright FAST A_FaceTarget;
+            HELN L 6 Bright FAST;
             HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,-4);
             HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,-2);
             HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,0);
             HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,2);
             HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,4);
-            HELN L 2;
+            HELN L 2 FAST;
             goto See;
         Pain:
             HELN M 2;

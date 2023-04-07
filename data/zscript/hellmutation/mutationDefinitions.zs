@@ -68,11 +68,11 @@ extend class HM_GlobalEventHandler
         );
         
         // Level 2
-        AddMutationDefinition( // Not implemented
-            "Hellions",
-            "Hellions",
+        AddMutationDefinition(
+            "Brightfire",
+            "Brightfire",
             2,
-            "IMPS, THEIR VARIANTS AS WELL AS THEIR PROJECTILES ARE FASTER."
+            "IMPS AND THEIR VARIANTS ARE FASTER."
         );
 
         AddMutationDefinition(
