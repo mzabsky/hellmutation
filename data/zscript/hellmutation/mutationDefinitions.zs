@@ -11,28 +11,28 @@ extend class HM_GlobalEventHandler
     void CreateMutationDefinitions() {
         // Level 0
         AddMutationDefinition(
-            "Stormtroopers",
+            "stormtroopers",
             "Stormtroopers",
             0,
             "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE."
         );
 
         AddMutationDefinition(
-            "Macropods",
+            "macropods",
             "Macropods",
             0,
             "PINKIES GAIN THE ABILITY TO POUNCE FROM A DISTANCE AND ACROSS GAPS."
         );
 
         AddMutationDefinition(
-            "Desecration",
+            "desecration",
             "Desecration",
             0,
             "IMPS WHO SCORE A HIT ON A PLAYER BECOME ARCH-IMPS."
         );
 
         AddMutationDefinition(
-            "HyperFuel",
+            "hyperfuel",
             "Hyper-Fuel",
             0,
             "ALL ROCKETS AND GUIDED ROCKETS FIRED BY MONSTERS ARE MUCH FASTER."
@@ -40,28 +40,28 @@ extend class HM_GlobalEventHandler
 
         // Level 1
         AddMutationDefinition(
-            "Insomnia",
+            "insomnia",
             "Insomnia",
             1,
             "MONSTERS DO NOT START THE LEVEL ASLEEP."
         );
 
         AddMutationDefinition(
-            "Promotion",
+            "promotion",
             "Promotion",
             1,
             "BASIC ZOMBIEMEN WHO SCORE A HIT ON A PLAYER BECOME SHOTGUNNERS."
         );
 
         AddMutationDefinition(
-            "Hematophagy",
+            "hematophagy",
             "Hematophagy",
             1,
             "Pinkies and their variants become fully healed whenever they deal damage."
         );
 
         AddMutationDefinition(
-            "Ego",
+            "ego",
             "Ego",
             1,
             "Lost souls deal and take much more damage."
@@ -69,60 +69,69 @@ extend class HM_GlobalEventHandler
         
         // Level 2
         AddMutationDefinition(
-            "Brightfire",
+            "brightfire",
             "Brightfire",
             2,
             "IMPS AND THEIR VARIANTS ARE FASTER."
         );
 
         AddMutationDefinition(
-            "Decapitation",
+            "decapitation",
             "Decapitation",
             2,
             "ZOMBIEMEN, SHOTGUNNERS, Chaingunners AND THEIR VARIANTS MAY SPAWN \nA LOST SOUL AFTER DYING, UNLESS GIBBED."
         );
 
         AddMutationDefinition(
-            "HellsCaress",
+            "hellscaress",
             "Hell's Caress",
             2,
             "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nand their  variants are much more powerful."
         );
 
         AddMutationDefinition(
-            "Cacoblasters",
+            "cacoblasters",
             "Cacoblasters",
             2,
             "Cacodemons always fire two additional projectiles."
         );
 
         AddMutationDefinition( // NOT IMPLEMENTED
-            "Adrenaline",
+            "adrenaline",
             "Adrenaline",
             3,
             "Zombiemen, Shotgunners and their variants are faster."
         );
 
         AddMutationDefinition( // NOT IMPLEMENTED
-            "Slimeborne",
+            "slimeborne",
             "Slimeborne",
             3,
             "Player losing health to a damaging floor might cause Pinkies to spawn."
         );
 
         AddMutationDefinition( // NOT IMPLEMENTED
-            "Sacrifice",
+            "sacrifice",
             "Sacrifice",
             3,
             "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters."
         );
 
         AddMutationDefinition( // NOT IMPLEMENTED
-            "Adipocytes",
+            "adipocytes",
             "Adipocytes",
             3,
             "Mancubuses and their variants have 200 more health."
         );
+
+        /*
+        AddMutationDefinition( // NOT IMPLEMENTED
+            "Blazeballs",
+            "Blazeballs",
+            4,
+            "Projectiles of imps and their variants are much faster."
+        );
+        */
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, string description)

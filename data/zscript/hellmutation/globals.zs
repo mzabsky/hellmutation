@@ -46,36 +46,70 @@ class HM_GlobalEventHandler : EventHandler
 
     override void NetworkProcess(consoleevent e)
     {
-        if (e.name.IndexOf("HM_RemoveMutation:") >= 0) // sent by DNA menu
+        let commandName = e.name.MakeLower();
+        if (commandName.IndexOf("hm_remove:") >= 0) // sent by DNA menu
         {
             Array <String> parts;
-			      e.name.split(parts, ":");
+			      commandName.split(parts, ":");
 
             let playerNumber = e.args[0];
             let mutationName = parts[1];
-            console.printf("%s REMOVED MUTATION %s", players[playerNumber].GetUserName(), mutationName);
-            ActiveMutations.Insert(mutationName, "0");
 
-            let playerPawn = players[playerNumber].mo;
-            playerPawn.TakeInventory("HM_Dna", 1);
-
-            for (let i = 0; i < players.Size(); i++)
+            if(IsMutationActive(mutationName))
             {
-                if (players[i].mo != null)
+                console.printf("%s removed mutation %s", players[playerNumber].GetUserName(), mutationName);
+                ActiveMutations.Insert(mutationName, "0");
+
+                let playerPawn = players[playerNumber].mo;
+                playerPawn.TakeInventory("HM_Dna", 1);
+
+                for (let i = 0; i < players.Size(); i++)
                 {
-                    players[i].mo.ACS_NamedExecute("hm_mutationremoved");
+                    if (players[i].mo != null)
+                    {
+                        players[i].mo.ACS_NamedExecute("hm_mutationremoved");
+                    }
                 }
             }
+            else
+            {
+                console.printf("%s is not an active mutation.", mutationName);
+            }
         }
-        else if (e.name.IndexOf("HM_AddMutation:") >= 0)
+        else if (commandName.IndexOf("hm_add:") >= 0)
         {
             Array <String> parts;
-            e.name.split(parts, ":");
+            commandName.split(parts, ":");
 
-            let playerNumber = e.args[0];
             let mutationName = parts[1];
-            console.printf("%s ADDED MUTATION %s", players[playerNumber].GetUserName(), mutationName);
-            ActiveMutations.Insert(mutationName, "1");
+
+            bool found = false;
+            for(let i = 0; i < mutationDefinitions.Size(); i++)
+            {
+                if (mutationDefinitions[i].Key != mutationName)
+                {
+                    continue;
+                }
+
+                found = true;
+                break;
+            }
+
+            if(found)
+            {
+
+                let playerNumber = e.args[0];
+                console.printf("%s added mutation %s", players[playerNumber].GetUserName(), mutationName);
+                ActiveMutations.Insert(mutationName, "1");
+            }
+            else
+            {
+                console.printf("Unknown mutation %s", mutationName);
+            }
+        }
+        else
+        {
+            console.printf("Unknown net command: %s", commandName);
         }
     }
 
@@ -176,7 +210,7 @@ class HM_GlobalEventHandler : EventHandler
     
     clearscope bool IsMutationRemoved(string mutationName)
     {
-        let foundValue = ActiveMutations.At(mutationName);
+        let foundValue = ActiveMutations.At(mutationName.MakeLower());
         let isRemoved = foundValue != "1";
 
         //console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
@@ -185,7 +219,7 @@ class HM_GlobalEventHandler : EventHandler
     
     clearscope bool IsMutationActive(string mutationName)
     {
-        let foundValue = ActiveMutations.At(mutationName);
+        let foundValue = ActiveMutations.At(mutationName.MakeLower());
         let isActive = foundValue == "1";
 
         //console.printf("IS MUTATION ACTIVE %s %i", mutationName, isActive);
