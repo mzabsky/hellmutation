@@ -1,6 +1,6 @@
 class HM_Cacodemon : Cacodemon replaces Cacodemon
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
 
     States
     {

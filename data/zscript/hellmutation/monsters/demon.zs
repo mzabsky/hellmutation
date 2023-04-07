@@ -1,6 +1,6 @@
 class RH_Demon : Demon replaces Demon
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
 
     Default {
         Species "Demon";

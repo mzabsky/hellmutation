@@ -1,4 +1,4 @@
-mixin class RefToHandler
+mixin class HM_GlobalRef
 {
     HM_GlobalEventHandler global;
     

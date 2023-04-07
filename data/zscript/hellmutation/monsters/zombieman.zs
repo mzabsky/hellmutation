@@ -1,6 +1,6 @@
 class HM_ZombieMan : ZombieMan replaces ZombieMan
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
     mixin HM_Decapitable;
 
     Default

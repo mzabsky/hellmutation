@@ -1,6 +1,6 @@
 class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
     mixin HM_Decapitable;
 
     States

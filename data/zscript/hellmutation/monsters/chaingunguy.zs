@@ -1,6 +1,6 @@
 class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
     mixin HM_Decapitable;
     States
     {

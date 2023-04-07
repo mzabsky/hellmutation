@@ -1,6 +1,6 @@
 class HM_RevenantTracer : RevenantTracer replaces RevenantTracer
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
 
     override void PostBeginPlay()
     {

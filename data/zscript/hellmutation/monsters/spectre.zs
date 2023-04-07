@@ -1,7 +1,7 @@
 class RH_Spectre : Spectre replaces Spectre
 {
     // Copied in its entirety from HM_Demon
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
 
     Default {
         Species "Demon";

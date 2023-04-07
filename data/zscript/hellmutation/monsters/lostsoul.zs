@@ -1,6 +1,6 @@
 class HM_LostSoul: LostSoul replaces LostSoul
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
 
     States
     {

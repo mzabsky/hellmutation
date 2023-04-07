@@ -1,6 +1,6 @@
 class HM_Rocket : Rocket replaces Rocket
 {
-    mixin RefToHandler;
+    mixin HM_GlobalRef;
 
     override void PostBeginPlay()
     {
