@@ -1,12 +1,11 @@
 class HM_ZombieMan : ZombieMan replaces ZombieMan
 {
     mixin RefToHandler;
+    mixin HM_Decapitable;
 
     Default
     {
     }
-
-    Actor Spawnee;
 
     States
 	{
@@ -26,26 +25,35 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
             POSS E 8;
             goto See;
         Death:
+            POSS H 0 {
+                if(global.IsMutationActive("Decapitation"))
+                {
+                    return ResolveState("Decapitation");
+                }
+                else {
+                    return ResolveState(null);
+                }
+            }
             POSS H 5;
             POSS I 5 A_Scream;
             POSS J 0 A_NoBlocking;
-            POSS J 5 {
-                if(global.IsMutationActive("Decapitation"))
-                {
-                    Spawnee = Spawn("LostSoul", Vec3Offset(0, 0, 0), ALLOW_REPLACE);
-                    Spawnee.A_Look();
-                    Spawnee.A_FaceTarget();
-                    SetState(FindState("XDeathFromDecapitation"));
-                }
-            }
+            POSS J 5;
             POSS K 5;
             POSS L -1;
             Stop;
         XDeath:
             POSS M 5;
-        XDeathFromDecapitation:
             POSS N 5 A_XScream;
             POSS O 5 A_NoBlocking;
+            POSS PQRST 5;
+            POSS U -1;
+            Stop;
+        Decapitation:
+            POSS H 5;
+            POSS I 5;
+            POSS J 0;
+            POSS N 5 A_XScream;
+            POSS O 5 Decapitate;
             POSS PQRST 5;
             POSS U -1;
             Stop;

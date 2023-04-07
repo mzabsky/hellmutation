@@ -75,11 +75,11 @@ extend class HM_GlobalEventHandler
             "IMPS, THEIR VARIANTS AS WELL AS THEIR PROJECTILES ARE FASTER."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Decapitation",
             "Decapitation",
             2,
-            "ZOMBIEMEN, SHOTGUNNERS AND THEIR VARIANTS MAY SPAWN A LOST SOUL AFTER DYING,\nUNLESS GIBBED."
+            "ZOMBIEMEN, SHOTGUNNERS, Chaingunners AND THEIR VARIANTS MAY SPAWN \nA LOST SOUL AFTER DYING, UNLESS GIBBED."
         );
 
         AddMutationDefinition( // Not implemented
