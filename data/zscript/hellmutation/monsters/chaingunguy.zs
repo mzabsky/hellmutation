@@ -5,7 +5,7 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
     States
     {
         Death:
-            CPOS H 0 JumpIfDecapitation("Decapitation", null);
+            CPOS H 0 JumpIfDecapitation("Decapitation");
             CPOS H 5;
             CPOS I 5 A_Scream;
             CPOS J 5 A_NoBlocking;

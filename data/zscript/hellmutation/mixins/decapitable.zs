@@ -1,7 +1,7 @@
 // Implements a Decapitate action for the Decapitation mutation (the mutation check is done separately)
 mixin class HM_Decapitable
 {
-    state JumpIfDecapitation(StateLabel decapitationStateLabel, StateLabel otherwiseStateLabel)
+    state JumpIfDecapitation(StateLabel decapitationStateLabel)
     {
         if (global.IsMutationActive("Decapitation"))
         {
@@ -9,7 +9,7 @@ mixin class HM_Decapitable
         }
         else
         {
-            return ResolveState(otherwiseStateLabel);
+            return ResolveState(null);
         }
     }
 
