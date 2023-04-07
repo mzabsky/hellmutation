@@ -5,6 +5,12 @@ class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
 
     States
     {
+        See:
+            SPOS A 0 {
+                bAlwaysFast = global.IsMutationActive("Adrenaline");
+            }
+            SPOS AABBCCDD 3 A_Chase;
+            Loop;
         Death:
             POSS H 0 JumpIfDecapitation("Decapitation");
             SPOS H 5;

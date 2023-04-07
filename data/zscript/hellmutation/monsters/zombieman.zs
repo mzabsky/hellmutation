@@ -8,8 +8,15 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
     }
 
     States
-	{
-         Missile:
+    {
+        
+        See:
+            POSS A 0 FAST {
+                bAlwaysFast = global.IsMutationActive("Adrenaline");
+            }
+            POSS AABBCCDD 4 FAST A_Chase;
+            Loop;
+        Missile:
             POSS E 0 {
                 if(global.IsMutationActive("Stormtroopers"))
                 {
@@ -20,14 +27,14 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
                     return ResolveState(null);
                 }
             }
-            POSS E 10 A_FaceTarget;
-            POSS F 8 A_PosAttack;
-            POSS E 8;
+            POSS E 10 FAST A_FaceTarget;
+            POSS F 8 FAST A_PosAttack;
+            POSS E 8FAST ;
             goto See;
         StormTrooperMissile:
-            POSS E 10 A_FaceTarget;
-            POSS F 8 A_CustomBulletAttack(5, 0, 1, random(1,5)*3, "BulletPuff", 0, CBAF_NORANDOM);
-            POSS E 8;
+            POSS E 10 FAST A_FaceTarget;
+            POSS F 8 FAST A_CustomBulletAttack(5, 0, 1, random(1,5)*3, "BulletPuff", 0, CBAF_NORANDOM);
+            POSS E 8 FAST;
             goto See;
         Death:
             POSS H 0 JumpIfDecapitation("Decapitation");
