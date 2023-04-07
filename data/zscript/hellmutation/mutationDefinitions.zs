@@ -96,6 +96,33 @@ extend class HM_GlobalEventHandler
             "Cacodemons always fire two additional projectiles."
         );
 
+        AddMutationDefinition( // NOT IMPLEMENTED
+            "Adrenaline",
+            "Adrenaline",
+            3,
+            "Zombiemen, Shotgunners and their variants are faster."
+        );
+
+        AddMutationDefinition( // NOT IMPLEMENTED
+            "Slimeborne",
+            "Slimeborne",
+            3,
+            "Player losing health to a damaging floor might cause Pinkies to spawn."
+        );
+
+        AddMutationDefinition( // NOT IMPLEMENTED
+            "Sacrifice",
+            "Sacrifice",
+            3,
+            "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters."
+        );
+
+        AddMutationDefinition( // NOT IMPLEMENTED
+            "Adipocytes",
+            "Adipocytes",
+            3,
+            "Mancubuses and their variants have 200 more health."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, string description)
