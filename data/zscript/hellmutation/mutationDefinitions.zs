@@ -14,7 +14,7 @@ extend class HM_GlobalEventHandler
             "Stormtroopers",
             "Stormtroopers",
             0,
-            "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE SHOTS."
+            "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE."
         );
 
         AddMutationDefinition(
@@ -35,7 +35,7 @@ extend class HM_GlobalEventHandler
             "HyperFuel",
             "Hyper-Fuel",
             0,
-            "ALL ROCKETS (INCLUDING GUIDED ROCKETS) FIRED BY MONSTERS ARE MUCH FASTER."
+            "ALL ROCKETS AND GUIDED ROCKETS FIRED BY MONSTERS ARE MUCH FASTER."
         );
 
         // Level 1

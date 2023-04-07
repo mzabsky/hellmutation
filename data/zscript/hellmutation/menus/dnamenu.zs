@@ -77,6 +77,9 @@ class HM_DnaMenu : HM_ZFGenericMenu
         let dna = HM_Dna(players[consoleplayer].mo.FindInventory("HM_Dna"));
         canRemoveMutation = !!dna;
 
+        // TODO: Clear HUD text underneath the menu (for when a player opens the DNA menu right away)
+        // players[consoleplayer].mo.ACS_NamedExecute("hm_clearannounce");
+
         globalHandler = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
 
         Vector2 baseRes = (640, 400);
@@ -187,6 +190,14 @@ class HM_DnaMenu : HM_ZFGenericMenu
         // Add the label element to the main frame.
         aLabel.Pack (mainFrame);*/
 
+		let background = HM_ZFImage.Create(
+			(-800, -100),
+			(2400, 1200),
+			image:"FLOOR7_2",
+			imagescale:(2, 2),
+            tiled: true
+		);
+		background.Pack(mainFrame);
 
         
         // Add a label.
@@ -220,14 +231,29 @@ class HM_DnaMenu : HM_ZFGenericMenu
             aLabel = HM_ZFLabel.Create
             (
                 (0, aLabel.GetPosY() + 20),
-                (0, bigFont.GetHeight ()),
+                (0, doomFont.GetHeight ()),
                 text: "FIND \c[Purple]DNA\c[Red] TO REMOVE A MUTATION",
-                fnt: bigFont,
+                fnt: doomFont,
                 wrap: false,
                 autoSize: true,
                 textColor: Font.CR_RED
             );
-            aLabel.SetPosX ((baseRes.x - bigFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+            aLabel.SetPosX ((baseRes.x - doomFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+            aLabel.Pack (mainFrame);
+        }
+        else
+        {
+            aLabel = HM_ZFLabel.Create
+            (
+                (0, aLabel.GetPosY() + 40),
+                (0, doomFont.GetHeight ()),
+                text: "\c[White]Click\c[Yellow] a mutation to permanently remove it. This costs \c[Green]1 \c[Purple]DNA\c[Yellow].",
+                fnt: doomFont,
+                wrap: false,
+                autoSize: true,
+                textColor: Font.CR_YELLOW
+            );
+            aLabel.SetPosX ((baseRes.x - doomFont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
             aLabel.Pack (mainFrame);
         }
 
@@ -274,7 +300,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         (
             (0, aLabel.GetPosY() + 30),
             (0, doomFont.GetHeight ()),
-            text: "Unspent \c[Purple]DNA\c[Yellow] is carried over to the next level.",
+            text: "Unspent \c[Purple]DNA\c[Yellow] is carried over to the next level",
             fnt: doomFont,
             wrap: false,
             autoSize: true,
@@ -288,6 +314,19 @@ class HM_DnaMenu : HM_ZFGenericMenu
             (0, aLabel.GetPosY() + 15),
             (0, doomFont.GetHeight ()),
             text: "Any mutations not removed by the end of this level become permanent!",
+            fnt: doomFont,
+            wrap: false,
+            autoSize: true,
+            textColor: Font.CR_YELLOW
+        );
+        aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+        aLabel.Pack (mainFrame);
+
+        aLabel = HM_ZFLabel.Create
+        (
+            (0, aLabel.GetPosY() + 15),
+            (0, doomFont.GetHeight ()),
+            text: "Press \c[White]ESC\c[Yellow] to close this screen",
             fnt: doomFont,
             wrap: false,
             autoSize: true,
