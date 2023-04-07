@@ -104,7 +104,7 @@ class HM_GlobalEventHandler : EventHandler
         if(firstDnaPlace != null)
         {
             firstDnaPlace.Spawn("HM_Dna", firstDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
-            console.printf("Spawned first DNA.");
+            console.printf("Spawned first DNA on a %s.", firstDnaPlace.GetClassName());
         }
         else
         {
@@ -115,11 +115,22 @@ class HM_GlobalEventHandler : EventHandler
         if(secondDnaPlace != null)
         {
             secondDnaPlace.Spawn("HM_Dna", secondDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
-            console.printf("Spawned second DNA.");
+            console.printf("Spawned second DNA on a %s.", secondDnaPlace.GetClassName());
         }
         else
         {
             console.printf("Could not find place to spawn second DNA.");
+        }
+
+        let thirdDnaPlace = FindPlaceForThirdDna();
+        if(thirdDnaPlace != null)
+        {
+            thirdDnaPlace.Spawn("HM_Dna", thirdDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
+            console.printf("Spawned third DNA on a %s.", thirdDnaPlace.GetClassName());
+        }
+        else
+        {
+            console.printf("Could not find place to spawn third DNA.");
         }
     }
 
@@ -210,13 +221,19 @@ class HM_GlobalEventHandler : EventHandler
 
     private Actor FindPlaceForFirstDna()
     {
-        let finder = ThinkerIterator.Create("MegasphereHealth");
+        let finder = ThinkerIterator.Create("Megasphere");
         let actor = Actor(finder.Next());
         if(actor != null) {
             return actor;
         }
 
         finder = ThinkerIterator.Create("Soulsphere");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("BlueArmor");
         actor = Actor(finder.Next());
         if(actor != null) {
             return actor;
@@ -235,6 +252,42 @@ class HM_GlobalEventHandler : EventHandler
         }
 
         finder = ThinkerIterator.Create("RocketLauncher");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("YellowSkull");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("RedSkull");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("BlueSkull");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("YellowCard");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("RedCard");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("BlueCard");
         actor = Actor(finder.Next());
         if(actor != null) {
             return actor;
@@ -263,6 +316,12 @@ class HM_GlobalEventHandler : EventHandler
             return actor;
         }
 
+        finder = ThinkerIterator.Create("GreenArmor");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
         finder = ThinkerIterator.Create("Medikit");
         actor = Actor(finder.Next());
         if(actor != null) {
@@ -270,6 +329,23 @@ class HM_GlobalEventHandler : EventHandler
         }
 
         finder = ThinkerIterator.Create("Stimpack");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        return null;
+    }
+
+    private Actor FindPlaceForThirdDna()
+    {
+        let finder = ThinkerIterator.Create("Cyberdemon");
+        let actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
+        finder = ThinkerIterator.Create("SpiderMastermind");
         actor = Actor(finder.Next());
         if(actor != null) {
             return actor;
