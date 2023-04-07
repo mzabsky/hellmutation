@@ -25,15 +25,7 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
             POSS E 8;
             goto See;
         Death:
-            POSS H 0 {
-                if(global.IsMutationActive("Decapitation"))
-                {
-                    return ResolveState("Decapitation");
-                }
-                else {
-                    return ResolveState(null);
-                }
-            }
+            POSS H 0 JumpIfDecapitation("Decapitation", null);
             POSS H 5;
             POSS I 5 A_Scream;
             POSS J 0 A_NoBlocking;

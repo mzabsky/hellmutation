@@ -6,15 +6,7 @@ class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
     States
     {
         Death:
-            POSS H 0 {
-                if(global.IsMutationActive("Decapitation"))
-                {
-                    return ResolveState("Decapitation");
-                }
-                else {
-                    return ResolveState(null);
-                }
-            }
+            POSS H 0 JumpIfDecapitation("Decapitation", null);
             SPOS H 5;
             SPOS I 5 A_Scream;
             SPOS J 5 A_NoBlocking;
