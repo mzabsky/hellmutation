@@ -67,6 +67,16 @@ class HM_GlobalEventHandler : EventHandler
                 }
             }
         }
+        else if (e.name.IndexOf("HM_AddMutation:") >= 0)
+        {
+            Array <String> parts;
+            e.name.split(parts, ":");
+
+            let playerNumber = e.args[0];
+            let mutationName = parts[1];
+            console.printf("%s ADDED MUTATION %s", players[playerNumber].GetUserName(), mutationName);
+            ActiveMutations.Insert(mutationName, "1");
+        }
     }
 
     override void WorldLoaded(WorldEvent e) 
