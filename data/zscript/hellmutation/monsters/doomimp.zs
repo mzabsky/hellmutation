@@ -2,6 +2,8 @@ class HM_DoomImp : DoomImp replaces DoomImp
 {
     mixin HM_GlobalRef;
 
+    // The ArchImp replacement is done in the global handler
+
     States
     {
         See:

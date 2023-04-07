@@ -125,26 +125,31 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldThingDamaged(WorldEvent e)
     {
-        //console.printf("Thing damaged: %s, Health: %d", e.thing.GetClassName(), e.thing.health);
+        if (e.inflictor == null)
+        {
+            return;    
+        }
 
+        console.printf("Thing damaged: %s, Health: %d, Inflictor health %d", e.thing.GetClassName(), e.thing.health, e.inflictor.health);
+        
         // Hematophagy
-        if(e.inflictor is "Demon" && IsMutationActive("Hematophagy"))
+        if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
         {
             e.inflictor.A_ResetHealth();
         }
 
-        if(e.thing is "PlayerPawn")
+        if (e.thing is "PlayerPawn")
         {
             console.printf("Player was damaged by %s", e.inflictor.GetClassName());
 
             // Desecration - player was damaged by an imp fireball
-            if(e.inflictor is "DoomImpBall" && e.inflictor.target != null && IsMutationActive("Desecration"))
+            if(e.inflictor is "DoomImpBall" && e.inflictor.target != null && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
             {
                 ReplaceActor(e.inflictor.target, "HM_ArchImp", e.thing);
             }
             
             // Desecration - player was damaged by imp melee attack
-            if(e.inflictor is "DoomImp" && IsMutationActive("Desecration"))
+            if(e.inflictor is "DoomImp" && IsMutationActive("Desecration") && e.inflictor.health >= 0)
             {
                 ReplaceActor(e.inflictor, "HM_ArchImp", e.thing);
             }
