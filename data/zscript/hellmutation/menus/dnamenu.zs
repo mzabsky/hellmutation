@@ -62,7 +62,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
     // A font to use for text.
     Font smallFont;
     Font bigFont;
-    Font conFont;
+    Font doomFont;
 
     // A background image.
     HM_ZFImage background;
@@ -89,7 +89,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         // Get GZDoom's new options menu smallfont.
         smallFont = OptionFont ();
         bigFont = Font.GetFont ("BIGFONT");
-        conFont = Font.GetFont ("CONFONT");
+        doomFont = Font.GetFont ("SMALLFONT");
 
         // Create an instance of the handler.
         handler = new ('HM_DnaMenuHandler');
@@ -260,14 +260,40 @@ class HM_DnaMenu : HM_ZFGenericMenu
             aLabel = HM_ZFLabel.Create
             (
                 (35, aButton.GetPosY() + aButton.GetHeight() + 5),
-                (0, conFont.GetHeight () * 2),
+                (0, doomFont.GetHeight () * 2),
                 text: mutationDefinition.Description,
-                fnt: conFont,
+                fnt: doomFont,
                 wrap: false,
                 autoSize: true,
                 textColor: Font.CR_WHITE
             );
             aLabel.Pack (mainFrame);
         }
+
+        aLabel = HM_ZFLabel.Create
+        (
+            (0, aLabel.GetPosY() + 30),
+            (0, doomFont.GetHeight ()),
+            text: "Unspent \c[Purple]DNA\c[Yellow] is carried over to the next level.",
+            fnt: doomFont,
+            wrap: false,
+            autoSize: true,
+            textColor: Font.CR_YELLOW
+        );
+        aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+        aLabel.Pack (mainFrame);
+
+        aLabel = HM_ZFLabel.Create
+        (
+            (0, aLabel.GetPosY() + 15),
+            (0, doomFont.GetHeight ()),
+            text: "Any mutations not removed by the end of this level become permanent!",
+            fnt: doomFont,
+            wrap: false,
+            autoSize: true,
+            textColor: Font.CR_YELLOW
+        );
+        aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+        aLabel.Pack (mainFrame);
     }
 }
