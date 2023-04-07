@@ -82,11 +82,11 @@ extend class HM_GlobalEventHandler
             "ZOMBIEMEN, SHOTGUNNERS, Chaingunners AND THEIR VARIANTS MAY SPAWN \nA LOST SOUL AFTER DYING, UNLESS GIBBED."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "HellsCaress",
             "Hell's Caress",
             2,
-            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell and their\nvariants are much more powerful."
+            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nand their  variants are much more powerful."
         );
 
         AddMutationDefinition(
