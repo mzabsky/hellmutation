@@ -51,6 +51,12 @@ extend class HM_GlobalEventHandler
             return actor;
         }
 
+        finder = ThinkerIterator.Create("Backpack");
+        actor = Actor(finder.Next());
+        if(actor != null) {
+            return actor;
+        }
+
         finder = ThinkerIterator.Create("BlueArmor");
         actor = Actor(finder.Next());
         if(actor != null) {
