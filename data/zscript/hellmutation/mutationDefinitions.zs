@@ -46,7 +46,7 @@ extend class HM_GlobalEventHandler
             "MONSTERS DO NOT START THE LEVEL ASLEEP."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "Promotion",
             "Promotion",
             1,

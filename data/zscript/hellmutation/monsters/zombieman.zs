@@ -11,8 +11,13 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
 	{
          Missile:
             POSS E 0 {
-                if(global.IsMutationActive("Stormtroopers")) {
-                    SetState(FindState("StormTrooperMissile"));
+                if(global.IsMutationActive("Stormtroopers"))
+                {
+                    return ResolveState("StormTrooperMissile");
+                }
+                else
+                {
+                    return ResolveState(null);
                 }
             }
             POSS E 10 A_FaceTarget;

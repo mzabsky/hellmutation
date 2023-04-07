@@ -58,6 +58,14 @@ class HM_GlobalEventHandler : EventHandler
 
             let playerPawn = players[playerNumber].mo;
             playerPawn.TakeInventory("HM_Dna", 1);
+
+            for (let i = 0; i < players.Size(); i++)
+            {
+                if (players[i].mo != null)
+                {
+                    players[i].mo.ACS_NamedExecute("hm_mutationremoved");
+                }
+            }
         }
     }
 
@@ -125,33 +133,33 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldThingDamaged(WorldEvent e)
     {
-        if (e.inflictor == null)
+        if (e.damageSource == null)
         {
             return;    
         }
 
-        console.printf("Thing damaged: %s, Health: %d, Inflictor health %d", e.thing.GetClassName(), e.thing.health, e.inflictor.health);
-        
+        //console.printf("Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
+
         // Hematophagy
         if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
         {
+            // This uses inflictor - we want the demon to be dealing the damage directly
+            // (instead of eg. via a barrel)
             e.inflictor.A_ResetHealth();
         }
 
         if (e.thing is "PlayerPawn")
         {
-            console.printf("Player was damaged by %s", e.inflictor.GetClassName());
-
-            // Desecration - player was damaged by an imp fireball
-            if(e.inflictor is "DoomImpBall" && e.inflictor.target != null && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
+            // Desecration - player was damaged by an imp
+            if(e.damageSource is 'DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
             {
-                ReplaceActor(e.inflictor.target, "HM_ArchImp", e.thing);
+                ReplaceActor(e.damageSource, "HM_ArchImp", e.thing);
             }
-            
-            // Desecration - player was damaged by imp melee attack
-            if(e.inflictor is "DoomImp" && IsMutationActive("Desecration") && e.inflictor.health >= 0)
+
+            // Promotiom - player was damaged by a zombieman
+            if(e.damageSource is 'ZombieMan' && IsMutationActive("Promotion"))
             {
-                ReplaceActor(e.inflictor, "HM_ArchImp", e.thing);
+                ReplaceActor(e.damageSource, "ShotgunGuy", e.thing);
             }
         }
     }
