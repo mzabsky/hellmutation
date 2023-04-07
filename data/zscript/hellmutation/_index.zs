@@ -4,5 +4,6 @@
 #include "./monsters/_index.zs"
 
 #include "./globals.zs"
+#include "./dnaSpawning.zs"
 #include "./helpers.zs"
 #include "./mutationDefinitions.zs"
