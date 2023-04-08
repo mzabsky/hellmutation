@@ -103,7 +103,7 @@ extend class HM_GlobalEventHandler
             "Zombiemen, Shotgunners and their variants are faster."
         );
 
-        AddMutationDefinition( // NOT IMPLEMENTED
+        AddMutationDefinition(
             "slimeborne",
             "Slimeborne",
             3,

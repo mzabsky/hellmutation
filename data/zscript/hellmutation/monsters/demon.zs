@@ -1,12 +1,14 @@
-class RH_Demon : Demon replaces Demon
+class HM_Demon : Demon replaces Demon
 {
     mixin HM_GlobalRef;
 
-    Default {
+    Default
+    {
         Species "Demon";
     }
 
-    States {
+    States
+    {
         Melee: 
             SARG EF 8 A_FaceTarget;
             SARG G 8 A_SargAttack;
@@ -28,6 +30,37 @@ class RH_Demon : Demon replaces Demon
             SARG F 10 A_SkullAttack;
             SARG G 5 A_Gravity;
             Goto See;
+        Hatch:
+        Raise:
+            SARG N 5;
+            SARG MLKJI 5;
+            Goto See;
     }
 
+}
+
+class HM_DemonEgg: Actor
+{
+    States
+    {
+        Spawn:
+	    Active:
+		    TNT1 A 70;
+            TNT1 A 0
+            {
+                let spawnee = Spawn("HM_Demon", VEc3Offset(0, 0, 0), ALLOW_REPLACE);
+                spawnee.SetState(spawnee.FindState("Hatch"));
+
+                // Make sure the spawnee fits wherever the originator of the egg (a player presumably)
+                // could fit.
+                let demonRadius = 16;
+                if(spawnee.target != null)
+                {
+                    demonRadius = spawnee.radius;
+                }
+
+                spawnee.A_SetSize(demonRadius);
+            }
+		    Stop;
+    }
 }

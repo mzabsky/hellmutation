@@ -179,31 +179,49 @@ class HM_GlobalEventHandler : EventHandler
     {
         if (e.damageSource == null)
         {
-            return;    
-        }
+            // No source
 
-        //console.printf("Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
-
-        // Hematophagy
-        if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
-        {
-            // This uses inflictor - we want the demon to be dealing the damage directly
-            // (instead of eg. via a barrel)
-            e.inflictor.A_ResetHealth();
-        }
-
-        if (e.thing is "PlayerPawn")
-        {
-            // Desecration - player was damaged by an imp
-            if(e.damageSource is 'DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
+            if (e.thing is "PlayerPawn")
             {
-                ReplaceActor(e.damageSource, "HM_ArchImp", e.thing);
+                if(IsMutationActive("slimeborne"))
+                {
+                    let roll = Random(0, 100);
+                    console.printf("slimeborne roll %d", roll);
+                    if(roll <= e.damage * 2)
+                    {
+                        let spawnee = e.thing.Spawn("HM_DemonEgg", e.thing.pos, ALLOW_REPLACE);
+                        spawnee.target = e.thing;
+                    }
+                }
+            }
+        }
+        else
+        {
+            // Has damage source
+
+            //console.printf("Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
+
+            // Hematophagy
+            if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
+            {
+                // This uses inflictor - we want the demon to be dealing the damage directly
+                // (instead of eg. via a barrel)
+                e.inflictor.A_ResetHealth();
             }
 
-            // Promotiom - player was damaged by a zombieman
-            if(e.damageSource is 'ZombieMan' && IsMutationActive("Promotion"))
+            if (e.thing is "PlayerPawn")
             {
-                ReplaceActor(e.damageSource, "ShotgunGuy", e.thing);
+                // Desecration - player was damaged by an imp
+                if(e.damageSource is 'DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
+                {
+                    ReplaceActor(e.damageSource, "HM_ArchImp", e.thing);
+                }
+
+                // Promotiom - player was damaged by a zombieman
+                if(e.damageSource is 'ZombieMan' && IsMutationActive("Promotion"))
+                {
+                    ReplaceActor(e.damageSource, "ShotgunGuy", e.thing);
+                }
             }
         }
     }
