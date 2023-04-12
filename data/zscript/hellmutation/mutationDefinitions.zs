@@ -96,7 +96,7 @@ extend class HM_GlobalEventHandler
             "Cacodemons always fire two additional projectiles."
         );
 
-        AddMutationDefinition( // NOT IMPLEMENTED
+        AddMutationDefinition(
             "adrenaline",
             "Adrenaline",
             3,
@@ -117,11 +117,11 @@ extend class HM_GlobalEventHandler
             "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters."
         );
 
-        AddMutationDefinition( // NOT IMPLEMENTED
+        AddMutationDefinition(
             "adipocytes",
             "Adipocytes",
             3,
-            "Mancubuses and their variants have 200 more health."
+            "Mancubuses and their variants have more health."
         );
 
         /*

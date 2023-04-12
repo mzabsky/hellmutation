@@ -6,6 +6,7 @@
 #include "./doomimp.zs"
 #include "./demon.zs"
 #include "./lostsoul.zs"
+#include "./mancubus.zs"
 #include "./revenant.zs"
 #include "./shotgunguy.zs"
 #include "./spectre.zs"
