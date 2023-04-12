@@ -167,6 +167,12 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldThingSpawned(WorldEvent e)
     {
+        // This is required to support various healing and health manipulating functions
+        if(e.thing.starthealth == 0)
+        {
+            e.thing.starthealth = e.thing.SpawnHealth();
+        }
+
         // Insomnia
         if(e.thing.bIsMonster && players.Size() > 0 && players[0].mo != null && IsMutationActive("Insomnia"))
         {
@@ -224,6 +230,47 @@ class HM_GlobalEventHandler : EventHandler
                 }
             }
         }
+    }
+
+    override void WorldTick()
+    {
+        // Run each second
+        if(Level.time % 35 != 0)
+        {
+            return;
+        }
+
+        if(IsMutationActive("extremophilia"))
+        {
+            let finder = ThinkerIterator.Create("Actor");
+            Actor actor;
+            while((actor = Actor(finder.next())) != null)
+            {
+                // Only alive monsters
+                if(!actor.bIsMonster || actor.health <= 0) 
+                {
+                    continue;
+                }
+
+                if(actor.cursector.damageamount == 0)
+                {
+                    continue;
+                }
+
+                // Only injured monsters
+                if(actor.health >= actor.spawnhealth())
+                {
+                    continue;
+                }
+
+                let oldHealth = actor.health;
+                let healAmount = max(min(actor.spawnhealth() / 7, 200), 10);
+                actor.A_SetHealth(min(oldHealth + healAmount, actor.spawnhealth()));
+                
+                //console.printf("Extremophilia heal %s from %d to %d (+%d)", actor.GetClassName(), oldHealth, actor.health, healAmount);
+            }
+        }
+        
     }
     
     clearscope bool IsMutationRemoved(string mutationName)

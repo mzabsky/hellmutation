@@ -147,7 +147,7 @@ extend class HM_GlobalEventHandler
             "Players lose all rockets and plasma ammo between levels."
         );
        
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "extremophilia",
             "Extremophilia",
             4,
