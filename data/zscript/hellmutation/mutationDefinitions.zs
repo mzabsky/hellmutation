@@ -110,7 +110,7 @@ extend class HM_GlobalEventHandler
             "Player losing health to a damaging floor might cause Pinkies to spawn."
         );
 
-        AddMutationDefinition( // NOT IMPLEMENTED
+        AddMutationDefinition(
             "sacrifice",
             "Sacrifice",
             3,

@@ -1,4 +1,5 @@
 #include "./archimp.zs"
+#include "./archvile.zs"
 #include "./baronofhell.zs"
 #include "./cacodemon.zs"
 #include "./chaingunguy.zs"

@@ -3,6 +3,7 @@ class HM_ArchImp : DoomImp
     // The replacement of Imp is done by the global event handler -> WorldThingDamaged.
 
     mixin HM_GlobalRef;
+    mixin HM_Sacrifice;
 
     Default
     {
@@ -68,6 +69,8 @@ class HM_ArchImp : DoomImp
             HELN TSRQPON 6;
             goto See;
     }
+
+
 }
 
 class HellionBall : CacodemonBall
