@@ -125,7 +125,7 @@ extend class HM_GlobalEventHandler
         );
 
        
-        AddMutationDefinition(
+        AddMutationDefinition( // Not implemented
             "barrage",
             "Barrage",
             4,
@@ -133,21 +133,21 @@ extend class HM_GlobalEventHandler
         );
 
        
-        AddMutationDefinition(
+        AddMutationDefinition( // Not implemented
             "ambushdeployment",
             "Ambush Deployment",
             4,
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
        
-        AddMutationDefinition(
+        AddMutationDefinition( // Not implemented
             "kleptomania",
             "Kleptomania",
             4,
             "Players lose all rockets and plasma ammo between levels."
         );
        
-        AddMutationDefinition(
+        AddMutationDefinition( // Not implemented
             "extremophilia",
             "Extremophilia",
             4,
