@@ -124,14 +124,35 @@ extend class HM_GlobalEventHandler
             "Mancubuses and their variants have more health."
         );
 
-        /*
-        AddMutationDefinition( // NOT IMPLEMENTED
-            "Blazeballs",
-            "Blazeballs",
+       
+        AddMutationDefinition(
+            "barrage",
+            "Barrage",
             4,
-            "Projectiles of imps and their variants are much faster."
+            "Imps fire three fireballs in a rapid barrage."
         );
-        */
+
+       
+        AddMutationDefinition(
+            "ambushdeployment",
+            "Ambush Deployment",
+            4,
+            "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
+        );
+       
+        AddMutationDefinition(
+            "kleptomania",
+            "Kleptomania",
+            4,
+            "Players lose all rockets and plasma ammo between levels."
+        );
+       
+        AddMutationDefinition(
+            "extremophilia",
+            "Extremophilia",
+            4,
+            "Monsters recover some health each second on a damaging floor."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, string description)
