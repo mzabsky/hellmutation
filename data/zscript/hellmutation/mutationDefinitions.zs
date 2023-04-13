@@ -9,7 +9,8 @@ class HM_MutationDefinition
 extend class HM_GlobalEventHandler
 {
     void CreateMutationDefinitions() {
-        // Level 0
+
+        // Level 0 - MAP01/EXM1
         AddMutationDefinition(
             "stormtroopers",
             "Stormtroopers",
@@ -38,7 +39,7 @@ extend class HM_GlobalEventHandler
             "ALL ROCKETS AND GUIDED ROCKETS FIRED BY MONSTERS ARE MUCH FASTER."
         );
 
-        // Level 1
+        // Level 1 - MAP02/EXM2
         AddMutationDefinition(
             "insomnia",
             "Insomnia",
@@ -67,7 +68,7 @@ extend class HM_GlobalEventHandler
             "Lost souls deal and take much more damage."
         );
         
-        // Level 2
+        // Level 2 - MAP03/EXM3
         AddMutationDefinition(
             "brightfire",
             "Brightfire",
@@ -96,6 +97,7 @@ extend class HM_GlobalEventHandler
             "Cacodemons always fire two additional projectiles."
         );
 
+        // Level 3 - MAP04/EXM4
         AddMutationDefinition(
             "adrenaline",
             "Adrenaline",
@@ -124,7 +126,7 @@ extend class HM_GlobalEventHandler
             "Mancubuses and their variants have more health."
         );
 
-       
+        // Level 4 - MAP05/EXM5
         AddMutationDefinition(
             "barrage",
             "Barrage",
@@ -152,6 +154,64 @@ extend class HM_GlobalEventHandler
             "Extremophilia",
             4,
             "Monsters recover some health each second on a damaging floor."
+        );
+
+        // Level 5 - MAP06/EXM6
+        AddMutationDefinition( // Not implemented
+            "unyielding",
+            "Unyelding",
+            5,
+            "Cacodemons are more resistant to pain."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "concentratednukage",
+            "Concentrated Nukage",
+            5,
+            "Damaging floors deal double damage."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "lordsofdarkness",
+            "Lords of Darkness",
+            5,
+            "Hell Knights and Barons of Hell take less damage\nwhile in darkness."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "lordsofdarkness",
+            "Lords of Darkness",
+            5,
+            "Hell Knights and Barons of Hell take less damage\nwhile in darkness."
+        );
+
+        // Level 6 - MAP07/EXM7
+        AddMutationDefinition( // Not implemented
+            "rapidspin",
+            "Rapid Spin",
+            5,
+            "Chaingunners and their variants are faster."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "coherentplasma",
+            "Coherent Plasma",
+            5,
+            "Arachnotron projectiles bounce off of walls."
+        );
+
+        AddMutationDefinition( // Not implemented
+            "rainoffire",
+            "Rain of Fire",
+            5,
+            "Mancubuses fire additional projectiles."
+        );
+        
+        AddMutationDefinition( // Not implemented
+            "lockon",
+            "Lock On",
+            5,
+            "All Revenant rockets are guided."
         );
     }
     
