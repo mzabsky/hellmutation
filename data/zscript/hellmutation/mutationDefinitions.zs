@@ -125,7 +125,7 @@ extend class HM_GlobalEventHandler
         );
 
        
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "barrage",
             "Barrage",
             4,

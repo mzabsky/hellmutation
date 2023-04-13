@@ -16,6 +16,21 @@ class HM_DoomImp : DoomImp replaces DoomImp
         Missile:
             TROO EF 8 FAST A_FaceTarget;
             TROO G 6 FAST HM_A_TroopAttack;
+            TROO G 0 {
+                if(global.IsMutationActive("barrage"))
+                {
+                    return ResolveState("BarrageMissile");
+                }
+                else {
+                    return ResolveState(null);
+                }
+            }
+            Goto See;
+        BarrageMissile:
+            TROO EF 3 FAST A_FaceTarget;
+            TROO G 1 FAST HM_A_TroopAttack;
+            TROO EF 3 FAST A_FaceTarget;
+            TROO G 1 FAST HM_A_TroopAttack;
             Goto See;
 
     }
