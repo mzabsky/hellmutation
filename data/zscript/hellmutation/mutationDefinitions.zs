@@ -133,9 +133,9 @@ extend class HM_GlobalEventHandler
         );
 
        
-        AddMutationDefinition( // Not implemented
-            "ambushdeployment",
-            "Ambush Deployment",
+        AddMutationDefinition(
+            "ambushshield",
+            "Ambush Shield",
             4,
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
