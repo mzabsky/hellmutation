@@ -143,6 +143,20 @@ class HM_GlobalEventHandler : EventHandler
             newMutationsInEffect++;
         }
 
+        // Kleptomania
+        if(IsMutationActive("kleptomania"))
+        {
+            for (let i = 0; i < players.Size(); i++)
+            {
+                if (players[i].mo != null)
+                {
+                    players[i].mo.TakeInventory("Cell", 9999);
+                    players[i].mo.TakeInventory("RocketAmmo", 9999);
+                }
+            }
+        }
+        
+
         // Diplay the title card
         for (let i = 0; i < players.Size(); i++)
         {

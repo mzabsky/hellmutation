@@ -140,7 +140,7 @@ extend class HM_GlobalEventHandler
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
        
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "kleptomania",
             "Kleptomania",
             4,
