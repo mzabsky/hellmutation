@@ -179,10 +179,10 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition( // Not implemented
-            "lordsofdarkness",
-            "Lords of Darkness",
+            "seekingsouls",
+            "Seeking Souls",
             5,
-            "Hell Knights and Barons of Hell take less damage\nwhile in darkness."
+            "Lost souls charge at greater speed."
         );
 
         // Level 6 - MAP07/EXM7

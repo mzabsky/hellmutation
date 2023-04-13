@@ -4,7 +4,7 @@ class HM_LostSoul: LostSoul replaces LostSoul
 
     States
     {
-	      Missile:
+        Missile:
             SKUL C 0 BRIGHT{
                 if (global.IsMutationActive("Ego"))
                 {
@@ -15,10 +15,23 @@ class HM_LostSoul: LostSoul replaces LostSoul
                     RestoreDamage();
                 }
             }
-		        SKUL C 10 BRIGHT A_FaceTarget;
-		        SKUL D 4 BRIGHT A_SkullAttack;
-		        SKUL CD 4 BRIGHT;
-		        Goto Missile+3;
+            SKUL C 10 BRIGHT A_FaceTarget;
+            SKUL D 4 BRIGHT {
+                if(global.IsMutationActive("seekingsouls"))
+                {
+                    A_SkullAttack(35);
+                }
+                else
+                {
+                    A_SkullAttack(20);
+                }
+            }
+        Charge:
+            SKUL D 0 {
+
+            }
+            SKUL CD 4 BRIGHT;
+            Goto Charge;
     }
 
     override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
