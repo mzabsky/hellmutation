@@ -246,8 +246,8 @@ class HM_GlobalEventHandler : EventHandler
             Actor actor;
             while((actor = Actor(finder.next())) != null)
             {
-                // Only alive monsters
-                if(!actor.bIsMonster || actor.health <= 0) 
+                // Only alive non-flying monsters that are standing on the floor qualify
+                if(!actor.bIsMonster || actor.health <= 0 || actor.bNoGravity || actor.pos.z - actor.floorz > 0) 
                 {
                     continue;
                 }
