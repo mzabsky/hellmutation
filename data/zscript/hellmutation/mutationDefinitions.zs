@@ -157,7 +157,7 @@ extend class HM_GlobalEventHandler
         );
 
         // Level 5 - MAP06/EXM6
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "unyielding",
             "Unyelding",
             5,
@@ -206,7 +206,7 @@ extend class HM_GlobalEventHandler
             5,
             "Mancubuses fire additional projectiles."
         );
-        
+
         AddMutationDefinition( // Not implemented
             "lockon",
             "Lock On",
