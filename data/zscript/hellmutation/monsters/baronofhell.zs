@@ -1,7 +1,8 @@
-class HM_BaronOfHell : HellKnight replaces HellKnight
+class HM_BaronOfHell : BaronOfHell replaces BaronOfHell
 {
     mixin HM_GlobalRef;
-    mixin HM_BruisAttack;
+    mixin HM_HellsCaress;
+    mixin HM_LordsOfDarkness;
 
     States
     {

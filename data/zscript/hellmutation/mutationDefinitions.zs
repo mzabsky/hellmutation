@@ -171,14 +171,14 @@ extend class HM_GlobalEventHandler
             "Damaging floors deal double damage."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "lordsofdarkness",
             "Lords of Darkness",
             5,
             "Hell Knights and Barons of Hell take less damage\nwhile in darkness."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "seekingsouls",
             "Seeking Souls",
             5,
@@ -189,29 +189,39 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition( // Not implemented
             "rapidspin",
             "Rapid Spin",
-            5,
+            6,
             "Chaingunners and their variants are faster."
         );
 
         AddMutationDefinition( // Not implemented
-            "coherentplasma",
-            "Coherent Plasma",
-            5,
-            "Arachnotron projectiles bounce off of walls."
+            "cyberneuralreflexes",
+            "Cyber-Neural Reflexes",
+            6,
+            "Arachnotrons and their variants immediately return fire when attacked."
         );
 
         AddMutationDefinition( // Not implemented
             "rainoffire",
             "Rain of Fire",
-            5,
+            6,
             "Mancubuses fire additional projectiles."
         );
 
         AddMutationDefinition( // Not implemented
             "lockon",
             "Lock On",
-            5,
+            6,
             "All Revenant rockets are guided."
+        );
+
+
+        
+
+        AddMutationDefinition( // Not implemented
+            "coherentplasma",
+            "Coherent Plasma",
+            5,
+            "Arachnotron projectiles bounce off of walls."
         );
     }
     

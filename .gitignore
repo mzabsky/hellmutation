@@ -3,3 +3,5 @@ output
 *.zds
 .vs
 obj
+*.backup*
+*.dbs

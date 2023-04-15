@@ -1,5 +1,5 @@
 // Replacement action for A_BruisAttack (for Baron of Hell and Hell Knight), which takes into consideration mutations.
-mixin class HM_BruisAttack
+mixin class HM_HellsCaress
 {
     void HM_A_BruisAttack()
     {
@@ -9,7 +9,7 @@ mixin class HM_BruisAttack
             if (CheckMeleeRange())
             {
                 int damage = random[pr_bruisattack](1, 8) * 10;
-                if(global.IsMutationActive("HellsCaress"))
+                if(global.IsMutationActive("hellscaress"))
                 {
                     damage *= 2;
                 }
