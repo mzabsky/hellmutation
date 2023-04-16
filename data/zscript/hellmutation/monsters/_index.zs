@@ -1,3 +1,4 @@
+#include "./arachnotron.zs"
 #include "./archimp.zs"
 #include "./archvile.zs"
 #include "./baronofhell.zs"

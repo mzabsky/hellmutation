@@ -193,7 +193,7 @@ extend class HM_GlobalEventHandler
             "Chaingunners and their variants are faster."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
             6,
@@ -220,7 +220,7 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition( // Not implemented
             "coherentplasma",
             "Coherent Plasma",
-            5,
+            7,
             "Arachnotron projectiles bounce off of walls."
         );
     }

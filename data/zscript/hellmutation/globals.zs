@@ -243,6 +243,15 @@ class HM_GlobalEventHandler : EventHandler
                     ReplaceActor(e.damageSource, "ShotgunGuy", e.thing);
                 }
             }
+
+            if (e.thing is "HM_Arachnotron" && IsMutationActive("cyberneuralreflexes"))
+            {
+                let arachnotron = HM_ARachnotron(e.thing);
+                arachnotron.target = e.damageSource;
+                arachnotron.A_FaceTarget();
+                arachnotron.HM_A_BspiAttack();
+                arachnotron.SetState(arachnotron.ResolveState("InstantMissile"), 1);
+            }
         }
     }
 
