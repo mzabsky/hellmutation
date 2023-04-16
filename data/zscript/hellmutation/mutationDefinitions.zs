@@ -164,11 +164,11 @@ extend class HM_GlobalEventHandler
             "Cacodemons are more resistant to pain."
         );
 
-        AddMutationDefinition( // Not implemented
-            "concentratednukage",
-            "Concentrated Nukage",
+        AddMutationDefinition(
+            "highground",
+            "High Ground",
             5,
-            "Damaging floors deal double damage."
+            "Zombiemen, Shotgunners, Chaingunners and their variants\ndeal more damage when attacking from above."
         );
 
         AddMutationDefinition(

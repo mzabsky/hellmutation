@@ -2,6 +2,7 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
 {
     mixin HM_GlobalRef;
     mixin HM_Decapitable;
+    mixin HM_HighGround;
 
     Default
     {
@@ -17,24 +18,9 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
             POSS AABBCCDD 4 FAST A_Chase;
             Loop;
         Missile:
-            POSS E 0 {
-                if(global.IsMutationActive("Stormtroopers"))
-                {
-                    return ResolveState("StormTrooperMissile");
-                }
-                else
-                {
-                    return ResolveState(null);
-                }
-            }
             POSS E 10 FAST A_FaceTarget;
-            POSS F 8 FAST A_PosAttack;
+            POSS F 8 FAST HM_A_PosAttack();
             POSS E 8FAST ;
-            goto See;
-        StormTrooperMissile:
-            POSS E 10 FAST A_FaceTarget;
-            POSS F 8 FAST A_CustomBulletAttack(5, 0, 1, random(1,5)*3, "BulletPuff", 0, CBAF_NORANDOM);
-            POSS E 8 FAST;
             goto See;
         Death:
             POSS H 0 JumpIfDecapitation("Decapitation");
@@ -61,5 +47,32 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
             POSS PQRST 5;
             POSS U -1;
             Stop;
+    }
+
+    void HM_A_PosAttack()
+    {
+        if (target)
+        {
+            A_FaceTarget();
+            double ang = angle;
+            double slope = AimLineAttack(ang, MISSILERANGE);
+            A_StartSound("grunt/attack", CHAN_WEAPON);
+
+            let spread = 22.5;
+            if(global.IsMutationActive("stormtroopers"))
+            {
+                spread = 5;
+            }
+
+            ang  += Random2[PosAttack]() * (spread/256);
+            int damage = Random[PosAttack](1, 5) * 3;
+            let hasHighGround = HasHighGroundOver(target);
+            if(hasHighGround)
+            {
+                damage += 3;
+            }
+
+            LineAttack(ang, MISSILERANGE, slope, damage, "Hitscan", "Bulletpuff");
+        }
     }
 }

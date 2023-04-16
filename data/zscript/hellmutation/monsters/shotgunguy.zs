@@ -2,6 +2,7 @@ class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
 {
     mixin HM_GlobalRef;
     mixin HM_Decapitable;
+    mixin HM_HighGround;
 
     States
     {
@@ -11,6 +12,11 @@ class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
             }
             SPOS AABBCCDD 3 A_Chase;
             Loop;
+        Missile:
+            SPOS E 10 A_FaceTarget;
+            SPOS F 10 BRIGHT HM_A_SposAttackUseAtkSound();
+            SPOS E 10;
+            Goto See;
         Death:
             POSS H 0 JumpIfDecapitation("Decapitation");
             SPOS H 5;
@@ -28,5 +34,37 @@ class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
             SPOS PQRST 5;
             SPOS U -1;
             Stop;
+    }
+
+    void HM_A_SPosAttackUseAtkSound()
+    {
+        if (target)
+        {
+            A_StartSound(AttackSound, CHAN_WEAPON);
+            HM_A_SPosAttackInternal();
+        }
+    }
+
+    private void HM_A_SPosAttackInternal()
+    {
+        if (target)
+        {
+            A_FaceTarget();
+            double bangle = angle;
+            double slope = AimLineAttack(bangle, MISSILERANGE);
+        
+            let hasHighGround = HasHighGroundOver(target);
+            for (int i=0 ; i<3 ; i++)
+            {
+                double ang = bangle + Random2[SPosAttack]() * (22.5/256);
+                int damage = Random[SPosAttack](1, 5) * 3;
+                if(hasHighGround)
+                {
+                    damage += 3;
+                }
+
+                LineAttack(ang, MISSILERANGE, slope, damage, "Hitscan", "Bulletpuff");
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
 {
     mixin HM_GlobalRef;
     mixin HM_Decapitable;
+    mixin HM_HighGround;
 
     bool hadShield;
     bool hasShield;
@@ -22,7 +23,7 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
             }
             CPOS E 10 A_FaceTarget;
         ReMissile:
-            CPOS FE 4 BRIGHT A_CPosAttack;
+            CPOS FE 4 BRIGHT HM_A_CPosAttack();
             CPOS F 1 A_CPosRefire;
             Goto ReMissile;
         Death:
@@ -56,5 +57,25 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
         }
 
         super.Tick();
+    }
+
+    void HM_A_CPosAttack()
+    {
+        if (target)
+        {
+            if (bStealth) visdir = 1;
+            A_StartSound(AttackSound, CHAN_WEAPON);
+            A_FaceTarget();
+            double slope = AimLineAttack(angle, MISSILERANGE);
+            double ang = angle + Random2[CPosAttack]() * (22.5/256);
+            int damage = Random[CPosAttack](1, 5) * 3;
+            let hasHighGround = HasHighGroundOver(target);
+            if(hasHighGround)
+            {
+                damage += 1;
+            }
+
+            LineAttack(ang, MISSILERANGE, slope, damage, "Hitscan", "Bulletpuff");
+        }
     }
 }
