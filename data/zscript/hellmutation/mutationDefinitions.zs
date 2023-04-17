@@ -200,11 +200,11 @@ extend class HM_GlobalEventHandler
             "Arachnotrons and their variants immediately return fire when attacked."
         );
 
-        AddMutationDefinition( // Not implemented
-            "rainoffire",
-            "Rain of Fire",
+        AddMutationDefinition(
+            "abundance",
+            "Abundance",
             6,
-            "Mancubuses fire additional projectiles."
+            "Mancubuses fire additional projectiles in each\nhorizontal direction."
         );
 
         AddMutationDefinition( // Not implemented

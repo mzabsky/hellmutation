@@ -18,6 +18,15 @@ class HM_Mancubus: Fatso replaces Fatso
             }
             FATT AABBCCDDEEFF 4 A_Chase;
             Loop;
+        Missile:
+            FATT G 20 A_FatRaise;
+            FATT H 10 Bright HM_A_FatAttack(HM_FATSHOT_RIGHT);
+            FATT IG 5 A_FaceTarget;
+            FATT H 10 Bright HM_A_FatAttack(HM_FATSHOT_LEFT);
+            FATT IG 5 A_FaceTarget;
+            FATT H 10 Bright HM_A_FatAttack(HM_FATSHOT_RIGHT | HM_FATSHOT_LEFT);
+            FATT IG 5 A_FaceTarget;
+            Goto See;
     }
 
     void HM_SetMaxHealth(int newMaxHealth)
@@ -38,4 +47,50 @@ class HM_Mancubus: Fatso replaces Fatso
         }
     }
 
+    void HM_A_FatAttack(HM_FatShotDirection directions)
+    {
+        if(!target)
+        {
+            return;
+        }
+
+        let epsilon = 0.0000001;
+        
+        A_FaceTarget();
+
+        let startingAngle = Angle;
+        if(directions & HM_FATSHOT_LEFT)
+        {
+            startingAngle = Angle - FATSPREAD;
+        }
+
+        let endingAngle = Angle;
+        if(directions & HM_FATSHOT_RIGHT)
+        {
+            endingAngle = Angle + FATSPREAD;
+        }
+
+        let angleIncrement = FATSPREAD;
+        if(global.IsMutationActive("abundance"))
+        {
+            angleIncrement = FATSPREAD / 2;
+        }
+        
+        for(let currentAngle = startingAngle; currentAngle <= endingAngle + epsilon; currentAngle += angleIncrement)
+        {
+            Actor missile = SpawnMissile (target, "FatShot");
+            if (missile)
+            {
+                missile.Angle = currentAngle;
+                missile.VelFromAngle();
+            }
+        }
+    }
+
+}
+
+enum HM_FatShotDirection
+{
+    HM_FATSHOT_LEFT = 1,
+    HM_FATSHOT_RIGHT = 2
 }
