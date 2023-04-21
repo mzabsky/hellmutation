@@ -186,7 +186,7 @@ extend class HM_GlobalEventHandler
         );
 
         // Level 6 - MAP07/EXM7
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "rapidspin",
             "Rapid Spin",
             6,

@@ -8,8 +8,17 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
     bool hasShield;
     int shieldStartTime;
 
+
     States
     {
+        See:
+            CPOS A 0 {
+                let hasRapidSpin = global.IsMutationActive("rapidspin");
+                bAlwaysFast = hasRapidSpin;
+                A_SetSpeed(hasRapidSpin ? 10 : 8);
+            }
+            CPOS AABBCCDD 3 FAST A_Chase;
+            Loop;
         Missile:
             CPOS E 0 {
                 if(target && target is "PlayerPawn" && !hadShield && !hasShield && global.IsMutationActive("ambushshield"))
@@ -21,7 +30,7 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
                     bInvulnerable = true;
                 }
             }
-            CPOS E 10 A_FaceTarget;
+            CPOS E 10 FAST A_FaceTarget;
         ReMissile:
             CPOS FE 4 BRIGHT HM_A_CPosAttack();
             CPOS F 1 A_CPosRefire;
