@@ -207,7 +207,7 @@ extend class HM_GlobalEventHandler
             "Mancubuses fire additional projectiles in each\nhorizontal direction."
         );
 
-        AddMutationDefinition( // Not implemented
+        AddMutationDefinition(
             "decoys",
             "Decoys",
             6,
