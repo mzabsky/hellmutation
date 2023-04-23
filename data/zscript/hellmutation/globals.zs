@@ -128,6 +128,9 @@ class HM_GlobalEventHandler : EventHandler
             ActiveMutations = Dictionary.Create();
         }
 
+        ChooseMutations();
+
+
         int newMutationsInEffect = 0;
         for (let i = 0; i < MutationDefinitions.Size(); i++)
         {
