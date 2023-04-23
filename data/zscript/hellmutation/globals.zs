@@ -209,7 +209,7 @@ class HM_GlobalEventHandler : EventHandler
                 if(IsMutationActive("slimeborne"))
                 {
                     let roll = Random(0, 100);
-                    console.printf("slimeborne roll %d", roll);
+                    //console.printf("slimeborne roll %d", roll);
                     if(roll <= e.damage * 2)
                     {
                         let spawnee = e.thing.Spawn("HM_DemonEgg", e.thing.pos, ALLOW_REPLACE);
