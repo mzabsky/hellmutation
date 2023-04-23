@@ -208,10 +208,10 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition( // Not implemented
-            "lockon",
-            "Lock On",
+            "decoys",
+            "Decoys",
             6,
-            "All Revenant rockets are guided."
+            "Revenants may spawn a harmless decoy when they get hit."
         );
 
 

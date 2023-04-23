@@ -244,6 +244,7 @@ class HM_GlobalEventHandler : EventHandler
                 }
             }
 
+            // Cyber-Neural Reflexes
             if (e.thing is "HM_Arachnotron" && IsMutationActive("cyberneuralreflexes"))
             {
                 let arachnotron = HM_ARachnotron(e.thing);
@@ -251,6 +252,16 @@ class HM_GlobalEventHandler : EventHandler
                 arachnotron.A_FaceTarget();
                 arachnotron.HM_A_BspiAttack();
                 arachnotron.SetState(arachnotron.ResolveState("InstantMissile"), 1);
+            }
+
+            // Decoys
+            if (e.thing is "HM_Revenant" && IsMutationActive("decoys"))
+            {
+                let revenant = HM_Revenant(e.thing);
+                if(Level.time > revenant.lastDecoyTime + 35) // Max. once every second
+                {
+                    revenant.decoyRequested = true;
+                }
             }
         }
     }
