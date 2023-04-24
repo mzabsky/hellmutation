@@ -5,11 +5,14 @@ extend class HM_GlobalEventHandler
     Actor ReplaceActor(Actor original, string newClass, Actor playerPawn)
     {
         original.A_NoBlocking();
-        let spawnee = original.Spawn(newClass, original.Vec3Offset(0, 0, 0), ALLOW_REPLACE);
+        let spawnee = original.Spawn(newClass, original.pos, ALLOW_REPLACE);
         original.Destroy();
 
-        spawnee.A_Face(playerPawn);
-        spawnee.A_Look();
+        if(spawnee)
+        {
+            spawnee.A_Face(playerPawn);
+            spawnee.A_Look();
+        }
 
         return spawnee;
     }

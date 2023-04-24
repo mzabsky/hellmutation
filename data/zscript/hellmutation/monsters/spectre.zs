@@ -1,4 +1,4 @@
-class RH_Spectre : Spectre replaces Spectre
+class HM_Spectre : Spectre replaces Spectre
 {
     // Copied in its entirety from HM_Demon
     mixin HM_GlobalRef;

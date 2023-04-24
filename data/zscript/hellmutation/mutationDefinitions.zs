@@ -249,7 +249,7 @@ extend class HM_GlobalEventHandler
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
             6,
-            HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
+            HM_CAT_ARACHNOTRON,
             "Arachnotrons and their variants immediately return fire when attacked."
         );
 
@@ -269,6 +269,13 @@ extend class HM_GlobalEventHandler
             "Revenants may spawn a harmless decoy when they get hit."
         );
 
+        AddMutationDefinition(
+            "explosivesurprise",
+            "Explosive Surprise",
+            6,
+            HM_CAT_BARREL,
+            "Barrels may spawn a monster after exploding."
+        );
 
         
 

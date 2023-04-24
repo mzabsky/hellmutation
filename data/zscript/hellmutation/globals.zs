@@ -145,6 +145,7 @@ class HM_GlobalEventHandler : EventHandler
 
             newMutationsInEffect++;
         }
+        }*/
 
         // Kleptomania
         if(IsMutationActive("kleptomania"))
