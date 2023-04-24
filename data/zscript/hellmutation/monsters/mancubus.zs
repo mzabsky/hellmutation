@@ -8,6 +8,8 @@ class HM_Mancubus: Fatso replaces Fatso
     {
         See:
             FATT A 0 {
+                bAlwaysFast = global.IsMutationActive("hyperphagy");
+
                 let totalHealth = 600;
                 if(global.IsMutationActive("adipocytes"))
                 {
@@ -16,10 +18,10 @@ class HM_Mancubus: Fatso replaces Fatso
 
                 HM_SetMaxHealth(totalHealth);
             }
-            FATT AABBCCDDEEFF 4 A_Chase;
+            FATT AABBCCDDEEFF 4 FAST A_Chase;
             Loop;
         Missile:
-            FATT G 20 A_FatRaise;
+            FATT G 20 FAST A_FatRaise;
             FATT H 10 Bright HM_A_FatAttack(HM_FATSHOT_RIGHT);
             FATT IG 5 A_FaceTarget;
             FATT H 10 Bright HM_A_FatAttack(HM_FATSHOT_LEFT);

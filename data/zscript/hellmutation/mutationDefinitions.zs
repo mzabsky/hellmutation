@@ -321,8 +321,16 @@ extend class HM_GlobalEventHandler
             "walloffire",
             "Wall of Fire",
             6,
-            HM_CAT_ARACHNOTRON,
+            HM_CAT_MANCUBUS,
             "Mancubus projectiles spread vertically as well as horizontally."
+        );
+
+        AddMutationDefinition(
+            "hyperphagy",
+            "Hyperphagy",
+            6,
+            HM_CAT_MANCUBUS,
+            "Mancubuses are more aggressive."
         );
 
         
