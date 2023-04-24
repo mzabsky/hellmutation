@@ -24,7 +24,7 @@ class HM_Rocket : Rocket replaces Rocket
     {
         if(global.IsMutationActive("HyperFuel") && !(target is "PlayerPawn"))
         {
-            Speed = 40;
+            A_ScaleVelocity(2);
         }
     }
 }

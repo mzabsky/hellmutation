@@ -169,7 +169,7 @@ class HM_RevenantTracer : RevenantTracer replaces RevenantTracer
     {
         if(global.IsMutationActive("hyperfuel") && !(target is "PlayerPawn"))
         {
-            Speed = 16;
+            A_ScaleVelocity(1.5);
         }
 
         isLockOnActive = global.IsMutationActive("lockon");
