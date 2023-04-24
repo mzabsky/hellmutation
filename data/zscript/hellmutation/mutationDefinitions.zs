@@ -277,15 +277,23 @@ extend class HM_GlobalEventHandler
             "Barrels may spawn a monster after exploding."
         );
 
+        AddMutationDefinition(
+            "greaterritual",
+            "Greater Ritual",
+            6,
+            HM_CAT_IMP | HM_CAT_ARCHVILE,
+            "Arch-Imps and Arch-Viles can resurrect Arch-Viles, Pain\nElementals, Spider Masterminds and Cyberdemons."
+        );
+
         
 
-        AddMutationDefinition( // Not implemented
+        /*AddMutationDefinition( // Not implemented
             "coherentplasma",
             "Coherent Plasma",
             7,
             HM_CAT_ARACHNOTRON,
             "Arachnotron projectiles bounce off of walls."
-        );
+        );*/
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, MutationCategory category, string description)
