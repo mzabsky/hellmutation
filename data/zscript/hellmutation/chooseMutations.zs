@@ -1,9 +1,86 @@
 extend class HM_GlobalEventHandler
 {
-    void ChooseMutations()
+    int ChooseMutations()
     {
         let activeCategories = GetMutationCategoriesForCurrentLevel();
-        //var 
+
+        console.printf("Active:");
+        DictionaryIterator dictIt = DictionaryIterator.Create(ActiveMutations);
+        while(dictIt.Next())
+        {
+            console.printf(dictIt.Key());
+        }
+
+        Array<HM_MutationDefinition> legalMutations;
+        Array<HM_MutationDefinition> matchingMutations;
+        for(let i = 0; i < MutationDefinitions.Size(); i++)
+        {
+            let currentMutation = MutationDefinitions[i];
+
+            if(IsMutationActive(currentMutation.key))
+            {
+                console.printf("already active: %s", currentMutation.Key);
+                continue;
+            }
+
+            legalMutations.Push(currentMutation);
+
+            // There must be some overlap between the categories of mutation and the level
+            // This indicates that the mutation applies to something that appears in the level
+            if(!(currentMutation.Category & activeCategories))
+            {
+                //console.printf("Does not apply: %s %s", currentMutation.Key, MutationCategoryToString(currentMutation.Category));
+                continue;
+            }
+
+            console.printf("Candidate mutation: %s %s", currentMutation.Key, MutationCategoryToString(currentMutation.Category));
+            matchingMutations.Push(currentMutation);
+        }
+
+        // We will try to choose mutations that don't overlap
+        Array<HM_MutationDefinition> chosenMutations;
+        MutationCategory chosenCategories = 0;
+        let numberOfMutationsToChoose = min(4, matchingMutations.Size());
+        let i = 0;
+        while(chosenMutations.Size() < numberOfMutationsToChoose)
+        {
+            i++;
+            let candidateIndex = random[HM_GlobalEventHandler](0, matchingMutations.Size() - 1);
+            let candidateMutation = matchingMutations[candidateIndex];
+
+            // We try to choose mutations that don't overlap with the mutations chosen so far
+            // But if we get stuck and can't find a mutation which would fit, just grab the first one that comes by
+            if(!(chosenCategories & candidateMutation.Category) || i > 10)
+            {
+                bool alreadySelected;
+                for(int j = 0; j < chosenMutations.Size(); j++)
+                {
+                    if(chosenMutations[j].Key == candidateMutation.Key)
+                    {
+                        alreadySelected = true;
+                    }
+                }
+
+                if(alreadySelected)
+                {
+                    continue;
+                }
+
+                chosenMutations.Push(candidateMutation);
+                chosenCategories |= candidateMutation.Category;
+                console.printf("Chosen mutation: %s", candidateMutation.Key);
+            }
+        }
+
+        console.printf("Finished %d", chosenMutations.Size());
+
+        for(int i = 0; i < chosenMutations.Size(); i++)
+        {
+            ActiveMutations.Insert(chosenMutations[i].Key, "1");
+            MutationRemovalsOnOffer.Push(chosenMutations[i].Key);
+        }
+
+        return chosenMutations.Size();
     }
 
     MutationCategory GetMutationCategoriesForCurrentLevel()

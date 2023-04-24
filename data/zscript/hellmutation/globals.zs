@@ -115,6 +115,8 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldLoaded(WorldEvent e) 
     {
+        console.printf("has doom2 %d", Wads.FindLump("VILEA1D1"));
+
         CreateMutationDefinitions();
 
         globalThinker = HM_GlobalThinker.Get();
@@ -128,11 +130,8 @@ class HM_GlobalEventHandler : EventHandler
             ActiveMutations = Dictionary.Create();
         }
 
-        ChooseMutations();
-
-
-        int newMutationsInEffect = 0;
-        for (let i = 0; i < MutationDefinitions.Size(); i++)
+        int newMutationsInEffect = ChooseMutations();
+        /*for (let i = 0; i < MutationDefinitions.Size(); i++)
         {
             let mutationDefinition = MutationDefinitions[i];
             if(mutationDefinition.MapNumber != MapNumber)
@@ -144,7 +143,6 @@ class HM_GlobalEventHandler : EventHandler
             ActiveMutations.Insert(mutationDefinition.Key, "1");
 
             newMutationsInEffect++;
-        }
         }*/
 
         // Kleptomania
@@ -181,6 +179,15 @@ class HM_GlobalEventHandler : EventHandler
 
         globalThinker.MapNumber = MapNumber;
         globalThinker.ActiveMutations = ActiveMutations;
+
+        
+        console.printf("Unloading, active:");
+        DictionaryIterator dictIt = DictionaryIterator.Create(ActiveMutations);
+        while(dictIt.Next())
+        {
+            console.printf(dictIt.Key());
+        }
+
     }
 
     override void WorldThingSpawned(WorldEvent e)
@@ -223,7 +230,7 @@ class HM_GlobalEventHandler : EventHandler
         {
             // Has damage source
 
-            //console.printf("Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
+            console.printf("%f Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.FloorZ, e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
 
             // Hematophagy
             if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
