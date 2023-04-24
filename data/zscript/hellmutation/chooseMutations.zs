@@ -4,75 +4,89 @@ extend class HM_GlobalEventHandler
     {
         let activeCategories = GetMutationCategoriesForCurrentLevel();
 
-        console.printf("Active:");
+        /*console.printf("Active:");
         DictionaryIterator dictIt = DictionaryIterator.Create(ActiveMutations);
         while(dictIt.Next())
         {
             console.printf(dictIt.Key());
-        }
+        }*/
 
+        // These are mutations which do not break anything and are therefore technically allowed to be selected
+        // Not breaking anything means that they are appropriate for the currenct IWAD (Doom vs. Doom 2)
+        // and that they are not already active (from previous levels).
         Array<HM_MutationDefinition> legalMutations;
-        Array<HM_MutationDefinition> matchingMutations;
+
+        // "Appropriate" mutations are those that modify something that appears in the current level.
+        Array<HM_MutationDefinition> appropriateMutations;
         for(let i = 0; i < MutationDefinitions.Size(); i++)
         {
             let currentMutation = MutationDefinitions[i];
 
             if(IsMutationActive(currentMutation.key))
             {
-                console.printf("already active: %s", currentMutation.Key);
                 continue;
             }
 
             legalMutations.Push(currentMutation);
 
-            // There must be some overlap between the categories of mutation and the level
-            // This indicates that the mutation applies to something that appears in the level
             if(!(currentMutation.Category & activeCategories))
             {
-                //console.printf("Does not apply: %s %s", currentMutation.Key, MutationCategoryToString(currentMutation.Category));
+                // Does not apply to anything in the current level
                 continue;
             }
 
-            console.printf("Candidate mutation: %s %s", currentMutation.Key, MutationCategoryToString(currentMutation.Category));
-            matchingMutations.Push(currentMutation);
+            appropriateMutations.Push(currentMutation);
         }
 
         // We will try to choose mutations that don't overlap
         Array<HM_MutationDefinition> chosenMutations;
         MutationCategory chosenCategories = 0;
-        let numberOfMutationsToChoose = min(4, matchingMutations.Size());
+        let numberOfMutationsToChoose = min(4, appropriateMutations.Size());
         let i = 0;
         while(chosenMutations.Size() < numberOfMutationsToChoose)
         {
             i++;
-            let candidateIndex = random[HM_GlobalEventHandler](0, matchingMutations.Size() - 1);
-            let candidateMutation = matchingMutations[candidateIndex];
 
-            // We try to choose mutations that don't overlap with the mutations chosen so far
-            // But if we get stuck and can't find a mutation which would fit, just grab the first one that comes by
-            if(!(chosenCategories & candidateMutation.Category) || i > 10)
+            HM_MutationDefinition candidateMutation;
+            if(i < 8)
             {
-                bool alreadySelected;
-                for(int j = 0; j < chosenMutations.Size(); j++)
+                // We are in the initial stage of mutation selection - try to choose mutations which:
+                // - Are appropriate for the level (reflect features/monsters of the level)
+                // - Offer variety (do not overlap each other)
+                let candidateIndex = random[HM_GlobalEventHandler](0, appropriateMutations.Size() - 1);
+                candidateMutation = appropriateMutations[candidateIndex];
+                if(chosenCategories & candidateMutation.Category)
                 {
-                    if(chosenMutations[j].Key == candidateMutation.Key)
-                    {
-                        alreadySelected = true;
-                    }
-                }
-
-                if(alreadySelected)
-                {
+                    // Overlaps already selected mutations -> discard
                     continue;
                 }
-
-                chosenMutations.Push(candidateMutation);
-                chosenCategories |= candidateMutation.Category;
-                console.printf("Chosen mutation: %s", candidateMutation.Key);
             }
-        }
+            else
+            {
+                // We have given chance to select the appropriate mutations and couldn't manage to select
+                // a nice set. Now just pick something that will work from all the legal mutations.
+                let candidateIndex = random[HM_GlobalEventHandler](0, legalMutations.Size() - 1);
+                candidateMutation = legalMutations[candidateIndex];
+            }
 
-        console.printf("Finished %d", chosenMutations.Size());
+            // Undery any circumstances, no mutation can be selected twice
+            bool alreadySelected;
+            for(int j = 0; j < chosenMutations.Size(); j++)
+            {
+                if(chosenMutations[j].Key == candidateMutation.Key)
+                {
+                    alreadySelected = true;
+                }
+            }
+
+            if(alreadySelected)
+            {
+                continue;
+            }
+            
+            chosenCategories |= candidateMutation.Category;
+            chosenMutations.Push(candidateMutation);
+        }
 
         for(int i = 0; i < chosenMutations.Size(); i++)
         {
