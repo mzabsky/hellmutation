@@ -333,6 +333,14 @@ extend class HM_GlobalEventHandler
             "Mancubuses are more aggressive."
         );
 
+        AddMutationDefinition(
+            "dampingjaws",
+            "Damping Jaws",
+            6,
+            HM_CAT_CACODEMON,
+            "Damage from Cacodemons removes powerup effects from players."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
