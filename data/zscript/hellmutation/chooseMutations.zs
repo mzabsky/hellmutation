@@ -161,10 +161,10 @@ extend class HM_GlobalEventHandler
                 activeCategories |= currentCategory;
             }
 
-            console.printf("score %s => %d", MutationCategoryToString(currentCategory), currentScore);
+            //console.printf("score %s => %d", MutationCategoryToString(currentCategory), currentScore);
         }
 
-        console.printf("categories: %s", MutationCategoryToString(activeCategories));
+        //console.printf("categories: %s", MutationCategoryToString(activeCategories));
 
         return activeCategories;
     }
