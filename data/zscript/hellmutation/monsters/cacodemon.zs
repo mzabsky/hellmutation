@@ -9,7 +9,6 @@ class HM_Cacodemon : Cacodemon replaces Cacodemon
           HEAD A 3 A_Chase;
           Loop;
         Pain:
-					HEAD E 0 { console.printf("pain"); }
           HEAD E 0 UpdatePainThreshold();
           HEAD E 3;
           HEAD E 3 A_Pain;
@@ -55,15 +54,15 @@ class HM_Cacodemon : Cacodemon replaces Cacodemon
         }
     }
 
-
-		void UpdatePainThreshold()
-		{
-				if(global.IsMutationActive("unyielding"))
-				{
-						PainChance = 32;
-				}
-				else {
-						PainChance = 128;
-				}
-		}
+    void UpdatePainThreshold()
+    {
+        if(global.IsMutationActive("unyielding"))
+        {
+            PainChance = 32;
+        }
+        else
+        {
+            PainChance = 128;
+        }
+    }
 }

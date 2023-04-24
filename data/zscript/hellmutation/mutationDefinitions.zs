@@ -293,6 +293,14 @@ extend class HM_GlobalEventHandler
             "Cyberdemons and Spider Mastermind take much less damage from BFG9000."
         );
 
+        AddMutationDefinition(
+            "unstoppable",
+            "Unstoppable",
+            6,
+            HM_CAT_PINKY,
+            "Pinkies and their variants are almost immune to pain."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented

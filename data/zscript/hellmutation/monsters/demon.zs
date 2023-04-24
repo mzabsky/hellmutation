@@ -1,6 +1,7 @@
 class HM_Demon : Demon replaces Demon
 {
     mixin HM_GlobalRef;
+    mixin HM_Unstoppable;
 
     Default
     {
@@ -9,7 +10,11 @@ class HM_Demon : Demon replaces Demon
 
     States
     {
-        Melee: 
+        See:
+            SARG A 0 UpdatePainThreshold();
+            SARG AABBCCDD 2 Fast A_Chase;
+            Loop;
+        Melee:
             SARG EF 8 A_FaceTarget;
             SARG G 8 A_SargAttack;
             Goto See;
@@ -36,7 +41,6 @@ class HM_Demon : Demon replaces Demon
             SARG MLKJI 5;
             Goto See;
     }
-
 }
 
 class HM_DemonEgg: Actor
@@ -44,8 +48,8 @@ class HM_DemonEgg: Actor
     States
     {
         Spawn:
-	    Active:
-		    TNT1 A 70;
+        Active:
+            TNT1 A 70;
             TNT1 A 0
             {
                 let spawnee = Spawn("HM_Demon", VEc3Offset(0, 0, 0), ALLOW_REPLACE);
@@ -61,6 +65,6 @@ class HM_DemonEgg: Actor
 
                 spawnee.A_SetSize(demonRadius);
             }
-		    Stop;
+            Stop;
     }
 }

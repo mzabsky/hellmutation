@@ -2,12 +2,19 @@ class HM_Spectre : Spectre replaces Spectre
 {
     // Copied in its entirety from HM_Demon
     mixin HM_GlobalRef;
+    mixin HM_Unstoppable;
 
-    Default {
+    Default
+    {
         Species "Demon";
     }
 
-    States {
+    States
+    {
+        See:
+            SARG A 0 UpdatePainThreshold();
+            SARG AABBCCDD 2 Fast A_Chase;
+            Loop;
         Melee: 
             SARG EF 8 A_FaceTarget;
             SARG G 8 A_SargAttack;
