@@ -38,8 +38,6 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
                 {
                     missile.VelIntercept(target);
                 }
-
-                console.printf("speed %d", missile.speed);
             }
 
 
