@@ -309,6 +309,14 @@ extend class HM_GlobalEventHandler
             "Arachnotrons can lead their target when aiming."
         );
 
+        AddMutationDefinition(
+            "extendedaccelerators",
+            "Extended Acelerators",
+            6,
+            HM_CAT_ARACHNOTRON,
+            "Arachnotron projectiles are much faster."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
