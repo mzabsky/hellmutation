@@ -2,6 +2,7 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
 {
     mixin HM_GlobalRef;
     mixin HM_GreaterRitual;
+    mixin HM_BigFuckingWomp;
 
     States
     {

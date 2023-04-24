@@ -285,6 +285,14 @@ extend class HM_GlobalEventHandler
             "Arch-Imps and Arch-Viles can resurrect Arch-Viles, Pain\nElementals, Spider Masterminds and Cyberdemons."
         );
 
+        AddMutationDefinition(
+            "bigfuckingwomp",
+            "Big Fucking Womp",
+            6,
+            HM_CAT_CYBERDEMON | HM_CAT_SPIDERMASTERMIND,
+            "Cyberdemons and Spider Mastermind take much less damage from BFG9000."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
