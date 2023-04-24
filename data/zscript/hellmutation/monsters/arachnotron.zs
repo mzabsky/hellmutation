@@ -26,7 +26,12 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
         if (target)
         {
             A_FaceTarget();
-            SpawnMissile(target, "ArachnotronPlasma");
+            let missile = SpawnMissile(target, "ArachnotronPlasma");
+            if(missile && global.IsMutationActive("hypercognition"))
+            {
+                missile.VelIntercept(target);
+            }
+
             lastFireTime = Level.time;
         }
     }

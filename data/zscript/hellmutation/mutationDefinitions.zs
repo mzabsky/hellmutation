@@ -301,6 +301,14 @@ extend class HM_GlobalEventHandler
             "Pinkies and their variants are almost immune to pain."
         );
 
+        AddMutationDefinition(
+            "hypercognition",
+            "Hypercognition",
+            6,
+            HM_CAT_ARACHNOTRON,
+            "Arachnotrons can lead their target when aiming."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
