@@ -317,6 +317,14 @@ extend class HM_GlobalEventHandler
             "Arachnotron projectiles are much faster."
         );
 
+        AddMutationDefinition(
+            "walloffire",
+            "Wall of Fire",
+            6,
+            HM_CAT_ARACHNOTRON,
+            "Mancubus projectiles spread vertically as well as horizontally."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented

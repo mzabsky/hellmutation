@@ -55,34 +55,48 @@ class HM_Mancubus: Fatso replaces Fatso
         }
 
         let epsilon = 0.0000001;
-        
+
         A_FaceTarget();
 
-        let startingAngle = Angle;
+        let startingAngle = 0;
         if(directions & HM_FATSHOT_LEFT)
         {
-            startingAngle = Angle - FATSPREAD;
+            startingAngle = 0 - FATSPREAD;
         }
 
-        let endingAngle = Angle;
+        let endingHorizontalAngle = 0;
         if(directions & HM_FATSHOT_RIGHT)
         {
-            endingAngle = Angle + FATSPREAD;
+            endingHorizontalAngle = 0 + FATSPREAD;
         }
 
-        let angleIncrement = FATSPREAD;
+        let horizontalAngleIncrement = FATSPREAD;
         if(global.IsMutationActive("abundance"))
         {
-            angleIncrement = FATSPREAD / 2;
+            horizontalAngleIncrement = FATSPREAD / 2;
         }
         
-        for(let currentAngle = startingAngle; currentAngle <= endingAngle + epsilon; currentAngle += angleIncrement)
+        let startingVerticalAngle = 0;
+        let endingVerticalAngle = 0;
+        let verticalAngleIncrement = 6;
+        if(global.IsMutationActive("walloffire"))
         {
-            Actor missile = SpawnMissile (target, "FatShot");
-            if (missile)
+            startingVerticalAngle = -6;
+            endingVerticalAngle = 6;
+
+            if(global.IsMutationActive("abundance"))
             {
-                missile.Angle = currentAngle;
-                missile.VelFromAngle();
+                startingVerticalAngle = -9;
+                endingVerticalAngle = 9;
+                verticalAngleIncrement = 4.5;
+            }
+        }
+
+        for(let currentHorizontalAngle = startingAngle; currentHorizontalAngle <= endingHorizontalAngle + epsilon; currentHorizontalAngle += horizontalAngleIncrement)
+        {
+            for(let currentVerticalAngle = startingVerticalAngle; currentVerticalAngle <= endingVerticalAngle + epsilon; currentVerticalAngle += verticalAngleIncrement)
+            {
+                A_CustomMissile("FatShot",32,0, currentHorizontalAngle,CMF_AIMOFFSET | CMF_OFFSETPITCH, currentVerticalAngle);
             }
         }
     }
