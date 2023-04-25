@@ -357,6 +357,14 @@ extend class HM_GlobalEventHandler
             "Hell Knights and Barons of Hell get increasingly angry\nas they take damage."
         );
 
+        AddMutationDefinition(
+            "terminalpurpose",
+            "Terminal Purpose",
+            6,
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost Souls explode on death, dealing light damage."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
