@@ -7,6 +7,7 @@
 #include "./cyberdemon.zs"
 #include "./doomimp.zs"
 #include "./demon.zs"
+#include "./hellknight.zs"
 #include "./lostsoul.zs"
 #include "./mancubus.zs"
 #include "./painelemental.zs"

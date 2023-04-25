@@ -349,6 +349,14 @@ extend class HM_GlobalEventHandler
             "Player health over 100 slowly degenerates."
         );
 
+        AddMutationDefinition(
+            "lordsofvengeance",
+            "Lords of Vengeance",
+            6,
+            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
+            "Hell Knights and Barons of Hell get increasingly angry\nas they take damage."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
