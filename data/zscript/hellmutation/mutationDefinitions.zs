@@ -341,6 +341,14 @@ extend class HM_GlobalEventHandler
             "Damage from Cacodemons removes powerup effects from players."
         );
 
+        AddMutationDefinition(
+            "vitalitylimit",
+            "Vitality Limit",
+            6,
+            HM_CAT_PLAYER,
+            "Player health over 100 slowly degenerates."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented

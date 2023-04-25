@@ -292,12 +292,7 @@ class HM_GlobalEventHandler : EventHandler
     override void WorldTick()
     {
         // Run each second
-        if(Level.time % 35 != 0)
-        {
-            return;
-        }
-
-        if(IsMutationActive("extremophilia"))
+        if(Level.time % 35 == 0 && IsMutationActive("extremophilia"))
         {
             let finder = ThinkerIterator.Create("Actor");
             Actor actor;
@@ -327,7 +322,28 @@ class HM_GlobalEventHandler : EventHandler
                 //console.printf("Extremophilia heal %s from %d to %d (+%d)", actor.GetClassName(), oldHealth, actor.health, healAmount);
             }
         }
-        
+
+        if(Level.time % 22 == 0 && IsMutationActive("vitalitylimit"))
+        {
+            console.printf("vitlimit %d", players.Size());
+            for(let i = 0; i < players.Size(); i++)
+            {
+                let playerPawn = players[i].mo;
+                if(!playerPawn)
+                {
+                    console.printf("no pawn %d", i);
+                    continue;
+                }
+
+                if(playerPawn.health <= 100)
+                {
+                    console.printf("not healthy %d", i);
+                    continue;
+                }
+
+                playerPawn.A_SetHealth(max(100, playerPawn.health - 1));
+            }
+        }
     }
     
     clearscope bool IsMutationRemoved(string mutationName)
