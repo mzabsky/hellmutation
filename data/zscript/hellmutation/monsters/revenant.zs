@@ -30,6 +30,16 @@ class HM_Revenant : Revenant replaces Revenant
             SKEL K 10 A_FaceTarget;
             Goto See;
         Melee:
+            SKEL G 0 {
+                if(global.IsMutationActive("fistatrophy"))
+                {
+                    return ResolveState("Missile");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
             SKEL G 0 A_FaceTarget;
             SKEL G 6 A_SkelWhoosh;
             SKEL H 6 A_FaceTarget;
@@ -188,7 +198,7 @@ class HM_RevenantTracer : RevenantTracer replaces RevenantTracer
         // and some do. Also, internal demos start at random gametics, thus
         // the bug in which revenants cause internal demos to go out of sync.
 
-        console.printf("tracercheck %d %d %d %d %d, ", missileN, level.time, notTracerUntil, levelTimeOffset, notTracerUntil > level.time || (level.maptime + levelTimeOffset) & 3);
+        //console.printf("tracercheck %d %d %d %d %d, ", missileN, level.time, notTracerUntil, levelTimeOffset, notTracerUntil > level.time || (level.maptime + levelTimeOffset) & 3);
 
         if (notTracerUntil > level.time || (level.maptime + levelTimeOffset) & 3) return;
 
@@ -205,7 +215,7 @@ class HM_RevenantTracer : RevenantTracer replaces RevenantTracer
         }
 
         // The rest of this function was identical with Strife's version, except for the angle being used.
-          (16.875);
+        A_Tracer2(16.875);
     }
 
     void EnsureTracer()

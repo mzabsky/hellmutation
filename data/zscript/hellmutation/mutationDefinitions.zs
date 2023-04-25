@@ -365,6 +365,14 @@ extend class HM_GlobalEventHandler
             "Lost Souls explode on death, dealing light damage."
         );
 
+        AddMutationDefinition(
+            "fistatrophy",
+            "Fist Atrophy",
+            6,
+            HM_CAT_REVENANT,
+            "Revenants always use their ranged attack instead of punching."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
