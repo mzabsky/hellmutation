@@ -325,19 +325,16 @@ class HM_GlobalEventHandler : EventHandler
 
         if(Level.time % 22 == 0 && IsMutationActive("vitalitylimit"))
         {
-            console.printf("vitlimit %d", players.Size());
             for(let i = 0; i < players.Size(); i++)
             {
                 let playerPawn = players[i].mo;
                 if(!playerPawn)
                 {
-                    console.printf("no pawn %d", i);
                     continue;
                 }
 
                 if(playerPawn.health <= 100)
                 {
-                    console.printf("not healthy %d", i);
                     continue;
                 }
 
