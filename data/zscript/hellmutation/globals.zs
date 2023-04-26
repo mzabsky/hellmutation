@@ -238,6 +238,7 @@ class HM_GlobalEventHandler : EventHandler
                 // This uses inflictor - we want the demon to be dealing the damage directly
                 // (instead of eg. via a barrel)
                 e.inflictor.A_ResetHealth();
+                e.inflictor.A_GiveInventory("HM_HealGlitterGenerator");
             }
 
             if (e.thing is "PlayerPawn")
@@ -318,6 +319,7 @@ class HM_GlobalEventHandler : EventHandler
                 let oldHealth = actor.health;
                 let healAmount = max(min(actor.spawnhealth() / 7, 200), 10);
                 actor.A_SetHealth(min(oldHealth + healAmount, actor.spawnhealth()));
+                actor.A_GiveInventory("HM_HealGlitterGenerator");
                 
                 //console.printf("Extremophilia heal %s from %d to %d (+%d)", actor.GetClassName(), oldHealth, actor.health, healAmount);
             }
