@@ -373,6 +373,14 @@ extend class HM_GlobalEventHandler
             "Revenants always use their ranged attack instead of punching."
         );
 
+        AddMutationDefinition(
+            "bloodtax",
+            "Blood Tax",
+            6,
+            HM_CAT_PLAYER,
+            "Player takes 25 damage when they pick up a keycard or a\nskull key (this damage cannot kill)."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented
