@@ -381,6 +381,14 @@ extend class HM_GlobalEventHandler
             "Player takes 25 damage when they pick up a keycard or a\nskull key (this damage cannot kill)."
         );
 
+        AddMutationDefinition(
+            "catastrophicreflux",
+            "Catastrophic Reflux",
+            6,
+            HM_CAT_MANCUBUS,
+            "Mancubuses cause a powerful explosion on death."
+        );
+
         
 
         /*AddMutationDefinition( // Not implemented

@@ -2,6 +2,11 @@ class HM_Mancubus: Fatso replaces Fatso
 {
     mixin HM_GlobalRef;
 
+    Default
+    {
+        Species "Fatso";
+    }
+
     bool appliedAdipocytesState;
 
     States
@@ -29,6 +34,32 @@ class HM_Mancubus: Fatso replaces Fatso
             FATT H 10 Bright HM_A_FatAttack(HM_FATSHOT_RIGHT | HM_FATSHOT_LEFT);
             FATT IG 5 A_FaceTarget;
             Goto See;
+        Death:
+            FATT K 0 {
+                if(global.IsMutationActive("catastrophicreflux"))
+                {
+                    return ResolveState("RefluxDeath");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
+            FATT K 6;
+            FATT L 6 A_Scream;
+            FATT M 6 A_NoBlocking;
+            FATT NOPQRS 6;
+            FATT T -1 A_BossDeath;
+            Stop;
+        RefluxDeath:
+            FATT K 0 Spawn("HM_RefluxExplosionGenerator", pos);
+            FATT K 6;
+            FATT L 6 A_Scream;
+            FATT L 0 A_Explode(260, 164);
+            FATT M 6 A_NoBlocking;
+            FATT NOPQRS 6;
+            FATT T -1 A_BossDeath;
+            Stop;
     }
 
     void HM_SetMaxHealth(int newMaxHealth)
@@ -109,4 +140,64 @@ enum HM_FatShotDirection
 {
     HM_FATSHOT_LEFT = 1,
     HM_FATSHOT_RIGHT = 2
+}
+
+class HM_RefluxExplosionGenerator: Actor
+{
+    int RemainingTics;
+
+    States
+    {
+        Spawn:
+            TNT1 A -1;
+            Stop;
+    }
+
+    override void BeginPlay ()
+    {
+        RemainingTics = 35;
+        super.BeginPlay();
+    }
+
+    override void Tick()
+    {
+        if(RemainingTics <= 0)
+        {
+            Destroy();
+            return;
+        }
+
+        RemainingTics--;
+
+        let spread = 104 - RemainingTics * 3;
+        Spawn(
+            "HM_RefluxExplosion",
+            Vec3Offset(
+                random[HM_RefluxExplosion](-spread, spread), random[HM_RefluxExplosion](-spread, spread), random[TeleGlitter](0,64)
+            )
+        );
+        
+        super.Tick();
+    }
+}
+
+class HM_RefluxExplosion: Actor
+{
+    Default
+    {
+        +NOBLOCKMAP;
+        +NOTRIGGER;
+        +NOGRAVITY
+        RenderStyle "Add";
+        Damage 0;
+    }
+  
+    States
+    {
+        Spawn:
+            MISL B 8 Bright;
+            MISL C 6 Bright;
+            MISL D 4 Bright;
+            Stop;
+  }
 }
