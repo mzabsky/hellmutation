@@ -291,7 +291,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
                 fnt: doomFont,
                 wrap: false,
                 autoSize: true,
-                textColor: Font.CR_WHITE
+                textColor: buttonColor
             );
             aLabel.Pack (mainFrame);
         }
