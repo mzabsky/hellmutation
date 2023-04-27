@@ -12,15 +12,15 @@ class HM_ZombieMan : ZombieMan replaces ZombieMan
     {
         
         See:
-            POSS A 0 FAST {
+            POSS A 0 {
                 bAlwaysFast = global.IsMutationActive("Adrenaline");
             }
-            POSS AABBCCDD 4 FAST A_Chase;
+            POSS AABBCCDD 4 A_Chase;
             Loop;
         Missile:
-            POSS E 10 FAST A_FaceTarget;
+            POSS E 10 A_FaceTarget;
             POSS F 8 FAST HM_A_PosAttack();
-            POSS E 8FAST ;
+            POSS E 8 ;
             goto See;
         Death:
             POSS H 0 JumpIfDecapitation("Decapitation");

@@ -142,7 +142,7 @@ extend class HM_GlobalEventHandler
             "Adrenaline",
             3,
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER,
-            "Zombiemen, Shotgunners and their variants are faster."
+            "Zombiemen, Shotgunners and their variants are more aggressive."
         );
 
         AddMutationDefinition(
