@@ -90,7 +90,7 @@ extend class HM_GlobalEventHandler
 
         for(int i = 0; i < chosenMutations.Size(); i++)
         {
-            ActiveMutations.Insert(chosenMutations[i].Key, "1");
+            MutationStates.Insert(chosenMutations[i].Key, "Active");
             MutationRemovalsOnOffer.Push(chosenMutations[i].Key);
         }
 

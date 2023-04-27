@@ -1,7 +1,7 @@
 class HM_GlobalThinker : Thinker
 {
     int MapNumber;
-    Dictionary ActiveMutations;
+    Dictionary MutationStates;
 
     static HM_GlobalThinker Get()
     {
@@ -23,7 +23,9 @@ class HM_GlobalEventHandler : EventHandler
     Array<HM_MutationDefinition> mutationDefinitions;
 
     int MapNumber;
-    Dictionary ActiveMutations;
+
+    // Indexed by mutation key, values are: "None" (or not present), "Active" and "Removed"
+    Dictionary MutationStates;
     Array<string> MutationRemovalsOnOffer;
 
     HM_GlobalThinker globalThinker;
@@ -31,7 +33,7 @@ class HM_GlobalEventHandler : EventHandler
     override void NewGame()
     {
         MapNumber = 0;
-        ActiveMutations = Dictionary.Create();
+        MutationStates = Dictionary.Create();
         //MutationRemovalsOnOffer = new Array<string>();
     }
 
@@ -58,7 +60,7 @@ class HM_GlobalEventHandler : EventHandler
             if(IsMutationActive(mutationName))
             {
                 console.printf("%s removed mutation %s", players[playerNumber].GetUserName(), mutationName);
-                ActiveMutations.Insert(mutationName, "0");
+                MutationStates.Insert(mutationName, "Removed");
 
                 let playerPawn = players[playerNumber].mo;
                 playerPawn.TakeInventory("HM_Dna", 1);
@@ -100,7 +102,7 @@ class HM_GlobalEventHandler : EventHandler
 
                 let playerNumber = e.args[0];
                 console.printf("%s added mutation %s", players[playerNumber].GetUserName(), mutationName);
-                ActiveMutations.Insert(mutationName, "1");
+                MutationStates.Insert(mutationName, "Active");
             }
             else
             {
@@ -121,13 +123,13 @@ class HM_GlobalEventHandler : EventHandler
 
         globalThinker = HM_GlobalThinker.Get();
         MapNumber = globalThinker.MapNumber;
-        ActiveMutations = globalThinker.ActiveMutations;
+        MutationStates = globalThinker.MutationStates;
 
         //console.printf("WORLD LOADED MAP %d", MapNumber);
 
-        if(ActiveMutations == null)
+        if(MutationStates == null)
         {
-            ActiveMutations = Dictionary.Create();
+            MutationStates = Dictionary.Create();
         }
 
         int newMutationsInEffect = ChooseMutations();
@@ -178,16 +180,7 @@ class HM_GlobalEventHandler : EventHandler
         MapNumber++;
 
         globalThinker.MapNumber = MapNumber;
-        globalThinker.ActiveMutations = ActiveMutations;
-
-        
-        console.printf("Unloading, active:");
-        DictionaryIterator dictIt = DictionaryIterator.Create(ActiveMutations);
-        while(dictIt.Next())
-        {
-            console.printf(dictIt.Key());
-        }
-
+        globalThinker.MutationStates = MutationStates;
     }
 
     override void WorldThingSpawned(WorldEvent e)
@@ -347,8 +340,8 @@ class HM_GlobalEventHandler : EventHandler
     
     clearscope bool IsMutationRemoved(string mutationName)
     {
-        let foundValue = ActiveMutations.At(mutationName.MakeLower());
-        let isRemoved = foundValue != "1";
+        let foundValue = MutationStates.At(mutationName.MakeLower());
+        let isRemoved = foundValue == "Removed";
 
         //console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
         return isRemoved;
@@ -356,8 +349,8 @@ class HM_GlobalEventHandler : EventHandler
     
     clearscope bool IsMutationActive(string mutationName)
     {
-        let foundValue = ActiveMutations.At(mutationName.MakeLower());
-        let isActive = foundValue == "1";
+        let foundValue = MutationStates.At(mutationName.MakeLower());
+        let isActive = foundValue == "Active";
 
         //console.printf("IS MUTATION ACTIVE %s %i", mutationName, isActive);
         return isActive;
