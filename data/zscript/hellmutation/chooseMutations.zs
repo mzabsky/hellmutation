@@ -27,6 +27,14 @@ extend class HM_GlobalEventHandler
                 continue;
             }
 
+            // We generally don't want to see mutations which were already removed before all the options are exhausted
+            // But there should be a small chance that a removed mutation is offered again still, to make things
+            // a bit less predictable
+            if(IsMutationRemoved(currentMutation.key) && random[HM_GlobalEventHandler](0, 4) > 0)
+            {
+                continue;
+            }
+
             legalMutations.Push(currentMutation);
 
             if(!(currentMutation.Category & activeCategories))
