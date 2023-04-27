@@ -5,7 +5,7 @@ mixin class HM_Decapitable
     {
         if (global.IsMutationActive("Decapitation"))
         {
-            return A_Jump(127, decapitationStateLabel);
+            return A_Jump(48, decapitationStateLabel);
         }
         else
         {
