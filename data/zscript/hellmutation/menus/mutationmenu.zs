@@ -300,7 +300,7 @@ class HM_MutationMenu : HM_ZFGenericMenu
                 let mutationTitle = mutationDefinition.Name;
                 if(globalHandler.CanMutationBeRemoved(mutationDefinition.Key))
                 {
-                    mutationTitle = String.format("%s - \c[Green]CAN BE REMOVED", mutationTitle);
+                    mutationTitle = String.format("%s - \c[Yellow]NEW!\c[Yellow]\c[White] \c[Green]CAN BE REMOVED", mutationTitle);
                 }
 
                 pageInfo.Title.SetText(mutationTitle);
