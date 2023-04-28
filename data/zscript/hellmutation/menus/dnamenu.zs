@@ -153,7 +153,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
             (
                 (0, aLabel.GetPosY() + 40),
                 (0, doomFont.GetHeight ()),
-                text: "\c[White]Click\c[Yellow] a mutation to permanently remove it. This costs \c[Green]1 \c[Purple]DNA\c[Yellow].",
+                text: "You have \c[Green]1 \c[Purple]DNA\c[Yellow]. \c[White]Click\c[Yellow] a mutation to permanently remove it. This costs \c[Green]1 \c[Purple]DNA\c[Yellow].",
                 fnt: doomFont,
                 wrap: false,
                 autoSize: true,
