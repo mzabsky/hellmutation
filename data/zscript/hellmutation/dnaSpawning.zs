@@ -90,45 +90,47 @@ extend class HM_GlobalEventHandler
         Actor actor;
         while((actor = Actor(finder.next())) != null)
         {
+            let nonSecretMultiplier = actor.CurSector.IsSecret() ? 1 : 4;
+
             if(actor is 'Shotgun')
             {
-                AddChoiceOption(options, actor, 1000);
+                AddChoiceOption(options, actor, 1000 * nonSecretMultiplier);
             }
             else if(actor is 'SuperShotgun')
             {
-                AddChoiceOption(options, actor, 700);
+                AddChoiceOption(options, actor, 700 * nonSecretMultiplier);
             }
             else if(actor is 'Chaingun')
             {
-                AddChoiceOption(options, actor, 400);
+                AddChoiceOption(options, actor, 400 * nonSecretMultiplier);
             }
             else if(actor is 'GreenArmor')
             {
-                AddChoiceOption(options, actor, 100);
+                AddChoiceOption(options, actor, 100 * nonSecretMultiplier);
             }
             else if(actor is 'GreenArmor')
             {
-                AddChoiceOption(options, actor, 100);
+                AddChoiceOption(options, actor, 100 * nonSecretMultiplier);
             }
             else if(actor is 'Medikit')
             {
-                AddChoiceOption(options, actor, 20);
+                AddChoiceOption(options, actor, 20 * nonSecretMultiplier);
             }
             else if(actor is 'Stimpack')
             {
-                AddChoiceOption(options, actor, 20);
+                AddChoiceOption(options, actor, 20 * nonSecretMultiplier);
             }
             else if(actor is 'HealthBonus')
             {
-                AddChoiceOption(options, actor, 1);
+                AddChoiceOption(options, actor, 1 * nonSecretMultiplier);
             }
             else if(actor is 'ArmorBonus')
             {
-                AddChoiceOption(options, actor, 1);
+                AddChoiceOption(options, actor, 1 * nonSecretMultiplier);
             }
             else if(actor is 'YellowCard' || actor is 'RedCard' || actor is 'BlueCard' || actor is 'YellowSkull' || actor is 'RedSkull' || actor is 'BlueSkull')
             {
-                AddChoiceOption(options, actor, 1);
+                AddChoiceOption(options, actor, 1 * nonSecretMultiplier);
             }
         }
 
@@ -149,37 +151,39 @@ extend class HM_GlobalEventHandler
         Actor actor;
         while((actor = Actor(finder.next())) != null)
         {
+            let secretMultiplier = actor.CurSector.IsSecret() ? 4 : 1;
+
             if(actor is 'Megasphere')
             {
-                AddChoiceOption(options, actor, 1000);
+                AddChoiceOption(options, actor, 1000 * secretMultiplier);
             }
             else if(actor is 'Soulsphere')
             {
-                AddChoiceOption(options, actor, 500);
+                AddChoiceOption(options, actor, 500 * secretMultiplier);
             }
             else if(actor is 'BlueArmor')
             {
-                AddChoiceOption(options, actor, 250);
+                AddChoiceOption(options, actor, 250 * secretMultiplier);
             }
             else if(actor is 'Backpack')
             {
-                AddChoiceOption(options, actor, 350);
+                AddChoiceOption(options, actor, 350 * secretMultiplier);
             }
             else if(actor is 'BFG9000')
             {
-                AddChoiceOption(options, actor, 50);
+                AddChoiceOption(options, actor, 50 * secretMultiplier);
             }
             else if(actor is 'PlasmaRifle')
             {
-                AddChoiceOption(options, actor, 10);
+                AddChoiceOption(options, actor, 10 * secretMultiplier);
             }
             else if(actor is 'RocketLauncher')
             {
-                AddChoiceOption(options, actor, 10);
+                AddChoiceOption(options, actor, 10 * secretMultiplier);
             }
             else if(actor is 'YellowCard' || actor is 'RedCard' || actor is 'BlueCard' || actor is 'YellowSkull' || actor is 'RedSkull' || actor is 'BlueSkull')
             {
-                AddChoiceOption(options, actor, 1);
+                AddChoiceOption(options, actor, 1 * secretMultiplier);
             }
         }
 
