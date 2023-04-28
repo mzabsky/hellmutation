@@ -49,7 +49,35 @@ class HM_GlobalEventHandler : EventHandler
     override void NetworkProcess(consoleevent e)
     {
         let commandName = e.name.MakeLower();
-        if (commandName.IndexOf("hm_remove:") >= 0) // sent by DNA menu
+        if (commandName == "hm_dnamenu")
+        {
+            if(e.player == consoleplayer)
+            {
+                Menu.SetMenu("HM_DnaMenu");
+            }
+        }
+        else if (commandName == "hm_mutationmenu")
+        {
+            if(e.player == consoleplayer)
+            {
+                Menu.SetMenu("HM_MutationMenu");
+            }
+        }
+        else if (commandName == "hm_addall")
+        {
+            for(let i = 0; i < mutationDefinitions.Size(); i++)
+            {
+                MutationStates.Insert(mutationDefinitions[i].Key, "Active");
+            }
+        }
+        else if (commandName == "hm_clear")
+        {
+            for(let i = 0; i < mutationDefinitions.Size(); i++)
+            {
+                MutationStates.Insert(mutationDefinitions[i].Key, "None");
+            }
+        }
+        else if (commandName.IndexOf("hm_remove:") >= 0) // sent by DNA menu
         {
             Array <String> parts;
 			      commandName.split(parts, ":");
@@ -373,5 +401,52 @@ class HM_GlobalEventHandler : EventHandler
     clearscope int GetMutationRemovalOnOfferCount() const
     {
         return MutationRemovalsOnOffer.Size();
+    }
+    
+
+    clearscope int GetMutationDefinitionCount() const
+    {
+        return MutationDefinitions.Size();
+    }
+    
+
+    clearscope int GetActiveMutationDefinitionCount() const
+    {
+        let activeCount = 0;
+        for(int i = 0; i < MutationDefinitions.Size(); i++)
+        {
+            if(IsMutationActive(MutationDefinitions[i].Key))
+            {
+                activeCount++;
+            }
+        }
+        return activeCount;
+    }
+
+    clearscope void GetMutationDefinition(int index, out HM_MutationDefinition mutationDefinition) const
+    {
+        mutationDefinition = MutationDefinitions[index];
+    }
+
+    clearscope bool CanMutationBeRemoved(string mutationKey)
+    {
+        for(let i = 0; i < MutationRemovalsOnOffer.Size(); i++)
+        {
+            if(mutationKey == MutationRemovalsOnOffer[i])
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    clearscope string GetKeyForKeybind(string keybind) 
+    {
+        Array<int> keyInts;
+        Bindings.GetAllKeysForCommand(keyInts, keybind);
+        if (keyInts.Size() == 0)
+            return string.Format("[%s]", keybind);
+        return Bindings.NameAllKeys(keyInts);
     }
 }

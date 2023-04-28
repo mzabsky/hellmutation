@@ -203,7 +203,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         // Add a label.
         aLabel = HM_ZFLabel.Create
         (
-            (0, 40),
+            (0, 20),
             (0, bigFont.GetHeight ()),
             text: "REMOVE A MUTATION",
             fnt: bigFont,
@@ -298,7 +298,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
 
         aLabel = HM_ZFLabel.Create
         (
-            (0, aLabel.GetPosY() + 30),
+            (0, 360),
             (0, doomFont.GetHeight ()),
             text: "Unspent \c[Purple]DNA\c[Yellow] is carried over to the next level",
             fnt: doomFont,
@@ -309,11 +309,12 @@ class HM_DnaMenu : HM_ZFGenericMenu
         aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
         aLabel.Pack (mainFrame);
 
+        let pressMutation = String.Format("\c[White][%s]\c[Yellow] View active mutations    \c[White][ESC]\c[White]\c[Yellow] Close", globalHandler.GetKeyForKeybind("hm_mutationmenu"));
         aLabel = HM_ZFLabel.Create
         (
-            (0, aLabel.GetPosY() + 15),
+            (0, 375),
             (0, doomFont.GetHeight ()),
-            text: "Any mutations not removed by the end of this level become permanent!",
+            text: pressMutation,
             fnt: doomFont,
             wrap: false,
             autoSize: true,
@@ -321,18 +322,15 @@ class HM_DnaMenu : HM_ZFGenericMenu
         );
         aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
         aLabel.Pack (mainFrame);
+    }
 
-        aLabel = HM_ZFLabel.Create
-        (
-            (0, aLabel.GetPosY() + 15),
-            (0, doomFont.GetHeight ()),
-            text: "Press \c[White]ESC\c[Yellow] to close this screen",
-            fnt: doomFont,
-            wrap: false,
-            autoSize: true,
-            textColor: Font.CR_YELLOW
-        );
-        aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
-        aLabel.Pack (mainFrame);
+    override bool onUIEvent(UIEvent e) {
+        if (e.type == UIEvent.Type_KeyDown && e.KeyString == globalHandler.GetKeyForKeybind("hm_mutationmenu")) {
+            Close();
+            Menu.SetMenu("HM_MutationMenu");
+            return true;
+        }
+
+        return super.onUIEvent(e);
     }
 }

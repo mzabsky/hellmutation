@@ -1,7 +1,10 @@
 addkeysection "Hell Mutation" hellmutation
-addmenukey "Use DNA" hm_dna
+addmenukey "Use DNA" hm_dnamenu
+addmenukey "View Mutations" hm_mutationmenu
 
-alias hm_dna "openmenu HM_DnaMenu"
+alias hm_dnamenu "netevent hm_dnamenu"
+alias hm_mutationmenu "netevent hm_mutationmenu"
 
-defaultbind N hm_dna
+defaultbind N hm_dnamenu
+defaultbind M hm_mutationmenu
 
