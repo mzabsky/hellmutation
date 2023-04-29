@@ -14,6 +14,9 @@ extend class HM_GlobalEventHandler
             spawnee.A_Look();
         }
 
+        // Show a visual effect to notify the player the monster has been upgraded
+        spawnee.A_GiveInventory("HM_UpgradeGlitterGenerator");
+
         return spawnee;
     }
 
