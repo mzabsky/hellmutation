@@ -82,7 +82,7 @@ extend class HM_GlobalEventHandler
             "Big Fucking Womp",
             6,
             HM_CAT_CYBERDEMON | HM_CAT_SPIDERMASTERMIND,
-            "Cyberdemons and Spider Mastermind take much less damage from BFG9000."
+            "Cyberdemons and Spider Masterminds take much less damage from BFG9000."
         );
 
         AddMutationDefinition(
