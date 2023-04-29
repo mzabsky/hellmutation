@@ -267,14 +267,14 @@ class HM_GlobalEventHandler : EventHandler
                 let player = PlayerPawn(e.thing);
 
                 // Desecration - player was damaged by an imp
-                if(e.damageSource is 'DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
+                if(e.damageSource.GetClassName() == 'HM_DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
                 {
                     ReplaceActor(e.damageSource, "HM_ArchImp");
                     return;
                 }
 
                 // Promotiom - player was damaged by a zombieman
-                if(e.damageSource is 'ZombieMan' && IsMutationActive("Promotion"))
+                if(e.damageSource.GetClassName() == 'HM_ZombieMan' && IsMutationActive("Promotion"))
                 {
                     ReplaceActor(e.damageSource, "ShotgunGuy");
                     return;
