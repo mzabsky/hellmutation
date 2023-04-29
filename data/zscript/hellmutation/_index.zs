@@ -5,6 +5,7 @@
 #include "./mixins/_index.zs"
 #include "./monsters/_index.zs"
 
+#include "./detectGame.zs"
 #include "./globals.zs"
 
 #include "./chooseMutations.zs"

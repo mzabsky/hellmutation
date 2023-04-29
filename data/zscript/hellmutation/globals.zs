@@ -30,6 +30,8 @@ class HM_GlobalEventHandler : EventHandler
 
     HM_GlobalThinker globalThinker;
 
+    bool hasDoom2;
+
     override void NewGame()
     {
         MapNumber = 0;
@@ -145,7 +147,8 @@ class HM_GlobalEventHandler : EventHandler
 
     override void WorldLoaded(WorldEvent e) 
     {
-        console.printf("has doom2 %d", Wads.FindLump("VILEA1D1"));
+        let detectGame = new ("HM_DetectGame");
+        hasDoom2 = detectGame.HasDoom2();
 
         CreateMutationDefinitions();
 
@@ -153,27 +156,12 @@ class HM_GlobalEventHandler : EventHandler
         MapNumber = globalThinker.MapNumber;
         MutationStates = globalThinker.MutationStates;
 
-        //console.printf("WORLD LOADED MAP %d", MapNumber);
-
         if(MutationStates == null)
         {
             MutationStates = Dictionary.Create();
         }
 
         int newMutationsInEffect = ChooseMutations();
-        /*for (let i = 0; i < MutationDefinitions.Size(); i++)
-        {
-            let mutationDefinition = MutationDefinitions[i];
-            if(mutationDefinition.MapNumber != MapNumber)
-            {
-                continue;
-            }
-
-            MutationRemovalsOnOffer.Push(mutationDefinition.Key);
-            ActiveMutations.Insert(mutationDefinition.Key, "1");
-
-            newMutationsInEffect++;
-        }*/
 
         // Kleptomania
         if(IsMutationActive("kleptomania"))
@@ -187,7 +175,6 @@ class HM_GlobalEventHandler : EventHandler
                 }
             }
         }
-        
 
         // Diplay the title card
         for (let i = 0; i < players.Size(); i++)

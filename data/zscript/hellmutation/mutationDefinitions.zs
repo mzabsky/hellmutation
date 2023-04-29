@@ -9,28 +9,29 @@ class HM_MutationDefinition
 
 enum MutationCategory
 {
-    HM_CAT_PLAYER = 1 << 0,
-    HM_CAT_DMGFLOOR = 1 << 1,
-    HM_CAT_BARREL = 1 << 2,
-    HM_CAT_ALLMONSTERS = 1 << 3,
-    HM_CAT_ZOMBIEMAN = 1 << 4,
-    HM_CAT_SHOTGUNNER = 1 << 5,
-    HM_CAT_CHAINGUNNER = 1 << 6,
-    HM_CAT_IMP = 1 << 7,
-    HM_CAT_PINKY = 1 << 8,
+    HM_CAT_DOOM2 = 1 << 0,
+    HM_CAT_PLAYER = 1 << 1,
+    HM_CAT_DMGFLOOR = 1 << 2,
+    HM_CAT_BARREL = 1 << 3,
+    HM_CAT_ALLMONSTERS = 1 << 4,
+    HM_CAT_ZOMBIEMAN = 1 << 5,
+    HM_CAT_SHOTGUNNER = 1 << 6,
+    HM_CAT_CHAINGUNNER = 1 << 7,
+    HM_CAT_IMP = 1 << 8,
+    HM_CAT_PINKY = 1 << 9,
     //HM_CAT_SPECTRE = 1 << 9, spectre counts as a pinky
-    HM_CAT_REVENANT = 1 << 9,
-    HM_CAT_CACODEMON = 1 << 10,
-    HM_CAT_LOSTSOUL = 1 << 11,
-    HM_CAT_PAINELEMENTAL = 1 << 12,
-    HM_CAT_HELLKNIGHT = 1 << 13,
-    HM_CAT_BARONOFHELL = 1 << 14,
-    HM_CAT_MANCUBUS = 1 << 15,
-    HM_CAT_ARCHVILE = 1 << 16,
-    HM_CAT_ARACHNOTRON = 1 << 17,
-    HM_CAT_SPIDERMASTERMIND = 1 << 18,
-    HM_CAT_CYBERDEMON = 1 << 19,
-    HM_CAT_BOSSBRAIN = 1 << 20
+    HM_CAT_REVENANT = 1 << 10,
+    HM_CAT_CACODEMON = 1 << 11,
+    HM_CAT_LOSTSOUL = 1 << 12,
+    HM_CAT_PAINELEMENTAL = 1 << 13,
+    HM_CAT_HELLKNIGHT = 1 << 14,
+    HM_CAT_BARONOFHELL = 1 << 15,
+    HM_CAT_MANCUBUS = 1 << 16,
+    HM_CAT_ARCHVILE = 1 << 17,
+    HM_CAT_ARACHNOTRON = 1 << 18,
+    HM_CAT_SPIDERMASTERMIND = 1 << 19,
+    HM_CAT_CYBERDEMON = 1 << 20,
+    HM_CAT_BOSSBRAIN = 1 << 21
 };
 
 extend class HM_GlobalEventHandler
@@ -41,7 +42,7 @@ extend class HM_GlobalEventHandler
             "abundance",
             "Abundance",
             6,
-            HM_CAT_MANCUBUS,
+            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses fire additional projectiles in each\nhorizontal direction."
         );
 
@@ -49,7 +50,7 @@ extend class HM_GlobalEventHandler
             "adipocytes",
             "Adipocytes",
             3,
-            HM_CAT_MANCUBUS,
+            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses and their variants have more health."
         );
 
@@ -65,7 +66,7 @@ extend class HM_GlobalEventHandler
             "ambushshield",
             "Ambush Shield",
             4,
-            HM_CAT_CHAINGUNNER,
+            HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
 
@@ -113,7 +114,7 @@ extend class HM_GlobalEventHandler
             "catastrophicreflux",
             "Catastrophic Reflux",
             6,
-            HM_CAT_MANCUBUS,
+            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses cause a powerful explosion on death."
         );
 
@@ -121,7 +122,7 @@ extend class HM_GlobalEventHandler
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
             6,
-            HM_CAT_ARACHNOTRON,
+            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotrons and their variants immediately return fire when attacked."
         );
 
@@ -145,7 +146,7 @@ extend class HM_GlobalEventHandler
             "decoys",
             "Decoys",
             6,
-            HM_CAT_REVENANT,
+            HM_CAT_DOOM2 | HM_CAT_REVENANT,
             "Revenants may spawn a harmless decoy when they get hit."
         );
 
@@ -177,7 +178,7 @@ extend class HM_GlobalEventHandler
             "extendedaccelerators",
             "Extended Acelerators",
             6,
-            HM_CAT_ARACHNOTRON,
+            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotron projectiles are much faster."
         );
        
@@ -193,7 +194,7 @@ extend class HM_GlobalEventHandler
             "fistatrophy",
             "Fist Atrophy",
             6,
-            HM_CAT_REVENANT,
+            HM_CAT_DOOM2 | HM_CAT_REVENANT,
             "Revenants always use their ranged attack instead of punching."
         );
 
@@ -233,7 +234,7 @@ extend class HM_GlobalEventHandler
             "hypercognition",
             "Hypercognition",
             6,
-            HM_CAT_ARACHNOTRON,
+            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotrons can lead their target when aiming."
         );
 
@@ -249,7 +250,7 @@ extend class HM_GlobalEventHandler
             "hyperphagy",
             "Hyperphagy",
             6,
-            HM_CAT_MANCUBUS,
+            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses are more aggressive."
         );
 
@@ -305,7 +306,7 @@ extend class HM_GlobalEventHandler
             "rapidspin",
             "Rapid Spin",
             6,
-            HM_CAT_CHAINGUNNER,
+            HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
             "Chaingunners and their variants are faster."
         );
 
@@ -385,7 +386,7 @@ extend class HM_GlobalEventHandler
             "walloffire",
             "Wall of Fire",
             6,
-            HM_CAT_MANCUBUS,
+            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubus projectiles spread vertically as well as horizontally."
         );
 

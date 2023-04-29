@@ -22,6 +22,11 @@ extend class HM_GlobalEventHandler
         {
             let currentMutation = MutationDefinitions[i];
 
+            if(currentMutation.Category & HM_CAT_DOOM2 > 0 && !hasDoom2)
+            {
+                continue;
+            }
+
             if(IsMutationActive(currentMutation.key))
             {
                 continue;
@@ -110,6 +115,8 @@ extend class HM_GlobalEventHandler
         // These are always active
         MutationCategory activeCategories = HM_CAT_PLAYER |HM_CAT_ALLMONSTERS;
 
+
+
         // HM_CAT_DMGFLOOR
         for (let i = 0; i < Level.sectors.Size(); i++)
         {
@@ -177,38 +184,6 @@ extend class HM_GlobalEventHandler
         return activeCategories;
     }
 
-
-    /*
-
-    enum MutationCategory
-    {
-        HM_CAT_PLAYER = 1 << 0,
-        HM_CAT_DMGFLOOR = 1 << 1,
-        HM_CAT_BARREL = 1 << 2,
-        HM_CAT_ALLMONSTERS = 1 << 3,
-        HM_CAT_ZOMBIEMAN = 1 << 4,
-        HM_CAT_SHOTGUNNER = 1 << 5,
-        HM_CAT_CHAINGUNNER = 1 << 6,
-        HM_CAT_IMP = 1 << 7,
-        HM_CAT_PINKY = 1 << 8,
-        //HM_CAT_SPECTRE = 1 << 9, spectre counts as a pinky
-        HM_CAT_REVENANT = 1 << 9,
-        HM_CAT_CACODEMON = 1 << 10,
-        HM_CAT_LOSTSOUL = 1 << 11,
-        HM_CAT_PAINELEMENTAL = 1 << 11,
-        HM_CAT_HELLKNIGHT = 1 << 12,
-        HM_CAT_BARONOFHELL = 1 << 13,
-        HM_CAT_MANCUBUS = 1 << 14,
-        HM_CAT_ARCHVILE = 1 << 15,
-        HM_CAT_ARACHNOTRON = 1 << 16,
-        HM_CAT_SPIDERMASTERMIND = 1 << 17,
-        HM_CAT_CYBERDEMON = 1 << 18,
-        HM_CAT_BOSSBRAIN = 1 << 19
-    };
-
-    */
-
-
     string MutationCategoryToString(MutationCategory category)
     {
         if(category == 0)
@@ -217,6 +192,7 @@ extend class HM_GlobalEventHandler
         }
 
         let str = "";
+        if(category & HM_CAT_DOOM2) str.AppendFormat("|DOOM2");
         if(category & HM_CAT_PLAYER) str.AppendFormat("|PLAYER");
         if(category & HM_CAT_DMGFLOOR) str.AppendFormat("|DMGFLOOR");
         if(category & HM_CAT_BARREL) str.AppendFormat("|BARREL");
