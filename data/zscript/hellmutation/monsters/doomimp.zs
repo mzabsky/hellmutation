@@ -1,4 +1,4 @@
-class HM_DoomImp : DoomImp replaces DoomImp
+class HM_DoomImp : DoomImp // Replacement is handled by MH_DoomImp_Spawner
 {
     mixin HM_GlobalRef;
 
@@ -57,6 +57,22 @@ class HM_DoomImp : DoomImp replaces DoomImp
                 // launch a missile
                 SpawnMissile (targ, "DoomImpBall");
             }
+        }
+    }
+}
+
+class MH_DoomImp_Spawner: RandomSpawner replaces DoomImp
+{
+    override Name ChooseSpawn ()
+    {
+        let roll = random[randomspawn](0,14);
+        if(roll == 0)
+        {
+            return "HM_ArchImp";
+        }
+        else
+        {
+            return "HM_DoomImp";
         }
     }
 }
