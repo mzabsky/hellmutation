@@ -269,13 +269,15 @@ class HM_GlobalEventHandler : EventHandler
                 // Desecration - player was damaged by an imp
                 if(e.damageSource is 'DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
                 {
-                    ReplaceActor(e.damageSource, "HM_ArchImp", player);
+                    ReplaceActor(e.damageSource, "HM_ArchImp");
+                    return;
                 }
 
                 // Promotiom - player was damaged by a zombieman
                 if(e.damageSource is 'ZombieMan' && IsMutationActive("Promotion"))
                 {
-                    ReplaceActor(e.damageSource, "ShotgunGuy", player);
+                    ReplaceActor(e.damageSource, "ShotgunGuy");
+                    return;
                 }
 
                 // Promotiom - player was damaged by a zombieman
