@@ -199,6 +199,27 @@ class HM_GlobalEventHandler : EventHandler
         }
 
         SpawnDna();
+
+        ReplaceMonsters();
+    }
+
+    void ReplaceMonsters()
+    {
+        let finder = ThinkerIterator.Create("Actor");
+        Actor actor;
+        
+        while((actor = Actor(finder.next())) != null)
+        {
+            if(!actor.bIsMonster)
+            {
+                continue;
+            }
+
+            if(actor.GetClass() == 'HM_DoomImp')
+            {
+                ChanceReplaceActor(actor, 'HM_ArchImp', IsMutationActive("unholylegion") ? 17 * 3 : 17); // 1 in 5 with Unholy Legion, one in 15 otherwise
+            }
+        }
     }
 
     override void WorldUnloaded(WorldEvent e) 

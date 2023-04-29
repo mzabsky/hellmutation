@@ -350,6 +350,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "unholylegion",
+            "Unholy Legion",
+            6,
+            HM_CAT_IMP,
+            "Arch-Imps replace Imps three times as frequently."
+        );
+
+        AddMutationDefinition(
             "unstoppable",
             "Unstoppable",
             6,

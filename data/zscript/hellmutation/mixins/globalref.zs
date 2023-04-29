@@ -5,5 +5,7 @@ mixin class HM_GlobalRef
     override void BeginPlay()
     {
         global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+
+        super.BeginPlay();
     }
 }
