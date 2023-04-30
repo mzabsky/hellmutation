@@ -14,23 +14,20 @@ class HM_DnaMenuHandler : HM_ZFHandler
         }
 
         if(caller is "HM_ZFButton") {
-            let button = HM_ZFButton(caller);
+            let activatedButton = HM_ZFButton(caller);
 
-            if(link.globalHandler.IsMutationRemoved(command))
+            link.currentHighlightedMutationIndex = - 1;
+            for(let i = 0; i < link.mutationTitles.Size(); i++)
             {
-                button.SetTextColor(Font.CR_BLACK);
-                return;
+                let currentButton = link.mutationTitles[i];
+
+                if(activatedButton == currentButton && !unhovered/* && !link.globalHandler.IsMutationActive(command)*/)
+                {
+                    link.currentHighlightedMutationIndex = i;
+                }
             }
 
-            if(unhovered)
-            {
-                button.SetTextColor(Font.CR_WHITE);
-            }
-            else
-            {
-                button.SetTextColor(Font.CR_YELLOW);
-            }
-            
+            link.UpdateItemHighlights();
         }
 
 
@@ -70,7 +67,10 @@ class HM_DnaMenu : HM_ZFGenericMenu
     HM_ZFButton aButton;
     // A text label.
     HM_ZFLabel aLabel;
-    int buttonColor; 
+    int buttonColor;
+
+    Array<HM_ZFButton> mutationTitles;
+    int currentHighlightedMutationIndex;
 
     override void Init (Menu parent)
     {
@@ -78,6 +78,8 @@ class HM_DnaMenu : HM_ZFGenericMenu
         canRemoveMutation = !!dna;
 
         globalHandler = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+
+        currentHighlightedMutationIndex = -1;
 
         Vector2 baseRes = (640, 400);
 
@@ -200,13 +202,28 @@ class HM_DnaMenu : HM_ZFGenericMenu
                 textColor: buttonColor
             );
             aLabel.Pack (mainFrame);
+
+            mutationTitles.Push(aButton);
         }
+
+        aLabel = HM_ZFLabel.Create
+        (
+            (0, 345),
+            (0, doomFont.GetHeight ()),
+            text: "Unspent \c[Purple]DNA\c[Yellow] is carried over to the next level",
+            fnt: doomFont,
+            wrap: false,
+            autoSize: true,
+            textColor: Font.CR_YELLOW
+        );
+        aLabel.SetPosX ((baseRes.x - doomfont.stringWidth (aLabel.GetText ())) / 2.); // Center on X axis
+        aLabel.Pack (mainFrame);
 
         aLabel = HM_ZFLabel.Create
         (
             (0, 360),
             (0, doomFont.GetHeight ()),
-            text: "Unspent \c[Purple]DNA\c[Yellow] is carried over to the next level",
+            text: "\c[White][Up]\c[Yellow] Previous mutation    \c[White][Down]\c[Yellow] Next mutation    \c[White][Click]/[Enter]\c[White] \c[Yellow] Remove mutation",
             fnt: doomFont,
             wrap: false,
             autoSize: true,
@@ -238,5 +255,62 @@ class HM_DnaMenu : HM_ZFGenericMenu
         }
 
         return super.onUIEvent(e);
+    }
+
+    override bool menuEvent(int mkey, bool fromcontroller)
+    {
+        if(mutationTitles.Size() > 0 && canRemoveMutation)
+        {
+            switch (mkey)
+            {
+                case MKEY_Up: 
+
+                    // Fix navigation jumping to the second item from the bottom if
+                    // navigation UP is the first thing the player does after opening the menu
+                    if(currentHighlightedMutationIndex == -1)
+                    {
+                        currentHighlightedMutationIndex = 0;
+                    }
+
+                    currentHighlightedMutationIndex = (currentHighlightedMutationIndex - 1 + mutationTitles.Size()) % mutationTitles.Size();
+                    break;
+                case MKEY_Down:
+                    currentHighlightedMutationIndex = (currentHighlightedMutationIndex + 1 + mutationTitles.Size()) % mutationTitles.Size();
+                    break;
+                case MKEY_Enter:
+                    if(currentHighlightedMutationIndex != -1)
+                    {
+                        HM_MutationDefinition mutationDefinition;
+                        globalHandler.GetMutationRemovalOnOffer(currentHighlightedMutationIndex, mutationDefinition);
+                        EventHandler.SendNetworkEvent(String.Format("HM_Remove:%s", mutationDefinition.Key), consoleplayer);
+                        Close();
+                        return true;
+                    }
+            }
+        }
+
+        UpdateItemHighlights();
+
+        return super.menuEvent(mkey, fromcontroller);
+    }
+
+    void UpdateItemHighlights()
+    {
+        for(let i = 0; i < mutationTitles.Size(); i++)
+        {
+            let currentButton = mutationTitles[i];
+            if(currentButton.GetTextColor() == Font.CR_BLACK)
+            {
+                continue;
+            }
+            else if(currentHighlightedMutationIndex == i)
+            {
+                currentButton.SetTextColor(Font.CR_RED);
+            }
+            else
+            {
+                currentButton.SetTextColor(Font.CR_WHITE);
+            }
+        }
     }
 }
