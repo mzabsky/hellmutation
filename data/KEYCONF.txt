@@ -5,6 +5,11 @@ addmenukey "View Mutations" hm_mutationmenu
 alias hm_dnamenu "netevent hm_dnamenu"
 alias hm_mutationmenu "netevent hm_mutationmenu"
 
+alias hm_add "netevent hm_add:%1"
+alias hm_remove "netevent hm_remove:%1"
+alias hm_addall "netevent hm_addall"
+alias hm_clear "netevent hm_clear"
+
 defaultbind N hm_dnamenu
 defaultbind M hm_mutationmenu
 
