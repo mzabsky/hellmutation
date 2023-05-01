@@ -223,7 +223,7 @@ class HM_RevenantTracer : RevenantTracer replaces RevenantTracer
         // This needs to be called just after the missile is spawned
         if(level.maptime % 4 == 0)
         {
-            console.printf("made tracer %d", level.time);
+            //console.printf("made tracer %d", level.time);
             levelTimeOffset = 1;
         }
         else

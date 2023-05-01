@@ -73,7 +73,7 @@ extend class HM_GlobalEventHandler
         {
             let thirdDna = thirdDnaPlace.Spawn("HM_Dna", thirdDnaPlace.Vec3Offset(0, 0, 0), ALLOW_REPLACE);
             thirdDna.bNoGravity = false; // Apply gravity to this DNA specifically (primarily for MAP02 where the cyberdemon spawns on a lowering platform)
-            console.printf("Spawned third DNA on a %s.", thirdDnaPlace.GetClassName());
+            //console.printf("Spawned third DNA on a %s.", thirdDnaPlace.GetClassName());
         }
         else
         {

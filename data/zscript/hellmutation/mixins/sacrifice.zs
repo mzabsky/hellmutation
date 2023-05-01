@@ -38,12 +38,12 @@ mixin class HM_Sacrifice
                 for(let i = 0; i < redirectTargets.Size(); i++)
                 {
                     redirectTargets[i].DamageMobj(self, source, damagePerTarget, mod, redirectFlags, angle); // TODO: Recalculate angle probably?
-                    console.printf("%s redirected %d damage to %s", GetClassName(), damagePerTarget, redirectTargets[i].GetClassName());
+                    //console.printf("%s redirected %d damage to %s", GetClassName(), damagePerTarget, redirectTargets[i].GetClassName());
                 }
 
                 // Take the rest that wasn't redirected
                 super.DamageMobj(inflictor, source, newDamage, mod, flags, angle);
-                console.printf("%s took leftover damage 5d", GetClassName(), newDamage);
+                //console.printf("%s took leftover damage 5d", GetClassName(), newDamage);
                 return newDamage;
             }
         }

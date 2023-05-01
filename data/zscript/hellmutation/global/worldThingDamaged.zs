@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             // Has damage source
 
-            console.printf("%f Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.FloorZ, e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
+            //console.printf("%f Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.FloorZ, e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
 
             // Hematophagy
             if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
