@@ -9,29 +9,32 @@ class HM_MutationDefinition
 
 enum MutationCategory
 {
-    HM_CAT_DOOM2 = 1 << 0,
-    HM_CAT_PLAYER = 1 << 1,
-    HM_CAT_DMGFLOOR = 1 << 2,
-    HM_CAT_BARREL = 1 << 3,
-    HM_CAT_ALLMONSTERS = 1 << 4,
-    HM_CAT_ZOMBIEMAN = 1 << 5,
-    HM_CAT_SHOTGUNNER = 1 << 6,
-    HM_CAT_CHAINGUNNER = 1 << 7,
-    HM_CAT_IMP = 1 << 8,
-    HM_CAT_PINKY = 1 << 9,
-    //HM_CAT_SPECTRE = 1 << 9, spectre counts as a pinky
-    HM_CAT_REVENANT = 1 << 10,
-    HM_CAT_CACODEMON = 1 << 11,
-    HM_CAT_LOSTSOUL = 1 << 12,
-    HM_CAT_PAINELEMENTAL = 1 << 13,
-    HM_CAT_HELLKNIGHT = 1 << 14,
-    HM_CAT_BARONOFHELL = 1 << 15,
-    HM_CAT_MANCUBUS = 1 << 16,
-    HM_CAT_ARCHVILE = 1 << 17,
-    HM_CAT_ARACHNOTRON = 1 << 18,
-    HM_CAT_SPIDERMASTERMIND = 1 << 19,
-    HM_CAT_CYBERDEMON = 1 << 20,
-    HM_CAT_BOSSBRAIN = 1 << 21
+    HM_CAT_DOOM2 = 1 << 0, // Only allowed if the current IWAD allows DOOM2's feature set (arch viles and stuff)
+    HM_CAT_NOFIRSTMAP = 1 << 1, // Can't appear in the first map in this save
+    HM_CAT_PLAYER = 1 << 2,
+    HM_CAT_DMGFLOOR = 1 << 3,
+    HM_CAT_BARREL = 1 << 4,
+
+    HM_CAT_ALLMONSTERS = 1 << 13, // Affects all monsters
+
+    // Enemy types
+    HM_CAT_ZOMBIEMAN = 1 << 14,
+    HM_CAT_SHOTGUNNER = 1 << 15,
+    HM_CAT_CHAINGUNNER = 1 << 16,
+    HM_CAT_IMP = 1 << 17,
+    HM_CAT_PINKY = 1 << 18, // Spectres count as pinkys
+    HM_CAT_REVENANT = 1 << 19,
+    HM_CAT_CACODEMON = 1 << 20,
+    HM_CAT_LOSTSOUL = 1 << 21,
+    HM_CAT_PAINELEMENTAL = 1 << 22,
+    HM_CAT_HELLKNIGHT = 1 << 23,
+    HM_CAT_BARONOFHELL = 1 << 24,
+    HM_CAT_MANCUBUS = 1 << 25,
+    HM_CAT_ARCHVILE = 1 << 26,
+    HM_CAT_ARACHNOTRON = 1 << 27,
+    HM_CAT_SPIDERMASTERMIND = 1 << 28,
+    HM_CAT_CYBERDEMON = 1 << 29,
+    HM_CAT_BOSSBRAIN = 1 << 30
 };
 
 extend class HM_GlobalEventHandler
@@ -258,7 +261,7 @@ extend class HM_GlobalEventHandler
             "insomnia",
             "Insomnia",
             1,
-            HM_CAT_ALLMONSTERS,
+            HM_CAT_NOFIRSTMAP | HM_CAT_ALLMONSTERS,
             "MONSTERS DO NOT START THE LEVEL ASLEEP."
         );
 

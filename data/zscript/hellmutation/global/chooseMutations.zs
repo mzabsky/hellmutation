@@ -27,6 +27,11 @@ extend class HM_GlobalEventHandler
                 continue;
             }
 
+            if(currentMutation.Category & HM_CAT_NOFIRSTMAP > 0 && mapNumber == 0)
+            {
+                continue;
+            }
+
             if(IsMutationActive(currentMutation.key))
             {
                 continue;
