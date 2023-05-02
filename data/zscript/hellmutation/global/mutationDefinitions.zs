@@ -392,16 +392,14 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubus projectiles spread vertically as well as horizontally."
         );
-
         
-
-        /*AddMutationDefinition( // Not implemented
-            "coherentplasma",
-            "Coherent Plasma",
-            7,
-            HM_CAT_ARACHNOTRON,
-            "Arachnotron projectiles bounce off of walls."
-        );*/
+        AddMutationDefinition(
+            "ascension",
+            "Ascension",
+            6,
+            HM_CAT_HELLKNIGHT,
+            "Hell Knights who score a hit on the player become Barons of Hell."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, MutationCategory category, string description)

@@ -49,7 +49,14 @@ extend class HM_GlobalEventHandler
                 // Promotiom - player was damaged by a zombieman
                 if(e.damageSource.GetClassName() == 'HM_ZombieMan' && IsMutationActive("Promotion"))
                 {
-                    ReplaceActor(e.damageSource, "ShotgunGuy");
+                    ReplaceActor(e.damageSource, "HM_ShotgunGuy");
+                    return;
+                }
+
+                // Ascension - player was damaged by a hell knight
+                if(e.damageSource.GetClassName() == 'HM_HellKnight' && IsMutationActive("ascension"))
+                {
+                    ReplaceActor(e.damageSource, "HM_BaronOfHell");
                     return;
                 }
 
