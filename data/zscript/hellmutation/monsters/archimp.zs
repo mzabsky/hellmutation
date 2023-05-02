@@ -4,6 +4,7 @@ class HM_ArchImp : DoomImp
 
     mixin HM_GlobalRef;
     mixin HM_Sacrifice;
+    mixin HM_GreaterRitual;
 
     Default
     {

@@ -206,7 +206,7 @@ extend class HM_GlobalEventHandler
             "Greater Ritual",
             6,
             HM_CAT_IMP | HM_CAT_ARCHVILE,
-            "Arch-Imps and Arch-Viles can resurrect Arch-Viles, Pain\nElementals, Spider Masterminds and Cyberdemons."
+            "Arch-Imps and Arch-Viles can resurrect Arch-Imps, Arch-Viles,\nPain Elementals, Spider Masterminds and Cyberdemons."
         );
 
         AddMutationDefinition(
