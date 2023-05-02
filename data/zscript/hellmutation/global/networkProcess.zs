@@ -91,6 +91,38 @@ extend class HM_GlobalEventHandler
                 console.printf("Unknown mutation %s", mutationName);
             }
         }
+        else if (commandName.IndexOf("hm_offer:") >= 0)
+        {
+            Array <String> parts;
+            commandName.split(parts, ":");
+
+            MutationRemovalsOnOffer.Clear();
+            for(let i = 1; i < parts.Size(); i++)
+            {
+                let mutationKey = parts[i];
+                bool found = false;
+                for(let j = 0; j < mutationDefinitions.Size(); j++)
+                {
+                    if (mutationDefinitions[j].Key != mutationKey)
+                    {
+                        continue;
+                    }
+
+                    found = true;
+                    break;
+                }
+
+                if(found)
+                {
+                    MutationRemovalsOnOffer.Push(mutationKey);
+                    console.printf("Added %s to offers.", mutationKey);
+                }
+                else
+                {
+                    console.printf("Unknown mutation %s", mutationKey);
+                }
+            }
+        }
         else
         {
             console.printf("Unknown net command: %s", commandName);
