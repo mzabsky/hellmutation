@@ -17,7 +17,11 @@ mixin class HM_Decapitable
     {
         A_NoBlocking();
         let spawnee = Spawn("LostSoul", Vec3Offset(0, 0, 0), ALLOW_REPLACE);
-        spawnee.target = target;
-        spawnee.A_FaceTarget();
+        if(spawnee)
+        {
+            spawnee.A_SetHealth(40); // Make the spawned lost soul a bit easier to kill
+            spawnee.target = target;
+            spawnee.A_FaceTarget();
+        }
     }
 }
