@@ -400,6 +400,14 @@ extend class HM_GlobalEventHandler
             HM_CAT_HELLKNIGHT,
             "Hell Knights who score a hit on the player become Barons of Hell."
         );
+        
+        AddMutationDefinition(
+            "prepained",
+            "Pre-Pained",
+            6,
+            HM_CAT_PAINELEMENTAL,
+            "Pain Elementals spawn with several Lost Souls."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, MutationCategory category, string description)
