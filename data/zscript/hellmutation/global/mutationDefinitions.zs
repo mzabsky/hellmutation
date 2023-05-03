@@ -397,7 +397,7 @@ extend class HM_GlobalEventHandler
             "ascension",
             "Ascension",
             6,
-            HM_CAT_HELLKNIGHT,
+            HM_CAT_DOOM2 | HM_CAT_HELLKNIGHT,
             "Hell Knights who score a hit on the player become Barons of Hell."
         );
         
@@ -405,7 +405,7 @@ extend class HM_GlobalEventHandler
             "prepained",
             "Pre-Pained",
             6,
-            HM_CAT_PAINELEMENTAL,
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
             "Pain Elementals spawn with several Lost Souls."
         );
     }
