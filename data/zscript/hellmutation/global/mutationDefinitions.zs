@@ -408,6 +408,14 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
             "Pain Elementals spawn with several Lost Souls."
         );
+        
+        AddMutationDefinition(
+            "losttogether",
+            "Lost Together",
+            6,
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost souls never attack each other."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, int mapNumber, MutationCategory category, string description)

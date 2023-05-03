@@ -58,6 +58,16 @@ class HM_LostSoul: LostSoul replaces LostSoul
 
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
     }
+
+    override bool OkayToSwitchTarget(Actor other)
+    {
+        if((other is 'LostSoul' || other is 'PainElemental') && global.IsMutationActive("losttogether"))
+        {
+            return false;
+        }
+
+        return super.OkayToSwitchTarget(other);
+    }
 }
 
 class HM_LostSoulExplosion: Actor
