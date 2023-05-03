@@ -84,7 +84,7 @@ extend class HM_GlobalEventHandler
                         )
                     );
 
-                    if(spawnee && spawnee.TestMobjLocation())
+                    if(spawnee && !spawnee.TestMobjLocation())
                     {
                         spawnee.Destroy();
                     }
