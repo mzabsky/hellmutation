@@ -52,7 +52,7 @@ extend class HM_GlobalEventHandler
                     return;
                 }
 
-                // Promotiom - player was damaged by a zombieman
+                // Promotion - player was damaged by a zombieman
                 if(e.damageSource.GetClassName() == 'HM_ZombieMan' && IsMutationActive("Promotion"))
                 {
                     ReplaceActor(e.damageSource, "HM_ShotgunGuy");
@@ -66,7 +66,7 @@ extend class HM_GlobalEventHandler
                     return;
                 }
 
-                // Promotiom - player was damaged by a zombieman
+                // Damping Jaws - player was damaged by a cacodemon -> remove powerups
                 if(e.damageSource is 'Cacodemon' && IsMutationActive("dampingjaws"))
                 {
                     player.A_TakeInventory("PowerStrength");
@@ -95,6 +95,12 @@ extend class HM_GlobalEventHandler
                 {
                     revenant.decoyRequested = true;
                 }
+            }
+
+            // Decoys
+            if (e.thing is "HM_Demon" && IsMutationActive("reactivecamouflage"))
+            {
+                e.thing.A_SetRenderStyle(0.5, STYLE_OptFuzzy);
             }
         }
     }

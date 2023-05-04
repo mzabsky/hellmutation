@@ -330,6 +330,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "reactivecamouflage",
+            "Reactive Camouflage",
+            3,
+            HM_CAT_PINKY,
+            "Pinkies become spectral when damaged."
+        );
+
+        AddMutationDefinition(
             "sacrifice",
             "Sacrifice",
             3,
