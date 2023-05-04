@@ -4,6 +4,11 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
 
     int lastFireTime;
 
+    Default
+    {
+        Species "Arachnotron";
+    }
+
     States
     {
         Missile:
@@ -51,7 +56,7 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
         // the actual trigger to do the counterattack is in WorldThingDamaged
         if(global.IsMutationActive("cyberneuralreflexes"))
         {
-            flags = flags & DMG_NO_PAIN;
+            flags = flags | DMG_NO_PAIN;
         }
 
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
