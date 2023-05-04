@@ -72,6 +72,14 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
+        
+        AddMutationDefinition(
+            "ascension",
+            "Ascension",
+            6,
+            HM_CAT_DOOM2 | HM_CAT_HELLKNIGHT,
+            "Hell Knights who score a hit on the player become Barons of Hell."
+        );
 
         AddMutationDefinition(
             "barrage",
@@ -288,6 +296,14 @@ extend class HM_GlobalEventHandler
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Hell Knights and Barons of Hell get increasingly angry\nas they take damage."
         );
+        
+        AddMutationDefinition(
+            "losttogether",
+            "Lost Together",
+            6,
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost souls never attack each other."
+        );
        
         AddMutationDefinition(
             "kleptomania",
@@ -311,6 +327,14 @@ extend class HM_GlobalEventHandler
             0,
             HM_CAT_DOOM2| HM_CAT_MANCUBUS,
             "Mancubuses spread fire with their attacks."
+        );
+        
+        AddMutationDefinition(
+            "prepained",
+            "Pre-Pained",
+            6,
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
+            "Pain Elementals spawn with several Lost Souls."
         );
 
         AddMutationDefinition(
@@ -431,30 +455,6 @@ extend class HM_GlobalEventHandler
             6,
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubus projectiles spread vertically as well as horizontally."
-        );
-        
-        AddMutationDefinition(
-            "ascension",
-            "Ascension",
-            6,
-            HM_CAT_DOOM2 | HM_CAT_HELLKNIGHT,
-            "Hell Knights who score a hit on the player become Barons of Hell."
-        );
-        
-        AddMutationDefinition(
-            "prepained",
-            "Pre-Pained",
-            6,
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals spawn with several Lost Souls."
-        );
-        
-        AddMutationDefinition(
-            "losttogether",
-            "Lost Together",
-            6,
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls never attack each other."
         );
     }
     
