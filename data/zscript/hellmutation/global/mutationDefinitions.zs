@@ -309,7 +309,7 @@ extend class HM_GlobalEventHandler
             "napalmpayload",
             "Napalm Payload",
             0,
-            HM_CAT_MANCUBUS,
+            HM_CAT_DOOM2| HM_CAT_MANCUBUS,
             "Mancubuses spread fire with their attacks."
         );
 
