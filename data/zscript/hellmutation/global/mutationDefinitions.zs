@@ -378,6 +378,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "tractorspell",
+            "Tractor Spell",
+            3,
+            HM_CAT_ARCHVILE,
+            "Arch-Vile attack pulls its target towards it."
+        );
+
+        AddMutationDefinition(
             "unholylegion",
             "Unholy Legion",
             6,
