@@ -37,9 +37,9 @@ extend class HM_GlobalEventHandler
 
             if (e.thing is "PlayerPawn")
             {
-                /*let player = PlayerPawn(e.thing);
+                let player = PlayerPawn(e.thing);
 
-                let painSeed = HM_PainSeed(e.thing.Spawn("HM_PainSeed", e.thing.Vec3Offset(0, 0, 40)));
+                /*let painSeed = HM_PainSeed(e.thing.Spawn("HM_PainSeed", e.thing.Vec3Offset(0, 0, 40)));
                 if(painSeed != null)
                 {
                     painSeed.SetSourceHealthLoss(e.damage);
