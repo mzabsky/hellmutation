@@ -314,6 +314,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "rage",
+            "Rage",
+            6,
+            HM_CAT_PINKY,
+            "Pinkies and Spectres are faster."
+        );
+
+        AddMutationDefinition(
             "rapidspin",
             "Rapid Spin",
             6,

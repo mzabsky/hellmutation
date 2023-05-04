@@ -2,6 +2,7 @@ class HM_Spectre : Spectre replaces Spectre
 {
     // Copied in its entirety from HM_Demon
     mixin HM_GlobalRef;
+    mixin HM_Macropods;
     mixin HM_Unstoppable;
 
     Default
@@ -12,23 +13,15 @@ class HM_Spectre : Spectre replaces Spectre
     States
     {
         See:
+            SARG A 0 {
+                bAlwaysFast = global.IsMutationActive("rage");
+            }
             SARG A 0 UpdatePainThreshold();
-            SARG AABBCCDD 2 Fast A_Chase;
+            SARG AABBCCDD 2 Fast A_PounceChase;
             Loop;
         Melee: 
             SARG EF 8 A_FaceTarget;
             SARG G 8 A_SargAttack;
-            Goto See;
-        Missile: 
-            SARG E 0 {
-                if(!global.IsMutationActive("Macropods")) {
-                    return ResolveState("See");
-                }
-
-                return ResolveState(null);
-            }
-            SARG E 0 A_Jumpifcloser(100, "Melee");
-            SARG E 0 A_Jumpifcloser(1000, "Pounce");
             Goto See;
         Pounce:
             SARG E 4 A_FaceTarget;

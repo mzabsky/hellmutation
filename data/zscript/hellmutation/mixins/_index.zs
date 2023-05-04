@@ -8,5 +8,6 @@
 #include "./highground.zs"
 #include "./lordsofdarkness.zs"
 #include "./lordsofvengeance.zs"
+#include "./macropods.zs"
 #include "./sacrifice.zs"
 #include "./unstoppable.zs"
