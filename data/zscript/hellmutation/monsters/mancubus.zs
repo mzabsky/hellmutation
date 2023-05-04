@@ -62,6 +62,16 @@ class HM_Mancubus: Fatso replaces Fatso
             Stop;
     }
 
+    override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+    {
+        if(inflictor is 'HM_Fire')
+        {
+            return 0;
+        }
+
+        return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+    }
+
     void HM_SetMaxHealth(int newMaxHealth)
     {
         let previousMaxHealth = starthealth;
@@ -129,7 +139,7 @@ class HM_Mancubus: Fatso replaces Fatso
         {
             for(let currentVerticalAngle = startingVerticalAngle; currentVerticalAngle <= endingVerticalAngle + epsilon; currentVerticalAngle += verticalAngleIncrement)
             {
-                A_CustomMissile("FatShot",32,0, currentHorizontalAngle,CMF_AIMOFFSET | CMF_OFFSETPITCH, currentVerticalAngle);
+                A_CustomMissile("HM_FatShot",32,0, currentHorizontalAngle,CMF_AIMOFFSET | CMF_OFFSETPITCH, currentVerticalAngle);
             }
         }
     }
@@ -142,9 +152,65 @@ enum HM_FatShotDirection
     HM_FATSHOT_RIGHT = 2
 }
 
-class HM_RefluxExplosionGenerator: Actor
+class HM_FatShot : FatShot
 {
+    mixin HM_GlobalRef;
+
+    States
+    {
+        Spawn:
+            MANF AB 4 BRIGHT;
+            Loop;
+        Death:
+            MISL B 8 BRIGHT;
+            MISL B 0 BRIGHT {
+                SpawnFire();
+            }
+            MISL C 6 BRIGHT;
+            MISL D 4 BRIGHT;
+            Stop;
+    }
+
+    Vector3 storedVel;
+    
+    override void PostBeginPlay()
+    {
+        storedVel = vel;
+
+        super.PostBeginPlay();
+    }
+
+    void SpawnFire()
+    {
+        if(!global.IsMutationActive("napalmpayload"))
+        {
+            return;
+        }
+
+        let numberOfFires = random[HM_Fire](5, 8);
+        for(let i = 0; i < numberOfFires; i++)
+        {
+            // Reverse a bit of the flight trajectory to spawn the fire, so that it spreads
+            // a little bit away from whatever it hit
+            let fire = Spawn("HM_Fire", Vec3Offset(-storedVel.x, -storedVel.y, 10));
+            fire.target = target;
+            if(fire)
+            {
+                // Spread the fire around a bit
+                fire.vel.x = random[HM_Fire](-6, 6);
+                fire.vel.y = random[HM_Fire](-6, 6);
+                fire.vel.z = random[HM_Fire](0, 3);                
+            }
+        }
+    }
+}
+
+class HM_RefluxExplosionGenerator: Actor
+{    
+    mixin HM_GlobalRef;
+
     int RemainingTics;
+    bool EnableNapalm;
 
     States
     {
@@ -153,10 +219,11 @@ class HM_RefluxExplosionGenerator: Actor
             Stop;
     }
 
-    override void BeginPlay ()
+    override void PostBeginPlay ()
     {
         RemainingTics = 35;
-        super.BeginPlay();
+        EnableNapalm = global.IsMutationActive("napalmpayload");
+        super.PostBeginPlay();
     }
 
     override void Tick()
@@ -165,6 +232,25 @@ class HM_RefluxExplosionGenerator: Actor
         {
             Destroy();
             return;
+        }
+
+        if(EnableNapalm)
+        {
+            let numberOfFires = random[HM_Fire](0, 3);
+            for(let i = 0; i < numberOfFires; i++)
+            {
+                // Reverse a bit of the flight trajectory to spawn the fire, so that it spreads
+                // a little bit away from whatever it hit
+                let fire = Spawn("HM_Fire", Vec3Offset(random[HM_Fire](-30, 30), random[HM_Fire](-30, 30), random[HM_Fire](0, 60)));
+                fire.target = target;
+                if(fire)
+                {
+                    // Spread the fire around a bit
+                    fire.vel.x = random[HM_Fire](-8, 8);
+                    fire.vel.y = random[HM_Fire](-8, 8);
+                    fire.vel.z = random[HM_Fire](0, 12);                
+                }
+            }
         }
 
         RemainingTics--;

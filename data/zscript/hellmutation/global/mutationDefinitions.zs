@@ -306,6 +306,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "napalmpayload",
+            "Napalm Payload",
+            0,
+            HM_CAT_MANCUBUS,
+            "Mancubuses spread fire with their attacks."
+        );
+
+        AddMutationDefinition(
             "promotion",
             "Promotion",
             1,
