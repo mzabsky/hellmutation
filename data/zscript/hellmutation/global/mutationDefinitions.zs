@@ -386,6 +386,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "reachingritual",
+            "Reaching Ritual",
+            6,
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Viles can resurrect monster from a greater distance."
+        );
+
+        AddMutationDefinition(
             "reactivecamouflage",
             "Reactive Camouflage",
             3,

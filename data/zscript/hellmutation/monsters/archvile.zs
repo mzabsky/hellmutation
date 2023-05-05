@@ -6,6 +6,9 @@ class HM_ArchVile : ArchVile replaces ArchVile
     
     States
     {
+        See:
+		    VILE AABBCCDDEEFF 2 DoReachingRitual;
+		    Loop;
         Raise:
             VILE YXWVUT 7;
             VILE S 7;
@@ -20,6 +23,33 @@ class HM_ArchVile : ArchVile replaces ArchVile
             VILE O 8 BRIGHT HM_A_VileAttack;
             VILE P 20 BRIGHT;
             Goto See;
+    }
+
+    void DoReachingRitual()
+    {
+        if(global.IsMutationActive("reachingritual"))
+        {
+            let range = 386;
+            BlockThingsIterator it = BlockThingsIterator.Create(self, range);
+            Actor mo;
+
+            while (it.Next())
+            {
+                mo = it.thing;
+                if (!mo || !mo.bIsMonster || mo.health > 0 || Distance3D(mo) > range || !CheckSight(mo) || !mo.CanRaise())
+                {
+                    continue;
+                }
+
+                if(RaiseActor(mo))
+                {
+                    A_Face(mo);
+                    SetState(ResolveState("Heal"));
+                }
+            }
+        }
+
+        A_VileChase();
     }
 
     void HM_A_VileAttack(sound snd = "vile/stop", int initialdmg = 20, int blastdmg = 70, int blastradius = 70, double thrust = 1.0, name damagetype = "Fire", int flags = 0)
