@@ -322,6 +322,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "momentum",
+            "Momentum",
+            0,
+            HM_CAT_CACODEMON,
+            "Cacodemons attack faster the faster they are moving."
+        );
+
+        AddMutationDefinition(
             "napalmpayload",
             "Napalm Payload",
             0,
