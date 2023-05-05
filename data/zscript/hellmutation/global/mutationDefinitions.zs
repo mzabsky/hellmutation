@@ -330,6 +330,14 @@ extend class HM_GlobalEventHandler
         );
         
         AddMutationDefinition(
+            "pomodorosustenance",
+            "Pomodoro Sustenance",
+            6,
+            HM_CAT_CACODEMON,
+            "Dying Cacodemons heal other monsters around where they crash."
+        );
+        
+        AddMutationDefinition(
             "prepained",
             "Pre-Pained",
             6,

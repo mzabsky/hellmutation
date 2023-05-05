@@ -13,11 +13,11 @@ class HM_HealGlitter: Actor
     States
     {
         Spawn:
-            TGLT A 2 Bright A_FadeOut(0.07);
-            TGLT B 2 Bright A_FadeOut(0.07);
-            TGLT C 2 Bright A_FadeOut(0.07);
-            TGLT D 2 Bright A_FadeOut(0.07);
-            TGLT E 2 Bright A_FadeOut(0.07);
+            TGLT A 2 Bright A_FadeOut(0.05);
+            TGLT B 2 Bright A_FadeOut(0.05);
+            TGLT C 2 Bright A_FadeOut(0.05);
+            TGLT D 2 Bright A_FadeOut(0.05);
+            TGLT E 2 Bright A_FadeOut(0.05);
             Loop;
         Crash:
         Death:
@@ -52,7 +52,7 @@ class HM_HealGlitterGenerator: Inventory
 
         RemainingTics--;
 
-        if(owner.GetAge() % 8 == 0)
+        if(owner.GetAge() % 4 == 0)
         {
             Spawn(
                 "HM_HealGlitter",

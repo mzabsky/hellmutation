@@ -5,20 +5,23 @@ class HM_Cacodemon : Cacodemon replaces Cacodemon
     States
     {
         See:
-          HEAD A 0 UpdatePainThreshold();
-          HEAD A 3 A_Chase;
-          Loop;
+            HEAD A 0 UpdatePainThreshold();
+            HEAD A 3 A_Chase;
+            Loop;
         Pain:
-          HEAD E 0 UpdatePainThreshold();
-          HEAD E 3;
-          HEAD E 3 A_Pain;
-          HEAD F 6;
-          Goto See;
+            HEAD E 0 UpdatePainThreshold();
+            HEAD E 3;
+            HEAD E 3 A_Pain;
+            HEAD F 6;
+            Goto See;
         Missile:
             HEAD B 5 A_FaceTarget;
             HEAD C 5 A_FaceTarget;
             HEAD D 5 BRIGHT HM_A_HeadAttack();
             Goto See;
+        Crash:
+            HEAD D 0 PomodoroSustenance();
+            Goto Death;
         
     }
 
@@ -63,6 +66,36 @@ class HM_Cacodemon : Cacodemon replaces Cacodemon
         else
         {
             PainChance = 128;
+        }
+    }
+
+    void PomodoroSustenance()
+    {
+        if(!global.IsMutationActive("pomodorosustenance"))
+        {
+            return;
+        }
+
+        let range = 256;
+        let healthAmount = 200;
+        BlockThingsIterator it = BlockThingsIterator.Create(self, range);
+        Actor mo;
+
+        while (it.Next())
+        {
+            mo = it.thing;
+            if (!mo || !mo.bIsMonster || mo.health <= 0 || Distance3D(mo) > range)
+            {
+                continue;
+            }
+                
+            let startingHealth = min(mo.health + healthAmount, mo.spawnhealth());
+            if(startingHealth <= mo.health)
+            {
+                continue;
+            }
+
+            mo.A_GiveInventory("HM_HealGlitterGenerator");
         }
     }
 }
