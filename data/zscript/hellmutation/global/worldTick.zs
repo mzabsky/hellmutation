@@ -53,5 +53,95 @@ extend class HM_GlobalEventHandler
                 playerPawn.A_SetHealth(max(100, playerPawn.health - 1));
             }
         }
+
+        // Deja V u - once every 10 seconds
+        if(Level.time % 350 == 0 && IsMutationActive("dejavu"))
+        {
+            PerformDejaVuAmbushRespawns();
+        }
+    }
+
+    // For each sector that had any ambush enemies, this checks that they are already dead and out of sight.
+    // If they are, they might get to respawn.
+    void PerformDejaVuAmbushRespawns()
+    {
+        foreach(ambushSector: ambushSectors)
+        {
+            let livingTraces = 0;
+
+            // Check that all the monsters belonging to ambush traces in this sector
+            // are dead.
+            ACtor looker;
+            for (looker = ambushSector.thinglist; looker != NULL; looker = looker.snext)
+            {
+                if(looker is 'HM_AmbushTrace' && looker.target && looker.target.health > 0)
+                {
+                    livingTraces++;
+                    //console.printf("living %s", looker.target.GetClassName());
+                }
+            }
+
+            //console.printf("sector %d living traces %d", ambushSector.sectornum, livingTraces);
+            if(livingTraces > 0)
+            {
+                continue;
+            }
+
+            // Check that no player can see any of the traces in this sector
+            let visibleTraces = 0;
+            for (looker = ambushSector.thinglist; looker != NULL; looker = looker.snext)
+            {
+                if(looker is 'HM_AmbushTrace' && looker.target)
+                {
+                    for(let i = 0; i < players.Size(); i++)
+                    {
+                        let playerPawn = players[i].mo;
+                        if(!playerPawn)
+                        {
+                            continue;
+                        }
+
+                        if(playerPawn.CheckSight(looker))
+                        {
+                            //console.printf("visible %s", looker.target.GetClassName());
+                            visibleTraces++;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if(visibleTraces > 0)
+            {
+                continue;
+            }
+
+            // All the traces in this sector are ready to respawn
+
+            // Now we have 4% chance to actually respawn them (each 10s)
+            let roll = random[HM_AmbushTrace](0, 255);
+            if(roll >= 10)
+            {
+                continue;
+            }
+
+            // Everything passed: Respawn all ambush enemies in the sector
+            for (looker = ambushSector.thinglist; looker != NULL; looker = looker.snext)
+            {
+                if(looker is 'HM_AmbushTrace' && looker.target)
+                {
+                    let spawnee = looker.Spawn(looker.target.GetClass(), looker.pos);
+                    if(spawnee)
+                    {
+                        spawnee.angle = looker.angle;
+                        spawnee.SpawnFlags = looker.SpawnFlags;
+                        spawnee.HandleSpawnFlags();
+
+                        // The trace now cares about trakcing this new monster
+                        looker.target = spawnee;
+                    }
+                }
+            }
+        }
     }
 }

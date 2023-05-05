@@ -101,7 +101,38 @@ extend class HM_GlobalEventHandler
                 }
             }
         }
-        
+
+        SpawnDejaVuTraces();
+
+        /*
+
+        		for (looker = cursector.thinglist; looker != NULL; looker = looker.snext)
+		{
+			if (looker == self || looker == target)
+				continue;
+
+			if (looker.health <= 0)
+				continue;
+
+			if (!looker.bSeesDaggers)
+				continue;
+
+			if (!looker.bInCombat)
+			{
+				if (!looker.CheckSight(target) && !looker.CheckSight(self))
+					continue;
+
+				looker.target = target;
+				if (looker.SeeSound)
+				{
+					looker.A_StartSound(looker.SeeSound, CHAN_VOICE);
+				}
+				looker.SetState(looker.SeeState);
+				looker.bInCombat = true;
+			}
+		}
+
+        */
     }
 
     void ReplaceMonsters()
@@ -120,6 +151,47 @@ extend class HM_GlobalEventHandler
             {
                 ChanceReplaceActor(actor, 'HM_ArchImp', IsMutationActive("unholylegion") ? 17 * 3 : 17); // 1 in 5 with Unholy Legion, one in 15 otherwise
             }
+        }
+    }
+
+    // Spawns traces that can be periodially checked - and if conditions permit, used to respawn the monsters
+    // These traces are invisible and only exist for this purpose.
+    void SpawnDejaVuTraces()
+    {
+        Map<int, Sector> ambushSectorMap;
+
+        let ambushMonsterFinder = ThinkerIterator.Create("Actor");
+        Actor monster;
+        while((monster = Actor(ambushMonsterFinder.next())) != null)
+        {
+            if(!monster.bIsMonster)
+            {
+                continue;
+            }
+
+            if(monster.SpawnFlags & MTF_AMBUSH == 0)
+            {
+                continue;
+            }
+
+            //console.printf("ambush %s", monster.GetClassName());
+
+            let ambushTrace = monster.Spawn("HM_AmbushTrace", monster.pos);
+            ambushTrace.SpawnFlags = monster.SpawnFlags;
+            ambushTrace.target = monster;
+            ambushTrace.angle = monster.angle;
+
+            ambushSectorMap.Insert(monster.cursector.sectornum, monster.cursector);
+        }
+
+        MapIterator<int, Sector> ambushSectorMapIterator;
+        ambushSectorMapIterator.Init(ambushSectorMap);
+        while(ambushSectorMapIterator.Next())
+        {
+            let currentSector = ambushSectorMapIterator.GetValue();
+            ambushSectors.Push(currentSector);
+
+            //console.printf("ambushsector %d", currentSector.sectornum);
         }
     }
 }

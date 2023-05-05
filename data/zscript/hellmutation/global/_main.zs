@@ -4,6 +4,9 @@ class HM_GlobalEventHandler: EventHandler
     // This could be better done with associative arrays, once their const methods are in stable version
     Array<HM_MutationDefinition> mutationDefinitions;
 
+    //=================================
+    // PERSISTENT FIELDS
+    //=================================
     int MapNumber;
 
     // Indexed by mutation key, values are: "None" (or not present), "Active" and "Removed"
@@ -11,8 +14,12 @@ class HM_GlobalEventHandler: EventHandler
     Array<string> MutationRemovalsOnOffer;
 
     HM_GlobalThinker globalThinker;
-
+    
+    //=================================
+    // NONPERSISTENT FIELDS
+    //=================================
     bool hasDoom2;
+    Array<Sector> ambushSectors; // For Deja Vu
 
     override void NewGame()
     {

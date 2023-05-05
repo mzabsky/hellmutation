@@ -170,6 +170,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "dejavu",
+            "Deja Vu",
+            5,
+            HM_CAT_ALLMONSTERS,
+            "Monsters might ambush you more than once!"
+        );
+
+        AddMutationDefinition(
             "desecration",
             "Desecration",
             0,

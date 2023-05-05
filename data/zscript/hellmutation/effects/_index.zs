@@ -1,3 +1,4 @@
+#include "./ambushtrace.zs"
 #include "./fire.zs"
 #include "./healglitter.zs"
 #include "./painseed.zs"
