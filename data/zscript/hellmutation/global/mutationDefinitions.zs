@@ -112,14 +112,6 @@ extend class HM_GlobalEventHandler
             HM_CAT_IMP,
             "IMPS AND THEIR VARIANTS ARE FASTER."
         );
-        
-        AddMutationDefinition(
-            "motherhood",
-            "Motherhood",
-            6,
-            HM_CAT_DOOM2 | HM_CAT_SPIDERMASTERMIND,
-            "Spider Masterminds rapidly spawn Arachnotrons."
-        );
 
         AddMutationDefinition(
             "cacoblasters",
@@ -351,6 +343,14 @@ extend class HM_GlobalEventHandler
             0,
             HM_CAT_CACODEMON,
             "Cacodemons attack faster the faster they are moving."
+        );
+        
+        AddMutationDefinition(
+            "motherhood",
+            "Motherhood",
+            6,
+            HM_CAT_DOOM2 | HM_CAT_SPIDERMASTERMIND,
+            "Spider Masterminds rapidly spawn Arachnotrons."
         );
 
         AddMutationDefinition(
