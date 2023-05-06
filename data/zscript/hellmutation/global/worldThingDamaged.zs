@@ -66,6 +66,31 @@ extend class HM_GlobalEventHandler
                     return;
                 }
 
+                // Lords of Souls Ascension - player was damaged by a hell knight -> resurrect a nearby monster
+                if((e.damageSource is 'BaronOfHell' || e.damageSource is 'HellKnight') && IsMutationActive("lordsofsouls"))
+                {
+                    let range = 192;
+                    BlockThingsIterator it = BlockThingsIterator.Create(e.thing, range);
+                    Actor mo;
+
+                    while (it.Next())
+                    {
+                        mo = it.thing;
+
+                        if (!mo || !mo.bIsMonster || mo.health > 0 || e.thing.Distance3D(mo) > range || !mo.CanRaise())
+                        {
+                            continue;
+                        }
+
+                        if(e.damageSource.RaiseActor(mo))
+                        {
+                            break;
+                        }
+                    }
+
+                    return;
+                }
+
                 // Damping Jaws - player was damaged by a cacodemon -> remove powerups
                 if(e.damageSource is 'Cacodemon' && IsMutationActive("dampingjaws"))
                 {

@@ -314,6 +314,14 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "lordsofsouls",
+            "Lords of Souls",
+            6,
+            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
+            "Players taking damage from Hell Knights and Barons of Hell might cause a nearby monster to resurrect."
+        );
+
+        AddMutationDefinition(
             "lordsofvengeance",
             "Lords of Vengeance",
             6,
