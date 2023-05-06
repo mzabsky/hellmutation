@@ -66,7 +66,7 @@ extend class HM_GlobalEventHandler
                     return;
                 }
 
-                // Lords of Souls Ascension - player was damaged by a hell knight -> resurrect a nearby monster
+                // Lords of Souls - player was damaged by a hell knight -> resurrect a nearby monster
                 if((e.damageSource is 'BaronOfHell' || e.damageSource is 'HellKnight') && IsMutationActive("lordsofsouls"))
                 {
                     let range = 192;
