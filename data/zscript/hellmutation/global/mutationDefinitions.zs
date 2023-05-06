@@ -310,7 +310,7 @@ extend class HM_GlobalEventHandler
             "Lords of Reality",
             5,
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Hell Knight and Barons of Hell projectiles pass through\nother Hell Knights and Barons of Hell."
+            "Hell Knight and Baron of Hell projectiles pass through\nother Hell Knights and Barons of Hell."
         );
 
         AddMutationDefinition(
