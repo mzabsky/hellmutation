@@ -288,6 +288,14 @@ extend class HM_GlobalEventHandler
             HM_CAT_NOFIRSTMAP | HM_CAT_ALLMONSTERS,
             "MONSTERS DO NOT START THE LEVEL ASLEEP."
         );
+       
+        AddMutationDefinition(
+            "kleptomania",
+            "Kleptomania",
+            4,
+            HM_CAT_PLAYER,
+            "Players lose all rockets and plasma ammo between levels."
+        );
 
         AddMutationDefinition(
             "lordsofdarkness",
@@ -319,14 +327,6 @@ extend class HM_GlobalEventHandler
             6,
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost souls never attack each other."
-        );
-       
-        AddMutationDefinition(
-            "kleptomania",
-            "Kleptomania",
-            4,
-            HM_CAT_PLAYER,
-            "Players lose all rockets and plasma ammo between levels."
         );
 
         AddMutationDefinition(
