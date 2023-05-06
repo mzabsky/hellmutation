@@ -28,3 +28,19 @@ class HM_BaronOfHell : BaronOfHell replaces BaronOfHell
             Goto See;
     }
 }
+
+class HM_BaronBall : BaronBall replaces BaronBall
+{
+    mixin HM_GlobalRef;
+
+    override bool CanCollideWith(Actor other, bool passive)
+    {
+        // Lords of Reality - baron balls can pass through barons and hell knights.
+        if((other is 'BaronOfHell' || other is 'HellKnight') && global.IsMutationActive("lordsofreality"))
+        {
+            return false;
+        }
+
+        return super.CanCollideWith(other, passive);
+    }
+}
