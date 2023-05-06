@@ -59,13 +59,6 @@ extend class HM_GlobalEventHandler
                     return;
                 }
 
-                // Ascension - player was damaged by a hell knight
-                if(e.damageSource.GetClassName() == 'HM_HellKnight' && IsMutationActive("ascension"))
-                {
-                    ReplaceActor(e.damageSource, "HM_BaronOfHell");
-                    return;
-                }
-
                 // Lords of Souls - player was damaged by a hell knight -> resurrect a nearby monster
                 if((e.damageSource is 'BaronOfHell' || e.damageSource is 'HellKnight') && IsMutationActive("lordsofsouls"))
                 {
@@ -88,6 +81,13 @@ extend class HM_GlobalEventHandler
                         }
                     }
 
+                    return;
+                }
+
+                // Ascension - player was damaged by a hell knight
+                if(e.damageSource.GetClassName() == 'HM_HellKnight' && IsMutationActive("ascension"))
+                {
+                    ReplaceActor(e.damageSource, "HM_BaronOfHell");
                     return;
                 }
 
