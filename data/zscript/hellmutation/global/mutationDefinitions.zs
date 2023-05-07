@@ -415,7 +415,7 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "tractorspell",
             "Tractor Spell",
-            HM_CAT_ARCHVILE,
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
             "Arch-Vile attack pulls its target towards it."
         );
 
