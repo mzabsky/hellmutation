@@ -44,7 +44,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "abundance",
             "Abundance",
-            6,
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses fire additional projectiles in each\nhorizontal direction."
         );
@@ -52,7 +51,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "adipocytes",
             "Adipocytes",
-            3,
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses and their variants have more health."
         );
@@ -60,7 +58,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "adrenaline",
             "Adrenaline",
-            3,
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER,
             "Zombiemen, Shotgunners and their variants are more aggressive."
         );
@@ -68,7 +65,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "ambushshield",
             "Ambush Shield",
-            4,
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
@@ -76,7 +72,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "ascension",
             "Ascension",
-            6,
             HM_CAT_DOOM2 | HM_CAT_HELLKNIGHT,
             "Hell Knights who score a hit on the player become Barons of Hell."
         );
@@ -84,7 +79,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "barrage",
             "Barrage",
-            4,
             HM_CAT_IMP,
             "Imps fire three fireballs in a rapid barrage."
         );
@@ -92,7 +86,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "bigfuckingwomp",
             "Big Fucking Womp",
-            6,
             HM_CAT_CYBERDEMON | HM_CAT_SPIDERMASTERMIND,
             "Cyberdemons and Spider Masterminds take much less damage from BFG9000."
         );
@@ -100,7 +93,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "bloodtax",
             "Blood Tax",
-            6,
             HM_CAT_PLAYER,
             "Player takes 25 damage when they pick up a keycard or a\nskull key (this damage cannot kill)."
         );
@@ -108,7 +100,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "brightfire",
             "Brightfire",
-            2,
             HM_CAT_IMP,
             "IMPS AND THEIR VARIANTS ARE FASTER."
         );
@@ -116,7 +107,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "cacoblasters",
             "Cacoblasters",
-            2,
             HM_CAT_CACODEMON,
             "Cacodemons always fire two additional projectiles."
         );
@@ -124,7 +114,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "catastrophicreflux",
             "Catastrophic Reflux",
-            6,
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses cause a powerful explosion on death."
         );
@@ -132,7 +121,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
-            6,
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotrons and their variants immediately return fire when attacked."
         );
@@ -140,7 +128,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "dampingjaws",
             "Damping Jaws",
-            6,
             HM_CAT_CACODEMON,
             "Damage from Cacodemons removes powerup effects from players."
         );
@@ -148,7 +135,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "decapitation",
             "Decapitation",
-            2,
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
             "ZOMBIEMEN, SHOTGUNNERS, Chaingunners AND THEIR VARIANTS MAY SPAWN \nA LOST SOUL AFTER DYING, UNLESS GIBBED."
         );
@@ -156,7 +142,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "decoys",
             "Decoys",
-            6,
             HM_CAT_DOOM2 | HM_CAT_REVENANT,
             "Revenants may spawn a harmless decoy when they get hit."
         );
@@ -164,7 +149,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "dejavu",
             "Deja Vu",
-            5,
             HM_CAT_ALLMONSTERS,
             "Monsters might ambush you more than once!"
         );
@@ -172,7 +156,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "desecration",
             "Desecration",
-            0,
             HM_CAT_IMP,
             "IMPS WHO SCORE A HIT ON A PLAYER BECOME ARCH-IMPS."
         );
@@ -180,7 +163,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "ego",
             "Ego",
-            1,
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost souls deal and take much more damage."
         );
@@ -188,7 +170,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "explosivesurprise",
             "Explosive Surprise",
-            6,
             HM_CAT_BARREL,
             "Barrels may spawn a monster after exploding."
         );
@@ -196,7 +177,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "extendedaccelerators",
             "Extended Acelerators",
-            6,
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotron projectiles are much faster."
         );
@@ -204,7 +184,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "extremophilia",
             "Extremophilia",
-            4,
             HM_CAT_DMGFLOOR,
             "Monsters recover some health each second on a damaging floor."
         );
@@ -212,7 +191,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "fistatrophy",
             "Fist Atrophy",
-            6,
             HM_CAT_DOOM2 | HM_CAT_REVENANT,
             "Revenants always use their ranged attack instead of punching."
         );
@@ -220,7 +198,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "greaterritual",
             "Greater Ritual",
-            6,
             HM_CAT_IMP | HM_CAT_ARCHVILE,
             "Arch-Imps and Arch-Viles can resurrect Arch-Imps, Arch-Viles,\nPain Elementals, Spider Masterminds and Cyberdemons."
         );
@@ -228,7 +205,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "hellscaress",
             "Hell's Caress",
-            2,
             HM_CAT_IMP | HM_CAT_REVENANT | HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nand their  variants are much more powerful."
         );
@@ -236,7 +212,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "hematophagy",
             "Hematophagy",
-            1,
             HM_CAT_PINKY,
             "Pinkies and their variants become fully healed whenever they deal damage."
         );
@@ -244,7 +219,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "highground",
             "High Ground",
-            5,
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
             "Zombiemen, Shotgunners, Chaingunners and their variants\ndeal more damage when attacking from above."
         );
@@ -252,7 +226,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "hypercognition",
             "Hypercognition",
-            6,
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotrons can lead their target when aiming."
         );
@@ -260,7 +233,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "hyperfuel",
             "Hyper-Fuel",
-            0,
             HM_CAT_REVENANT | HM_CAT_CYBERDEMON,
             "ALL ROCKETS AND GUIDED ROCKETS FIRED BY MONSTERS ARE MUCH FASTER."
         );
@@ -268,7 +240,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "hyperphagy",
             "Hyperphagy",
-            6,
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses are more aggressive."
         );
@@ -276,7 +247,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "insomnia",
             "Insomnia",
-            1,
             HM_CAT_NOFIRSTMAP | HM_CAT_ALLMONSTERS,
             "MONSTERS DO NOT START THE LEVEL ASLEEP."
         );
@@ -284,7 +254,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "kleptomania",
             "Kleptomania",
-            4,
             HM_CAT_PLAYER,
             "Players lose all rockets and plasma ammo between levels."
         );
@@ -292,7 +261,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "lordsofdarkness",
             "Lords of Darkness",
-            5,
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Hell Knights and Barons of Hell take less damage\nwhile in darkness."
         );
@@ -300,7 +268,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "lordsofreality",
             "Lords of Reality",
-            5,
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Hell Knight and Baron of Hell projectiles pass through\nother Hell Knights and Barons of Hell."
         );
@@ -308,7 +275,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "lordsofsouls",
             "Lords of Souls",
-            6,
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Players taking damage from Hell Knights and Barons of Hell might cause a nearby monster to resurrect."
         );
@@ -316,7 +282,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "lordsofvengeance",
             "Lords of Vengeance",
-            6,
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Hell Knights and Barons of Hell get increasingly angry\nas they take damage."
         );
@@ -324,7 +289,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "losttogether",
             "Lost Together",
-            6,
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost souls never attack each other."
         );
@@ -332,7 +296,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "macropods",
             "Macropods",
-            0,
             HM_CAT_PINKY,
             "PINKIES GAIN THE ABILITY TO POUNCE FROM A DISTANCE AND ACROSS GAPS."
         );
@@ -340,7 +303,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "momentum",
             "Momentum",
-            0,
             HM_CAT_CACODEMON,
             "Cacodemons attack faster the faster they are moving."
         );
@@ -348,7 +310,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "motherhood",
             "Motherhood",
-            6,
             HM_CAT_DOOM2 | HM_CAT_SPIDERMASTERMIND,
             "Spider Masterminds rapidly spawn Arachnotrons."
         );
@@ -356,7 +317,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "napalmpayload",
             "Napalm Payload",
-            0,
             HM_CAT_DOOM2| HM_CAT_MANCUBUS,
             "Mancubuses spread fire with their attacks."
         );
@@ -364,7 +324,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "overwhelmingfire",
             "Overwhelming Fire",
-            6,
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotron fire rate continuously ramps up as they fire."
         );
@@ -372,7 +331,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "pomodorosustenance",
             "Pomodoro Sustenance",
-            6,
             HM_CAT_CACODEMON,
             "Dying Cacodemons heal other monsters around where they crash."
         );
@@ -380,7 +338,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "prepained",
             "Pre-Pained",
-            6,
             HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
             "Pain Elementals spawn with several Lost Souls."
         );
@@ -388,7 +345,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "promotion",
             "Promotion",
-            1,
             HM_CAT_ZOMBIEMAN,
             "BASIC ZOMBIEMEN WHO SCORE A HIT ON A PLAYER BECOME SHOTGUNNERS."
         );
@@ -396,7 +352,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "rage",
             "Rage",
-            6,
             HM_CAT_PINKY,
             "Pinkies and Spectres are faster."
         );
@@ -404,7 +359,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "rapidspin",
             "Rapid Spin",
-            6,
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
             "Chaingunners and their variants are faster."
         );
@@ -412,7 +366,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "reachingritual",
             "Reaching Ritual",
-            6,
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
             "Arch-Viles can resurrect monster from a greater distance."
         );
@@ -420,7 +373,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "reactivecamouflage",
             "Reactive Camouflage",
-            3,
             HM_CAT_PINKY,
             "Pinkies become spectral when damaged."
         );
@@ -428,7 +380,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "sacrifice",
             "Sacrifice",
-            3,
             HM_CAT_IMP | HM_CAT_ARCHVILE,
             "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters."
         );
@@ -436,7 +387,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "seekingsouls",
             "Seeking Souls",
-            5,
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost souls charge at greater speed."
         );
@@ -444,7 +394,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "slimeborne",
             "Slimeborne",
-            3,
             HM_CAT_DMGFLOOR,
             "Player losing health to a damaging floor might cause Pinkies to spawn."
         );
@@ -452,7 +401,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "stormtroopers",
             "Stormtroopers",
-            0,
             HM_CAT_ZOMBIEMAN,
             "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE."
         );
@@ -460,7 +408,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "terminalpurpose",
             "Terminal Purpose",
-            6,
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost Souls explode on death, dealing light damage."
         );
@@ -468,7 +415,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "tractorspell",
             "Tractor Spell",
-            3,
             HM_CAT_ARCHVILE,
             "Arch-Vile attack pulls its target towards it."
         );
@@ -476,7 +422,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "unholylegion",
             "Unholy Legion",
-            6,
             HM_CAT_IMP,
             "Arch-Imps replace Imps three times as frequently."
         );
@@ -484,7 +429,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "unstoppable",
             "Unstoppable",
-            6,
             HM_CAT_PINKY,
             "Pinkies and their variants are almost immune to pain."
         );
@@ -492,7 +436,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "unyielding",
             "Unyelding",
-            5,
             HM_CAT_CACODEMON,
             "Cacodemons are more resistant to pain."
         );
@@ -500,7 +443,6 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "vitalitylimit",
             "Vitality Limit",
-            6,
             HM_CAT_PLAYER,
             "Player health over 100 slowly degenerates."
         );
@@ -508,18 +450,17 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "walloffire",
             "Wall of Fire",
-            6,
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubus projectiles spread vertically as well as horizontally."
         );
     }
     
-    private void AddMutationDefinition(string key, string name, int mapNumber, MutationCategory category, string description)
+    private void AddMutationDefinition(string key, string name, MutationCategory category, string description)
     {
         let mutationDefinition = new("HM_MutationDefinition");
         mutationDefinition.Key = key;
         mutationDefinition.Name = name;
-        mutationDefinition.MapNumber = mapNumber;
+        mutationDefinition.MapNumber = 0;
         mutationDefinition.Category = category;
         mutationDefinition.Description = description;
         MutationDefinitions.Push(mutationDefinition);
