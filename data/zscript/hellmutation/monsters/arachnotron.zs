@@ -3,6 +3,7 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
     mixin HM_GlobalRef;
 
     int lastFireTime;
+    int rampNumber;
 
     Default
     {
@@ -12,12 +13,53 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
     States
     {
         Missile:
+            BSPI A 0 {
+                rampNumber = 0;
+            }
             BSPI A 20 A_FaceTarget;
         InstantMissile:
+            BSPI G 0 {
+                if(!global.IsMutationActive("overwhelmingfire"))
+                {
+                    return ResolveState(null);
+                }
+
+                if(rampNumber >= 38)
+                {
+                    return ResolveState("InstantMissile4");
+                }
+                else if(rampNumber >= 12)
+                {
+                    return ResolveState("InstantMissile3");
+                }
+                else if(rampNumber >= 4)
+                {
+                    return ResolveState("InstantMissile2");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
             BSPI G 4 BRIGHT HM_A_BspiAttack();
             BSPI H 4 ;
             BSPI H 1 A_SpidRefire;
-            Goto Missile+1;
+            Goto InstantMissile;
+        InstantMissile2:
+            BSPI G 3 BRIGHT HM_A_BspiAttack();
+            BSPI H 3 ;
+            BSPI H 1 A_SpidRefire;
+            Goto InstantMissile;
+        InstantMissile3:
+            BSPI G 2 BRIGHT HM_A_BspiAttack();
+            BSPI H 2 ;
+            BSPI H 1 A_SpidRefire;
+            Goto InstantMissile;
+        InstantMissile4:
+            BSPI G 1 BRIGHT HM_A_BspiAttack();
+            BSPI H 1 ;
+            BSPI H 1 A_SpidRefire;
+            Goto InstantMissile;
     }
 
     void HM_A_BspiAttack()
@@ -45,8 +87,8 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
                 }
             }
 
-
             lastFireTime = Level.time;
+            rampNumber++;
         }
     }
 

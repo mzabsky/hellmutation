@@ -362,6 +362,14 @@ extend class HM_GlobalEventHandler
         );
         
         AddMutationDefinition(
+            "overwhelmingfire",
+            "Overwhelming Fire",
+            6,
+            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
+            "Arachnotron fire rate continuously ramps up as they fire."
+        );
+        
+        AddMutationDefinition(
             "pomodorosustenance",
             "Pomodoro Sustenance",
             6,
