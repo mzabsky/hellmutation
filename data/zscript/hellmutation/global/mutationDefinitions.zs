@@ -453,6 +453,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubus projectiles spread vertically as well as horizontally."
         );
+
+        AddMutationDefinition(
+            "workplacesafety",
+            "Workplace Safety",
+            HM_CAT_BARREL,
+            "Removes all explosive barrels."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, MutationCategory category, string description)

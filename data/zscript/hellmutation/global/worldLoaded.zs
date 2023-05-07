@@ -48,35 +48,7 @@ extend class HM_GlobalEventHandler
 
         SpawnDejaVuTraces();
 
-        /*
-
-        		for (looker = cursector.thinglist; looker != NULL; looker = looker.snext)
-		{
-			if (looker == self || looker == target)
-				continue;
-
-			if (looker.health <= 0)
-				continue;
-
-			if (!looker.bSeesDaggers)
-				continue;
-
-			if (!looker.bInCombat)
-			{
-				if (!looker.CheckSight(target) && !looker.CheckSight(self))
-					continue;
-
-				looker.target = target;
-				if (looker.SeeSound)
-				{
-					looker.A_StartSound(looker.SeeSound, CHAN_VOICE);
-				}
-				looker.SetState(looker.SeeState);
-				looker.bInCombat = true;
-			}
-		}
-
-        */
+        WorkplaceSafety();
     }
 
     void ReplaceMonsters()
@@ -205,6 +177,20 @@ extend class HM_GlobalEventHandler
             ambushSectors.Push(currentSector);
 
             //console.printf("ambushsector %d", currentSector.sectornum);
+        }
+    }
+
+    void WorkplaceSafety()
+    {
+        if(IsMutationActive("workplacesafety"))
+        {
+            let barrelFinder = ThinkerIterator.Create("HM_ExplosiveBarrel");
+            HM_ExplosiveBarrel barrel;
+            while((barrel = HM_ExplosiveBarrel(barrelFinder.next())) != null)
+            {
+                barrel.SpawnSurprise();
+                barrel.Destroy();
+            }
         }
     }
 }
