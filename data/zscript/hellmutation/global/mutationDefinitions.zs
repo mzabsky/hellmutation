@@ -101,7 +101,7 @@ extend class HM_GlobalEventHandler
             "brightfire",
             "Brightfire",
             HM_CAT_IMP,
-            "IMPS AND THEIR VARIANTS ARE FASTER."
+            "Imps and their variants are faster."
         );
 
         AddMutationDefinition(
@@ -136,7 +136,7 @@ extend class HM_GlobalEventHandler
             "decapitation",
             "Decapitation",
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
-            "ZOMBIEMEN, SHOTGUNNERS, Chaingunners AND THEIR VARIANTS MAY SPAWN \nA LOST SOUL AFTER DYING, UNLESS GIBBED."
+            "Zombiement, Shotgunners, Chaingunners may spawna lost soul\nafter dying, unless gibbed."
         );
 
         AddMutationDefinition(
@@ -157,7 +157,7 @@ extend class HM_GlobalEventHandler
             "desecration",
             "Desecration",
             HM_CAT_IMP,
-            "IMPS WHO SCORE A HIT ON A PLAYER BECOME ARCH-IMPS."
+            "Imps who score a hit on the player become Arch-Imps."
         );
 
         AddMutationDefinition(
@@ -234,7 +234,7 @@ extend class HM_GlobalEventHandler
             "hyperfuel",
             "Hyper-Fuel",
             HM_CAT_REVENANT | HM_CAT_CYBERDEMON,
-            "ALL ROCKETS AND GUIDED ROCKETS FIRED BY MONSTERS ARE MUCH FASTER."
+            "All rockets and guided rockets fired by monsters are faster."
         );
 
         AddMutationDefinition(
@@ -248,7 +248,7 @@ extend class HM_GlobalEventHandler
             "insomnia",
             "Insomnia",
             HM_CAT_NOFIRSTMAP | HM_CAT_ALLMONSTERS,
-            "MONSTERS DO NOT START THE LEVEL ASLEEP."
+            "Monsters do not start the level asleep."
         );
        
         AddMutationDefinition(
@@ -276,7 +276,7 @@ extend class HM_GlobalEventHandler
             "lordsofsouls",
             "Lords of Souls",
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Players taking damage from Hell Knights and Barons of Hell might cause a nearby monster to resurrect."
+            "Players taking damage from Hell Knights and Barons of Hell\nmight cause a nearby monster to resurrect."
         );
 
         AddMutationDefinition(
@@ -297,7 +297,7 @@ extend class HM_GlobalEventHandler
             "macropods",
             "Macropods",
             HM_CAT_PINKY,
-            "PINKIES GAIN THE ABILITY TO POUNCE FROM A DISTANCE AND ACROSS GAPS."
+            "Pinkies and Spectres can pounce from a distance, and across gaps."
         );
 
         AddMutationDefinition(
@@ -346,7 +346,7 @@ extend class HM_GlobalEventHandler
             "promotion",
             "Promotion",
             HM_CAT_ZOMBIEMAN,
-            "BASIC ZOMBIEMEN WHO SCORE A HIT ON A PLAYER BECOME SHOTGUNNERS."
+            "Basic Zombiemen who score a hit on the player become Shotgunners."
         );
 
         AddMutationDefinition(
@@ -402,7 +402,7 @@ extend class HM_GlobalEventHandler
             "stormtroopers",
             "Stormtroopers",
             HM_CAT_ZOMBIEMAN,
-            "BASIC ZOMBIEMEN ARE SIGNIFICANTLY MORE ACCURATE."
+            "Basic Zombiemen are significantly more accurate."
         );
 
         AddMutationDefinition(
