@@ -7,8 +7,6 @@ class HM_Mancubus: Fatso replaces Fatso
         Species "Fatso";
     }
 
-    bool appliedAdipocytesState;
-
     States
     {
         See:
@@ -16,7 +14,7 @@ class HM_Mancubus: Fatso replaces Fatso
                 bAlwaysFast = global.IsMutationActive("hyperphagy");
 
                 let totalHealth = 600;
-                if(global.IsMutationActive("adipocytes"))
+                if(global.IsMutationActive("obesity"))
                 {
                     totalHealth += 300;
                 }

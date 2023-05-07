@@ -49,13 +49,6 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
-            "adipocytes",
-            "Adipocytes",
-            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubuses and their variants have more health."
-        );
-
-        AddMutationDefinition(
             "adrenaline",
             "Adrenaline",
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER,
@@ -319,6 +312,13 @@ extend class HM_GlobalEventHandler
             "Napalm Payload",
             HM_CAT_DOOM2| HM_CAT_MANCUBUS,
             "Mancubuses spread fire with their attacks."
+        );
+
+        AddMutationDefinition(
+            "obesity",
+            "Obesity",
+            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
+            "Mancubuses and their variants have more health."
         );
         
         AddMutationDefinition(
