@@ -188,7 +188,7 @@ extend class HM_GlobalEventHandler
             HM_ExplosiveBarrel barrel;
             while((barrel = HM_ExplosiveBarrel(barrelFinder.next())) != null)
             {
-                barrel.SpawnSurprise();
+                barrel.SpawnSurprise(true);
                 barrel.Destroy();
             }
         }
