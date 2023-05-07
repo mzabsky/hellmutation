@@ -44,63 +44,7 @@ extend class HM_GlobalEventHandler
 
         ReplaceMonsters();
 
-        if(IsMutationActive("prepained"))
-        {
-            Array<int> lostSoulOffsetXs;
-            lostSoulOffsetXs.Push(60);
-            lostSoulOffsetXs.Push(60);
-            lostSoulOffsetXs.Push(0);
-            lostSoulOffsetXs.Push(-60);
-            lostSoulOffsetXs.Push(-60);
-            lostSoulOffsetXs.Push(-60);
-            lostSoulOffsetXs.Push(0);
-            lostSoulOffsetXs.Push(60);
-            
-            Array<int> lostSoulOffsetYs;
-            lostSoulOffsetYs.Push(0);
-            lostSoulOffsetYs.Push(-60);
-            lostSoulOffsetYs.Push(-60);
-            lostSoulOffsetYs.Push(-60);
-            lostSoulOffsetYs.Push(0);
-            lostSoulOffsetYs.Push(60);
-            lostSoulOffsetYs.Push(60);
-            lostSoulOffsetYs.Push(60);
-
-            let painElementalFinder = ThinkerIterator.Create("HM_PainElemental");
-            HM_PainElemental painElemental;
-            while((painElemental = HM_PainElemental(painElementalFinder.next())) != null)
-            {
-                int numberAccepted = 0;
-                for(let i = 0; i < lostSoulOffsetXs.Size(); i++)
-                {
-                    //console.printf("spawning LS at %i %d %d", i, lostSoulOffsetXs[i], lostSoulOffsetYs[i]);
-
-                    let spawnee = painElemental.Spawn(
-                        "HM_LostSoul",
-                        painElemental.Vec3Offset(
-                            lostSoulOffsetXs[i],
-                            lostSoulOffsetYs[i],
-                            0
-                        )
-                    );
-
-                    if(spawnee && !spawnee.TestMobjLocation())
-                    {
-                        spawnee.Destroy();
-                    }
-                    else
-                    {
-                        numberAccepted++;
-
-                        // 4 is enough
-                        if(numberAccepted >= 4)
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+        SpawnPrepainedLostSouls();
 
         SpawnDejaVuTraces();
 
@@ -150,6 +94,75 @@ extend class HM_GlobalEventHandler
             if(actor.GetClass() == 'HM_DoomImp')
             {
                 ChanceReplaceActor(actor, 'HM_ArchImp', IsMutationActive("unholylegion") ? 17 * 3 : 17); // 1 in 5 with Unholy Legion, one in 15 otherwise
+            }
+        }
+    }
+
+    // Spawn Pre-pained lost souls
+    void SpawnPrepainedLostSouls()
+    {
+        if(!IsMutationActive("prepained"))
+        {
+            return;
+        }
+
+        Array<int> lostSoulOffsetXs;
+        lostSoulOffsetXs.Push(60);
+        lostSoulOffsetXs.Push(60);
+        lostSoulOffsetXs.Push(0);
+        lostSoulOffsetXs.Push(-60);
+        lostSoulOffsetXs.Push(-60);
+        lostSoulOffsetXs.Push(-60);
+        lostSoulOffsetXs.Push(0);
+        lostSoulOffsetXs.Push(60);
+        
+        Array<int> lostSoulOffsetYs;
+        lostSoulOffsetYs.Push(0);
+        lostSoulOffsetYs.Push(-60);
+        lostSoulOffsetYs.Push(-60);
+        lostSoulOffsetYs.Push(-60);
+        lostSoulOffsetYs.Push(0);
+        lostSoulOffsetYs.Push(60);
+        lostSoulOffsetYs.Push(60);
+        lostSoulOffsetYs.Push(60);
+
+        let painElementalFinder = ThinkerIterator.Create("HM_PainElemental");
+        HM_PainElemental painElemental;
+        while((painElemental = HM_PainElemental(painElementalFinder.next())) != null)
+        {
+            int numberAccepted = 0;
+            for(let i = 0; i < lostSoulOffsetXs.Size(); i++)
+            {
+                //console.printf("spawning LS at %i %d %d", i, lostSoulOffsetXs[i], lostSoulOffsetYs[i]);
+
+                let spawnee = painElemental.Spawn(
+                    "HM_LostSoul",
+                    painElemental.Vec3Offset(
+                        lostSoulOffsetXs[i],
+                        lostSoulOffsetYs[i],
+                        0
+                    )
+                );
+
+                if(spawnee && !spawnee.TestMobjLocation())
+                {
+                    // Reject lost souls which would collide with something
+                    spawnee.Destroy();
+                }
+                else
+                {
+                    spawnee.Angle = painElemental.Angle;
+                    spawnee.SpawnFlags = painElemental.SpawnFlags;
+                    spawnee.HandleSpawnFlags();
+
+                    numberAccepted++;
+
+                    // 4 is enough
+                    if(numberAccepted >= 4)
+                    {
+                        break;
+                    }
+                }
             }
         }
     }
