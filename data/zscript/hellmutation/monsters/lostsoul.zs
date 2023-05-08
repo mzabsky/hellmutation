@@ -34,7 +34,7 @@ class HM_LostSoul: LostSoul replaces LostSoul
             Goto Charge;
         Death:
             SKUL F 0 BRIGHT {
-                if(global.IsMutationActive("terminalpurpose"))
+                if(global.IsMutationActive("closure"))
                 {
                     A_Explode(10, 96, XF_NOTMISSILE, 1, 96);
                     Spawn("HM_LostSoulExplosion", Vec3Offset(0, 0, 20));

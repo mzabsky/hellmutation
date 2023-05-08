@@ -112,6 +112,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "closure",
+            "Closure",
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost Souls explode on death, dealing light area damage."
+        );
+
+        AddMutationDefinition(
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
@@ -403,13 +410,6 @@ extend class HM_GlobalEventHandler
             "Stormtroopers",
             HM_CAT_ZOMBIEMAN,
             "Basic Zombiemen are significantly more accurate."
-        );
-
-        AddMutationDefinition(
-            "terminalpurpose",
-            "Terminal Purpose",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost Souls explode on death, dealing light damage."
         );
 
         AddMutationDefinition(
