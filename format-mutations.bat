@@ -1,0 +1,1 @@
+mutationformatter\bin\Debug\net7.0\MutationFormatter.exe data\zscript\hellmutation\global\mutationDefinitions.zs documentation\mutations.md

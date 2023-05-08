@@ -5,3 +5,5 @@ output
 obj
 *.backup*
 *.dbs
+
+/bin/
