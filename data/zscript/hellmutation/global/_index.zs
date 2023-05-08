@@ -9,4 +9,5 @@
 #include "./networkProcess.zs"
 #include "./worldLoaded.zs"
 #include "./worldThingDamaged.zs"
+#include "./worldThingDied.zs"
 #include "./worldTick.zs"

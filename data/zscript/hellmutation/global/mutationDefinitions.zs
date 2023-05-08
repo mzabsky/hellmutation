@@ -61,6 +61,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
             "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
         );
+
+        AddMutationDefinition(
+            "anger",
+            "Anger",
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost Souls get angry when they see other monsters die."
+        );
         
         AddMutationDefinition(
             "ascension",

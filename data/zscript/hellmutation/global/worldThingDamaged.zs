@@ -45,6 +45,12 @@ extend class HM_GlobalEventHandler
                     painSeed.SetSourceHealthLoss(e.damage);
                 }*/
 
+                // Anger - player was damaged by lost soul -> reset FAST to default state (the lost soul is no longer angry)
+                if(e.damageSource.GetClassName() == 'HM_LostSoul' && IsMutationActive("anger"))
+                {
+                    e.damageSource.bAlwaysFast = false;
+                }
+
                 // Desecration - player was damaged by an imp
                 if(e.damageSource.GetClassName() == 'HM_DoomImp' && IsMutationActive("Desecration") && e.inflictor.target.health >= 0)
                 {
