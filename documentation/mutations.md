@@ -339,7 +339,7 @@ Chaingunners and their variants are faster.
 
 **Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `reachingritual`
 
-Arch-Viles can resurrect monster from a greater distance.
+Arch-Viles can resurrect monsters from a greater distance.
 
 
 ## Reactive Camouflage
