@@ -19,7 +19,7 @@ script "hm_announce" (int isNewGame, int newMutations) CLIENTSIDE {
         HudMessage(s:"\c[Purple]:: \c[Red]HELL \c[Purple]::"; HUDMSG_FADEOUT,786,CR_BLUE,0.5,0.3,2.0,0.5);
         HudMessage(s:"\c[Purple]:: \c[Red]MUTATION \c[Purple]::"; HUDMSG_FADEOUT,787,CR_BLUE,0.5,0.35,2.0,0.5);
         SetFont("DOOMFONT");
-        HudMessage(s:"\c[Yellow]Version 0.2"; HUDMSG_FADEOUT,788,CR_YELLOW,0.5,0.4,2.0,0.5);
+        HudMessage(s:"\c[Yellow]Version 0.3"; HUDMSG_FADEOUT,788,CR_YELLOW,0.5,0.4,2.0,0.5);
         HudMessage(s:"\ccBy \cvKlaxxon"; HUDMSG_FADEOUT,789,CR_YELLOW,0.5,0.45,2.0,0.5);
     }
 
