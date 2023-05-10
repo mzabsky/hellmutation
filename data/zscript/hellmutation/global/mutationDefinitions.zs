@@ -124,6 +124,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost Souls explode on death, dealing light area damage."
         );
+        
+        AddMutationDefinition(
+            "compassion",
+            "Compassion",
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost souls never attack each other."
+        );
 
         AddMutationDefinition(
             "cyberneuralreflexes",
@@ -291,13 +298,6 @@ extend class HM_GlobalEventHandler
             "Lords of Vengeance",
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
             "Hell Knights and Barons of Hell get increasingly angry\nas they take damage."
-        );
-        
-        AddMutationDefinition(
-            "losttogether",
-            "Lost Together",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls never attack each other."
         );
 
         AddMutationDefinition(
