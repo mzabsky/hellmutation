@@ -467,6 +467,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_BARREL,
             "Removes all explosive barrels."
         );
+
+        AddMutationDefinition(
+            "zeal",
+            "Zeal",
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
+            "Whenever a Pain Elemental spawns a Lost Soul, all\nthe Lost Souls spawned by it immediately charge."
+        );
     }
     
     private void AddMutationDefinition(string key, string name, MutationCategory category, string description)
