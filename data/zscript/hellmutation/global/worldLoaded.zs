@@ -127,6 +127,10 @@ extend class HM_GlobalEventHandler
                     spawnee.SpawnFlags = painElemental.SpawnFlags;
                     spawnee.HandleSpawnFlags();
 
+                    // Make sure the pain elemental tracks this as one of his own
+                    // eg. for Zeal
+                    painElemental.spawnedActors.Push(spawnee);
+
                     numberAccepted++;
 
                     // 4 is enough
