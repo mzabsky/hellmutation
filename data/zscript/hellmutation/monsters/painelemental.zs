@@ -7,17 +7,28 @@ class HM_PainElemental: PainElemental replaces PainElemental
 
     States
     {
+        See:
+            PAIN A 0 {
+                bAlwaysFast = global.IsMutationActive("dependence");
+            }
+		    PAIN AABBCC 3 FAST A_Chase;
+		    Loop;
         Missile:
-            PAIN D 5 A_FaceTarget;
-            PAIN E 5 A_FaceTarget;
-            PAIN F 5 BRIGHT A_FaceTarget;
-            PAIN F 0 BRIGHT HM_A_PainAttack();
+            PAIN D 5 FAST A_FaceTarget;
+            PAIN E 5 FAST A_FaceTarget;
+            PAIN F 5 FAST BRIGHT A_FaceTarget;
+            PAIN F 0 FAST BRIGHT HM_A_PainAttack();
             Goto See;
         Death:
             PAIN H 8 BRIGHT;
             PAIN I 8 BRIGHT A_Scream;
             PAIN JK 8 BRIGHT;
-            PAIN L 8 BRIGHT HM_A_PainDie();
+            PAIN L 8 BRIGHT {
+                if(!global.IsMutationActive("dependence"))
+                {
+                    HM_A_PainDie();
+                }
+            }
             PAIN M 8 BRIGHT;
             TNT1 A -1; // Needed to be resurrectable (for Greater Ritual)
             Stop;
@@ -29,6 +40,22 @@ class HM_PainElemental: PainElemental replaces PainElemental
             PAIN I 8 BRIGHT;
             PAIN H 8 BRIGHT;
             Goto See;
+    }
+
+    // Called from global handler on death of this
+    // Kills all dependent lost souls
+    void DependenceDeath(Actor source)
+    {
+        for(let i = 0; i < spawnedActors.Size(); i++)
+        {
+            int newDamage;
+
+            let spawnee = spawnedActors[i];
+            if(spawnee != null)
+            {
+                spawnee.DamageMobj(self, source, 9999, 'Dependence', DMG_FOILINVUL);
+            }
+        }
     }
 
     // Copied over from A_PainShootSkull

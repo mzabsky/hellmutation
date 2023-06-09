@@ -83,6 +83,13 @@ Mancubuses cause a powerful explosion on death.
 Lost Souls explode on death, dealing light area damage.
 
 
+## Compassion
+
+**Applies to**: Lost Soul, Pain Elemental&emsp;&emsp;&emsp;**Key**: `compassion`
+
+Lost souls never attack each other.
+
+
 ## Cyber-Neural Reflexes
 
 **Applies to**: Doom 2 only, Arachnotron&emsp;&emsp;&emsp;**Key**: `cyberneuralreflexes`
@@ -116,6 +123,13 @@ Revenants may spawn a harmless decoy when they get hit.
 **Applies to**: All monsters&emsp;&emsp;&emsp;**Key**: `dejavu`
 
 Monsters might ambush you more than once!
+
+
+## Dependence
+
+**Applies to**: Doom 2 only, Pain Elemental&emsp;&emsp;&emsp;**Key**: `dependence`
+
+Pain Elementals spawns Lost Souls much faster, but they all die when it dies.
 
 
 ## Desecration
@@ -249,13 +263,6 @@ Players taking damage from Hell Knights and Barons of Hell might cause a nearby 
 **Applies to**: Hell Knight, Baron of Hell&emsp;&emsp;&emsp;**Key**: `lordsofvengeance`
 
 Hell Knights and Barons of Hell get increasingly angry as they take damage.
-
-
-## Lost Together
-
-**Applies to**: Lost Soul, Pain Elemental&emsp;&emsp;&emsp;**Key**: `losttogether`
-
-Lost souls never attack each other.
 
 
 ## Macropods
@@ -424,5 +431,12 @@ Mancubus projectiles spread vertically as well as horizontally.
 **Applies to**: Barrel&emsp;&emsp;&emsp;**Key**: `workplacesafety`
 
 Removes all explosive barrels.
+
+
+## Zeal
+
+**Applies to**: Doom 2 only, Pain Elemental&emsp;&emsp;&emsp;**Key**: `zeal`
+
+Whenever a Pain Elemental spawns a Lost Soul, all the Lost Souls spawned by it immediately charge.
 
 

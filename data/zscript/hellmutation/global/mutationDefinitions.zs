@@ -168,6 +168,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "dependence",
+            "Dependence",
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
+            "Pain Elementals spawn Lost Souls much faster, but they all\ndie when it dies."
+        );
+
+        AddMutationDefinition(
             "desecration",
             "Desecration",
             HM_CAT_IMP,

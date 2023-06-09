@@ -38,5 +38,10 @@ extend class HM_GlobalEventHandler
             e.thing.target = players[0].mo;
             e.thing.A_AlertMonsters();
         }
+
+        if(e.thing is 'HM_PainElemental' && IsMutationActive('dependence'))
+        {
+            HM_PainElemental(e.thing).DependenceDeath(e.damageSource);
+        }
     }
 }
