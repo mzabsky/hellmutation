@@ -56,6 +56,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "affinity",
+            "Affinity",
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
+            "Pain Elementals have much more health, but take damage along with\ntheir Lost Souls."
+        );
+
+        AddMutationDefinition(
             "ambushshield",
             "Ambush Shield",
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,

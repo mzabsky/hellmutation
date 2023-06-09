@@ -10,4 +10,5 @@
 #include "./lordsofvengeance.zs"
 #include "./macropods.zs"
 #include "./sacrifice.zs"
+#include "./setmaxhealth.zs"
 #include "./unstoppable.zs"

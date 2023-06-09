@@ -2,6 +2,7 @@ class HM_PainElemental: PainElemental replaces PainElemental
 {
     mixin HM_GlobalRef;
     mixin HM_GreaterRitual;
+    mixin HM_SetMaxHealth;
 
     Array<Actor> spawnedActors;
 
@@ -10,6 +11,14 @@ class HM_PainElemental: PainElemental replaces PainElemental
         See:
             PAIN A 0 {
                 bAlwaysFast = global.IsMutationActive("dependence");
+
+                let totalHealth = 400;
+                if(global.IsMutationActive("affinity"))
+                {
+                    totalHealth += 1000;
+                }
+
+                HM_SetMaxHealth(totalHealth);
             }
 		    PAIN AABBCC 3 FAST A_Chase;
 		    Loop;
@@ -183,6 +192,13 @@ class HM_PainElemental: PainElemental replaces PainElemental
             {
                 // No Compassion -> just the spawned lost soul charges
                 other.A_SkullAttack();
+            }
+
+            // The actor might have got replaced, theoretically
+            let lostSoul = HM_LostSoul(other);
+            if(lostSoul != null)
+            {
+                lostSoul.parent = self;
             }
 
         }

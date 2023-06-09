@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             // Has damage source
 
-            //console.printf("%f Thing damaged: %s, Health: %d, Source: %s, Source health %d", e.thing.FloorZ, e.thing.GetClassName(), e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
+            //console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Source: %s, Source health %d", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
 
             // Hematophagy
             if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
@@ -132,6 +132,16 @@ extend class HM_GlobalEventHandler
             if (e.thing is "HM_Demon" && IsMutationActive("reactivecamouflage"))
             {
                 e.thing.A_SetRenderStyle(0.5, STYLE_OptFuzzy);
+            }
+
+            // Afinity
+            if (e.thing is "HM_LostSoul" && IsMutationActive("affinity") && !(e.damageSource is 'LostSoul')) // We ignore infighting damage, makes it way too easy
+            {
+                let lostSoul = HM_LostSoul(e.thing);
+                if(lostSoul != null && lostSoul.parent != null && lostSoul.parent.health > 0)
+                {
+                    lostSoul.parent.DamageMobj(lostSoul, e.damageSource, e.damage, 'Affinity', 0);
+                }
             }
         }
     }

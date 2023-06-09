@@ -1,6 +1,7 @@
 class HM_Mancubus: Fatso replaces Fatso
 {
     mixin HM_GlobalRef;
+    mixin HM_SetMaxHealth;
 
     Default
     {
@@ -68,24 +69,6 @@ class HM_Mancubus: Fatso replaces Fatso
         }
 
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
-    }
-
-    void HM_SetMaxHealth(int newMaxHealth)
-    {
-        let previousMaxHealth = starthealth;
-        if(newMaxHealth != previousMaxHealth)
-        {
-            starthealth = newMaxHealth;
-
-            if(newMaxHealth > previousMaxHealth)
-            {
-                A_SetHealth(newMaxHealth);
-            }
-            else if(health > newMaxHealth)
-            {
-                A_SetHealth(newMaxHealth);
-            }
-        }
     }
 
     void HM_A_FatAttack(HM_FatShotDirection directions)

@@ -2,6 +2,8 @@ class HM_LostSoul: LostSoul replaces LostSoul
 {
     mixin HM_GlobalRef;
 
+    HM_PainElemental parent;
+
     States
     {
         Missile:
@@ -51,9 +53,14 @@ class HM_LostSoul: LostSoul replaces LostSoul
 
     override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
     {
-        if(global.IsMutationActive("Ego"))
+        if(global.IsMutationActive("ego"))
         {
             return super.DamageMobj(inflictor, source, damage * 2, mod, flags, angle);
+        }
+
+        if(parent != null && parent.health > 0 && global.IsMutationActive("affinity"))
+        {
+            parent.DamageMobj(self, source, damage, 'Affinity', flags);
         }
 
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
