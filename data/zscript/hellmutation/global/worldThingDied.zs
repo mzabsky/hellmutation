@@ -43,5 +43,23 @@ extend class HM_GlobalEventHandler
         {
             HM_PainElemental(e.thing).DependenceDeath(e.damageSource);
         }
+
+        // Triumvirate - Kill the other cyberdemons (shouldn't be needed, just to be sure)
+        if (e.thing is "HM_Cyberdemon" && (e.damageFlags & HM_DMG_REDIRECTED == 0)) // Do not share already shared damage
+        {
+            let cyberdemon = HM_Cyberdemon(e.thing);
+            if(cyberdemon != null)
+            {
+                if(cyberdemon.triumvirateMateA != null)
+                {
+                    cyberdemon.triumvirateMateA.DamageMobj(cyberdemon, e.damageSource, 9999, 'Triumvirate', HM_DMG_REDIRECTED);
+                }
+                
+                if(cyberdemon.triumvirateMateB != null)
+                {
+                    cyberdemon.triumvirateMateB.DamageMobj(cyberdemon, e.damageSource, 9999, 'Triumvirate', HM_DMG_REDIRECTED);
+                }
+            }
+        }
     }
 }

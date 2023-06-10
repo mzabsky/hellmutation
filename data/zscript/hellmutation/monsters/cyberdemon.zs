@@ -4,6 +4,9 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
     mixin HM_GreaterRitual;
     mixin HM_BigFuckingWomp;
 
+    Actor triumvirateMateA;
+    Actor triumvirateMateB;
+
     States
     {
         Raise:
@@ -13,6 +16,16 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
             CYBR I 10;
             CYBR H 10;
             Goto See;
+    }
+
+    override bool CanCollideWith(Actor other, bool passive)
+    {
+        if(other == triumvirateMateA || other == triumvirateMateB)
+        {
+            return false;
+        }
+
+        return super.CanCollideWith(other, passive);
     }
 }
 

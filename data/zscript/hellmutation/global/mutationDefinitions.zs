@@ -441,6 +441,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "triumvirate",
+            "Triumvirate",
+            HM_CAT_CYBERDEMON,
+            "Cyberdemons spawn as a trio, sharing a single health pool."
+        );
+
+        AddMutationDefinition(
             "unholylegion",
             "Unholy Legion",
             HM_CAT_IMP,

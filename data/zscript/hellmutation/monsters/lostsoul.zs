@@ -58,11 +58,6 @@ class HM_LostSoul: LostSoul replaces LostSoul
             return super.DamageMobj(inflictor, source, damage * 2, mod, flags, angle);
         }
 
-        if(parent != null && parent.health > 0 && global.IsMutationActive("affinity"))
-        {
-            parent.DamageMobj(self, source, damage, 'Affinity', flags);
-        }
-
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
     }
 

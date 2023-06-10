@@ -46,6 +46,8 @@ extend class HM_GlobalEventHandler
 
         SpawnPrepainedLostSouls();
 
+        SpawnTriumvirate();
+
         SpawnDejaVuTraces();
 
         WorkplaceSafety();
@@ -140,6 +142,58 @@ extend class HM_GlobalEventHandler
                     }
                 }
             }
+        }
+    }
+
+    void SpawnTriumvirate()
+    {
+        if(!IsMutationActive("triumvirate"))
+        {
+            return;
+        }
+
+        // Spawn an additional cyberdemon for each one in the map
+        // Then connect them in a love triangle so they treat each other
+        // as mates
+        let cyberdemonFinder = ThinkerIterator.Create("HM_Cyberdemon");
+        HM_Cyberdemon cyberdemon;
+        while((cyberdemon = HM_Cyberdemon(cyberdemonFinder.next())) != null)
+        {
+            // A newly spawned cyberdemon from previous iteration of the loop
+            if (cyberdemon.triumvirateMateA != null)
+            {
+                continue;
+            }
+
+            let triumvirateMate1 = HM_Cyberdemon(cyberdemon.Spawn('HM_Cyberdemon', cyberdemon.pos));
+            if(triumvirateMate1 == null)
+            {
+                break;
+            }
+
+            triumvirateMate1.Angle = cyberdemon.Angle;
+            triumvirateMate1.SpawnFlags = cyberdemon.SpawnFlags;
+            triumvirateMate1.HandleSpawnFlags();
+
+            let triumvirateMate2 = HM_Cyberdemon(cyberdemon.Spawn('HM_Cyberdemon', cyberdemon.pos));
+            if(triumvirateMate2 == null)
+            {
+                break;
+            }
+
+            triumvirateMate2.Angle = cyberdemon.Angle;
+            triumvirateMate2.SpawnFlags = cyberdemon.SpawnFlags;
+            triumvirateMate2.HandleSpawnFlags();
+
+            // Make the love triangle
+            cyberdemon.triumvirateMateA = triumvirateMate1;
+            cyberdemon.triumvirateMateB = triumvirateMate2;
+
+            triumvirateMate1.triumvirateMateA = cyberdemon;
+            triumvirateMate1.triumvirateMateB = triumvirateMate2;
+
+            triumvirateMate2.triumvirateMateA = cyberdemon;
+            triumvirateMate2.triumvirateMateB = triumvirateMate1;
         }
     }
 
