@@ -196,17 +196,17 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "desire",
+            "Desire",
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost souls charge at greater speed."
+        );
+
+        AddMutationDefinition(
             "dominance",
             "Dominance",
             HM_CAT_CYBERDEMON,
             "Cyberdemons can attack while walking."
-        );
-
-        AddMutationDefinition(
-            "pride",
-            "Pride",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls deal and take much more damage."
         );
 
         AddMutationDefinition(
@@ -385,6 +385,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "pride",
+            "Pride",
+            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
+            "Lost souls deal and take much more damage."
+        );
+
+        AddMutationDefinition(
             "promotion",
             "Promotion",
             HM_CAT_ZOMBIEMAN,
@@ -431,13 +438,6 @@ extend class HM_GlobalEventHandler
             "Sacrifice",
             HM_CAT_IMP | HM_CAT_ARCHVILE,
             "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters."
-        );
-
-        AddMutationDefinition(
-            "desire",
-            "Desire",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls charge at greater speed."
         );
 
         AddMutationDefinition(
