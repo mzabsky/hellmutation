@@ -441,6 +441,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "sovereignty",
+            "Sovereignty",
+            HM_CAT_CYBERDEMON,
+            "Cyberdemons have a chance to shoot a Hell Cube instead of a rocket."
+        );
+
+        AddMutationDefinition(
             "stormtroopers",
             "Stormtroopers",
             HM_CAT_ZOMBIEMAN,
