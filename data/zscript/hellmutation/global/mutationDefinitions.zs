@@ -420,6 +420,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "regality",
+            "Regality",
+            HM_CAT_CYBERDEMON,
+            "Cyberdemons deal devastating damage to other monster\nand take very little damage from other monsters."
+        );
+
+        AddMutationDefinition(
             "sacrifice",
             "Sacrifice",
             HM_CAT_IMP | HM_CAT_ARCHVILE,
@@ -427,8 +434,8 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
-            "seekingsouls",
-            "Seeking Souls",
+            "desire",
+            "Desire",
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost souls charge at greater speed."
         );

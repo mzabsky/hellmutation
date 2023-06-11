@@ -19,7 +19,7 @@ class HM_LostSoul: LostSoul replaces LostSoul
             }
             SKUL C 10 BRIGHT A_FaceTarget;
             SKUL D 4 BRIGHT {
-                if(global.IsMutationActive("seekingsouls"))
+                if(global.IsMutationActive("desire"))
                 {
                     A_SkullAttack(35);
                 }
