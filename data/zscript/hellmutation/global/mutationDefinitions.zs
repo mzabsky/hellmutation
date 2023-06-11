@@ -75,6 +75,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost Souls get angry when they see other monsters die."
         );
+
+        AddMutationDefinition(
+            "argenthydraulics",
+            "Argent Hydraulics",
+            HM_CAT_ARACHNOTRON || HM_CAT_SPIDERMASTERMIND,
+            "Arachnotrons and Spider Masterminds walk much faster."
+        );
         
         AddMutationDefinition(
             "ascension",

@@ -9,6 +9,17 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
     States
     {
         See:
+            SPID A 0 {
+                if(global.IsMutationActive("argenthydraulics"))
+                {
+                    Speed = 24;
+                    return ResolveState("FastSee");
+                }
+                else {
+                    Speed = 12;
+                    return ResolveState(null);
+                }
+            }
             SPID A 3 A_Metal;
             SPID ABB 3 A_Chase;
             SPID C 3 A_Metal;
@@ -16,6 +27,14 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
             SPID E 3 A_Metal;
             SPID EFF 3 A_Chase;
             Loop;
+        FastSee:
+            SPID A 2 A_Metal;
+            SPID ABB 2 A_Chase;
+            SPID C 2 A_Metal;
+            SPID CDD 2 A_Chase;
+            SPID E 2 A_Metal;
+            SPID EFF 2 A_Chase;
+            Goto See;
         Missile:
             SPID A 20 BRIGHT A_FaceTarget;
             SPID A 0 BRIGHT {

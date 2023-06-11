@@ -12,6 +12,30 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
 
     States
     {
+        See:
+            BSPI A 20;
+            BSPI A 0 {
+                if(global.IsMutationActive("argenthydraulics"))
+                {
+                    Speed = 24;
+                    return ResolveState("FastSee");
+                }
+                else {
+                    Speed = 12;
+                    return ResolveState(null);
+                }
+            }
+            BSPI A 3 A_BabyMetal;
+            BSPI ABBCC 3 A_Chase;
+            BSPI D 3 A_BabyMetal;
+            BSPI DEEFF 3 A_Chase;
+            Goto See+1;
+        FastSee:
+            BSPI A 2 A_BabyMetal;
+            BSPI ABBCC 2 A_Chase;
+            BSPI D 2 A_BabyMetal;
+            BSPI DEEFF 2 A_Chase;
+            Goto See+1;
         Missile:
             BSPI A 0 {
                 rampNumber = 0;
