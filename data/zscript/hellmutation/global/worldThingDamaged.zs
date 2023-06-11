@@ -161,6 +161,13 @@ extend class HM_GlobalEventHandler
                     }
                 }
             }
+
+            // Tyranny - Reset tyranny counter whenever a cyberdemon hits its target
+            if (e.damageSource is "HM_Cyberdemon" && IsMutationActive("tyranny") && e.thing == e.damageSource.target) // Only hitting the intended target counts
+            {
+                let cyberdemon = HM_Cyberdemon(e.damageSource);
+                cyberdemon.lastScoredHitTime = Level.time;
+            }
         }
     }
 }

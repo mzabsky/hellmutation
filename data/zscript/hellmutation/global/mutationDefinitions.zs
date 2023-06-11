@@ -455,6 +455,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "tyranny",
+            "Tyranny",
+            HM_CAT_CYBERDEMON,
+            "Cyberdemons get increasingly angry as their target evades them."
+        );
+
+        AddMutationDefinition(
             "unholylegion",
             "Unholy Legion",
             HM_CAT_IMP,
