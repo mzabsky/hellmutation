@@ -203,8 +203,8 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
-            "ego",
-            "Ego",
+            "pride",
+            "Pride",
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
             "Lost souls deal and take much more damage."
         );

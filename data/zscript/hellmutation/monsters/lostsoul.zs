@@ -8,7 +8,7 @@ class HM_LostSoul: LostSoul replaces LostSoul
     {
         Missile:
             SKUL C 0 BRIGHT{
-                if (global.IsMutationActive("Ego"))
+                if (global.IsMutationActive("pride"))
                 {
                     SetDamage(8);
                 }
@@ -18,7 +18,7 @@ class HM_LostSoul: LostSoul replaces LostSoul
                 }
             }
             SKUL C 10 BRIGHT A_FaceTarget;
-            SKUL D 4 BRIGHT {
+            SKUL D 4 BRIGHT {  
                 if(global.IsMutationActive("desire"))
                 {
                     A_SkullAttack(35);
