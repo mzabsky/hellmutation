@@ -344,3 +344,56 @@ class HM_CybredemonSpawneeShield: Inventory
         }
     }
 }
+
+// Implements the damage modifiers for Regality
+// Granted in WorldThingSpawned
+class HM_RegalityModifier: Inventory
+{
+    mixin HM_GlobalRef;
+
+    bool ownerIsCyberdemon;
+
+    override void PostBeginPlay()
+    {
+        console.printf("owner is %s", owner.GetClassName());
+        ownerIsCyberdemon = owner is "Cyberdemon";
+    }
+
+    override void ModifyDamage (int damage, Name damageType, out int newdamage, bool passive, Actor inflictor, Actor source, int flags)
+    {
+        newDamage = damage;
+
+        if(!passive)
+        {
+            // Everything is calculated on the passive (taking damage) side
+            // Active (dealing damage) side doesn't know who the victim is
+            return;
+        }
+
+        if(!source)
+        {
+            return;
+        }
+
+        if(!source.bIsMonster)
+        {
+            // Regality only matters among monsters
+            return;
+        }
+
+        if(!global.IsMutationActive("regality"))
+        {
+            return;
+        }
+
+        if(ownerIsCyberdemon)
+        {
+            newDamage = 1; // Reduce damage taken by cyberdemons to almost nothing
+            return;
+        }
+        else if(source is 'Cyberdemon')
+        {
+            newDamage = damage * 5; // Increase damage dealt by cyberdemons by a factor of 5
+        }
+    }
+}

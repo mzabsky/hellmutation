@@ -61,5 +61,11 @@ class HM_GlobalEventHandler: EventHandler
             e.thing.target = players[0].mo;
             e.thing.A_AlertMonsters();
         }
+
+        // Regality - Each monster need to have a regality modifier (it will check for the mutation on its own)
+        if(e.thing.bIsMonster)
+        {
+            e.thing.GiveInventory("HM_RegalityModifier", 1);
+        }
     }
 }
