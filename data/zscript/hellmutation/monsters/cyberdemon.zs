@@ -11,6 +11,29 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
 
     States
     {
+        See:
+            CYBR A 3 A_Hoof;
+            CYBR ABBCC 3 A_Chase;
+            CYBR D 0 {
+                if(global.IsMutationActive("dominance") && target != null && CheckSight(target))
+                {
+                    return ResolveState("FireSee");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }      
+            CYBR D 3 A_Metal;
+            CYBR D 3 A_Chase;
+            Loop;
+        FireSee:
+            CYBR F 3 {
+                A_Metal();
+                A_CyberAttack();
+            }
+            CYBR F 3 A_Chase;
+            Goto See;
         Raise:
             CYBR ON 10;
             CYBR M 10;

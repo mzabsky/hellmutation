@@ -196,6 +196,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "dominance",
+            "Dominance",
+            HM_CAT_CYBERDEMON,
+            "Cyberdemons can attack while walking."
+        );
+
+        AddMutationDefinition(
             "ego",
             "Ego",
             HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
