@@ -38,7 +38,7 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
         Missile:
             SPID A 20 BRIGHT A_FaceTarget;
             SPID A 0 BRIGHT {
-                if(!global.IsMutationActive("motherhood"))
+                if(!global.IsMutationActive("broodfabrication"))
                 {
                     return;
                 }
