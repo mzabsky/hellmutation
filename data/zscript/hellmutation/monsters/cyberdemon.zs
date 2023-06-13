@@ -12,7 +12,7 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
     States
     {
         See:
-            CYBR A 3 A_Hoof;
+            CYBR A 3 HoofStomp();
             CYBR ABBCC 3 A_Chase;
             CYBR D 0 {
                 if(global.IsMutationActive("dominance") && target != null && CheckSight(target))
@@ -222,6 +222,78 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
         A_CyberAttack();
     }
 
+    void HoofStomp()
+    {
+        if(global.IsMutationActive("craterhoof"))
+        {
+            let stompRadius = 192;
+            let verticalTolerance = 32;
+            for(int i = 0; i < 100; i++)
+            {
+                let glitPos = Vec3Offset(
+                    random[HM_Cyberdemon](-stompRadius, stompRadius),
+                    random[HM_Cyberdemon](-stompRadius, stompRadius),
+                    8
+                );
+
+                let spawnee = Spawn('HM_StompGlitter', glitPos);
+                if(spawnee)
+                {
+                    let dist = Distance2D(spawnee);
+                    if(dist > stompRadius)
+                    {
+                        spawnee.Destroy();
+                        continue;
+                    }
+
+                    if(abs(floorz - spawnee.floorz) > verticalTolerance)
+                    {
+                        // Do not create stomp particles on floors that are too far away vertically
+                        // from the cyberdemon
+                        spawnee.Destroy();
+                        continue;
+                    }
+
+                    if(!CheckSight(spawnee))
+                    {
+                        spawnee.Destroy();
+                        continue;
+                    }
+
+                    // Spawn the particle relative to local floor
+                    spawnee.SetXYZ((glitPos.x, glitPos.y, spawnee.floorz + 8));
+
+                    spawnee.vel.z = 5;
+                }
+            }
+
+            BlockThingsIterator it = BlockThingsIterator.Create(self, stompRadius);
+            Actor mo;
+
+            while (it.Next())
+            {
+                mo = it.thing;
+                if (
+                    !mo
+                    || (!mo.bIsMonster && !(mo is 'PlayerPawn'))
+                    || mo.health <= 0
+                    || Distance2D(mo) > stompRadius
+                    || !CheckSight(mo)
+                    || abs(mo.floorz - floorz) > verticalTolerance
+                    || mo.pos.z - mo.floorz > 0 // Is flying
+                )
+                {
+                    continue;
+                }
+
+                mo.GiveInventory("HM_HoofSlowdown", 1);
+                mo.DamageMobj(self, self, 20, 'Stomp', 0);
+            }
+        }
+        
+        A_Hoof();
+    }
+
     void SpawnHellCube()
     {
         A_FaceTarget();
@@ -395,5 +467,53 @@ class HM_RegalityModifier: Inventory
         {
             newDamage = damage * 5; // Increase damage dealt by cyberdemons by a factor of 5
         }
+    }
+}
+
+class HM_StompGlitter: Actor
+{
+    Default
+    {
+        +NOBLOCKMAP;
+        +NOTRIGGER;
+        +MISSILE
+        Gravity 0.25;
+        RenderStyle "Translucent";
+        Damage 0;
+        Scale 0.5;
+    }
+  
+    States
+    {
+        Spawn:
+            SGLT B 2 A_FadeOut(0.05);
+            SGLT B 2 A_FadeOut(0.05);
+            SGLT B 2 A_FadeOut(0.05);
+            SGLT B 2 A_FadeOut(0.05);
+            SGLT B 2 A_FadeOut(0.05);
+            Loop;
+        Crash:
+        Death:
+        XDeath:
+            TNT1 A 1;
+            stop;
+    }
+
+    override void Tick()
+    {
+        vel.z -= 0.5;
+        super.Tick();
+    }
+}
+
+class HM_HoofSlowdown : PowerSpeed
+{
+    Default
+    {
+        Powerup.Duration 70;
+        
+		//Powerup.Color "ff 00 00", 0.5;
+        PowerSpeed.NoTrail 1;
+        Speed 0.5;
     }
 }

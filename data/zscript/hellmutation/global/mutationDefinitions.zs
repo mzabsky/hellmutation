@@ -147,6 +147,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "craterhoof",
+            "Craterhoof",
+            HM_CAT_CYBERDEMON,
+            "Cyberdemon hoof stomps damage and debilitate everything in\na moderate area."
+        );
+
+        AddMutationDefinition(
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
