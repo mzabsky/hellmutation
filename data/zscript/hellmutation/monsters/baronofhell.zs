@@ -1,7 +1,7 @@
 class HM_BaronOfHell : BaronOfHell replaces BaronOfHell
 {
     mixin HM_GlobalRef;
-    mixin HM_HellsCaress;
+    mixin HM_BruisAttack;
     mixin HM_LordsOfDarkness;
     mixin MG_LordsOfVengeance;
 

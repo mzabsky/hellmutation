@@ -308,6 +308,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "lordsofchaos",
+            "Lords of Chaos",
+            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
+            "Hell Knight and Baron of Hell projectile speed is\nchaotically randomized."
+        );
+
+        AddMutationDefinition(
             "lordsofdarkness",
             "Lords of Darkness",
             HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,

@@ -1,5 +1,5 @@
 // Replacement action for A_BruisAttack (for Baron of Hell and Hell Knight), which takes into consideration mutations.
-mixin class HM_HellsCaress
+mixin class HM_BruisAttack
 {
     void HM_A_BruisAttack()
     {
@@ -21,7 +21,15 @@ mixin class HM_HellsCaress
             else
             {
                 // launch a missile
-                SpawnMissile (target, "BaronBall");
+                let missile = SpawnMissile (target, "BaronBall");
+                if(missile && global.IsMutationActive("lordsofchaos"))
+                {
+                    let roll = random[hm_bruisattack](20, 200);
+                    console.printf("roll %d", roll);
+                    missile.vel.x = missile.vel.x * roll / 100;
+                    missile.vel.y = missile.vel.y * roll / 100;
+                    missile.vel.z = missile.vel.z * roll / 100;
+                }
             }
         }
     }

@@ -1,7 +1,7 @@
 class HM_HellKnight : HellKnight replaces HellKnight
 {
     mixin HM_GlobalRef;
-    mixin HM_HellsCaress;
+    mixin HM_BruisAttack;
     mixin HM_LordsOfDarkness;
     mixin MG_LordsOfVengeance;
 

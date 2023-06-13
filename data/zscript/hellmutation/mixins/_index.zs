@@ -1,10 +1,10 @@
 
 #include "./bigfuckingwomp.zs"
 #include "./bloodtax.zs"
+#include "./bruisattack.zs"
 #include "./decapitable.zs"
 #include "./globalref.zs"
 #include "./greaterritual.zs"
-#include "./hellscaress.zs"
 #include "./highground.zs"
 #include "./lordsofdarkness.zs"
 #include "./lordsofvengeance.zs"
