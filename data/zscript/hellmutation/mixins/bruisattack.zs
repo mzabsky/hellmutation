@@ -25,7 +25,6 @@ mixin class HM_BruisAttack
                 if(missile && global.IsMutationActive("lordsofchaos"))
                 {
                     let roll = random[hm_bruisattack](20, 200);
-                    console.printf("roll %d", roll);
                     missile.vel.x = missile.vel.x * roll / 100;
                     missile.vel.y = missile.vel.y * roll / 100;
                     missile.vel.z = missile.vel.z * roll / 100;
