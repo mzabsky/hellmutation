@@ -32,6 +32,10 @@ class HM_DoomImp : DoomImp replaces DoomImp // Replacement is handled by MH_Doom
             TROO EF 3 FAST A_FaceTarget;
             TROO G 1 FAST HM_A_TroopAttack;
             Goto See;
+        FastRaise:
+            TROO ML 4;
+            TROO KJI 3;
+            Goto See;
 
     }
 

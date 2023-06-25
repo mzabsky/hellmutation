@@ -59,6 +59,10 @@ class HM_Mancubus: Fatso replaces Fatso
             FATT NOPQRS 6;
             FATT T -1 A_BossDeath;
             Stop;
+        FastRaise:
+            FATT R 3;
+            FATT QPONMLK 3;
+            Goto See;
     }
 
     override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)

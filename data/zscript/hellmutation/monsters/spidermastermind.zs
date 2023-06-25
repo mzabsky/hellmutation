@@ -69,6 +69,11 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
             SPID K 10;
             SPID J 20;
             Goto See;
+        FastRaise:
+            SPID RQPONML 5;
+            SPID K 5;
+            SPID J 10;
+            Goto See;
     }
 /*
     private void HM_A_SPosAttackInternal()

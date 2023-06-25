@@ -44,6 +44,10 @@ class HM_Cacodemon : Cacodemon replaces Cacodemon
         Crash:
             HEAD D 0 PomodoroSustenance();
             Goto Death;
+        FastRaise:
+            HEAD L 4 A_UnSetFloorClip;
+            HEAD KJIHG 4;
+            Goto See;
         
     }
 

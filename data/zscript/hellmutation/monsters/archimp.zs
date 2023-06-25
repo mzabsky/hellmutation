@@ -69,6 +69,9 @@ class HM_ArchImp : DoomImp
         Raise:
             HELN TSRQPON 6;
             goto See;
+        FastRaise:
+            HELN TSRQPON 3;
+            goto See;
     }
 
 

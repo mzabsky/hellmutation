@@ -146,6 +146,10 @@ class HM_RevenantDecoy : Revenant
             SKEL P 7;
             SKEL Q -1;
             Stop;
+        FastRaise:
+            SKEL Q 3;
+            SKEL PONML 3;
+            Goto See;
     }
 
     override bool CanCollideWith(Actor other, bool passive)

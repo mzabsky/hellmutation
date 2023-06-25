@@ -52,6 +52,10 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
             CPOS RS 5;
             CPOS T -1;
             Stop;
+        FastRaise:
+            CPOS N 3;
+            CPOS MLKJIH 3;
+            Goto See;
     }
 
     override void Tick()

@@ -48,6 +48,13 @@ class HM_PainElemental: PainElemental replaces PainElemental
             PAIN I 8 BRIGHT;
             PAIN H 8 BRIGHT;
             Goto See;
+        FastRaise:
+            PAIN M 4 BRIGHT;
+            PAIN L 4 BRIGHT;
+            PAIN KJ 4 BRIGHT;
+            PAIN I 4 BRIGHT;
+            PAIN H 4 BRIGHT;
+            Goto See;
     }
 
     // Called from global handler on death of this

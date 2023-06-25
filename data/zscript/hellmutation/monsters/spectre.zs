@@ -29,5 +29,9 @@ class HM_Spectre : Spectre replaces Spectre
             SARG F 10 A_SkullAttack;
             SARG G 5 A_Gravity;
             Goto See;
+        FastRaise:
+            SARG N 3;
+            SARG MLKJ 3;
+            Goto See;
     }
 }

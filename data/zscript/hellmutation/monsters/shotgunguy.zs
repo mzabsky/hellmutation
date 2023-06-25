@@ -34,6 +34,10 @@ class HM_ShotgunGuy: ShotgunGuy replaces ShotgunGuy
             SPOS PQRST 5;
             SPOS U -1;
             Stop;
+        FastRaise:
+            SPOS L 3;
+            SPOS KJIH 3;
+            Goto See;
     }
 
     void HM_A_SPosAttackUseAtkSound()

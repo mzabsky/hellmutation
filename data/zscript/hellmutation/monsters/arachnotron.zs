@@ -84,6 +84,14 @@ class HM_Arachnotron: Arachnotron replaces Arachnotron
             BSPI H 1 ;
             BSPI H 1 A_SpidRefire;
             Goto InstantMissile;
+        Raise:
+            BSPI P 5;
+            BSPI ONMLKJ 5;
+            Goto See+1;
+        FastRaise:
+            BSPI P 3;
+            BSPI ONMLKJ 3;
+            Goto See+1;
     }
 
     void HM_A_BspiAttack()

@@ -26,6 +26,10 @@ class HM_BaronOfHell : BaronOfHell replaces BaronOfHell
             BOSS EF 8 A_FaceTarget;
             BOSS G 8 HM_A_BruisAttack();
             Goto See;
+        FastRaise:
+            BOSS O 4;
+            BOSS NMLKJI 4;
+            Goto See;
     }
 }
 

@@ -26,5 +26,9 @@ class HM_HellKnight : HellKnight replaces HellKnight
             BOS2 EF 8 A_FaceTarget;
             BOS2 G 8 HM_A_BruisAttack();
             Goto See;
+        FastRaise:
+            BOS2 O 4;
+            BOS2 NMLKJI 4;
+            Goto See;
     }
 }

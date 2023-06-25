@@ -33,6 +33,10 @@ class HM_Demon : Demon replaces Demon
             SARG N 5;
             SARG MLKJI 5;
             Goto See;
+        FastRaise:
+            SARG N 3;
+            SARG MLKJI 3;
+            Goto See;
     }
 }
 

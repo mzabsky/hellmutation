@@ -455,6 +455,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "rushedritual",
+            "Rushed Ritual",
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Viles resurrect monsters faster, but with less health."
+        );
+
+        AddMutationDefinition(
             "sacrifice",
             "Sacrifice",
             HM_CAT_IMP | HM_CAT_ARCHVILE,

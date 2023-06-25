@@ -15,6 +15,12 @@ class HM_ArchVile : ArchVile replaces ArchVile
             VILE R 7;
             VILE Q 7;
             Goto See;
+        FastRaise:
+            VILE YXWVUT 4;
+            VILE S 4;
+            VILE R 4;
+            VILE Q 4;
+            Goto See;
         Missile:
             VILE G 0 BRIGHT A_VileStart;
             VILE G 10 BRIGHT A_FaceTarget;
@@ -27,7 +33,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
 
     void DoReachingRitual()
     {
-        if(global.IsMutationActive("reachingritual"))
+        //if(global.IsMutationActive("reachingritual"))
         {
             let range = 386;
             BlockThingsIterator it = BlockThingsIterator.Create(self, range);
@@ -36,8 +42,26 @@ class HM_ArchVile : ArchVile replaces ArchVile
             while (it.Next())
             {
                 mo = it.thing;
-                if (!mo || !mo.bIsMonster || mo.health > 0 || Distance3D(mo) > range || !CheckSight(mo) || !mo.CanRaise())
+                if (!mo || !mo.bIsMonster || mo.health > 0 || !CheckSight(mo) || !mo.CanRaise())
                 {
+                    continue;
+                }
+
+                let actualRange = radius + mo/*.GetDefault()*/.radius + 30; // I'm not sure why the 30 is necessary...
+                if(global.IsMutationActive("reachingritual"))
+                {
+                    actualRange = range;
+                }
+
+                // This is the way P_CheckForResurrection does things
+                let manhattanDist = min(
+                    abs(pos.x - mo.pos.x),
+                    abs(pos.y - mo.pos.y)
+                );
+
+                if(Distance3D(mo) > actualRange)
+                {
+                    console.printf("out of range %d %d (%d/%d vs. %d/%d)", Distance3D(mo), actualRange, pos.x, pos.y, mo.pos.x, mo.pos.y);
                     continue;
                 }
 
@@ -45,11 +69,21 @@ class HM_ArchVile : ArchVile replaces ArchVile
                 {
                     A_Face(mo);
                     SetState(ResolveState("Heal"));
+
+                    if(global.IsMutationActive("rushedritual"))
+                    {
+                        let fastRaiseState = mo.ResolveState("FastRaise");
+                        if(fastRaiseState)
+                        {
+                            mo.SetState(fastRaiseState);
+                        }
+                        mo.health /= 2;
+                    }
                 }
             }
         }
 
-        A_VileChase();
+        A_Chase();
     }
 
     void HM_A_VileAttack(sound snd = "vile/stop", int initialdmg = 20, int blastdmg = 70, int blastradius = 70, double thrust = 1.0, name damagetype = "Fire", int flags = 0)
