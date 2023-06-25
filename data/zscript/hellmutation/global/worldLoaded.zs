@@ -51,6 +51,8 @@ extend class HM_GlobalEventHandler
         SpawnDejaVuTraces();
 
         WorkplaceSafety();
+
+        SpawnDoppelgangersCorpses();
     }
 
     void ReplaceMonsters()
@@ -249,6 +251,124 @@ extend class HM_GlobalEventHandler
                 barrel.SpawnSurprise(true);
                 barrel.Destroy();
             }
+        }
+    }
+
+    void SpawnDoppelgangersCorpses()
+    {
+        if(!IsMutationActive("dopplegangers"))
+        {
+            return;
+        }
+
+        // Corpses will only be spawned in sectors where monsters already exists
+        // (we know it makes sense for monsters to be there, since there are some already)
+        Array<Sector> candidateSectors;
+        for(let i = 0; i < Level.Sectors.Size(); i++)
+        {
+            let sector = Level.Sectors[i];
+
+            let foundMonster = false;
+            let foundPriorityMonster = false; // Give a bit higher weight to monster that can actually take advantage of the corpses
+            let currentThing = sector.thingList;
+            while(currentThing != null)
+            {
+                if(currentThing is 'HM_ArchImp' || currentThing is 'ArchVile')
+                {
+                    foundPriorityMonster = true;
+                }
+                else if(currentThing.bIsMonster)
+                {
+                    foundMonster = true;
+                }
+
+                currentThing = currentThing.snext;
+            }
+
+            if(foundPriorityMonster)
+            {
+                // 4x weight :)
+                candidateSectors.Push(sector);
+                candidateSectors.Push(sector);
+                candidateSectors.Push(sector);
+                candidateSectors.Push(sector);
+            }
+            else if(foundMonster)
+            {
+                candidateSectors.Push(sector);
+            }
+        }
+
+        //console.printf("%d candidate sectors", candidateSectors.Size());
+
+        // Determine which monsters need corpses spawned
+        // Do this before the actual spawning (spawning actors in a finder loop
+        // causes infinite loops...)
+        Array<Actor> monsters;
+        let actorFinder = ThinkerIterator.Create("Actor");
+        Actor actor;
+        while((actor = Actor(actorFinder.next())) != null)
+        {
+            if(!actor.bIsMonster || actor.bCorpse)
+            {
+                continue;
+            }
+
+            // Those leave no corpses
+            if(actor is 'PainElemental' || actor is 'LostSoul')
+            {
+                continue;
+            }
+
+            monsters.Push(actor);
+        }
+
+        for(let i = 0; i < monsters.Size(); i++)
+        {
+            let actor = monsters[i];
+
+            for(let attempt = 0; attempt < 10; i++)
+            {
+                let chosenSector = candidateSectors[random[HM_GlobalEventHandler](0, candidateSectors.Size() - 1)];
+
+                let minX = int.max;
+                let minY = int.max;
+                let maxX = int.min;
+                let maxY = int.min;
+
+                for(let j = 0; j < chosenSector.lines.Size(); j++)
+                {
+                    let line = chosenSector.lines[j];
+
+                    minX = min(minX, line.v1.p.x);
+                    minX = min(minX, line.v2.p.x);
+
+                    maxX = max(maxX, line.v1.p.x);
+                    maxX = max(maxX, line.v2.p.x);
+
+                    minY = min(minY, line.v1.p.y);
+                    minY = min(minY, line.v2.p.y);
+
+                    maxY = max(maxY, line.v1.p.y);
+                    maxY = max(maxY, line.v2.p.y);
+                }
+
+                let chosenX = random[HM_GlobalEventHandler](minX, maxX);
+                let chosenY = random[HM_GlobalEventHandler](minY, maxY);
+
+                if(Level.PointInSector((chosenX, chosenY)) == null)
+                {
+                    console.printf("rejected sector X:%d Y:%d %d", chosenX, chosenY, chosenSector != null);
+                    continue;
+                }
+
+                MonsterCorpseSpawner.SpawnCorpse(actor.GetClass(), (chosenX, chosenY, 0));
+
+                // Atempt was sucessful
+                break;
+            }
+
+            //console.printf("failed index %d", i);
         }
     }
 }

@@ -222,6 +222,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_CYBERDEMON,
             "Cyberdemons can attack while walking."
         );
+        
+        AddMutationDefinition(
+            "dopplegangers",
+            "Dopplegangers",
+            HM_CAT_IMP | HM_CAT_ARCHVILE,
+            "A dead copy of each monster is spawned somewhere in the level."
+        );
 
         AddMutationDefinition(
             "explosivesurprise",

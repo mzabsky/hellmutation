@@ -41,7 +41,6 @@ class HM_PainElemental: PainElemental replaces PainElemental
             PAIN M 8 BRIGHT;
             TNT1 A -1; // Needed to be resurrectable (for Greater Ritual)
             Stop;
-            Stop;
         Raise:
             PAIN M 8 BRIGHT;
             PAIN L 8 BRIGHT;
