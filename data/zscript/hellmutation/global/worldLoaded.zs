@@ -358,7 +358,7 @@ extend class HM_GlobalEventHandler
 
                 if(Level.PointInSector((chosenX, chosenY)) == null)
                 {
-                    console.printf("rejected sector X:%d Y:%d %d", chosenX, chosenY, chosenSector != null);
+                    //console.printf("rejected sector X:%d Y:%d %d", chosenX, chosenY, chosenSector != null);
                     continue;
                 }
 
