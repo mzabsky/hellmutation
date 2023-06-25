@@ -7,7 +7,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
     States
     {
         See:
-		    VILE AABBCCDDEEFF 2 DoReachingRitual;
+		    VILE AABBCCDDEEFF 2 DoReachingRitual(false);
 		    Loop;
         Raise:
             VILE YXWVUT 7;
@@ -40,14 +40,30 @@ class HM_ArchVile : ArchVile replaces ArchVile
                     return ResolveState(null);
                 }
             }
-            VILE [\] 10 BRIGHT;
+            VILE [\ 10 BRIGHT;
+            VILE ] 0 {
+                if(global.IsMutationActive("odiousritual"))
+                {
+                    return ResolveState("ReHeal");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
+            VILE ] 10 BRIGHT;
+            Goto See;
+        ReHeal:
+            VILE \ 30 BRIGHT;
+            VILE \ 10 BRIGHT DoReachingRitual(true);
+            VILE ] 10 BRIGHT;
             Goto See;
         FastHeal:
             VILE [\] 5 BRIGHT;
             Goto See;
     }
 
-    void DoReachingRitual()
+    void DoReachingRitual(bool isReHeal)
     {
         //if(global.IsMutationActive("reachingritual"))
         {
@@ -67,6 +83,10 @@ class HM_ArchVile : ArchVile replaces ArchVile
                 if(global.IsMutationActive("reachingritual"))
                 {
                     actualRange = range;
+                }
+                else if(isReHeal)
+                {
+                    actualRange += 50; // Give Odious Ritual some more space to work with on reheals, so that the raising can continue
                 }
 
                 // This is the way P_CheckForResurrection does things
@@ -95,6 +115,13 @@ class HM_ArchVile : ArchVile replaces ArchVile
                         }
                         mo.health /= 2;
                     }
+
+                    if(isReHeal)
+                    {
+                        SetState(ResolveState("ReHeal"));
+                    }
+                    
+                    return;
                 }
             }
         }

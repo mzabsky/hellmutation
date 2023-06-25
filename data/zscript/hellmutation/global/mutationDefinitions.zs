@@ -383,6 +383,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
             "Mancubuses and their variants have more health."
         );
+
+        AddMutationDefinition(
+            "odiousritual",
+            "Odious Ritual",
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Viles resurrect monsters continuously, without\ninterruption."
+        );
         
         AddMutationDefinition(
             "overwhelmingfire",
