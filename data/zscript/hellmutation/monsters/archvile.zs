@@ -53,13 +53,39 @@ class HM_ArchVile : ArchVile replaces ArchVile
             }
             VILE ] 10 BRIGHT;
             Goto See;
+        FastHeal:
+            VILE [ 0 {
+                if(global.IsMutationActive("rushedritual"))
+                {
+                    return ResolveState("FastHeal");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
+            VILE [\ 5 BRIGHT;
+            VILE ] 0 {
+                if(global.IsMutationActive("odiousritual"))
+                {
+                    return ResolveState("ReHeal");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
+            VILE ] 5 BRIGHT;
+            Goto See;
         ReHeal:
             VILE \ 30 BRIGHT;
             VILE \ 10 BRIGHT DoReachingRitual(true);
             VILE ] 10 BRIGHT;
             Goto See;
-        FastHeal:
-            VILE [\] 5 BRIGHT;
+        FastReHeal:
+            VILE \ 15 BRIGHT;
+            VILE \ 5 BRIGHT DoReachingRitual(true);
+            VILE ] 10 BRIGHT;
             Goto See;
     }
 
@@ -118,7 +144,14 @@ class HM_ArchVile : ArchVile replaces ArchVile
 
                     if(isReHeal)
                     {
-                        SetState(ResolveState("ReHeal"));
+                        if(global.IsMutationActive("rushedritual"))
+                        {
+                            SetState(ResolveState("FastReHeal"));
+                        }
+                        else
+                        {
+                            SetState(ResolveState("ReHeal"));
+                        }
                     }
                     
                     return;
