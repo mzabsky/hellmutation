@@ -60,8 +60,8 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
 
                 nextEggTime = Level.time + 35 * 10;
             }
-            SPID G 4 BRIGHT A_SPosAttackUseAtkSound();
-            SPID H 4 BRIGHT A_SPosAttackUseAtkSound();
+            SPID G 4 BRIGHT HM_A_SPosAttackUseAtkSound();
+            SPID H 4 BRIGHT HM_A_SPosAttackUseAtkSound();
             SPID H 1 BRIGHT A_SpidRefire;
             Goto Missile+1;
         Raise:
@@ -75,7 +75,7 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
             SPID J 10;
             Goto See;
     }
-/*
+
     private void HM_A_SPosAttackInternal()
     {
         if (target)
@@ -88,7 +88,15 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
             {
                 double ang = bangle + Random2[SPosAttack]() * (22.5/256);
                 int damage = Random[SPosAttack](1, 5) * 3;
-                LineAttack(ang, MISSILERANGE, slope, damage, "Hitscan", "BulletPuff");
+
+                if(global.IsMutationActive("torrentcannons"))
+                {
+                    LineAttack(ang, MISSILERANGE, slope, 0, "Hitscan", "HM_TorrentExplosion");
+                }
+                else
+                {
+                    LineAttack(ang, MISSILERANGE, slope, DAMAGE, "Hitscan", "BulletPuff");
+                }
             }
         }
     }
@@ -100,7 +108,7 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
 			A_StartSound(AttackSound, CHAN_WEAPON);
 			HM_A_SPosAttackInternal();
 		}
-	}*/
+	}
 
     override bool OkayToSwitchTarget(Actor other)
     {

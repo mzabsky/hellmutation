@@ -504,6 +504,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "torrentcannons",
+            "Torrent Cannons",
+            HM_CAT_CHAINGUNNER | HM_CAT_SPIDERMASTERMIND,
+            "Chaingunners and Spider Masterminds fire explosive rounds."
+        );
+
+        AddMutationDefinition(
             "tractorspell",
             "Tractor Spell",
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,

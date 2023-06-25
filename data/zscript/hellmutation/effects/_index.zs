@@ -2,4 +2,5 @@
 #include "./fire.zs"
 #include "./healglitter.zs"
 #include "./painseed.zs"
+#include "./torrentexplosion.zs"
 #include "./upgradeglitter.zs"

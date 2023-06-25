@@ -88,7 +88,22 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
                 damage += 1;
             }
 
-            LineAttack(ang, MISSILERANGE, slope, damage, "Hitscan", "Bulletpuff");
+
+            if(global.IsMutationActive("torrentcannons"))
+            {
+                if(hasHighGround)
+                {
+                    LineAttack(ang, MISSILERANGE, slope, 0, "Hitscan", "HM_HighGroundTorrentExplosion");
+                }
+                else
+                {
+                    LineAttack(ang, MISSILERANGE, slope, 0, "Hitscan", "HM_TorrentExplosion");
+                }
+            }
+            else
+            {
+                LineAttack(ang, MISSILERANGE, slope, DAMAGE, "Hitscan", "BulletPuff");
+            }
         }
     }
 }
