@@ -29,6 +29,22 @@ class HM_ArchVile : ArchVile replaces ArchVile
             VILE O 8 BRIGHT HM_A_VileAttack;
             VILE P 20 BRIGHT;
             Goto See;
+        Heal:
+            VILE [ 0 {
+                if(global.IsMutationActive("rushedritual"))
+                {
+                    return ResolveState("FastHeal");
+                }
+                else
+                {
+                    return ResolveState(null);
+                }
+            }
+            VILE [\] 10 BRIGHT;
+            Goto See;
+        FastHeal:
+            VILE [\] 5 BRIGHT;
+            Goto See;
     }
 
     void DoReachingRitual()
