@@ -462,6 +462,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "searinggaze",
+            "Searing Gaze",
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Vile flames deal moderate damage."
+        );
+
+        AddMutationDefinition(
             "slimeborne",
             "Slimeborne",
             HM_CAT_DMGFLOOR,

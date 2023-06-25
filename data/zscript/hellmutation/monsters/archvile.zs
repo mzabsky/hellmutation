@@ -88,3 +88,36 @@ class HM_ArchVile : ArchVile replaces ArchVile
         }
     }
 }
+
+class HM_ArchvileFire : ArchvileFire replaces ArchvileFire
+{
+    mixin HM_GlobalRef;
+
+    States
+    {
+        Spawn:
+            FIRE A 2 BRIGHT  A_StartFire;
+            FIRE BAB 2 BRIGHT  HM_A_Fire;
+            FIRE C 2 BRIGHT  A_FireCrackle;
+            FIRE BCBCDCDCDEDED 2 BRIGHT  HM_A_Fire;
+            FIRE E 2 BRIGHT  A_FireCrackle;
+            FIRE FEFEFGHGHGH 2 BRIGHT  HM_A_Fire;
+            Stop;
+    }
+
+    void HM_A_Fire(double spawnheight = 0)
+    {
+        Actor dest = tracer;
+        if (!dest || !target) return;
+                
+        // don't move it if the vile lost sight
+        if (!target.CheckSight (dest, 0) ) return;
+
+        SetOrigin(dest.Vec3Angle(24, dest.angle, spawnheight), true);
+
+        if(global.IsMutationActive('searinggaze'))
+        {
+            dest.DamageMobj(self, target, 1, 'fire', DMG_THRUSTLESS);
+        }
+    }
+}
