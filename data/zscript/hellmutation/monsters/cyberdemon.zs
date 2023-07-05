@@ -209,6 +209,8 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
 
     void HM_A_CyberAttack()
     {
+        RhythmOfWar();
+
         if(global.IsMutationActive("sovereignty"))
         {
             let r = random[pr_spawnfly](0, 255);
@@ -220,6 +222,120 @@ class HM_Cyberdemon : Cyberdemon replaces Cyberdemon
         }
         
         A_CyberAttack();
+    }
+
+    void RhythmOfWar()
+    {
+        let finder = ThinkerIterator.Create("Actor");
+        Actor actor;
+        
+        while((actor = Actor(finder.next())) != null)
+        {
+            if(
+                !actor
+                || !actor.bIsMonster
+                || actor.bCorpse 
+                || actor.health <= 0
+                || (actor.target == null && actor.lastheard == null)
+                || !CheckSight(target))
+            {
+                continue;
+            }
+
+            /*let freeAttackState = actor.ResolveState("FreeAttack");
+            if(freeAttackState == null)
+            {
+                continue;
+            }*/
+
+            actor.target = target;
+            actor.A_FaceTarget();
+
+            if(actor is 'HM_Arachnotron')
+            {
+                HM_Arachnotron(actor).HM_A_BspiAttack();
+            }
+            else if(actor is 'HM_Archimp')
+            {
+                HM_Archimp(actor).ArchImpAttack();
+            }
+            else if(actor is 'HM_Archvile')
+            {
+                // Do nothing.
+            }
+            else if(actor is 'HM_BaronOfHell')
+            {
+                HM_BaronOfHell(actor).HM_A_BruisAttack();
+            }
+            else if(actor is 'HM_Cacodemon')
+            {
+                HM_Cacodemon(actor).HM_A_HeadAttack();
+            }
+            else if(actor is 'HM_ChaingunGuy')
+            {
+                let chaingunGuy = HM_ChaingunGuy(actor);
+                chaingunGuy.SetState(chaingunGuy.ResolveState('ReMissile'));
+            }
+            else if(actor is 'HM_Cyberdemon')
+            {
+                // Do nothing
+            }
+            else if(actor is 'HM_Demon' || actor is 'HM_Spectre')
+            {
+                if(global.IsMutationActive('macropods'))
+                {
+                    actor.A_SkullAttack();
+                }
+                else
+                {
+                    // Do nothing
+                }
+            }
+            else if(actor is 'HM_DoomImp')
+            {
+                HM_DoomImp(actor).HM_A_TroopAttack();
+            }
+            else if(actor is 'HM_HellKnight')
+            {
+                HM_HellKnight(actor).HM_A_BruisAttack();
+            }
+            else if(actor is 'HM_LostSoul')
+            {
+                actor.A_SkullAttack();
+            }
+            else if(actor is 'HM_Mancubus')
+            {
+                HM_Mancubus(actor).HM_A_FatAttack(HM_FATSHOT_RIGHT | HM_FATSHOT_LEFT);
+            }
+            else if(actor is 'HM_PainElemental')
+            {
+                HM_PainElemental(actor).HM_A_PainAttack();
+            }
+            else if(actor is 'HM_PainElemental')
+            {
+                HM_PainElemental(actor).HM_A_PainAttack();
+            }
+            else if(actor is 'HM_Revenant')
+            {
+                HM_Revenant(actor).A_SkelMissile();
+            }
+            else if(actor is 'HM_ShotgunGuy')
+            {
+                HM_ShotgunGuy(actor).HM_A_SposAttackUseAtkSound();
+            }
+            else if(actor is 'HM_SpiderMastermind')
+            {
+                HM_SpiderMastermind(actor).HM_A_SPosAttackUseAtkSound();
+            }
+            else if(actor is 'HM_ZombieMan')
+            {
+                HM_ZombieMan(actor).HM_A_PosAttack();
+            }
+
+
+            /*;
+            actor.SetState(freeAttackState);*/
+        }
     }
 
     void HoofStomp()

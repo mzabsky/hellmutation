@@ -39,11 +39,7 @@ class HM_ArchImp : DoomImp
             HELN G 0 FAST A_VileStart;
             HELN GHIJK 6 Bright FAST A_FaceTarget;
             HELN L 6 Bright FAST;
-            HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,-4);
-            HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,-2);
-            HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,0);
-            HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,2);
-            HELN L 0 Bright A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,4);
+            HELN L 0 Bright ArchImpAttack();
             HELN L 2 FAST;
             goto See;
         Pain:
@@ -74,7 +70,14 @@ class HM_ArchImp : DoomImp
             goto See;
     }
 
-
+    void ArchImpAttack()
+    {
+        A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,-4);
+        A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,-2);
+        A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,0);
+        A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,2);
+        A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,4);
+    }
 }
 
 class HellionBall : CacodemonBall

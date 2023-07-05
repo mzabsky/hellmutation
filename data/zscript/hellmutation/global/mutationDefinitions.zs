@@ -462,6 +462,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "rhythmofwar",
+            "Rhythm of War",
+            HM_CAT_CYBERDEMON,
+            "Whenever a Cyberdemon attacks, all other monsters fire as well."
+        );
+
+        AddMutationDefinition(
             "rushedritual",
             "Rushed Ritual",
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
