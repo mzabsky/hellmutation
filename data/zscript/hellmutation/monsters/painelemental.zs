@@ -28,6 +28,17 @@ class HM_PainElemental: PainElemental replaces PainElemental
             PAIN F 5 FAST BRIGHT A_FaceTarget;
             PAIN F 0 FAST BRIGHT HM_A_PainAttack();
             Goto See;
+        Pain:
+            PAIN G 6;
+            PAIN G 0 {
+                if(global.IsMutationActive('obsession'))
+                {
+                    A_FaceTarget();
+                    HM_A_PainAttack();
+                }
+            }
+            PAIN G 6 A_Pain;
+		Goto See;
         Death:
             PAIN H 8 BRIGHT;
             PAIN I 8 BRIGHT A_Scream;

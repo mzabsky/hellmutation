@@ -392,6 +392,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "obsession",
+            "Obsession",
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
+            "Pain Elementals spawn a Lost Soul whenever they flinch with pain."
+        );
+
+        AddMutationDefinition(
             "odiousritual",
             "Odious Ritual",
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
