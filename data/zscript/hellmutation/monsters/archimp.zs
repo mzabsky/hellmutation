@@ -3,7 +3,7 @@ class HM_ArchImp : DoomImp
     // The replacement of Imp is done by the global event handler -> WorldThingDamaged.
 
     mixin HM_GlobalRef;
-    mixin HM_Sacrifice;
+    mixin HM_SacrificeAndPhylactery;
     mixin HM_GreaterRitual;
 
     Default
@@ -29,7 +29,7 @@ class HM_ArchImp : DoomImp
             HELN A 0 {
                 bAlwaysFast = global.IsMutationActive("Brightfire");
             }
-            HELN AABBCCDDEEFF 2 FAST A_Chase("Melee", "Missile", CHF_RESURRECT);
+            HELN AABBCCDDEEFF 2 FAST ResurrectChase();
             loop;
         Heal:
             HELN G 30 BRIGHT;
@@ -77,6 +77,51 @@ class HM_ArchImp : DoomImp
         A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,0);
         A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,2);
         A_SpawnProjectile ("HellionBall",32,0,0,CMF_OFFSETPITCH ,4);
+    }
+
+    void ResurrectChase()
+    {
+        //if(global.IsMutationActive("reachingritual"))
+        {
+            let range = 386;
+            BlockThingsIterator it = BlockThingsIterator.Create(self, range);
+            Actor mo;
+
+            while (it.Next())
+            {
+                mo = it.thing;
+                if (!mo || !mo.bIsMonster || mo.health > 0 || !CheckSight(mo) || !mo.CanRaise())
+                {
+                    continue;
+                }
+
+                let actualRange = radius + mo/*.GetDefault()*/.radius + 30; // I'm not sure why the 30 is necessary...
+                        
+                // This is the way P_CheckForResurrection does things
+                let manhattanDist = min(
+                    abs(pos.x - mo.pos.x),
+                    abs(pos.y - mo.pos.y)
+                );
+
+                if(Distance3D(mo) > actualRange)
+                {
+                    //console.printf("out of range %d %d (%d/%d vs. %d/%d)", Distance3D(mo), actualRange, pos.x, pos.y, mo.pos.x, mo.pos.y);
+                    continue;
+                }
+
+                if(RaiseActor(mo))
+                {
+                    A_Face(mo);
+                    SetState(ResolveState("Heal"));
+
+                    phylacteryTarget = mo;
+
+                    return;
+                }
+            }
+        }
+
+        A_Chase("Melee", "Missile");
     }
 }
 

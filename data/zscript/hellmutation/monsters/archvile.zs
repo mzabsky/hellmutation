@@ -1,13 +1,13 @@
 class HM_ArchVile : ArchVile replaces ArchVile
 {
     mixin HM_GlobalRef;
-    mixin HM_Sacrifice;
+    mixin HM_SacrificeAndPhylactery;
     mixin HM_GreaterRitual;
-    
+
     States
     {
         See:
-		    VILE AABBCCDDEEFF 2 DoReachingRitual(false);
+		    VILE AABBCCDDEEFF 2 ResurrectChase(false);
 		    Loop;
         Raise:
             VILE YXWVUT 7;
@@ -79,17 +79,17 @@ class HM_ArchVile : ArchVile replaces ArchVile
             Goto See;
         ReHeal:
             VILE \ 30 BRIGHT;
-            VILE \ 10 BRIGHT DoReachingRitual(true);
+            VILE \ 10 BRIGHT ResurrectChase(true);
             VILE ] 10 BRIGHT;
             Goto See;
         FastReHeal:
             VILE \ 15 BRIGHT;
-            VILE \ 5 BRIGHT DoReachingRitual(true);
+            VILE \ 5 BRIGHT ResurrectChase(true);
             VILE ] 10 BRIGHT;
             Goto See;
     }
 
-    void DoReachingRitual(bool isReHeal)
+    void ResurrectChase(bool isReHeal)
     {
         //if(global.IsMutationActive("reachingritual"))
         {
@@ -123,7 +123,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
 
                 if(Distance3D(mo) > actualRange)
                 {
-                    console.printf("out of range %d %d (%d/%d vs. %d/%d)", Distance3D(mo), actualRange, pos.x, pos.y, mo.pos.x, mo.pos.y);
+                    //console.printf("out of range %d %d (%d/%d vs. %d/%d)", Distance3D(mo), actualRange, pos.x, pos.y, mo.pos.x, mo.pos.y);
                     continue;
                 }
 
@@ -141,6 +141,8 @@ class HM_ArchVile : ArchVile replaces ArchVile
                         }
                         mo.health /= 2;
                     }
+
+                    phylacteryTarget = mo;
 
                     if(isReHeal)
                     {

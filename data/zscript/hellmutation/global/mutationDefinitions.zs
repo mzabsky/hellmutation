@@ -411,6 +411,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
             "Arachnotron fire rate continuously ramps up as they fire."
         );
+
+        AddMutationDefinition(
+            "phylactery",
+            "Phylactery",
+            HM_CAT_IMP | HM_CAT_ARCHVILE,
+            "Arch-Imps and Arch-Viles cannot die as long as the last\nmonster they resurrected is alive."
+        );
         
         AddMutationDefinition(
             "pomodorosustenance",

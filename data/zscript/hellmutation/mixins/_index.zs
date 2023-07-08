@@ -9,6 +9,6 @@
 #include "./lordsofdarkness.zs"
 #include "./lordsofvengeance.zs"
 #include "./macropods.zs"
-#include "./sacrifice.zs"
+#include "./sacrificePhylactery.zs"
 #include "./setmaxhealth.zs"
 #include "./unstoppable.zs"
