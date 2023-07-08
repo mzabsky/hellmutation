@@ -74,7 +74,7 @@ foreach (Match match in matches)
                 case "HM_CAT_BOSSBRAIN":
                     return "Boss Brain (Icon of Sin)";
                 default:
-                    throw new NotImplementedException();
+                    throw new Exception("Unknown category " + categoryIdentifier.Trim() + " in mutation " + match.Groups["name"]);
             }
         });
     

@@ -79,7 +79,7 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "argenthydraulics",
             "Argent Hydraulics",
-            HM_CAT_ARACHNOTRON || HM_CAT_SPIDERMASTERMIND,
+            HM_CAT_ARACHNOTRON | HM_CAT_SPIDERMASTERMIND,
             "Arachnotrons and Spider Masterminds walk much faster."
         );
         
