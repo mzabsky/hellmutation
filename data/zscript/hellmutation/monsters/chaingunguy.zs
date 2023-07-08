@@ -15,7 +15,6 @@ class HM_ChaingunGuy: ChaingunGuy replaces ChaingunGuy
             CPOS A 0 {
                 let hasRapidSpin = global.IsMutationActive("rapidspin");
                 bAlwaysFast = hasRapidSpin;
-                A_SetSpeed(hasRapidSpin ? 10 : 8);
             }
             CPOS AABBCCDD 3 FAST A_Chase;
             Loop;

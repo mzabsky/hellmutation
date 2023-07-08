@@ -444,7 +444,7 @@ extend class HM_GlobalEventHandler
             "rapidspin",
             "Rapid Spin",
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
-            "Chaingunners and their variants are faster."
+            "Chaingunners react faster."
         );
 
         AddMutationDefinition(
