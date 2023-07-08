@@ -4,8 +4,12 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
     mixin HM_GreaterRitual;
     mixin HM_BigFuckingWomp;
 
+    // Next time when Brood Fabrication eggs get fired
     int nextEggTime;
 
+    // Last time when a dummy has spotted a player.
+    int lastDummySightTime;
+    
     States
     {
         See:
@@ -76,6 +80,34 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
             Goto See;
     }
 
+    override void PostBeginPlay()
+    {
+        let dummyPlacementRadius = Radius * 0.8;
+        let dummyPlacementLayerHeight = Height / 2;
+        for(int i = 0; i < 8; i++)
+        {
+            let dummyAngle = i * (360 / 8);
+            for(int layer = 0; layer < 3; layer++)
+            {
+
+            let dummyXOffset = dummyPlacementRadius * (1 - layer * 0.25) * cos(dummyAngle);
+            let dummyYOffset = dummyPlacementRadius * (1 - layer * 0.2) * sin(dummyAngle);
+
+                let dummyOffset = (dummyXOffset, dummyYOffset, layer * dummyPlacementLayerHeight);
+                //console.printf("dummy offset %f    %d, %d, %d", dummyAngle, dummyOffset.x, dummyOffset.y, dummyOffset.z);
+
+                let dummy = HM_GorgonProtocolDummy(Spawn("HM_GorgonProtocolDummy", Vec3Offset(dummyOffset.x, dummyOffset.y, dummyOffset.z)));
+                dummy.master = self;
+                if(dummy)
+                {
+                    dummy.offsetToParent = dummyOffset;
+                }
+            }
+        }
+
+        super.PostBeginPlay();
+    }
+
     private void HM_A_SPosAttackInternal()
     {
         if (target)
@@ -121,6 +153,7 @@ class HM_SpiderMastermind: SpiderMastermind replaces SpiderMastermind
         return super.OkayToSwitchTarget(other);
     }
 }
+
 
 /*class HM_SM_BulletPuff : Actor
 {
@@ -270,5 +303,64 @@ class HM_ChildArachnotron: HM_Arachnotron
 
         // ... but still take the damage, otherwise it would be annoying
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+    }
+}
+
+class HM_GorgonProtocolDummy: Actor
+{
+    mixin HM_GlobalRef;
+
+    Vector3 offsetToParent;
+
+    States
+    {
+        Spawn:
+            TNT A 2 Bright;
+            Loop;
+    }
+
+    override void Tick()
+    {
+        if(master)
+        {
+            if(master.bCorpse)
+            {
+                // Don't destroy (in case of resurrection)
+                return;
+            }
+
+            SetOrigin(master.Vec3Offset(offsetToParent.x, offsetToParent.y, offsetToParent.z), false);
+
+            if(global.IsMutationActive("gorgonprotocol"))
+            {
+                for(let i = 0; i < Players.Size(); i++)
+                {
+                    if(Players[i].mo)
+                    {
+                        //console.printf("check %d %d", global.lastGorgonProtocolSpotted[i], Level.time);
+
+                        // No not spot if another dummy has spotted this player in this tick
+                        if(global.lastGorgonProtocolSpotted[i] >= Level.time)
+                        {
+                            continue;
+                        }
+
+                        if(Actor(Players[i].mo).CheckFOV(self, 100) && CheckSight(Players[i].mo))
+                        {
+                            //console.printf("spotted");
+                            // Spotted!
+                            global.lastGorgonProtocolSpotted[i] = Level.Time;
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            //console.printf("end");
+            Destroy();
+        }
+
+        //super.Tick();
     }
 }

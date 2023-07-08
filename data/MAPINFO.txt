@@ -1,4 +1,5 @@
 GameInfo
 {
     AddEventHandlers = "HM_GlobalEventHandler"
+    PlayerClasses = "HM_Player"
 }

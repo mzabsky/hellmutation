@@ -20,11 +20,15 @@ class HM_GlobalEventHandler: EventHandler
     //=================================
     bool hasDoom2;
     Array<Sector> ambushSectors; // For Deja Vu
+    Array<int> lastGorgonProtocolSpotted; // For Gorgon Protocol - time when each player has spotted a mastermind with GP, indexed by player index
 
     override void NewGame()
     {
         MapNumber = 0;
         MutationStates = Dictionary.Create();
+
+        //CVar attacksetting = CVar.FindCVar('m_yaw');
+        //attackSetting.SetFloat(0.1);
         //MutationRemovalsOnOffer = new Array<string>();
     }
 
@@ -35,6 +39,8 @@ class HM_GlobalEventHandler: EventHandler
 			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
         players[e.playerNumber].mo.ACS_NamedExecute("hm_hud", 0);
+        
+        lastGorgonProtocolSpotted.Resize(Players.Size());
     }
 
     override void WorldUnloaded(WorldEvent e) 

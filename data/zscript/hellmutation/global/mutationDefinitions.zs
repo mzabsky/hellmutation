@@ -259,6 +259,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "gorgonprotocol",
+            "Gorgon Protocol",
+            HM_CAT_SPIDERMASTERMIND,
+            "Laying gaze on a Spider Mastermind rapidly immobilizes the player.\n Their speed and especially strafing become greatly reduced."
+        );
+
+        AddMutationDefinition(
             "greaterritual",
             "Greater Ritual",
             HM_CAT_IMP | HM_CAT_ARCHVILE,
