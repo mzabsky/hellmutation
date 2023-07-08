@@ -53,6 +53,12 @@ class HM_LostSoul: LostSoul replaces LostSoul
 
     override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
     {
+        // Take no damage from Regret explosions
+        if(mod == 'Regret')
+        {
+            return 0;
+        }
+
         if(global.IsMutationActive("ego"))
         {
             return super.DamageMobj(inflictor, source, damage * 2, mod, flags, angle);

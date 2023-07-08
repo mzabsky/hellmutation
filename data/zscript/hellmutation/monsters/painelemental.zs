@@ -57,6 +57,17 @@ class HM_PainElemental: PainElemental replaces PainElemental
             Goto See;
     }
 
+    override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+    {
+        // Take no damage from Regret explosions
+        if(mod == 'Regret')
+        {
+            return 0;
+        }
+
+        return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+    }
+
     // Called from global handler on death of this
     // Kills all dependent lost souls
     void DependenceDeath(Actor source)
@@ -155,6 +166,13 @@ class HM_PainElemental: PainElemental replaces PainElemental
                     other.DamageMobj(self, self, TELEFRAG_DAMAGE, 'None');
                     bSolid = savedsolid;
                     other.bNoTeleport = savednoteleport;
+
+                    if(global.IsMutationActive('regret'))
+                    {                     
+                        other.Spawn('HM_RefluxExplosionGenerator', other.pos);
+                        other.A_Explode(40, 164, damageType: 'Regret');   
+                    }
+
                     return;
                 }
 

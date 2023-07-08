@@ -66,7 +66,7 @@ extend class HM_GlobalEventHandler
             "ambushshield",
             "Ambush Shield",
             HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
-            "Chaingunners and their variants get a brief invulnerability\nshield when they first open fire."
+            "Chaingunners get a brief invulnerability\nshield when they first open fire."
         );
 
         AddMutationDefinition(
@@ -164,7 +164,7 @@ extend class HM_GlobalEventHandler
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
-            "Arachnotrons and their variants immediately return fire when attacked."
+            "Arachnotrons immediately return fire when attacked."
         );
 
         AddMutationDefinition(
@@ -276,7 +276,7 @@ extend class HM_GlobalEventHandler
             "hellscaress",
             "Hell's Caress",
             HM_CAT_IMP | HM_CAT_REVENANT | HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nand their  variants are much more powerful."
+            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nare much more powerful."
         );
 
         AddMutationDefinition(
@@ -297,7 +297,7 @@ extend class HM_GlobalEventHandler
             "hypercognition",
             "Hypercognition",
             HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
-            "Arachnotrons can lead their target when aiming."
+            "Arachnotrons lead their target when aiming."
         );
 
         AddMutationDefinition(
@@ -388,7 +388,7 @@ extend class HM_GlobalEventHandler
             "obesity",
             "Obesity",
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubuses and their variants have more health."
+            "Mancubuses have more health."
         );
 
         AddMutationDefinition(
@@ -466,6 +466,13 @@ extend class HM_GlobalEventHandler
             "Regality",
             HM_CAT_CYBERDEMON,
             "Cyberdemons deal devastating damage to other monster\nand take very little damage from other monsters."
+        );
+
+        AddMutationDefinition(
+            "regret",
+            "Regret",
+            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
+            "Pain Elementals failing to spawn a Lost Soul cause an explosion."
         );
 
         AddMutationDefinition(
