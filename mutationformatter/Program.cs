@@ -85,4 +85,4 @@ foreach (Match match in matches)
     streamWriter.WriteLine();
 }
 
-Console.WriteLine("Done");
+Console.WriteLine($"Done ({matches.Count} mutations found)");
