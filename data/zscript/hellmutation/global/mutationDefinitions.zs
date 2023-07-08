@@ -413,8 +413,8 @@ extend class HM_GlobalEventHandler
         );
         
         AddMutationDefinition(
-            "prepained",
-            "Pre-Pained",
+            "trauma",
+            "Trauma",
             HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
             "Pain Elementals spawn with several Lost Souls."
         );

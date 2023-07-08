@@ -77,7 +77,7 @@ extend class HM_GlobalEventHandler
     // Spawn Pre-pained lost souls
     void SpawnPrepainedLostSouls()
     {
-        if(!IsMutationActive("prepained"))
+        if(!IsMutationActive("trauma"))
         {
             return;
         }
