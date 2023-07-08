@@ -315,7 +315,7 @@ class HM_GorgonProtocolDummy: Actor
     States
     {
         Spawn:
-            TNT A 2 Bright;
+            TNT1 A 2 Bright;
             Loop;
     }
 
@@ -335,12 +335,14 @@ class HM_GorgonProtocolDummy: Actor
             {
                 for(let i = 0; i < Players.Size(); i++)
                 {
-                    if(Players[i].mo)
+                    if(Players[i].mo is 'HM_Player')
                     {
+                        let hmPlayer = HM_Player(Players[i].mo);
+
                         //console.printf("check %d %d", global.lastGorgonProtocolSpotted[i], Level.time);
 
                         // No not spot if another dummy has spotted this player in this tick
-                        if(global.lastGorgonProtocolSpotted[i] >= Level.time)
+                        if(hmPlayer.lastGorgonProtocolSpotted >= Level.time)
                         {
                             continue;
                         }
@@ -349,7 +351,7 @@ class HM_GorgonProtocolDummy: Actor
                         {
                             //console.printf("spotted");
                             // Spotted!
-                            global.lastGorgonProtocolSpotted[i] = Level.Time;
+                            hmPlayer.lastGorgonProtocolSpotted = Level.Time;
                         }
                     }
                 }

@@ -1,12 +1,29 @@
 class HM_Player: DoomPlayer
 {
+    // When the player has last spotted a gorgon protocol dummy
+    int lastGorgonProtocolSpotted;
+
     // Number of ticks the player has looked at a Mastermind with Gorgon Protocol enabled
     int gorgonProtocolTicks;
 
+    override void Tick()
+    {
+        // Gorgon Protocol - check if each player was spotted by a dummy in this tick
+        if(lastGorgonProtocolSpotted >= Level.Time - 1)
+        {
+            gorgonProtocolTicks++;
+        }
+        else
+        {
+            gorgonProtocolTicks /= 2;
+        }
+
+        super.Tick();
+    }
+
     override void PlayerThink()
     {
-
-
+        // Apply Gorgon Protocol immobilizations
         if(gorgonProtocolTicks > 0)
         {
             let maxoutTime = 10 * 35; // How many ticks it takes for the effect to max out
@@ -41,7 +58,6 @@ class HM_Player: DoomPlayer
         {
             //console.printf("gorgon protocol %d", gorgonProtocolTicks);
         }
-
         
         // Run all the stuff from the original function
         super.PlayerThink();

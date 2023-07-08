@@ -20,7 +20,7 @@ class HM_GlobalEventHandler: EventHandler
     //=================================
     bool hasDoom2;
     Array<Sector> ambushSectors; // For Deja Vu
-    Array<int> lastGorgonProtocolSpotted; // For Gorgon Protocol - time when each player has spotted a mastermind with GP, indexed by player index
+    //Array<int> lastGorgonProtocolSpotted; // For Gorgon Protocol - time when each player has spotted a mastermind with GP, indexed by player index
 
     override void NewGame()
     {
@@ -39,8 +39,6 @@ class HM_GlobalEventHandler: EventHandler
 			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
 
         players[e.playerNumber].mo.ACS_NamedExecute("hm_hud", 0);
-        
-        lastGorgonProtocolSpotted.Resize(Players.Size());
     }
 
     override void WorldUnloaded(WorldEvent e) 

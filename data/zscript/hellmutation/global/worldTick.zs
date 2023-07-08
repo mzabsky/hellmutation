@@ -59,12 +59,6 @@ extend class HM_GlobalEventHandler
         {
             PerformDejaVuAmbushRespawns();
         }
-
-        // Gorgon Protocol - check if each player was spotted by a dummy in this tick
-        if(IsMutationActive("gorgonprotocol"))
-        {
-            PerforormGorgonProtocolChecks();
-        }
     }
 
     // For each sector that had any ambush enemies, this checks that they are already dead and out of sight.
@@ -146,26 +140,6 @@ extend class HM_GlobalEventHandler
                         // The trace now cares about trakcing this new monster
                         looker.target = spawnee;
                     }
-                }
-            }
-        }
-    }
-
-    void PerforormGorgonProtocolChecks()
-    {
-        
-        for(let i = 0; i < Players.Size(); i++)
-        {
-            //console.printf("player %d last spotted at %d %d", i, lastGorgonProtocolSpotted[i], Level.Time);
-            if(Players[i].mo is 'HM_Player')
-            {
-                if(lastGorgonProtocolSpotted[i] >= Level.Time - 1)
-                {
-                    HM_Player(Players[i].mo).gorgonProtocolTicks++;
-                }
-                else
-                {
-                    HM_Player(Players[i].mo).gorgonProtocolTicks /= 2;
                 }
             }
         }
