@@ -129,7 +129,7 @@ extend class HM_GlobalEventHandler
             "cacoblasters",
             "Cacoblasters",
             HM_CAT_CACODEMON,
-            "Cacodemons always fire two additional projectiles."
+            "Cacodemons fire two additional projectiles."
         );
 
         AddMutationDefinition(
@@ -178,7 +178,7 @@ extend class HM_GlobalEventHandler
             "decapitation",
             "Decapitation",
             HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
-            "Zombiement, Shotgunners, Chaingunners may spawna lost soul\nafter dying, unless gibbed."
+            "Zombiemen, Shotgunners, Chaingunners may spawn a lost soul\nafter dying, unless gibbed."
         );
 
         AddMutationDefinition(
@@ -402,7 +402,7 @@ extend class HM_GlobalEventHandler
             "odiousritual",
             "Odious Ritual",
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles resurrect monsters continuously, without\ninterruption."
+            "Arch-Viles resurrect monsters continuously, without interruption."
         );
         
         AddMutationDefinition(
@@ -415,8 +415,8 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "phylactery",
             "Phylactery",
-            HM_CAT_IMP | HM_CAT_ARCHVILE,
-            "Arch-Imps and Arch-Viles cannot die as long as the last\nmonster they resurrected is alive."
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Viles cannot die as long as the last monster they\nresurrected is alive."
         );
         
         AddMutationDefinition(
@@ -430,7 +430,7 @@ extend class HM_GlobalEventHandler
             "trauma",
             "Trauma",
             HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals spawn with several Lost Souls."
+            "Pain Elementals spawn along with several Lost Souls."
         );
 
         AddMutationDefinition(
@@ -479,7 +479,7 @@ extend class HM_GlobalEventHandler
             "regality",
             "Regality",
             HM_CAT_CYBERDEMON,
-            "Cyberdemons deal devastating damage to other monster\nand take very little damage from other monsters."
+            "Cyberdemons deal devastating damage to other monsters\nand take very little damage from other monsters."
         );
 
         AddMutationDefinition(
