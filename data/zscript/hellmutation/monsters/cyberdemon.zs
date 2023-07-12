@@ -543,7 +543,6 @@ class HM_RegalityModifier: Inventory
 
     override void PostBeginPlay()
     {
-        console.printf("owner is %s", owner.GetClassName());
         ownerIsCyberdemon = owner is "Cyberdemon";
     }
 
