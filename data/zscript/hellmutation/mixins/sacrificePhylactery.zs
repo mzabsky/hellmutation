@@ -54,6 +54,8 @@ mixin class HM_SacrificeAndPhylactery
 
         if(global.IsMutationActive("phylactery"))
         {
+            // Arch-imps are not eligible for Phylactery, but that is handled by them never assigning phylacteryTarget
+
             if(phylacteryTarget && phylacteryTarget.health > 0 && actualDamage > health)
             {
                 actualDamage = health - 1;
