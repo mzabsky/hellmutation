@@ -256,7 +256,7 @@ extend class HM_GlobalEventHandler
 
     void SpawnDoppelgangersCorpses()
     {
-        if(!IsMutationActive("dopplegangers"))
+        if(!IsMutationActive("doppelgangers"))
         {
             return;
         }
@@ -292,10 +292,14 @@ extend class HM_GlobalEventHandler
                 candidateSectors.Push(sector);
                 candidateSectors.Push(sector);
                 candidateSectors.Push(sector);
+
+                sector.lightlevel = 255;
             }
             else if(foundMonster)
             {
                 candidateSectors.Push(sector);
+
+                //sector.lightlevel = 255;
             }
         }
 
@@ -327,7 +331,9 @@ extend class HM_GlobalEventHandler
         {
             let actor = monsters[i];
 
-            for(let attempt = 0; attempt < 10; i++)
+            // Give each doppelganger 25 shots and finding a place where they fit
+            let successfulAttempt = -1;
+            for(let attempt = 0; attempt < 25; attempt++)
             {
                 let chosenSector = candidateSectors[random[HM_GlobalEventHandler](0, candidateSectors.Size() - 1)];
 
@@ -358,17 +364,25 @@ extend class HM_GlobalEventHandler
 
                 if(Level.PointInSector((chosenX, chosenY)) == null)
                 {
-                    //console.printf("rejected sector X:%d Y:%d %d", chosenX, chosenY, chosenSector != null);
+                    // Outside of the sector
+                    //console.printf("nosec");
                     continue;
                 }
 
-                MonsterCorpseSpawner.SpawnCorpse(actor.GetClass(), (chosenX, chosenY, 0));
+                let spawner = MonsterCorpseSpawner.SpawnCorpse(actor.GetClass(), (chosenX, chosenY, 0), true);
+                if(!spawner)
+                {
+                    // Spawner refused to spawn, probably because of a collision
+                    //console.printf("nospawn");
+                    continue;
+                }
 
                 // Atempt was sucessful
+                successfulAttempt = attempt;
                 break;
             }
 
-            //console.printf("failed index %d", i);
+            //console.printf("actor %s: %d", actor.GetClassName(), successfulAttempt);
         }
     }
 }

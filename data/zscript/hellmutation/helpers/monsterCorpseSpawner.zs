@@ -10,14 +10,30 @@ class MonsterCorpseSpawner : Actor
         +NOSECTOR
     }
     
-    static MonsterCorpseSpawner SpawnCorpse(class<Actor> who, vector3 pos)
+    static MonsterCorpseSpawner SpawnCorpse(class<Actor> who, vector3 pos, bool checkCollisions)
     {
-        let idc = MonsterCorpseSpawner(Actor.Spawn("MonsterCorpseSpawner", pos));
         let bod = Actor.Spawn(who, pos);
+        if(bod)
+        {
+            bod.SetOrigin((pos.x, pos.y, bod.floorz), false);
+            
+            if(checkCollisions && !bod.TestMobjLocation())
+            {
+                bod.Destroy();
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+        
+        let idc = MonsterCorpseSpawner(Actor.Spawn("MonsterCorpseSpawner", pos));
         if (idc && bod)
         {
             idc.tokill = bod;
         }
+
         return idc;
     }
     
@@ -50,7 +66,6 @@ class MonsterCorpseSpawner : Actor
 
             if (tokill.tics == -1)
             {
-                tokill.SetOrigin((tokill.pos.x, tokill.pos.y, tokill.floorz), false);
                 Destroy();
             }
         }

@@ -224,8 +224,8 @@ extend class HM_GlobalEventHandler
         );
         
         AddMutationDefinition(
-            "dopplegangers",
-            "Dopplegangers",
+            "doppelgangers",
+            "Doppelgangers",
             HM_CAT_IMP | HM_CAT_ARCHVILE,
             "A dead copy of each monster is spawned somewhere in the level."
         );
