@@ -143,6 +143,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
                     }
 
                     phylacteryTarget = mo;
+                    lastPhylacteryTime = Level.Time;
 
                     if(isReHeal)
                     {

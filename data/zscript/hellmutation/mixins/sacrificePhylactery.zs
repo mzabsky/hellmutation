@@ -7,6 +7,7 @@ enum HM_EDmgFlags
 mixin class HM_SacrificeAndPhylactery
 {
     Actor phylacteryTarget;
+    int lastPhylacteryTime;
 
     override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
     {
@@ -56,7 +57,7 @@ mixin class HM_SacrificeAndPhylactery
         {
             // Arch-imps are not eligible for Phylactery, but that is handled by them never assigning phylacteryTarget
 
-            if(phylacteryTarget && phylacteryTarget.health > 0 && actualDamage > health)
+            if(phylacteryTarget && phylacteryTarget.health > 0 && actualDamage > health && Level.time - lastPhylacteryTime > 17)
             {
                 actualDamage = health - 1;
             }
@@ -68,7 +69,7 @@ mixin class HM_SacrificeAndPhylactery
 
     override void Tick()
     {
-        if(health > 0 && phylacteryTarget && phylacteryTarget.health > 0 && global.IsMutationActive("phylactery"))
+        if(health > 0 && phylacteryTarget && phylacteryTarget.health > 0 && global.IsMutationActive("phylactery") && Level.time - lastPhylacteryTime > 17)
         {
             phylacteryTarget.Spawn(
                 "HM_PhylacteryGlitter",
