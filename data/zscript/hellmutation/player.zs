@@ -6,6 +6,12 @@ class HM_Player: DoomPlayer
     // Number of ticks the player has looked at a Mastermind with Gorgon Protocol enabled
     int gorgonProtocolTicks;
 
+    override void PreTravelled()
+    {
+        lastGorgonProtocolSpotted = 0;
+        gorgonProtocolTicks = 0;
+    }
+
     override void Tick()
     {
         // Gorgon Protocol - check if each player was spotted by a dummy in this tick
@@ -26,6 +32,8 @@ class HM_Player: DoomPlayer
         // Apply Gorgon Protocol immobilizations
         if(gorgonProtocolTicks > 0)
         {
+            //console.printf("gorgonprotocolticks %d %d", lastGorgonProtocolSpotted, gorgonProtocolTicks);
+
             let maxoutTime = 10 * 35; // How many ticks it takes for the effect to max out
             let maxPitchYawReduction = 4.0;
             let maxForwardMoveReduction = 3.0;
