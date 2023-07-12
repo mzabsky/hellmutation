@@ -66,7 +66,7 @@ mixin class HM_SacrificeAndPhylactery
 
     override void Tick()
     {
-        if(phylacteryTarget && phylacteryTarget.health > 0 && global.IsMutationActive("phylactery"))
+        if(health > 0 && phylacteryTarget && phylacteryTarget.health > 0 && global.IsMutationActive("phylactery"))
         {
             phylacteryTarget.Spawn(
                 "HM_PhylacteryGlitter",
