@@ -87,7 +87,7 @@ Spider Masterminds rapidly spawn Arachnotrons.
 
 **Applies to**: Cacodemon&emsp;&emsp;&emsp;**Key**: `cacoblasters`
 
-Cacodemons always fire two additional projectiles.
+Cacodemons fire two additional projectiles.
 
 
 ## Catastrophic Reflux
@@ -136,7 +136,7 @@ Damage from Cacodemons removes powerup effects from players.
 
 **Applies to**: Zombieman, Shotgunner, Chaingunner&emsp;&emsp;&emsp;**Key**: `decapitation`
 
-Zombiement, Shotgunners, Chaingunners may spawna lost soul after dying, unless gibbed.
+Zombiemen, Shotgunners, Chaingunners may spawn a lost soul after dying, unless gibbed.
 
 
 ## Decoys
@@ -181,9 +181,9 @@ Lost souls charge at greater speed.
 Cyberdemons can attack while walking.
 
 
-## Dopplegangers
+## Doppelgangers
 
-**Applies to**: Imp, Arch-Vile&emsp;&emsp;&emsp;**Key**: `dopplegangers`
+**Applies to**: Imp, Arch-Vile&emsp;&emsp;&emsp;**Key**: `doppelgangers`
 
 A dead copy of each monster is spawned somewhere in the level.
 
@@ -388,7 +388,7 @@ Dying Cacodemons heal other monsters around where they crash.
 
 **Applies to**: Doom 2 only, Pain Elemental&emsp;&emsp;&emsp;**Key**: `trauma`
 
-Pain Elementals spawn with several Lost Souls.
+Pain Elementals spawn along with several Lost Souls.
 
 
 ## Pride
@@ -437,7 +437,7 @@ Pinkies become spectral when damaged.
 
 **Applies to**: Cyberdemon&emsp;&emsp;&emsp;**Key**: `regality`
 
-Cyberdemons deal devastating damage to other monster and take very little damage from other monsters.
+Cyberdemons deal devastating damage to other monsters and take very little damage from other monsters.
 
 
 ## Regret
