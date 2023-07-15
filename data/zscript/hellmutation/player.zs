@@ -6,14 +6,25 @@ class HM_Player: DoomPlayer
     // Number of ticks the player has looked at a Mastermind with Gorgon Protocol enabled
     int gorgonProtocolTicks;
 
+    // Time of the last Boreal Gaze tick
+    int lastBorealGazeTime;
+
+    // The number of continuous Boreal Gaze stacked ticks
+    int borealGazeTicks;
+
+
     override void PreTravelled()
     {
         lastGorgonProtocolSpotted = 0;
         gorgonProtocolTicks = 0;
+
+        lastBorealGazeTime = 0;
+        borealGazeTicks = 0;
     }
 
     override void Tick()
     {
+
         // Gorgon Protocol - check if each player was spotted by a dummy in this tick
         if(lastGorgonProtocolSpotted >= Level.Time - 1)
         {
@@ -24,11 +35,26 @@ class HM_Player: DoomPlayer
             gorgonProtocolTicks /= 2;
         }
 
+        //console.printf("%d tick %d %d", Level.Time, lastBorealGazeTime, borealGazeTicks);
+
+        if(lastBorealGazeTime < Level.Time - 4)
+        {
+            borealGazeTicks = 0;
+
+            //console.printf("%d tick reset", Level.Time);
+        }
+        else
+        {
+          //console.printf("%d tick keep boreal", Level.Time);
+        }
+
         super.Tick();
     }
 
     override void PlayerThink()
     {
+        let originalSpeed = player.cmd.forwardmove;
+
         // Apply Gorgon Protocol immobilizations
         if(gorgonProtocolTicks > 0)
         {
@@ -66,6 +92,35 @@ class HM_Player: DoomPlayer
         {
             //console.printf("gorgon protocol %d", gorgonProtocolTicks);
         }
+
+        if(borealGazeTicks > 0)
+        {
+            let maxoutTime = 60;
+            let maxReduction = 1.5;
+
+            let applicableTicks = min(borealGazeTicks, maxoutTime);
+
+            let factor = float(applicableTicks) / float(maxoutTime);
+
+            let divisor = 1+(factor * maxReduction);
+
+            bool notpredicting = !(player.cheats & CF_PREDICTING);
+
+
+            player.cheats |= CF_INTERPVIEW;
+
+            //console.printf("%d move %d %f", Level.Time, borealGazeTicks, factor);
+
+            if(notPredicting)
+            {
+                player.cmd.yaw /= divisor;
+                player.cmd.pitch /= divisor;
+            }
+            player.cmd.forwardmove /= divisor;
+            player.cmd.sidemove /= divisor;
+        }
+
+        //console.printf("speed %f", originalSpeed > 0 ? float(player.cmd.forwardmove) / float(originalSpeed) : 0);
         
         // Run all the stuff from the original function
         super.PlayerThink();

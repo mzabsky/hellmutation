@@ -112,6 +112,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "borealgaze",
+            "Boreal Gaze",
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Viles progressively slow down their target with their flame attack."
+        );
+
+        AddMutationDefinition(
             "brightfire",
             "Brightfire",
             HM_CAT_IMP,

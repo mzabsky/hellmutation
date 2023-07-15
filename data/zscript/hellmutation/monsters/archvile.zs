@@ -232,5 +232,23 @@ class HM_ArchvileFire : ArchvileFire replaces ArchvileFire
         {
             dest.DamageMobj(self, target, 1, 'fire', DMG_THRUSTLESS);
         }
+
+        if(global.IsMutationActive('borealgaze') && dest is 'HM_Player')
+        {
+            let hmPlayer = HM_Player(dest);
+            //console.printf("%d vile apply boreal %d", Level.Time, hmPlayer.lastBorealGazeTime);
+            if(hmPlayer.lastBorealGazeTime >= Level.Time - 4)
+            {
+                hmPlayer.borealGazeTicks+=2;
+            }
+            else
+            {
+                //console.printf("%d vile new boreal", Level.Time);
+                hmPlayer.borealGazeTicks = 2;
+            }
+
+            hmPlayer.lastBorealGazeTime = Level.Time;
+            //console.printf("%d vile final %d %d", Level.Time, hmPlayer.lastBorealGazeTime, hmPlayer.borealGazeTicks );
+        }
     }
 }
