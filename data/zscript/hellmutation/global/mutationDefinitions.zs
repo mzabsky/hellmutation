@@ -588,6 +588,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "vileincursion",
+            "Vile Incursion",
+            HM_CAT_DOOM2 | HM_CAT_NOFIRSTMAP,
+            "An additional Arch-Vile spawns somewhere in each level."
+        );
+
+        AddMutationDefinition(
             "vitalitylimit",
             "Vitality Limit",
             HM_CAT_PLAYER,

@@ -43,4 +43,51 @@ extend class HM_GlobalEventHandler
 
         return ReplaceActor(original, newClass);
     }
+
+    bool, int, int, int ChooseRandomPointInSector(Sector sec)
+    {
+        for(let attempt = 0; attempt < 50; attempt++)
+        {
+            let minX = int.max;
+            let minY = int.max;
+            let maxX = int.min;
+            let maxY = int.min;
+
+            for(let j = 0; j < sec.lines.Size(); j++)
+            {
+                let line = sec.lines[j];
+
+                minX = min(minX, line.v1.p.x);
+                minX = min(minX, line.v2.p.x);
+
+                maxX = max(maxX, line.v1.p.x);
+                maxX = max(maxX, line.v2.p.x);
+
+                minY = min(minY, line.v1.p.y);
+                minY = min(minY, line.v2.p.y);
+
+                maxY = max(maxY, line.v1.p.y);
+                maxY = max(maxY, line.v2.p.y);
+            }
+
+            let chosenX = random[HM_GlobalEventHandler](minX, maxX);
+            let chosenY = random[HM_GlobalEventHandler](minY, maxY);
+
+            let v2 = (chosenX, chosenY);
+
+            let matchedSector = Level.PointInSector(v2);
+            double floorHeight = matchedSector.floorPlane.ZAtPoint(v2);
+
+            let v3 = (chosenX, chosenY, floorHeight);
+
+            if(!Level.IsPointInLevel(v3))
+            {
+                continue;
+            }
+
+            return true, chosenX, chosenY, floorHeight;
+        }
+
+        return false, 0, 0, 0;
+    }
 }

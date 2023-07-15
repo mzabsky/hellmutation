@@ -53,6 +53,8 @@ extend class HM_GlobalEventHandler
         WorkplaceSafety();
 
         SpawnDoppelgangersCorpses();
+
+        SpawnVileIncursion();
     }
 
     void ReplaceMonsters()
@@ -337,43 +339,13 @@ extend class HM_GlobalEventHandler
             {
                 let chosenSector = candidateSectors[random[HM_GlobalEventHandler](0, candidateSectors.Size() - 1)];
 
-                let minX = int.max;
-                let minY = int.max;
-                let maxX = int.min;
-                let maxY = int.min;
+                bool foundPoint;
+                int chosenX, chosenY, chosenZ;
+                [foundPoint, chosenX, chosenY, chosenZ] = ChooseRandomPointInSector(chosenSector);
 
-                for(let j = 0; j < chosenSector.lines.Size(); j++)
-                {
-                    let line = chosenSector.lines[j];
-
-                    minX = min(minX, line.v1.p.x);
-                    minX = min(minX, line.v2.p.x);
-
-                    maxX = max(maxX, line.v1.p.x);
-                    maxX = max(maxX, line.v2.p.x);
-
-                    minY = min(minY, line.v1.p.y);
-                    minY = min(minY, line.v2.p.y);
-
-                    maxY = max(maxY, line.v1.p.y);
-                    maxY = max(maxY, line.v2.p.y);
-                }
-
-                let chosenX = random[HM_GlobalEventHandler](minX, maxX);
-                let chosenY = random[HM_GlobalEventHandler](minY, maxY);
-
-                if(Level.PointInSector((chosenX, chosenY)) == null)
-                {
-                    // Outside of the sector
-                    //console.printf("nosec");
-                    continue;
-                }
-
-                let spawner = MonsterCorpseSpawner.SpawnCorpse(actor.GetClass(), (chosenX, chosenY, 0), true);
+                let spawner = MonsterCorpseSpawner.SpawnCorpse(actor.GetClass(), (chosenX, chosenY, chosenZ), true);
                 if(!spawner)
                 {
-                    // Spawner refused to spawn, probably because of a collision
-                    //console.printf("nospawn");
                     continue;
                 }
 
@@ -381,8 +353,79 @@ extend class HM_GlobalEventHandler
                 successfulAttempt = attempt;
                 break;
             }
-
-            //console.printf("actor %s: %d", actor.GetClassName(), successfulAttempt);
         }
+    }
+
+    void SpawnVileIncursion()
+    {
+        if(!IsMutationActive("vileincursion"))
+        {
+            return;
+        }
+
+        // Corpses will only be spawned in sectors where monsters already exists
+        // (we know it makes sense for monsters to be there, since there are some already)
+        Array<Sector> candidateSectors;
+        for(let i = 0; i < Level.Sectors.Size(); i++)
+        {
+            let sector = Level.Sectors[i];
+
+            let currentThing = sector.thingList;
+            while(currentThing != null)
+            {
+                // Push it once for each monster -> this serves to weigh the spawning specifically towards more crowded sectors
+                candidateSectors.Push(sector);
+
+                currentThing = currentThing.snext;
+            }
+        }
+
+        for(let attempt = 0; attempt < 50; attempt++)
+        {
+            let chosenSector = candidateSectors[random[HM_GlobalEventHandler](0, candidateSectors.Size() - 1)];
+
+            bool pointFound;
+            int chosenX, chosenY, chosenZ;
+            [pointFound, chosenX, chosenY, chosenZ] = ChooseRandomPointInSector(chosenSector);
+
+            if(!pointFound)
+            {
+                // Outside of the sector
+                continue;
+            }
+
+            let vile = Actor.Spawn('HM_ArchVile', (chosenX, chosenY, 0));
+            if(vile)
+            {
+                if(!vile.TestMobjLocation())
+                {
+                    vile.Destroy();
+                    continue;
+                }
+                
+                // Do not spawn the AC where it would be seen by the player
+                let seenByPlayer = false;
+                for(let i = 0; i < Players.Size(); i++)
+                {
+                    if(Players[i].mo && Players[i].mo.CheckSight(vile))
+                    {
+                        seenByPlayer = true;
+                        break;
+                    }
+                }
+
+                if(seenByPlayer)
+                {
+                    vile.Destroy();
+                    continue;
+                }
+
+                // Atempt was sucessful
+                break;
+            }
+
+            continue;
+        }
+
     }
 }
