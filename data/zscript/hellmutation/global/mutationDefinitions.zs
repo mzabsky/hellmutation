@@ -511,10 +511,17 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
-            "searinggaze",
-            "Searing Gaze",
+            "scorchinggaze",
+            "Scorching Gaze",
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
             "Arch-Vile flames deal moderate damage."
+        );
+
+        AddMutationDefinition(
+            "sirenicgaze",
+            "Sirenic Gaze",
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Vile attack pulls its victim towards it."
         );
 
         AddMutationDefinition(
@@ -543,13 +550,6 @@ extend class HM_GlobalEventHandler
             "Torrent Cannons",
             HM_CAT_CHAINGUNNER | HM_CAT_SPIDERMASTERMIND,
             "Chaingunners and Spider Masterminds fire explosive rounds."
-        );
-
-        AddMutationDefinition(
-            "tractorspell",
-            "Tractor Spell",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Vile attack pulls its target towards it."
         );
 
         AddMutationDefinition(

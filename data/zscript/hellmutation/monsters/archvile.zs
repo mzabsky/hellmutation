@@ -186,7 +186,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
             }
             if (!targ.bDontThrust)
             {
-                if(global.IsMutationActive("tractorspell"))
+                if(global.IsMutationActive("sirenicgaze"))
                 {
                     // Pull towards the caster
                     let to = Vec3To(targ);
@@ -228,7 +228,7 @@ class HM_ArchvileFire : ArchvileFire replaces ArchvileFire
 
         SetOrigin(dest.Vec3Angle(24, dest.angle, spawnheight), true);
 
-        if(global.IsMutationActive('searinggaze'))
+        if(global.IsMutationActive('scorchinggaze'))
         {
             dest.DamageMobj(self, target, 1, 'fire', DMG_THRUSTLESS);
         }
