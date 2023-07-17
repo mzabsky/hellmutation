@@ -363,8 +363,7 @@ extend class HM_GlobalEventHandler
             return;
         }
 
-        // Corpses will only be spawned in sectors where monsters already exists
-        // (we know it makes sense for monsters to be there, since there are some already)
+        // Spawn the Vile in a sector where monsters already are
         Array<Sector> candidateSectors;
         for(let i = 0; i < Level.Sectors.Size(); i++)
         {
@@ -373,8 +372,15 @@ extend class HM_GlobalEventHandler
             let currentThing = sector.thingList;
             while(currentThing != null)
             {
-                // Push it once for each monster -> this serves to weigh the spawning specifically towards more crowded sectors
-                candidateSectors.Push(sector);
+                
+
+                // We actually don't mind the monsters are dead (eg. from Doppelgangers)
+                // We don't want flying monsters though (don't want to spawn the vile where )
+                if(currentThing.bIsMonster && currentThing.pos.z - currentThing.floorz == 0)
+                {
+                    // Push it once for each monster -> this serves to weigh the spawning specifically towards more crowded sectors
+                    candidateSectors.Push(sector);
+                }
 
                 currentThing = currentThing.snext;
             }
