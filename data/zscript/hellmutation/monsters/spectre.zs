@@ -24,6 +24,9 @@ class HM_Spectre : Spectre replaces Spectre
             SARG G 8 A_SargAttack;
             Goto See;
         Pounce:
+            SARG E 0 {
+                lastPounceTime = Level.Time;
+            }
             SARG E 4 A_FaceTarget;
             //SARG F 0 Thrust(5000, 0);
             SARG F 10 A_SkullAttack;
