@@ -56,6 +56,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "aethericritual",
+            "Aetheric Ritual",
+            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
+            "Arch-Viles do not require to be able to see a corpse\nto resurrect it."
+        );
+
+        AddMutationDefinition(
             "affinity",
             "Affinity",
             HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
