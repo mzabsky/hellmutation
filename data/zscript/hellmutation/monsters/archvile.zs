@@ -132,6 +132,8 @@ class HM_ArchVile : ArchVile replaces ArchVile
                     A_Face(mo);
                     SetState(ResolveState("Heal"));
 
+                    mo.target = target;
+
                     if(global.IsMutationActive("rushedritual"))
                     {
                         let fastRaiseState = mo.ResolveState("FastRaise");

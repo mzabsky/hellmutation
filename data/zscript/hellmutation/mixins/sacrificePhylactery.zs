@@ -8,6 +8,7 @@ mixin class HM_SacrificeAndPhylactery
 {
     Actor phylacteryTarget;
     int lastPhylacteryTime;
+    int lastPhylacterySaveTime;
 
     override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
     {
@@ -59,6 +60,7 @@ mixin class HM_SacrificeAndPhylactery
 
             if(phylacteryTarget && phylacteryTarget.health > 0 && actualDamage > health && Level.time - lastPhylacteryTime > 17)
             {
+                lastPhylacterySaveTime = Level.Time;
                 actualDamage = health - 1;
             }
         }
@@ -71,15 +73,31 @@ mixin class HM_SacrificeAndPhylactery
     {
         if(health > 0 && phylacteryTarget && phylacteryTarget.health > 0 && global.IsMutationActive("phylactery") && Level.time - lastPhylacteryTime > 17)
         {
-            phylacteryTarget.Spawn(
-                "HM_PhylacteryGlitter",
-                phylacteryTarget.Vec3Offset(
-                    random[TeleGlitter](-phylacteryTarget.radius, phylacteryTarget.radius), random[TeleGlitter](-phylacteryTarget.radius, phylacteryTarget.radius), random[TeleGlitter](0, phylacteryTarget.height)
-                )
-            );
+            SpawnPhylacteryGlitter();
+
+            // Spawn a pulse of more particules if Phylactery has recently saved the Vile
+            if(lastPhylacterySaveTime > Level.Time - 5)
+            {
+                SpawnPhylacteryGlitter();
+                SpawnPhylacteryGlitter();
+                SpawnPhylacteryGlitter();
+                SpawnPhylacteryGlitter();
+                SpawnPhylacteryGlitter();
+                SpawnPhylacteryGlitter();
+            }
         }
 
         super.Tick();
+    }
+
+    void SpawnPhylacteryGlitter()
+    {
+        phylacteryTarget.Spawn(
+            "HM_PhylacteryGlitter",
+            phylacteryTarget.Vec3Offset(
+                random[TeleGlitter](-phylacteryTarget.radius, phylacteryTarget.radius), random[TeleGlitter](-phylacteryTarget.radius, phylacteryTarget.radius), random[TeleGlitter](0, phylacteryTarget.height)
+            )
+        );
     }
 
     override bool OkayToSwitchTarget(Actor other)

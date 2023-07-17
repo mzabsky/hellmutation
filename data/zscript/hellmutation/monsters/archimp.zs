@@ -114,6 +114,8 @@ class HM_ArchImp : DoomImp
                     A_Face(mo);
                     SetState(ResolveState("Heal"));
 
+                    mo.target = target;
+
                     // Arch-imps are not eligible for phylactery
 
                     return;
