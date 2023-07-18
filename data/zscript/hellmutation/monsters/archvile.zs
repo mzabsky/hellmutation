@@ -100,7 +100,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
             while (it.Next())
             {
                 mo = it.thing;
-                if (!mo || !mo.bIsMonster || mo.health > 0 || (!CheckSight(mo) && !global.IsMutationActive("aethericritual")) || !mo.CanRaise())
+                if (!mo || mo == self || !mo.bIsMonster || mo.health > 0 || (!CheckSight(mo) && !global.IsMutationActive("aethericritual")) || !mo.CanRaise())
                 {
                     continue;
                 }

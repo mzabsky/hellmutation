@@ -90,7 +90,7 @@ class HM_ArchImp : DoomImp
             while (it.Next())
             {
                 mo = it.thing;
-                if (!mo || !mo.bIsMonster || mo.health > 0 || !CheckSight(mo) || !mo.CanRaise())
+                if (!mo || mo == self || !mo.bIsMonster || mo.health > 0 || !CheckSight(mo) || !mo.CanRaise())
                 {
                     continue;
                 }
