@@ -32,7 +32,7 @@ class HM_ArchImp : DoomImp
             HELN AABBCCDDEEFF 2 FAST ResurrectChase();
             loop;
         Heal:
-            HELN G 30 BRIGHT;
+            HELN G 45 BRIGHT;
             Goto See;
         Melee:
         Missile:
