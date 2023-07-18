@@ -3,3 +3,8 @@ GameInfo
     AddEventHandlers = "HM_GlobalEventHandler"
     PlayerClasses = "HM_Player"
 }
+
+DoomEdNums
+{
+    19886 = HM_TargetDummy
+}
