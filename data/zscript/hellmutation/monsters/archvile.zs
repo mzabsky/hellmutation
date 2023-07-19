@@ -54,16 +54,6 @@ class HM_ArchVile : ArchVile replaces ArchVile
             VILE ] 10 BRIGHT;
             Goto See;
         FastHeal:
-            VILE [ 0 {
-                if(global.IsMutationActive("rushedritual"))
-                {
-                    return ResolveState("FastHeal");
-                }
-                else
-                {
-                    return ResolveState(null);
-                }
-            }
             VILE [\ 5 BRIGHT;
             VILE ] 0 {
                 if(global.IsMutationActive("odiousritual"))
@@ -96,7 +86,6 @@ class HM_ArchVile : ArchVile replaces ArchVile
             let range = 386;
             BlockThingsIterator it = BlockThingsIterator.Create(self, range);
             Actor mo;
-
             while (it.Next())
             {
                 mo = it.thing;
@@ -158,7 +147,6 @@ class HM_ArchVile : ArchVile replaces ArchVile
                             SetState(ResolveState("ReHeal"));
                         }
                     }
-                    
                     return;
                 }
             }
