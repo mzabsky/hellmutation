@@ -474,6 +474,11 @@ class HM_CyberdemonHellCube: Actor
 
     void HellCubeDeath()
     {
+        if(!spawnClass)
+        {
+            return;
+        }
+
         //Spawn('SpawnFire', pos, ALLOW_REPLACE);
 
         let spawnee = Spawn(spawnClass, pos, ALLOW_REPLACE);
@@ -491,6 +496,7 @@ class HM_CyberdemonHellCube: Actor
         console.printf("assign master %s ", target.GetClassName());
         spawnee.master = target;
         spawnee.target = tracer;
+        spawnee.A_FaceTarget();
         spawnee.GiveInventory("HM_CybredemonSpawneeShield", 1);
         if(spawnee.SeeState != null)
         {
