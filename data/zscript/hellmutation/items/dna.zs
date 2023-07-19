@@ -4,8 +4,6 @@ class HM_Dna: Inventory
 	{
 		  +COUNTITEM
 		  +INVENTORY.ALWAYSPICKUP
-      +NOGRAVITY  // Spawn the DNA a bit above the actual thing it is spawning on.
-			+RELATIVETOFLOOR // ... but follow lowering platforms (such as in MAP07)
 		  +INVENTORY.FANCYPICKUPSOUND;
       Inventory.Amount 1;
 		  Inventory.MaxAmount 999;

@@ -49,7 +49,11 @@ extend class HM_GlobalEventHandler
         let firstDnaPlace = FindPlaceForFirstDna();
         if(firstDnaPlace != null)
         {
-            firstDnaPlace.Spawn("HM_Dna", firstDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
+            let dna = firstDnaPlace.Spawn("HM_Dna", firstDnaPlace.pos, ALLOW_REPLACE);
+            if(dna)
+            {
+                dna.A_SpriteOffset(0, -32);
+            }
             //console.printf("Spawned first DNA on a %s.", firstDnaPlace.GetClassName());
         }
         else
@@ -60,7 +64,11 @@ extend class HM_GlobalEventHandler
         let secondDnaPlace = FindPlaceForSecondDna();
         if(secondDnaPlace != null)
         {
-            secondDnaPlace.Spawn("HM_Dna", secondDnaPlace.Vec3Offset(0, 0, 32), ALLOW_REPLACE);
+            let dna = secondDnaPlace.Spawn("HM_Dna", secondDnaPlace.pos, ALLOW_REPLACE);
+            if(dna)
+            {
+                dna.A_SpriteOffset(0, -32);
+            }
             //console.printf("Spawned second DNA on a %s.", secondDnaPlace.GetClassName());
         }
         else
@@ -71,7 +79,7 @@ extend class HM_GlobalEventHandler
         let thirdDnaPlace = FindPlaceForThirdDna();
         if(thirdDnaPlace != null)
         {
-            let thirdDna = thirdDnaPlace.Spawn("HM_Dna", thirdDnaPlace.Vec3Offset(0, 0, 0), ALLOW_REPLACE);
+            let thirdDna = thirdDnaPlace.Spawn("HM_Dna", thirdDnaPlace.pos, ALLOW_REPLACE);
             thirdDna.bNoGravity = false; // Apply gravity to this DNA specifically (primarily for MAP02 where the cyberdemon spawns on a lowering platform)
             //console.printf("Spawned third DNA on a %s.", thirdDnaPlace.GetClassName());
         }
@@ -90,6 +98,12 @@ extend class HM_GlobalEventHandler
         Actor actor;
         while((actor = Actor(finder.next())) != null)
         {
+            if(!Level.IsPointInLevel(actor.pos))
+            {
+                // Some levels have actors randomly in the void...
+                continue;
+            }
+
             let nonSecretMultiplier = actor.CurSector.IsSecret() ? 1 : 4;
 
             if(actor is 'Shotgun')
@@ -151,6 +165,12 @@ extend class HM_GlobalEventHandler
         Actor actor;
         while((actor = Actor(finder.next())) != null)
         {
+            if(!Level.IsPointInLevel(actor.pos))
+            {
+                // Some levels have actors randomly in the void...
+                continue;
+            }
+
             let secretMultiplier = actor.CurSector.IsSecret() ? 4 : 1;
 
             if(actor is 'Megasphere')
