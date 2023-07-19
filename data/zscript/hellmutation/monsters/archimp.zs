@@ -19,6 +19,8 @@ class HM_ArchImp : DoomImp
 		PainChance 100;
     }
 
+    int lastResurrectionTime;
+
     States
 	{
         Spawn:
@@ -81,7 +83,7 @@ class HM_ArchImp : DoomImp
 
     void ResurrectChase()
     {
-        //if(global.IsMutationActive("reachingritual"))
+        if(lastResurrectionTime + 35 * 3 < Level.Time) // Arch-Imps are only allowed to resurrect once every three seconds
         {
             let range = 386;
             BlockThingsIterator it = BlockThingsIterator.Create(self, range);
@@ -116,6 +118,8 @@ class HM_ArchImp : DoomImp
 
                     mo.target = target;
 
+                    lastResurrectionTime = Level.Time;
+            
                     // Arch-imps are not eligible for phylactery
 
                     return;
