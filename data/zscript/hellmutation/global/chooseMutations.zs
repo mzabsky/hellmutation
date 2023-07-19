@@ -44,12 +44,14 @@ extend class HM_GlobalEventHandler
             // a bit less predictable
             if(IsMutationRemoved(currentMutation.key) && random[HM_GlobalEventHandler](0, 4) > 0)
             {
+                console.printf("Rejected already picked mutation: %s, Current chosen categories: %s", currentMutation.key, MutationCategoryToString(activeCategories));
                 continue;
             }
 
             if(!(currentMutation.Category & activeCategories))
             {
                 // Does not apply to anything in the current level
+                console.printf("Rejected not applicable mutation: %s", currentMutation.key, MutationCategoryToString(activeCategories));
                 continue;
             }
 
@@ -66,7 +68,15 @@ extend class HM_GlobalEventHandler
             i++;
 
             HM_MutationDefinition candidateMutation;
-            if(i < 8)
+
+            // This value determines how rigid the mutation selection algorithm is.
+            // First phase is when we try to choose non-overlapping mutations that match the level's conditions.
+            // Second phase is when we loosen those conditions and allow overlaps and mutaitons that don't specifically apply to the level.
+            // This number determines how many iterations are spent in the first phase.
+            // Higher number means we try harder to find a nice set of matching mutations, but especially for levels with small set of matching
+            // mutations (eg. MAP01) this will cause more predictable results.
+            let firstPhaseStepCount = 12;
+            if(i < firstPhaseStepCount) 
             {
                 // We are in the initial stage of mutation selection - try to choose mutations which:
                 // - Are appropriate for the level (reflect features/monsters of the level)
@@ -76,12 +86,18 @@ extend class HM_GlobalEventHandler
                 if(chosenCategories & candidateMutation.Category)
                 {
                     // Overlaps already selected mutations -> discard
+                    
+                    console.printf("#%d Rejected mutation because of overlap: %s, current categories: %s", i, candidateMutation.key, MutationCategoryToString(chosenCategories));
                     continue;
                 }
             }
+            else if (i > 250)
+            {
+                console.printf("#%d Mutation selection algorithm is stuck! Aborting.", i);
+            }
             else
             {
-                // We have given chance to select the appropriate mutations and couldn't manage to select
+                // We are in second phase - we have given chance to select the appropriate mutations and couldn't manage to select
                 // a nice set. Now just pick something that will work from all the legal mutations.
                 let candidateIndex = random[HM_GlobalEventHandler](0, legalMutations.Size() - 1);
                 candidateMutation = legalMutations[candidateIndex];
@@ -99,10 +115,18 @@ extend class HM_GlobalEventHandler
 
             if(alreadySelected)
             {
+                console.printf("#%d Rejected already selected mutation: %s", i, candidateMutation.key);
                 continue;
             }
+
+            //console.printf("Chosen categories before: %s", MutationCategoryToString(chosenCategories));
             
-            chosenCategories |= candidateMutation.Category;
+            chosenCategories = (chosenCategories | candidateMutation.Category)
+                & ~(HM_CAT_DOOM2 | HM_CAT_NOFIRSTMAP); // These categories don't count as overlaps
+
+            console.printf("#%d Accepted mutation: %s, Current accepted categories: %s", i, candidateMutation.Key, MutationCategoryToString(chosenCategories));
+
+            //chosenCategories
             chosenMutations.Push(candidateMutation);
         }
 
@@ -184,7 +208,7 @@ extend class HM_GlobalEventHandler
             //console.printf("score %s => %d", MutationCategoryToString(currentCategory), currentScore);
         }
 
-        //console.printf("categories: %s", MutationCategoryToString(activeCategories));
+        console.printf("Categories for map: %s", MutationCategoryToString(activeCategories));
 
         return activeCategories;
     }
