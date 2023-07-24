@@ -13,6 +13,13 @@ Mancubuses fire additional projectiles in each horizontal direction.
 Zombiemen, Shotgunners and their variants are more aggressive.
 
 
+## Aetheric Ritual
+
+**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `aethericritual`
+
+Arch-Viles do not require to be able to see a corpse to resurrect it.
+
+
 ## Affinity
 
 **Applies to**: Doom 2 only, Pain Elemental&emsp;&emsp;&emsp;**Key**: `affinity`
@@ -67,6 +74,13 @@ Cyberdemons and Spider Masterminds take much less damage from BFG9000.
 **Applies to**: Player&emsp;&emsp;&emsp;**Key**: `bloodtax`
 
 Player takes 25 damage when they pick up a keycard or a skull key (this damage cannot kill).
+
+
+## Boreal Gaze
+
+**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `borealgaze`
+
+Arch-Viles progressively slow down their target with their flame attack.
 
 
 ## Brightfire
@@ -372,9 +386,9 @@ Arachnotron fire rate continuously ramps up as they fire.
 
 ## Phylactery
 
-**Applies to**: Imp, Arch-Vile&emsp;&emsp;&emsp;**Key**: `phylactery`
+**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `phylactery`
 
-Arch-Imps and Arch-Viles cannot die as long as the last monster they resurrected is alive.
+Arch-Viles cannot die as long as the last monster they resurrected is alive.
 
 
 ## Pomodoro Sustenance
@@ -468,11 +482,18 @@ Arch-Viles resurrect monsters faster, but with less health.
 Arch-Viles and Arch-Imps redirect some of the damage they  would take to other nearby monsters.
 
 
-## Searing Gaze
+## Scorching Gaze
 
-**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `searinggaze`
+**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `scorchinggaze`
 
 Arch-Vile flames deal moderate damage.
+
+
+## Sirenic Gaze
+
+**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `sirenicgaze`
+
+Arch-Vile attack pulls its victim towards it.
 
 
 ## Slimeborne
@@ -501,13 +522,6 @@ Basic Zombiemen are significantly more accurate.
 **Applies to**: Chaingunner, Spider Mastermind&emsp;&emsp;&emsp;**Key**: `torrentcannons`
 
 Chaingunners and Spider Masterminds fire explosive rounds.
-
-
-## Tractor Spell
-
-**Applies to**: Doom 2 only, Arch-Vile&emsp;&emsp;&emsp;**Key**: `tractorspell`
-
-Arch-Vile attack pulls its target towards it.
 
 
 ## Triumvirate
@@ -543,6 +557,13 @@ Pinkies and their variants are almost immune to pain.
 **Applies to**: Cacodemon&emsp;&emsp;&emsp;**Key**: `unyielding`
 
 Cacodemons are more resistant to pain.
+
+
+## Vile Incursion
+
+**Applies to**: Doom 2 only, Not first map&emsp;&emsp;&emsp;**Key**: `vileincursion`
+
+An additional Arch-Vile spawns somewhere in each level.
 
 
 ## Vitality Limit

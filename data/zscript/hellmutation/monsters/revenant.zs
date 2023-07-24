@@ -144,7 +144,6 @@ class HM_RevenantDecoy : Revenant
             SKEL N 7 A_FadeOut(0.2);
             SKEL O 7 A_FadeOut(0.2);
             SKEL P 7;
-            SKEL Q -1;
             Stop;
         FastRaise:
             SKEL Q 3;
