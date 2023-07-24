@@ -116,6 +116,7 @@ class HM_ArchVile : ArchVile replaces ArchVile
                     continue;
                 }
 
+                let oldSolid = mo.bSolid;
                 if(RaiseActor(mo))
                 {
                     A_Face(mo);
@@ -148,6 +149,11 @@ class HM_ArchVile : ArchVile replaces ArchVile
                         }
                     }
                     return;
+                }
+                else
+                {
+                    // P_Thing_Raise in C++ makes the corpse solid before calling CanResurrect, for some reason
+                    mo.bSolid = oldSolid;
                 }
             }
         }

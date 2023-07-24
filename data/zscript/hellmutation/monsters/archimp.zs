@@ -111,6 +111,7 @@ class HM_ArchImp : DoomImp
                     continue;
                 }
 
+                let oldSolid = mo.bSolid;
                 if(RaiseActor(mo))
                 {
                     A_Face(mo);
@@ -123,6 +124,11 @@ class HM_ArchImp : DoomImp
                     // Arch-imps are not eligible for phylactery
 
                     return;
+                }
+                else
+                {
+                    // P_Thing_Raise in C++ makes the corpse solid before calling CanResurrect, for some reason
+                    mo.bSolid = oldSolid;
                 }
             }
         }
