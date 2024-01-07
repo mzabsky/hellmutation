@@ -1,3 +1,4 @@
+#include "./blursphere.zs"
 #include "./dna.zs"
 #include "./keys.zs"
 #include "./lockedmutationcounter.zs"
