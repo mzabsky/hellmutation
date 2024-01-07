@@ -75,6 +75,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
     override void Init (Menu parent)
     {
         let dna = HM_Dna(players[consoleplayer].mo.FindInventory("HM_Dna"));
+        let dnaCount = players[consoleplayer].mo.CountInv("HM_Dna");
         canRemoveMutation = !!dna;
 
         globalHandler = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
@@ -151,11 +152,12 @@ class HM_DnaMenu : HM_ZFGenericMenu
         }
         else
         {
+            let youHaveXDna = String.Format("You have \c[Green]%d \c[Purple]DNA\c[Yellow]. \c[White]Click\c[Yellow] a mutation to permanently remove it. This costs \c[Green]1 \c[Purple]DNA\c[Yellow].", dnaCount);
             aLabel = HM_ZFLabel.Create
             (
                 (0, aLabel.GetPosY() + 40),
                 (0, doomFont.GetHeight ()),
-                text: "You have \c[Green]1 \c[Purple]DNA\c[Yellow]. \c[White]Click\c[Yellow] a mutation to permanently remove it. This costs \c[Green]1 \c[Purple]DNA\c[Yellow].",
+                text: youHaveXDna,
                 fnt: doomFont,
                 wrap: false,
                 autoSize: true,
