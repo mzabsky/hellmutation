@@ -46,19 +46,26 @@ extend class HM_GlobalEventHandler
 
     void SpawnDna()
     {
-        let firstDnaPlace = FindPlaceForFirstDna();
-        if(firstDnaPlace != null)
+        if(IsMutationActive("defundedresearch") && random[HM_GlobalEventHandler](1,2) == 1)
         {
-            let dna = firstDnaPlace.Spawn("HM_Dna", firstDnaPlace.pos, ALLOW_REPLACE);
-            if(dna)
-            {
-                dna.A_SpriteOffset(0, -32);
-            }
-            //console.printf("Spawned first DNA on a %s.", firstDnaPlace.GetClassName());
+            console.printf("First DNA did not spawn because of Defunded Research.");
         }
-        else
+        else 
         {
-            //console.printf("Could not find place to spawn first DNA.");
+            let firstDnaPlace = FindPlaceForFirstDna();
+            if(firstDnaPlace != null)
+            {
+                let dna = firstDnaPlace.Spawn("HM_Dna", firstDnaPlace.pos, ALLOW_REPLACE);
+                if(dna)
+                {
+                    dna.A_SpriteOffset(0, -32);
+                }
+                //console.printf("Spawned first DNA on a %s.", firstDnaPlace.GetClassName());
+            }
+            else
+            {
+                //console.printf("Could not find place to spawn first DNA.");
+            }
         }
 
         let secondDnaPlace = FindPlaceForSecondDna();

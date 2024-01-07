@@ -218,6 +218,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "defundedresearch",
+            "Defunded Research",
+            HM_CAT_PLAYER,
+            "One less DNA might spawn in each level."
+        );
+
+        AddMutationDefinition(
             "dejavu",
             "Deja Vu",
             HM_CAT_ALLMONSTERS,
@@ -285,6 +292,13 @@ extend class HM_GlobalEventHandler
             "Fist Atrophy",
             HM_CAT_DOOM2 | HM_CAT_REVENANT,
             "Revenants always use their ranged attack instead of punching."
+        );
+
+        AddMutationDefinition(
+            "geneticinstability",
+            "Genetic Instability",
+            HM_CAT_ALLMONSTERS,
+            "An additional mutation might affect the monsters in each level."
         );
 
         AddMutationDefinition(
@@ -404,13 +418,6 @@ extend class HM_GlobalEventHandler
             "Momentum",
             HM_CAT_CACODEMON,
             "Cacodemons attack faster the faster they are moving."
-        );
-
-        AddMutationDefinition(
-            "geneticinstability",
-            "Genetic Instability",
-            HM_CAT_ALLMONSTERS,
-            "An additional mutation might affect the monsters in each level."
         );
 
         AddMutationDefinition(
