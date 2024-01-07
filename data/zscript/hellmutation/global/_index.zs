@@ -9,6 +9,7 @@
 #include "./perkDefinitions.zs"
 
 #include "./networkProcess.zs"
+#include "./perkGained.zs"
 #include "./chooseMutations.zs"
 #include "./worldLoaded.zs"
 #include "./worldThingDamaged.zs"

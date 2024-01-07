@@ -175,6 +175,8 @@ extend class HM_GlobalEventHandler
             commandName.split(parts, ":");
 
             let perkKey = parts[1];
+            let playerNumber = e.args[0];
+            let player = players[playerNumber].mo;
 
             bool found = false;
             for(let i = 0; i < PerkDefinitions.Size(); i++)
@@ -190,17 +192,27 @@ extend class HM_GlobalEventHandler
 
             if(found)
             {
-
-                let playerNumber = e.args[0];
                 console.printf("%s gained perk %s", players[playerNumber].GetUserName(), perkKey);
-                PerkStates.Insert(perkKey, "Active");
+                if(perkKey.IndexOf("basic_") <= 0)
+                {
+                    PerkStates.Insert(perkKey, "Active");
+                }
 
-                players[playerNumber].mo.TakeInventory("HM_PerkPoint", 1);
-                players[playerNumber].mo.ACS_NamedExecute("hm_perkadded");
+                player.TakeInventory("HM_PerkPoint", 1);
+                player.ACS_NamedExecute("hm_perkadded");
+
+                PerkGained(perkKey, playerNumber);
+            }
+            else if(perkKey == "basic_recover" || perkKey == "basic_panic" || perkKey == "basic_undo")
+            {
+                console.printf("%s gained perk %s", players[playerNumber].GetUserName(), perkKey);
+                PerkGained(perkKey, playerNumber);
+                player.TakeInventory("HM_PerkPoint", 1);
+                player.ACS_NamedExecute("hm_perkadded");
             }
             else
             {
-                console.printf("Unknown mutation %s", perkKey);
+                console.printf("Unknown perk %s", perkKey);
             }
         }
         else
