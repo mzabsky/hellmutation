@@ -1,15 +1,28 @@
 addkeysection "Hell Mutation" hellmutation
 addmenukey "Use DNA" hm_dnamenu
-addmenukey "View Mutations" hm_mutationmenu
+addmenukey "View Active Mutations" hm_mutationmenu
+addmenukey "Choose Perk" hm_chooseperkmenu
+addmenukey "View Active Perks" hm_perksmenu
 
 alias hm_dnamenu "netevent hm_dnamenu"
 alias hm_mutationmenu "netevent hm_mutationmenu"
+
+alias hm_chooseperkmenu "netevent hm_chooseperkmenu"
+alias hm_perksmenu "netevent hm_perksmenu"
 
 alias hm_add "netevent hm_add:%1"
 alias hm_remove "netevent hm_remove:%1"
 alias hm_addall "netevent hm_addall"
 alias hm_clear "netevent hm_clear"
 
+alias hm_addperk "netevent hm_addperk:%1"
+alias hm_removeperk "netevent hm_removeperk:%1"
+alias hm_addallperks "netevent hm_addallperks"
+alias hm_clearperks "netevent hm_clearperks"
+
 defaultbind N hm_dnamenu
 defaultbind M hm_mutationmenu
+
+defaultbind O hm_chooseperkmenu
+defaultbind P hm_perksmenu
 

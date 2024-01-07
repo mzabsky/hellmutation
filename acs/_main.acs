@@ -2,9 +2,22 @@
 
 script "hm_hud" (void) CLIENTSIDE {
     while(true){
+        int y = 0.9;
         if(CheckInventory("HM_Dna") > 0) {
             SetFont("DOOMFONT");
-	        HudMessage(s:"You have \c[Green]", d:CheckInventory("HM_Dna"), s:"\c[Yellow] unused \c[Purple]DNA\c[Yellow]. Press \c[White]", k:"hm_dnamenu", s:"\c[Yellow] to remove a mutation from the monsters!"; HUDMSG_PLAIN,785,CR_YELLOW,0.5,0.9,0.5,0);
+	        HudMessage(s:"You have \c[Green]", d:CheckInventory("HM_Dna"), s:"\c[Yellow] unused \c[Purple]DNA\c[Yellow]. Press \c[White]", k:"hm_dnamenu", s:"\c[Yellow] to remove a mutation from the monsters!"; HUDMSG_PLAIN,785,CR_YELLOW,0.5,y,0.5,0);
+            y += 0.03;
+        }
+
+        if(CheckInventory("HM_PerkPoint") == 1) { // singular
+            SetFont("DOOMFONT");
+	        HudMessage(s:"You have \c[Green]", d:CheckInventory("HM_PerkPoint"), s:"\c[Yellow] unused \c[Purple]PERK POINT\c[Yellow]. Press \c[White]", k:"hm_chooseperkmenu", s:"\c[Yellow] to gain a perk!"; HUDMSG_PLAIN,795,CR_YELLOW,0.5,y,0.5,0);
+            y += 0.03;
+        }
+        else if(CheckInventory("HM_PerkPoint") > 1) { // plural
+            SetFont("DOOMFONT");
+	        HudMessage(s:"You have \c[Green]", d:CheckInventory("HM_PerkPoint"), s:"\c[Yellow] unused \c[Purple]PERK POINTS\c[Yellow]. Press \c[White]", k:"hm_chooseperkmenu", s:"\c[Yellow] to gain a perk!"; HUDMSG_PLAIN,795,CR_YELLOW,0.5,y,0.5,0);
+            y += 0.03;
         }
 
         delay(7);
@@ -49,6 +62,11 @@ script "hm_mutationremoved" (void) CLIENTSIDE {
     HudMessage(s:"\c[Yellow]MUTATION REMOVED!"; HUDMSG_FADEOUT,790,CR_YELLOW,0.5,0.7,5.0,0.5);
 }
 
+script "hm_perkadded" (void) CLIENTSIDE {
+    SetFont("BIGFONT");
+    HudMessage(s:"\c[Yellow]PERK GAINED!"; HUDMSG_FADEOUT,796,CR_YELLOW,0.5,0.7,5.0,0.5);
+}
+
 script "hm_clearannounce" (void) CLIENTSIDE {
     HudMessage(s:""; HUDMSG_PLAIN,786,CR_BLUE,0.5,0.3,2.0,0.5);
     HudMessage(s:""; HUDMSG_PLAIN,787,CR_BLUE,0.5,0.3,2.0,0.5);
@@ -58,4 +76,7 @@ script "hm_clearannounce" (void) CLIENTSIDE {
     HudMessage(s:""; HUDMSG_PLAIN,791,CR_BLUE,0.5,0.3,2.0,0.5);
     HudMessage(s:""; HUDMSG_PLAIN,792,CR_BLUE,0.5,0.3,2.0,0.5);
     HudMessage(s:""; HUDMSG_PLAIN,793,CR_BLUE,0.5,0.3,2.0,0.5);
+    HudMessage(s:""; HUDMSG_PLAIN,794,CR_BLUE,0.5,0.3,2.0,0.5);
+    HudMessage(s:""; HUDMSG_PLAIN,795,CR_BLUE,0.5,0.3,2.0,0.5);
+    HudMessage(s:""; HUDMSG_PLAIN,796,CR_BLUE,0.5,0.3,2.0,0.5);
 }

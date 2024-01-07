@@ -170,7 +170,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
         let offeredMutationCount = globalHandler.GetMutationRemovalOnOfferCount();
         for(let i = 0; i < offeredMutationCount; i++)
         {
-            HM_MutationDefinition mutationDefinition;
+            HM_Definition mutationDefinition;
             globalHandler.GetMutationRemovalOnOffer(i, mutationDefinition);
 
             if(globalHandler.IsMutationRemoved(mutationDefinition.Key))
@@ -282,7 +282,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
                 case MKEY_Enter:
                     if(currentHighlightedMutationIndex != -1)
                     {
-                        HM_MutationDefinition mutationDefinition;
+                        HM_Definition mutationDefinition;
                         globalHandler.GetMutationRemovalOnOffer(currentHighlightedMutationIndex, mutationDefinition);
                         EventHandler.SendNetworkEvent(String.Format("HM_Remove:%s", mutationDefinition.Key), consoleplayer);
                         Close();

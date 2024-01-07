@@ -127,7 +127,7 @@ class HM_MutationMenu : HM_ZFGenericMenu
         mutationsPerPage = 7;
         for(let i = 0; i < mutationsPerPage; i++)
         {
-            /*HM_MutationDefinition mutationDefinition;
+            /*HM_Definition mutationDefinition;
             globalHandler.GetMutationDefinition(i, mutationDefinition);
 
             if(!globalHandler.IsMutationActive(mutationDefinition.Key))
@@ -277,7 +277,7 @@ class HM_MutationMenu : HM_ZFGenericMenu
         for(int i = 0; i < mutationDefinitionCount; i++)
         {
             //console.printf("redraw i %d", i);
-            HM_MutationDefinition mutationDefinition;
+            HM_Definition mutationDefinition;
 
             globalHandler.GetMutationDefinition(i, mutationDefinition);
             //console.printf("mutation %s %d", mutationDefinition.Key, globalHandler.IsMutationActive(mutationDefinition.Key));

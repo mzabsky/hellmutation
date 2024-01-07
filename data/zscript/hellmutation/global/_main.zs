@@ -2,16 +2,18 @@
 class HM_GlobalEventHandler: EventHandler
 {
     // This could be better done with associative arrays, once their const methods are in stable version
-    Array<HM_MutationDefinition> mutationDefinitions;
+    Array<HM_Definition> mutationDefinitions;
+    Array<HM_Definition> perkDefinitions;
 
     //=================================
     // PERSISTENT FIELDS
     //=================================
     int MapNumber;
 
-    // Indexed by mutation key, values are: "None" (or not present), "Active" and "Removed"
-    Dictionary MutationStates;
+    Dictionary MutationStates; // Indexed by mutation key, values are: "None" (or not present), "Active" and "Removed"
     Array<string> MutationRemovalsOnOffer;
+    Dictionary PerkStates; // Indexed by perk key, values are: "None" (or not present), "Active" and "Removed"
+    Array<string> PerksOnOffer;
 
     HM_GlobalThinker globalThinker;
     
@@ -26,6 +28,7 @@ class HM_GlobalEventHandler: EventHandler
     {
         MapNumber = 0;
         MutationStates = Dictionary.Create();
+        PerkStates = Dictionary.Create();
 
         //CVar attacksetting = CVar.FindCVar('m_yaw');
         //attackSetting.SetFloat(0.1);
@@ -34,21 +37,7 @@ class HM_GlobalEventHandler: EventHandler
 
     override void PlayerSpawned (PlayerEvent e)
     {
-        //console.printf("PLAYER SPAWNED %d", e.playerNumber);
-		    //if (e.thing) // Check that the Actor is valid
-			  //  console.printf("SPAWNED %s", e.thing.GetClassName());
-
         players[e.playerNumber].mo.ACS_NamedExecute("hm_hud", 0);
-    }
-
-    override void WorldUnloaded(WorldEvent e) 
-    {
-        //console.printf("WORLD UNLOADED MAP %d", MapNumber);
-
-        MapNumber++;
-
-        globalThinker.MapNumber = MapNumber;
-        globalThinker.MutationStates = MutationStates;
     }
 
     override void WorldThingSpawned(WorldEvent e)

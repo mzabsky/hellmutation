@@ -2,6 +2,7 @@ class HM_GlobalThinker : Thinker
 {
     int MapNumber;
     Dictionary MutationStates;
+    Dictionary PerkStates;
 
     static HM_GlobalThinker Get()
     {

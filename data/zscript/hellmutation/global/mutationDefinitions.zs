@@ -1,46 +1,61 @@
-class HM_MutationDefinition
+class HM_Definition
 {
     string Key;
     int MapNumber;
     string Name;
-    MutationCategory Category;
+    HM_Category Category;
     string Description;
+    
 }
 
-enum MutationCategory
+// Categories for both mutations and perks
+enum HM_Category
 {
-    HM_CAT_DOOM2 = 1 << 0, // Only allowed if the current IWAD allows DOOM2's feature set (arch viles and stuff)
+    HM_CAT_DOOM2 = 1 << 0, // Only allowed if the current IWAD allows DOOM2's feature set (arch viles, super shotgun and stuff)
     HM_CAT_NOFIRSTMAP = 1 << 1, // Can't appear in the first map in this save
     HM_CAT_PLAYER = 1 << 2,
     HM_CAT_DMGFLOOR = 1 << 3,
     HM_CAT_BARREL = 1 << 4,
 
-    HM_CAT_ALLMONSTERS = 1 << 13, // Affects all monsters
+    // Weapons
+    HM_CAT_FIST = 1 << 5,
+    HM_CAT_PISTOL = 1 << 6,
+    HM_CAT_CHAINSAW = 1 << 7,
+    HM_CAT_SHOTGUN = 1 << 8,
+    HM_CAT_SUPERSHOTGUN = 1 << 9,
+    HM_CAT_CHAINGUN = 1 << 10,
+    HM_CAT_ROCKETLAUNCHER = 1 << 11,
+    HM_CAT_PLASMAGUN = 1 << 12,
+    HM_CAT_BFG = 1 << 13,
+
+    HM_CAT_ALLMONSTERS = 1 << 14, // Affects all monsters
 
     // Enemy types
-    HM_CAT_ZOMBIEMAN = 1 << 14,
-    HM_CAT_SHOTGUNNER = 1 << 15,
-    HM_CAT_CHAINGUNNER = 1 << 16,
-    HM_CAT_IMP = 1 << 17,
-    HM_CAT_PINKY = 1 << 18, // Spectres count as pinkys
-    HM_CAT_REVENANT = 1 << 19,
-    HM_CAT_CACODEMON = 1 << 20,
-    HM_CAT_LOSTSOUL = 1 << 21,
-    HM_CAT_PAINELEMENTAL = 1 << 22,
-    HM_CAT_HELLKNIGHT = 1 << 23,
-    HM_CAT_BARONOFHELL = 1 << 24,
-    HM_CAT_MANCUBUS = 1 << 25,
-    HM_CAT_ARCHVILE = 1 << 26,
-    HM_CAT_ARACHNOTRON = 1 << 27,
-    HM_CAT_SPIDERMASTERMIND = 1 << 28,
-    HM_CAT_CYBERDEMON = 1 << 29,
-    HM_CAT_BOSSBRAIN = 1 << 30
+    HM_CAT_ZOMBIEMAN = 1 << 15,
+    HM_CAT_SHOTGUNNER = 1 << 16,
+    HM_CAT_CHAINGUNNER = 1 << 17,
+    HM_CAT_IMP = 1 << 18,
+    HM_CAT_PINKY = 1 << 19, // Spectres count as pinkys
+    HM_CAT_REVENANT = 1 << 20,
+    HM_CAT_CACODEMON = 1 << 21,
+    HM_CAT_LOSTSOUL = 1 << 22,
+    HM_CAT_PAINELEMENTAL = 1 << 23,
+    HM_CAT_HELLKNIGHT = 1 << 24,
+    HM_CAT_BARONOFHELL = 1 << 25,
+    HM_CAT_MANCUBUS = 1 << 26,
+    HM_CAT_ARCHVILE = 1 << 27,
+    HM_CAT_ARACHNOTRON = 1 << 28,
+    HM_CAT_SPIDERMASTERMIND = 1 << 29,
+    HM_CAT_CYBERDEMON = 1 << 30,
+    HM_CAT_BOSSBRAIN = 1 << 31
 };
 
 extend class HM_GlobalEventHandler
 {
     void CreateMutationDefinitions()
     {
+        console.printf("TEST %d %d", HM_CAT_BOSSBRAIN, HM_CAT_CYBERDEMON);
+
         AddMutationDefinition(
             "abundance",
             "Abundance",
@@ -637,9 +652,9 @@ extend class HM_GlobalEventHandler
         );
     }
     
-    private void AddMutationDefinition(string key, string name, MutationCategory category, string description)
+    private void AddMutationDefinition(string key, string name, HM_Category category, string description)
     {
-        let mutationDefinition = new("HM_MutationDefinition");
+        let mutationDefinition = new("HM_Definition");
         mutationDefinition.Key = key;
         mutationDefinition.Name = name;
         mutationDefinition.MapNumber = 0;

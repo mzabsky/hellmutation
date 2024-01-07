@@ -6,17 +6,51 @@ extend class HM_GlobalEventHandler
         hasDoom2 = detectGame.HasDoom2();
 
         CreateMutationDefinitions();
+        CreatePerkDefinitions();
 
         globalThinker = HM_GlobalThinker.Get();
         MapNumber = globalThinker.MapNumber;
-        MutationStates = globalThinker.MutationStates;
 
+        MutationStates = globalThinker.MutationStates;
         if(MutationStates == null)
         {
             MutationStates = Dictionary.Create();
         }
 
+        PerkStates = globalThinker.PerkStates;
+        if(PerkStates == null)
+        {
+            PerkStates = Dictionary.Create();
+        }
+
         int newMutationsInEffect = ChooseMutations();
+
+        if(MapNumber == 0)
+        {
+            ChoosePerks();
+        }
+        else
+        {
+            console.printf("ITERATOR");
+
+            DictionaryIterator dictIt = DictionaryIterator.Create(PerkStates);
+            while(dictIt.Next())
+            {
+                console.printf(dictIt.Key());
+            }
+
+
+            for(let i = 0; i < PerkDefinitions.Size(); i++)
+            {
+                let currentPerkDefinition = PerkDefinitions[i];
+                let foundValue = PerkStates.At(currentPerkDefinition.Key);
+                
+                if(foundValue == "Offered")
+                {
+                    PerksOnOffer.Push(currentPerkDefinition.Key);
+                }
+            }
+        }
 
         // Kleptomania
         if(IsMutationActive("kleptomania"))

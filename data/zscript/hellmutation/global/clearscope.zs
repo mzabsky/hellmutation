@@ -19,7 +19,7 @@ extend class HM_GlobalEventHandler
         return isActive;
     }
 
-    clearscope void GetMutationRemovalOnOffer(int index, out HM_MutationDefinition mutationDefinition) const
+    clearscope void GetMutationRemovalOnOffer(int index, out HM_Definition mutationDefinition) const
     {
         let mutationKey = MutationRemovalsOnOffer[index];
         for(let i = 0; i < MutationDefinitions.Size(); i++)
@@ -38,13 +38,11 @@ extend class HM_GlobalEventHandler
         return MutationRemovalsOnOffer.Size();
     }
     
-
     clearscope int GetMutationDefinitionCount() const
     {
         return MutationDefinitions.Size();
     }
     
-
     clearscope int GetActiveMutationDefinitionCount() const
     {
         let activeCount = 0;
@@ -58,7 +56,7 @@ extend class HM_GlobalEventHandler
         return activeCount;
     }
 
-    clearscope void GetMutationDefinition(int index, out HM_MutationDefinition mutationDefinition) const
+    clearscope void GetMutationDefinition(int index, out HM_Definition mutationDefinition) const
     {
         mutationDefinition = MutationDefinitions[index];
     }
@@ -75,6 +73,71 @@ extend class HM_GlobalEventHandler
 
         return false;
     }
+    
+    clearscope bool IsPerkActive(string mutationName)
+    {
+        let foundValue = PerkStates.At(mutationName.MakeLower());
+        let isActive = foundValue == "Active";
+
+        return isActive;
+    }
+
+    clearscope void GetPerkOnOffer(int index, out HM_Definition perkDefinition) const
+    {
+        let mutationKey = PerksOnOffer[index];
+        for(let i = 0; i < PerkDefinitions.Size(); i++)
+        {
+            let currentPerkDefinition = PerkDefinitions[i];
+            if(currentPerkDefinition.Key == mutationKey)
+            {
+                perkDefinition = currentPerkDefinition;
+                return;
+            }
+        }
+    }
+
+    clearscope int GetPerksOnOfferCount() const
+    {
+        return PerksOnOffer.Size();
+    }
+    
+    clearscope int GetPerkDefinitionCount() const
+    {
+        return PerkDefinitions.Size();
+    }
+    
+    clearscope int GetActivePerkDefinitionCount() const
+    {
+        let activeCount = 0;
+        for(int i = 0; i < PerkDefinitions.Size(); i++)
+        {
+            if(IsPerkActive(PerkDefinitions[i].Key))
+            {
+                activeCount++;
+            }
+        }
+        return activeCount;
+    }
+
+    clearscope void GetPerkDefinition(int index, out HM_Definition perkDefinition) const
+    {
+        perkDefinition = PerkDefinitions[index];
+    }
+
+    clearscope bool CanPerkBeGained(string perkKey)
+    {
+        for(let i = 0; i < PerksOnOffer.Size(); i++)
+        {
+            if(perkKey == PerksOnOffer[i])
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
 
     clearscope string GetKeyForKeybind(string keybind) 
     {

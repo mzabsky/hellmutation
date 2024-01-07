@@ -17,32 +17,46 @@ extend class HM_GlobalEventHandler
                 Menu.SetMenu("HM_MutationMenu");
             }
         }
+        else if (commandName == "hm_chooseperkmenu")
+        {
+            if(e.player == consoleplayer)
+            {
+                Menu.SetMenu("HM_ChoosePerkMenu");
+            }
+        }
+        else if (commandName == "hm_perksmenu")
+        {
+            if(e.player == consoleplayer)
+            {
+                Menu.SetMenu("HM_PerksMenu");
+            }
+        }
         else if (commandName == "hm_addall")
         {
-            for(let i = 0; i < mutationDefinitions.Size(); i++)
+            for(let i = 0; i < MutationDefinitions.Size(); i++)
             {
-                MutationStates.Insert(mutationDefinitions[i].Key, "Active");
+                MutationStates.Insert(MutationDefinitions[i].Key, "Active");
             }
         }
         else if (commandName == "hm_clear")
         {
-            for(let i = 0; i < mutationDefinitions.Size(); i++)
+            for(let i = 0; i < MutationDefinitions.Size(); i++)
             {
-                MutationStates.Insert(mutationDefinitions[i].Key, "None");
+                MutationStates.Insert(MutationDefinitions[i].Key, "None");
             }
         }
         else if (commandName.IndexOf("hm_remove:") >= 0) // sent by DNA menu
         {
             Array <String> parts;
-			      commandName.split(parts, ":");
+			commandName.split(parts, ":");
 
             let playerNumber = e.args[0];
-            let mutationName = parts[1];
+            let mutationKey = parts[1];
 
-            if(IsMutationActive(mutationName))
+            if(IsMutationActive(mutationKey))
             {
-                console.printf("%s removed mutation %s", players[playerNumber].GetUserName(), mutationName);
-                MutationStates.Insert(mutationName, "Removed");
+                console.printf("%s removed mutation %s", players[playerNumber].GetUserName(), mutationKey);
+                MutationStates.Insert(mutationKey, "Removed");
 
                 let playerPawn = players[playerNumber].mo;
                 playerPawn.TakeInventory("HM_Dna", 1);
@@ -57,7 +71,7 @@ extend class HM_GlobalEventHandler
             }
             else
             {
-                console.printf("%s is not an active mutation.", mutationName);
+                console.printf("%s is not an active mutation.", mutationKey);
             }
         }
         else if (commandName.IndexOf("hm_add:") >= 0)
@@ -65,12 +79,12 @@ extend class HM_GlobalEventHandler
             Array <String> parts;
             commandName.split(parts, ":");
 
-            let mutationName = parts[1];
+            let mutationKey = parts[1];
 
             bool found = false;
-            for(let i = 0; i < mutationDefinitions.Size(); i++)
+            for(let i = 0; i < MutationDefinitions.Size(); i++)
             {
-                if (mutationDefinitions[i].Key != mutationName)
+                if (MutationDefinitions[i].Key != mutationKey)
                 {
                     continue;
                 }
@@ -83,12 +97,12 @@ extend class HM_GlobalEventHandler
             {
 
                 let playerNumber = e.args[0];
-                console.printf("%s added mutation %s", players[playerNumber].GetUserName(), mutationName);
-                MutationStates.Insert(mutationName, "Active");
+                console.printf("%s added mutation %s", players[playerNumber].GetUserName(), mutationKey);
+                MutationStates.Insert(mutationKey, "Active");
             }
             else
             {
-                console.printf("Unknown mutation %s", mutationName);
+                console.printf("Unknown mutation %s", mutationKey);
             }
         }
         else if (commandName.IndexOf("hm_offer:") >= 0)
@@ -101,7 +115,7 @@ extend class HM_GlobalEventHandler
             {
                 let mutationKey = parts[i];
                 bool found = false;
-                for(let j = 0; j < mutationDefinitions.Size(); j++)
+                for(let j = 0; j < MutationDefinitions.Size(); j++)
                 {
                     if (mutationDefinitions[j].Key != mutationKey)
                     {
@@ -121,6 +135,72 @@ extend class HM_GlobalEventHandler
                 {
                     console.printf("Unknown mutation %s", mutationKey);
                 }
+            }
+        }
+        else if (commandName == "hm_addallperks")
+        {
+            for(let i = 0; i < PerkDefinitions.Size(); i++)
+            {
+                PerkStates.Insert(PerkDefinitions[i].Key, "Active");
+            }
+        }
+        else if (commandName == "hm_clearperks")
+        {
+            for(let i = 0; i < PerkDefinitions.Size(); i++)
+            {
+                PerkStates.Insert(PerkDefinitions[i].Key, "None");
+            }
+        }
+        else if (commandName.IndexOf("hm_removeperk:") >= 0) // sent by Choose Perk menu
+        {
+            Array <String> parts;
+			commandName.split(parts, ":");
+
+            let playerNumber = e.args[0];
+            let perkKey = parts[1];
+
+            if(IsPerkActive(perkKey))
+            {
+                console.printf("%s removed perk %s", players[playerNumber].GetUserName(), perkKey);
+                PerkStates.Insert(perkKey, "None");
+            }
+            else
+            {
+                console.printf("%s is not an active perk.", perkKey);
+            }
+        }
+        else if (commandName.IndexOf("hm_addperk:") >= 0)
+        {
+            Array <String> parts;
+            commandName.split(parts, ":");
+
+            let perkKey = parts[1];
+
+            bool found = false;
+            for(let i = 0; i < PerkDefinitions.Size(); i++)
+            {
+                if (PerkDefinitions[i].Key != perkKey)
+                {
+                    continue;
+                }
+
+                found = true;
+                break;
+            }
+
+            if(found)
+            {
+
+                let playerNumber = e.args[0];
+                console.printf("%s gained perk %s", players[playerNumber].GetUserName(), perkKey);
+                PerkStates.Insert(perkKey, "Active");
+
+                players[playerNumber].mo.TakeInventory("HM_PerkPoint", 1);
+                players[playerNumber].mo.ACS_NamedExecute("hm_perkadded");
+            }
+            else
+            {
+                console.printf("Unknown mutation %s", perkKey);
             }
         }
         else
