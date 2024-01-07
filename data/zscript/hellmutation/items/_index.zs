@@ -1,6 +1,8 @@
+#include "./armorbonus.zs"
 #include "./backpack.zs"
 #include "./blursphere.zs"
 #include "./dna.zs"
+#include "./healthbonus.zs"
 #include "./keys.zs"
 #include "./lockedmutationcounter.zs"
 #include "./medikit.zs"

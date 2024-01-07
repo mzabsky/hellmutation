@@ -14,6 +14,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "bonusbonus",
+            "Bonus Bonus",
+            HM_CAT_PLAYER,
+            "Armor and Health bonuses grant 2 health and 2 armor each."
+        );
+
+        AddPerkDefinition(
             "carepackage",
             "Care Package",
             HM_CAT_PLAYER,
