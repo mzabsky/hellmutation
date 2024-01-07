@@ -2,15 +2,20 @@ extend class HM_GlobalEventHandler
 {
     void CreatePerkDefinitions()
     {
-        // Only chance perks appear here, basic perks are omitterd
+        // Only chance perks appear here, basic perks are hard coded
 
-
-
-        AddPerkDefinition(
+        AddPerkDefinition( // TODO
             "bloodtrance",
             "Blood Trance",
             HM_CAT_FIST,
             "Kills with fist briefly increase movement speed."
+        );
+
+        AddPerkDefinition(
+            "brinkmanship",
+            "Brinkmanship",
+            HM_CAT_PLAYER,
+            "As long as you have 25 or less life, your movement speed is increased."
         );
 
         AddPerkDefinition(
@@ -27,7 +32,7 @@ extend class HM_GlobalEventHandler
             "Backpacks fill all ammo completely."
         );
 
-        AddPerkDefinition(
+        AddPerkDefinition( // TODO
             "coherentplasma",
             "Coherent Plasma",
             HM_CAT_PLASMAGUN,
@@ -48,7 +53,7 @@ extend class HM_GlobalEventHandler
             "Blur spheres affect you as if they were Soulspheres."
         );
 
-        AddPerkDefinition(
+        AddPerkDefinition( // TODO
             "longbarrels",
             "Long Barrels",
             HM_CAT_CHAINGUN,
@@ -62,21 +67,21 @@ extend class HM_GlobalEventHandler
             "Soulspheres affect you as if they were Megaspheres."
         );
 
-        AddPerkDefinition(
+        AddPerkDefinition( // TODO
             "sawnoff",
             "Sawn Off",
             HM_CAT_SHOTGUN,
             "Shotgun has significantly increased spread and slightly increased number of pellets fired."
         );
 
-        AddPerkDefinition(
+        AddPerkDefinition( // TODO
             "slayerssaw",
             "Slayer's Saw",
             HM_CAT_CHAINSAW,
             "Kills with chainsaw cause random ammo to drop."
         );
 
-        AddPerkDefinition(
+        AddPerkDefinition( // TODO
             "tunedthrust",
             "Tuned Thrust",
             HM_CAT_ROCKETLAUNCHER,

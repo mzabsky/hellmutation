@@ -1,5 +1,7 @@
 class HM_Player: DoomPlayer
 {
+    mixin HM_GlobalRef;
+
     // When the player has last spotted a gorgon protocol dummy
     int lastGorgonProtocolSpotted;
 
@@ -118,6 +120,12 @@ class HM_Player: DoomPlayer
             }
             player.cmd.forwardmove /= divisor;
             player.cmd.sidemove /= divisor;
+        }
+
+        if(global.IsPerkActive("brinkmanship") && player.mo && player.health <= 25)
+        {
+            player.cmd.forwardmove *= 1.07;
+            player.cmd.sidemove *= 1.07;
         }
 
         //console.printf("speed %f", originalSpeed > 0 ? float(player.cmd.forwardmove) / float(originalSpeed) : 0);
