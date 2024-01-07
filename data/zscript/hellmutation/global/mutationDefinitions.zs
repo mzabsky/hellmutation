@@ -407,6 +407,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "geneticinstability",
+            "Genetic Instability",
+            HM_CAT_ALLMONSTERS,
+            "An additional mutation might affect the monsters in each level."
+        );
+
+        AddMutationDefinition(
             "napalmpayload",
             "Napalm Payload",
             HM_CAT_DOOM2| HM_CAT_MANCUBUS,

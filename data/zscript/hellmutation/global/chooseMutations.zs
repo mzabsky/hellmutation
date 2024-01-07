@@ -3,7 +3,14 @@ extend class HM_GlobalEventHandler
     int ChooseMutations()
     {
         Array<HM_Definition> chosenOptions;
-        ChooseByCategories(MutationDefinitions, 4, "mutation", chosenOptions);
+
+        let numberOfMutationsToChoose = 4;
+        if(IsMutationActive("geneticinstability") && random[HM_GlobalEventHandler](1, 2) == 1)
+        {
+            numberOfMutationsToChoose++;
+        }
+
+        ChooseByCategories(MutationDefinitions, numberOfMutationsToChoose, "mutation", chosenOptions);
 
         for(int i = 0; i < chosenOptions.Size(); i++)
         {
