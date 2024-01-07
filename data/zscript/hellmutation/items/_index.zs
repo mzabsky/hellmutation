@@ -3,5 +3,7 @@
 #include "./dna.zs"
 #include "./keys.zs"
 #include "./lockedmutationcounter.zs"
+#include "./medikit.zs"
 #include "./perkpoint.zs"
 #include "./soulsphere.zs"
+#include "./stimpack.zs"

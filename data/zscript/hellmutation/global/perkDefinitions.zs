@@ -28,6 +28,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "firstaid",
+            "First Aid",
+            HM_CAT_PLAYER,
+            "Stimpacks and Medikits grant 10 extra health."
+        );
+
+        AddPerkDefinition(
             "focused",
             "Focused",
             HM_CAT_PLAYER,
