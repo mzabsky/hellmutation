@@ -3,7 +3,11 @@ extend class HM_GlobalEventHandler
     void PerkGained(string perkKey, int playerNumber) 
     {
         let player = players[playerNumber].mo;
-        if(perkKey == "basic_recover")
+        if(perkKey == "basic_panic")
+        {
+            player.GiveInventory("InvulnerabilitySphere", 1);
+        }
+        else if(perkKey == "basic_recover")
         {
             player.A_SetHealth(100);
             player.GiveInventory("GreenArmor", 1);
