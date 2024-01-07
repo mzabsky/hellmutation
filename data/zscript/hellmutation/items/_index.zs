@@ -4,3 +4,4 @@
 #include "./keys.zs"
 #include "./lockedmutationcounter.zs"
 #include "./perkpoint.zs"
+#include "./soulsphere.zs"

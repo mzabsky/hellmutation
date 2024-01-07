@@ -6,7 +6,16 @@ class HM_BlurSphere: BlurSphere replaces BlurSphere
     {
         if(global.IsPerkActive("focused"))
         {
-            Owner.GiveInventoryType("soulsphere");
+            // Make sure Focused stacks with Megalomania correctly
+            if(global.IsPerkActive("megalomania"))
+            {
+                Owner.GiveInventoryType("megasphere");
+            }
+            else
+            {
+                Owner.GiveInventoryType("soulsphere");
+            }
+            
             return true;
         }
         
