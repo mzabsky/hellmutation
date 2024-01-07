@@ -14,6 +14,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "carepackage",
+            "Care Package",
+            HM_CAT_PLAYER,
+            "Backpacks fill all ammo completely."
+        );
+
+        AddPerkDefinition(
             "coherentplasma",
             "Coherent Plasma",
             HM_CAT_PLASMAGUN,
