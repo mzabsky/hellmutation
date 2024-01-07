@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             // Has damage source
 
-            console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Source: %s, Source health %d", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.damageSource.GetClassName(), e.damageSource.health);
+            console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Source: %s, Source health %d, Damage type: %s", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.damageSource.GetClassName(), e.damageSource.health, e.damageType);
 
             // Hematophagy
             if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
@@ -33,6 +33,28 @@ extend class HM_GlobalEventHandler
                 // (instead of eg. via a barrel)
                 e.inflictor.A_ResetHealth();
                 e.inflictor.A_GiveInventory("HM_HealGlitterGenerator");
+            }
+
+            if (e.damageSource is "PlayerPawn")
+            {
+                // Vampirism
+                if(IsPerkActive("vampirism") && e.thing.bIsMonster)
+                {
+                    let percentMultiplier = 1;
+                    let vampirismValue = e.damage * 10 * percentMultiplier / 100;
+
+                    console.printf("vampirism: %d", vampirismValue);
+
+                    if(vampirismValue < 10)
+                    {
+                        if(random[HM_GlobalHandler](0, 10) <= vampirismValue)
+                        {
+                            vampirismValue = 10;
+                        }
+                    }
+
+                    e.damageSource.A_SetHealth(min(e.damageSource.health + vampirismValue / 10, e.damageSource.spawnhealth()));
+                }
             }
 
             if (e.thing is "PlayerPawn")
