@@ -24,11 +24,16 @@ extend class HM_GlobalEventHandler
         {
             let killer = killTracker.killer;
 
-            //console.printf("Kill %s %s", weapon.GetClassName(), e.damageSource.GetClassName());
+            console.printf("Kill %s", weapon.GetClassName());
 
             if(weapon is 'Fist' && IsPerkActive("bloodlust"))
             {
-                killer.GiveInventoryType('PowerGiverBloodlust');
+                killer.GiveInventoryType('HM_PowerGiverBloodlust');
+            }
+
+            if(e.thing is 'DoomImp' && IsPerkActive("shakedown"))
+            {
+                e.thing.Spawn("HM_RandomAmmo", e.thing.pos);
             }
         }
 

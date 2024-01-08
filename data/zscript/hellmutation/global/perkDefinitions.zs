@@ -74,6 +74,13 @@ extend class HM_GlobalEventHandler
             "Shotgun has significantly increased spread and slightly increased number of pellets fired."
         );
 
+        AddPerkDefinition(
+            "shakedown",
+            "Shake Down",
+            HM_CAT_IMP,
+            "Imps and their variants drop random ammo when killed."
+        );
+
         AddPerkDefinition( // TODO
             "slayerssaw",
             "Slayer's Saw",
