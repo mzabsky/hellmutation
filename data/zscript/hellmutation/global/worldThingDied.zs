@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             let killer = killTracker.killer;
 
-            console.printf("Kill %s", weapon.GetClassName());
+            console.printf("Kill Weapon: %s, Inflictor: %s", weapon.GetClassName(), e.inflictor.GetClassName());
 
             if(weapon is 'Fist' && IsPerkActive("bloodlust"))
             {
@@ -34,6 +34,18 @@ extend class HM_GlobalEventHandler
             if(e.thing is 'DoomImp' && IsPerkActive("shakedown"))
             {
                 e.thing.Spawn("HM_RandomAmmo", e.thing.pos);
+            }
+            
+            // Performance Bonus - Rocket kills 5 monsters -> gets refunded
+            if(e.inflictor is "HM_PlayerRocket" && IsPerkActive("performancebonus"))
+            {
+                let rocket = HM_PlayerRocket(e.inflictor);
+                rocket.KillCount++;
+                console.printf("rocket kills %d", rocket.KillCount);
+                if(rocket.KillCount == 5)
+                {
+                    Killer.GiveInventoryType("RocketAmmo");
+                }
             }
         }
 

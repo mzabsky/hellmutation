@@ -67,6 +67,13 @@ extend class HM_GlobalEventHandler
             "Soulspheres affect you as if they were Megaspheres."
         );
 
+        AddPerkDefinition(
+            "performancebonus",
+            "Performance Bonus",
+            HM_CAT_ROCKETLAUNCHER,
+            "Each rocket which kills five or more monsters is refunded."
+        );
+
         AddPerkDefinition( // TODO
             "sawnoff",
             "Sawn Off",
