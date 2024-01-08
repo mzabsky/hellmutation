@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             // Has damage source
 
-            console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Source: %s, Source health %d, Damage type: %s", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.damageSource.GetClassName(), e.damageSource.health, e.damageType);
+            console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Inflictor: %s, Source: %s, Source health %d, Damage type: %s", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.inflictor.GetClassName(), e.damageSource.GetClassName(), e.damageSource.health, e.damageType);
 
             // Hematophagy
             if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)
@@ -36,7 +36,18 @@ extend class HM_GlobalEventHandler
             }
 
             if (e.damageSource is "PlayerPawn")
-            {
+            {            
+                let weapon = GetSourceWeapon(e);
+                if(weapon != null)
+                {
+                    // This will be read in WorldThingDied (the last one applies)
+                    e.thing.TakeInventory("HM_KillTracker", 1);
+
+                    let killTracker = HM_KillTracker(e.thing.GiveInventoryType('HM_KillTracker'));
+                    killTracker.KillWeapon = weapon;
+                    killTracker.Killer = PlayerPawn(e.damageSource);
+                }
+
                 // Vampirism
                 if(IsPerkActive("vampirism") && e.thing.bIsMonster)
                 {

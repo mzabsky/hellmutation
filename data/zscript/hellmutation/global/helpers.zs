@@ -90,4 +90,38 @@ extend class HM_GlobalEventHandler
 
         return false, 0, 0, 0;
     }
+
+    Class<Weapon> GetSourceWeapon(WorldEvent e)
+    {
+        let player = e.damageSource;
+        if(!(player is 'PlayerPawn'))
+        {
+            return null;
+        }
+
+        Class<Weapon> weaponClass;
+        if(e.damageType == "BFGSplash")
+        {
+            return "BFG9000";
+        }
+        else if(e.inflictor is "BulletPuff")
+        {
+            // Hitscan weapon
+            return player.player.readyWeapon.GetClass();
+        }
+        else if(e.inflictor is "BFGBall")
+        {
+            return "BFG9000";
+        }
+        else if(e.inflictor is "PlasmaBall")
+        {
+            return "PlasmaRifle";
+        }
+        else if(e.inflictor is "Rocket")
+        {
+            return "RocketLauncher";
+        }
+
+        return null;
+    }
 }

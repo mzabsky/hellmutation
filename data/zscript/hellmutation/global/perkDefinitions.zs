@@ -5,8 +5,8 @@ extend class HM_GlobalEventHandler
         // Only chance perks appear here, basic perks are hard coded
 
         AddPerkDefinition( // TODO
-            "bloodtrance",
-            "Blood Trance",
+            "bloodlust",
+            "Bloodlust",
             HM_CAT_FIST,
             "Kills with fist briefly increase movement speed."
         );

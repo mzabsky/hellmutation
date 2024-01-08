@@ -7,8 +7,33 @@ extend class HM_GlobalEventHandler
             return;
         }
 
-        // ANger - Lost soul died -> set FAST on all Lost Souls in vision range
-        if(IsMutationActive("anger"))
+        // This is required to support various healing and health manipulating functions
+        if(e.thing.starthealth == 0)
+        {
+            e.thing.starthealth = e.thing.SpawnHealth();
+        }
+
+        let killTracker = HM_KillTracker(e.thing.FindInventory('HM_KillTracker'));
+        Class<Weapon> weapon = null;
+        if(killTracker != null)
+        {
+            weapon = killTracker.KillWeapon;
+        }
+
+        if(weapon != null)
+        {
+            let killer = killTracker.killer;
+
+            //console.printf("Kill %s %s", weapon.GetClassName(), e.damageSource.GetClassName());
+
+            if(weapon is 'Fist' && IsPerkActive("bloodlust"))
+            {
+                killer.GiveInventoryType('PowerGiverBloodlust');
+            }
+        }
+
+        // Anger - Lost soul died -> set FAST on all Lost Souls in vision range
+        if(IsMutationActive("anger") && e.thing is 'LostSoul')
         {
             let iterator = ThinkerIterator.Create("HM_LostSoul");
             HM_LostSoul lostSoul;
@@ -24,12 +49,6 @@ extend class HM_GlobalEventHandler
                     lostSoul.bAlwaysFast = true;
                 }
             }
-        }
-
-        // This is required to support various healing and health manipulating functions
-        if(e.thing.starthealth == 0)
-        {
-            e.thing.starthealth = e.thing.SpawnHealth();
         }
 
         // Insomnia

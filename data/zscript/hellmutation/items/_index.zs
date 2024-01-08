@@ -1,9 +1,13 @@
+#include "./powerups/_index.zs"
+#include "./weapons/_index.zs"
+
 #include "./armorbonus.zs"
 #include "./backpack.zs"
 #include "./blursphere.zs"
 #include "./dna.zs"
 #include "./healthbonus.zs"
 #include "./keys.zs"
+#include "./killTracker.zs"
 #include "./lockedmutationcounter.zs"
 #include "./medikit.zs"
 #include "./perkpoint.zs"
