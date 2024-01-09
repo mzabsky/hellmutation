@@ -75,6 +75,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition( // TODO
+            "profitablecut",
+            "Profitable Cut",
+            HM_CAT_CHAINSAW,
+            "Kills with Chainsaw drop random ammo."
+        );
+
+        AddPerkDefinition( // TODO
             "sawnoff",
             "Sawn Off",
             HM_CAT_SHOTGUN,

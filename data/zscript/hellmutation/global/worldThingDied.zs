@@ -35,6 +35,11 @@ extend class HM_GlobalEventHandler
             {
                 e.thing.Spawn("HM_RandomAmmo", e.thing.pos);
             }
+
+            if(weapon is 'Chainsaw' && IsPerkActive("profitablecut"))
+            {
+                e.thing.Spawn("HM_RandomAmmo", e.thing.pos);
+            }
             
             // Performance Bonus - Rocket kills 5 monsters -> gets refunded
             if(e.inflictor is "HM_PlayerRocket" && IsPerkActive("performancebonus"))
