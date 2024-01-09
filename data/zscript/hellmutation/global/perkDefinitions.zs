@@ -53,6 +53,13 @@ extend class HM_GlobalEventHandler
             "Blur spheres affect you as if they were Soulspheres."
         );
 
+        AddPerkDefinition(
+            "highvoltage",
+            "High Voltage",
+            HM_CAT_PLASMAGUN,
+            "Plasma Rifle deals double damage and consumes double ammo when your cell amount is within 100\nof the ammo capacity."
+        );
+
         AddPerkDefinition( // TODO
             "longbarrels",
             "Long Barrels",
