@@ -56,6 +56,11 @@ class MonsterCorpseSpawner : Actor
             }
 
             let finalState = tokill.ResolveState("Death");
+            if(finalState == null)
+            {
+                Destroy();
+            }
+
 
             while (finalState.nextstate)
             {
