@@ -13,7 +13,13 @@ class HM_Player: DoomPlayer
 
     // The number of continuous Boreal Gaze stacked ticks
     int borealGazeTicks;
-
+    
+    // This helps out the mixin, which does not trigger properly during level transitions
+    override void Travelled()
+    {
+        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+        super.BeginPlay();
+    }
 
     override void PreTravelled()
     {
@@ -22,6 +28,8 @@ class HM_Player: DoomPlayer
 
         lastBorealGazeTime = 0;
         borealGazeTicks = 0;
+
+        TakeInventory('HM_SafetyMeasures', 1);
     }
 
     override void Tick()
@@ -122,7 +130,7 @@ class HM_Player: DoomPlayer
             player.cmd.sidemove /= divisor;
         }
 
-        if(global.IsPerkActive("brinkmanship") && player.mo && player.health <= 25)
+        if(global != null && global.IsPerkActive("brinkmanship") && player.mo && player.health <= 25)
         {
             player.cmd.forwardmove *= 1.07;
             player.cmd.sidemove *= 1.07;
@@ -133,4 +141,16 @@ class HM_Player: DoomPlayer
         // Run all the stuff from the original function
         super.PlayerThink();
     }
+
+    override int DamageMobj (Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+    {
+        // Safety Measures - Give RadSuit if not activated in this level yet
+        if (inflictor == null && global.IsPerkActive("safetymeasures") && GiveInventoryType("HM_SafetyMeasures") != null)
+        {
+            GiveInventoryType("RadSuit");
+            return 0;
+        }
+
+        return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+    }    
 }

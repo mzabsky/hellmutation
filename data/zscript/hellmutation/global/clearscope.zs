@@ -74,9 +74,9 @@ extend class HM_GlobalEventHandler
         return false;
     }
     
-    clearscope bool IsPerkActive(string mutationName)
+    clearscope bool IsPerkActive(string perkName)
     {
-        let foundValue = PerkStates.At(mutationName.MakeLower());
+        let foundValue = PerkStates.At(perkName.MakeLower());
         let isActive = foundValue == "Active";
 
         return isActive;

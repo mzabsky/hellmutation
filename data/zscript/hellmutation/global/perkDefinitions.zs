@@ -75,6 +75,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "nuclearnukage",
+            "Nuclear Nukage",
+            HM_CAT_BARREL,
+            "Explosive barrels destroyed by you explode with massive force."
+        );
+
+        AddPerkDefinition(
             "performancebonus",
             "Performance Bonus",
             HM_CAT_ROCKETLAUNCHER,
@@ -86,6 +93,13 @@ extend class HM_GlobalEventHandler
             "Profitable Cut",
             HM_CAT_CHAINSAW,
             "Kills with Chainsaw drop random ammo."
+        );
+
+        AddPerkDefinition(
+            "safetymeasures",
+            "Safety Measures",
+            HM_CAT_DMGFLOOR,
+            "The first time you would be damaged by a damaging floor in each level,\nyou gain RadSuit for 60 seconds."
         );
 
         AddPerkDefinition( // TODO

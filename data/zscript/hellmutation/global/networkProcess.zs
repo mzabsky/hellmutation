@@ -193,10 +193,7 @@ extend class HM_GlobalEventHandler
             if(found)
             {
                 console.printf("%s gained perk %s", players[playerNumber].GetUserName(), perkKey);
-                if(perkKey.IndexOf("basic_") <= 0)
-                {
-                    PerkStates.Insert(perkKey, "Active");
-                }
+                PerkStates.Insert(perkKey, "Active");
 
                 player.TakeInventory("HM_PerkPoint", 1);
                 player.ACS_NamedExecute("hm_perkadded");
@@ -213,6 +210,14 @@ extend class HM_GlobalEventHandler
             else
             {
                 console.printf("Unknown perk %s", perkKey);
+            }
+        }
+        else if (commandName.IndexOf("hm_listperks") >= 0)
+        {
+            DictionaryIterator dictIt = DictionaryIterator.Create(PerkStates);
+            while(dictIt.Next())
+            {
+                console.printf("%s => %s", dictIt.Key(), dictIt.Value());
             }
         }
         else

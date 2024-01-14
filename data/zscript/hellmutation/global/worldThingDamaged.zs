@@ -2,6 +2,9 @@ extend class HM_GlobalEventHandler
 {
     override void WorldThingDamaged(WorldEvent e)
     {
+        // Only the last hit applies
+        // (it will be added again later, if applicable)
+        e.thing.TakeInventory("HM_KillTracker", 1);
         if (e.damageSource == null)
         {
             // No source
@@ -11,13 +14,14 @@ extend class HM_GlobalEventHandler
                 if(IsMutationActive("slimeborne"))
                 {
                     let roll = Random(0, 100);
-                    //console.printf("slimeborne roll %d", roll);
                     if(roll <= e.damage * 2)
                     {
                         let spawnee = e.thing.Spawn("HM_DemonEgg", e.thing.pos, ALLOW_REPLACE);
                         spawnee.target = e.thing;
                     }
                 }
+
+                // Safety Measures is handled in HM_Player
             }
         }
         else
@@ -41,7 +45,6 @@ extend class HM_GlobalEventHandler
                 if(weapon != null)
                 {
                     // This will be read in WorldThingDied (the last one applies)
-                    e.thing.TakeInventory("HM_KillTracker", 1);
 
                     let killTracker = HM_KillTracker(e.thing.GiveInventoryType('HM_KillTracker'));
                     killTracker.KillWeapon = weapon;

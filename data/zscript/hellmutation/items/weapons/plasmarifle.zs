@@ -60,7 +60,6 @@ class HM_PlasmaRifle : DoomWeapon replaces PlasmaRifle
         Weapon weap = player.ReadyWeapon;
         if (weap != null && invoker == weap && stateinfo != null && stateinfo.mStateType == STATE_Psprite)
         {
-            console.printf("special %d %d", ammoCost, powerLimit);
             if (!weap.DepleteAmmo (weap.bAltFire, true, ammoCost, true))
                 return;
 

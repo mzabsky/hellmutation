@@ -7,8 +7,22 @@ class HM_ExplosiveBarrel: ExplosiveBarrel replaces ExplosiveBarrel
         Death:
             BEXP A 5 BRIGHT;
             BEXP B 5 BRIGHT A_Scream;
-            BEXP C 5 BRIGHT;
-            BEXP D 10 BRIGHT A_Explode;
+            BEXP C 5 BRIGHT {
+                if(global.IsPerkActive("nuclearnukage"))
+                {
+                    Spawn("HM_NuclearNukageGenerator", pos);
+                }
+            }
+            BEXP D 10 BRIGHT {
+                if(global.IsPerkActive("nuclearnukage"))
+                {
+                    A_Explode(180, 136);
+                }
+                else
+                {
+                    A_Explode();
+                }
+            }
             BEXP E 10 BRIGHT;
             TNT1 A 0 SpawnSurprise(false);
             TNT1 A 1050 BRIGHT A_BarrelDestroy;
@@ -69,4 +83,70 @@ class HM_ExplosiveBarrel: ExplosiveBarrel replaces ExplosiveBarrel
             
         }
     }
+}
+
+class HM_NuclearNukageGenerator: Actor
+{    
+    mixin HM_GlobalRef;
+
+    int RemainingTics;
+
+    States
+    {
+        Spawn:
+            TNT1 A -1;
+            Stop;
+    }
+
+    override void PostBeginPlay ()
+    {
+        RemainingTics = 20;
+        super.PostBeginPlay();
+    }
+
+    override void Tick()
+    {
+        if(RemainingTics <= 0)
+        {
+            Destroy();
+            return;
+        }
+
+        RemainingTics--;
+
+        if(RemainingTics % 2 == 0)
+        {
+            let spread = 64 - RemainingTics * 3;
+            Spawn(
+                "HM_NuclearNukageExplosion",
+                Vec3Offset(
+                    random[HM_NuclearNukageExplosion](-spread, spread), random[HM_NuclearNukageExplosion](-spread, spread), random[HM_NuclearNukageExplosion](0,64)
+                )
+            );
+        }
+        
+        super.Tick();
+    }
+}
+
+class HM_NuclearNukageExplosion: Actor
+{
+    Default
+    {
+        +NOBLOCKMAP;
+        +NOTRIGGER;
+        +NOGRAVITY
+        RenderStyle "Add";
+        Damage 0;
+        Translation "168:191=112:127", "32:47=9:12";
+    }
+  
+    States
+    {
+        Spawn:
+            MISL B 8 Bright;
+            MISL C 6 Bright;
+            MISL D 4 Bright;
+            Stop;
+  }
 }

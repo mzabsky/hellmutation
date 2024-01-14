@@ -46,7 +46,6 @@ extend class HM_GlobalEventHandler
             {
                 let rocket = HM_PlayerRocket(e.inflictor);
                 rocket.KillCount++;
-                console.printf("rocket kills %d", rocket.KillCount);
                 if(rocket.KillCount == 5)
                 {
                     Killer.GiveInventoryType("RocketAmmo");

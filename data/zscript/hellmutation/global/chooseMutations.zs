@@ -2,15 +2,25 @@ extend class HM_GlobalEventHandler
 {
     int ChooseMutations()
     {
-        Array<HM_Definition> chosenOptions;
+        // Mutations which are already removed can never be offered for removal
+        Array<string> blockedOptionKeys;
+        DictionaryIterator dictIt = DictionaryIterator.Create(MutationStates);
+        while(dictIt.Next())
+        {
+            if(dictIt.Value() == "Removed")
+            {
+                blockedOptionKeys.Push(dictIt.Key());
+            }
+        }
 
+        Array<HM_Definition> chosenOptions;
         let numberOfMutationsToChoose = 4;
         if(IsMutationActive("geneticinstability") && random[HM_GlobalEventHandler](1, 2) == 1)
         {
             numberOfMutationsToChoose++;
         }
 
-        ChooseByCategories(MutationDefinitions, numberOfMutationsToChoose, "mutation", chosenOptions);
+        ChooseByCategories(MutationDefinitions, numberOfMutationsToChoose, "mutation", blockedOptionKeys, chosenOptions);
 
         for(int i = 0; i < chosenOptions.Size(); i++)
         {
@@ -23,8 +33,20 @@ extend class HM_GlobalEventHandler
 
     int ChoosePerks()
     {
+        // Perks which are already active can never be offered for gaining
+        Array<string> blockedOptionKeys;
+        DictionaryIterator dictIt = DictionaryIterator.Create(PerkStates);
+        while(dictIt.Next())
+        {
+            if(dictIt.Value() == "Active")
+            {
+                blockedOptionKeys.Push(dictIt.Key());
+                //console.printf("blocked perk %s", dictIt.Key());
+            }
+        }
+
         Array<HM_Definition> chosenOptions;
-        ChooseByCategories(PerkDefinitions, 3, "perk", chosenOptions);
+        ChooseByCategories(PerkDefinitions, 3, "perk", blockedOptionKeys, chosenOptions);
 
         for(int i = 0; i < chosenOptions.Size(); i++)
         {
@@ -36,7 +58,7 @@ extend class HM_GlobalEventHandler
         return chosenOptions.Size();
     }
 
-    int ChooseByCategories(Array<HM_Definition> options, int numberOfOptionsToChoose, string optionLabel, Array<HM_Definition> chosenOptions)
+    int ChooseByCategories(Array<HM_Definition> options, int numberOfOptionsToChoose, string optionLabel, Array<string> blockedOptionKeys, Array<HM_Definition> chosenOptions)
     {
         let activeCategories = GetCategoriesForCurrentLevel();
 
@@ -68,8 +90,9 @@ extend class HM_GlobalEventHandler
                 continue;
             }
 
-            if(IsMutationActive(currentOption.key))
-            {
+            // Mutations that are already removed/perks that are already active are not legal
+            if(blockedOptionKeys.Find(currentOption.key) != blockedOptionKeys.Size())
+            {    
                 continue;
             }
 
@@ -78,7 +101,7 @@ extend class HM_GlobalEventHandler
             // We generally don't want to see mutations/perks which were already removed before all the possibilities are exhausted
             // But there should be a small chance that a removed mutation/perk is offered again still, to make things
             // a bit less predictable
-            if(IsMutationRemoved(currentOption.key) && random[HM_GlobalEventHandler](0, 4) > 0)
+            if(IsMutationRemoved(currentOption.key) && random[HM_GlobalEventHandler](0, 4) > 0) // TODO: Make applicable to perks
             {
                 console.printf("Rejected already picked %s: %s, Current chosen categories: %s", optionLabel, currentOption.key, CategoryToString(activeCategories));
                 continue;

@@ -31,15 +31,6 @@ extend class HM_GlobalEventHandler
         }
         else
         {
-            console.printf("ITERATOR");
-
-            DictionaryIterator dictIt = DictionaryIterator.Create(PerkStates);
-            while(dictIt.Next())
-            {
-                console.printf(dictIt.Key());
-            }
-
-
             for(let i = 0; i < PerkDefinitions.Size(); i++)
             {
                 let currentPerkDefinition = PerkDefinitions[i];

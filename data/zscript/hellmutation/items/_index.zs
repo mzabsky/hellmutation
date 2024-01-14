@@ -1,4 +1,5 @@
 #include "./ammo/_index.zs"
+#include "./markers/_index.zs"
 #include "./powerups/_index.zs"
 #include "./weapons/_index.zs"
 
@@ -8,8 +9,6 @@
 #include "./dna.zs"
 #include "./healthbonus.zs"
 #include "./keys.zs"
-#include "./killTracker.zs"
-#include "./lockedmutationcounter.zs"
 #include "./medikit.zs"
 #include "./perkpoint.zs"
 #include "./soulsphere.zs"
