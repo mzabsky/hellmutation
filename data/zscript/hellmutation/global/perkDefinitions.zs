@@ -60,6 +60,13 @@ extend class HM_GlobalEventHandler
             "Plasma Rifle deals double damage and consumes double ammo when your cell amount is within 100\nof the ammo capacity."
         );
 
+        AddPerkDefinition(
+            "laststand",
+            "Last Stand",
+            HM_CAT_PLAYER,
+            "Once per level, you gain brief invulnerability if you would die."
+        );
+
         AddPerkDefinition( // TODO
             "longbarrels",
             "Long Barrels",

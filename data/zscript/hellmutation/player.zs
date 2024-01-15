@@ -151,6 +151,13 @@ class HM_Player: DoomPlayer
             return 0;
         }
 
+        if (damage >= Health && global.IsPerkActive("laststand") && GiveInventoryType("HM_LastStand") != null)
+        {
+            let result = super.DamageMobj(inflictor, source, Health - 1, mod, flags, angle);
+            GiveInventoryType("HM_LastStandPowerupGiver");
+            return result;
+        }
+
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
     }    
 }
