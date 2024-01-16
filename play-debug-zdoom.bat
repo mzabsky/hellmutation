@@ -19,6 +19,6 @@ if exist "temp\acs\acs.err" (
 	cd ..\temp
 	..\utility\7z a ..\temp\hellmutation-debug.pk3 acs/HELLMUTATION_ACS -mx0
 	cd ..
-	gzdoom temp/hellmutation-debug.pk3
+	gzdoom temp/hellmutation-debug.pk3 +map test
 	exit
 )
