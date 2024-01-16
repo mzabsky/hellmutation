@@ -5,6 +5,8 @@ class HM_Chaingun : Chaingun replaces Chaingun
     default
     {
         Weapon.SlotNumber 4;
+        Weapon.AmmoType2 "Clip";
+        Weapon.AmmoUse2 2;
     }
 
     states
@@ -18,6 +20,17 @@ class HM_Chaingun : Chaingun replaces Chaingun
         Select:
             CHGG A 1 A_Raise;
             Loop;
+        AltFire:
+            CHGG A 0 {
+                if(!invoker.global.IsPerkActive("torrentrounds"))
+                {
+                    return ResolveState("Ready");
+                }
+                else
+                {
+                    return ResolveState("Fire");
+                }
+            }
         Fire:
             CHGG AB 4 {
               HM_A_FireCGun();
@@ -65,10 +78,10 @@ class HM_Chaingun : Chaingun replaces Chaingun
         }
         player.mo.PlayAttacking2 ();
 
-        HM_GunShot (!player.refire, "BulletPuff", BulletSlope ());
+        HM_GunShot (!player.refire, BulletSlope ());
 	  }
 
-    protected action void HM_GunShot(bool accurate, Class<Actor> pufftype, double pitch)
+    protected action void HM_GunShot(bool accurate, double pitch)
     {
         int damage = 5 * random[GunShot](1, 3);
         double ang = angle;
@@ -89,6 +102,23 @@ class HM_Chaingun : Chaingun replaces Chaingun
           }
         }
 
-        LineAttack(ang, PLAYERMISSILERANGE, pitch, damage, 'Hitscan', pufftype);
+        if(invoker.bAltFire && invoker.global.IsPerkActive("torrentrounds"))
+        {
+            console.printf("torrent rounds");
+            LineAttack(ang, PLAYERMISSILERANGE, pitch, 0, 'Hitscan', 'HM_ChaingunTorrentExplosion');
+        }
+        else
+        {
+            LineAttack(ang, PLAYERMISSILERANGE, pitch, damage, 'Hitscan', 'BulletPuff');
+        }
     }
+
+    // override State GetAltAtkState (bool hold)
+    // {
+    //     if(global.IsPerkActive("torrentrounds"))
+    //     {
+    //         return super.GetAltAtkState(hold);
+    //     }
+    //     return FindState('DoesNotExist');
+    // }
 }

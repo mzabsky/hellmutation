@@ -130,6 +130,13 @@ extend class HM_GlobalEventHandler
             "Kills with chainsaw cause random ammo to drop."
         );
 
+        AddPerkDefinition(
+            "torrentrounds",
+            "Torrent Rounds",
+            HM_CAT_CHAINGUN,
+            "\c[Red]Chaingun ALT FIRE\c-: Fires explosive rounds, costs 2 bullets per shot."
+        );
+
         AddPerkDefinition( // TODO
             "tunedthrust",
             "Tuned Thrust",
