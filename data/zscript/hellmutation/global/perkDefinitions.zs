@@ -61,6 +61,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "largecaliber",
+            "Large Caliber",
+            HM_CAT_PISTOL,
+            "Pistol deals double damage."
+        );
+
+        AddPerkDefinition(
             "laststand",
             "Last Stand",
             HM_CAT_PLAYER,
@@ -113,7 +120,7 @@ extend class HM_GlobalEventHandler
             "sawnoff",
             "Sawn Off",
             HM_CAT_SHOTGUN,
-            "Shotgun has significantly increased spread and slightly increased number of pellets fired."
+            "Super Shotgun has significantly increased spread and slightly increased number of pellets fired."
         );
 
         AddPerkDefinition(
@@ -121,13 +128,6 @@ extend class HM_GlobalEventHandler
             "Shake Down",
             HM_CAT_IMP,
             "Imps and their variants drop random ammo when killed."
-        );
-
-        AddPerkDefinition( // TODO
-            "slayerssaw",
-            "Slayer's Saw",
-            HM_CAT_CHAINSAW,
-            "Kills with chainsaw cause random ammo to drop."
         );
 
         AddPerkDefinition(

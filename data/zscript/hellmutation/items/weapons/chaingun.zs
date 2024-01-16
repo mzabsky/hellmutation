@@ -98,13 +98,12 @@ class HM_Chaingun : Chaingun replaces Chaingun
 
           if (GetCVar ("vertspread") && !sv_novertspread)
           {
-            pitch += Random2[GunShot]() * (3.549 / 256 / longBarrelDivisor);
+              pitch += Random2[GunShot]() * (3.549 / 256 / longBarrelDivisor);
           }
         }
 
         if(invoker.bAltFire && invoker.global.IsPerkActive("torrentrounds"))
         {
-            console.printf("torrent rounds");
             LineAttack(ang, PLAYERMISSILERANGE, pitch, 0, 'Hitscan', 'HM_ChaingunTorrentExplosion');
         }
         else
@@ -112,13 +111,4 @@ class HM_Chaingun : Chaingun replaces Chaingun
             LineAttack(ang, PLAYERMISSILERANGE, pitch, damage, 'Hitscan', 'BulletPuff');
         }
     }
-
-    // override State GetAltAtkState (bool hold)
-    // {
-    //     if(global.IsPerkActive("torrentrounds"))
-    //     {
-    //         return super.GetAltAtkState(hold);
-    //     }
-    //     return FindState('DoesNotExist');
-    // }
 }
