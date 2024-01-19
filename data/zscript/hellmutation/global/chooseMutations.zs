@@ -28,6 +28,8 @@ extend class HM_GlobalEventHandler
             MutationRemovalsOnOffer.Push(chosenOptions[i].Key);
         }
 
+        ApplyMutationMetaLocks();
+
         return chosenOptions.Size();
     }
 
@@ -320,5 +322,17 @@ extend class HM_GlobalEventHandler
         if(category & HM_CAT_BOSSBRAIN) str.AppendFormat("|BOSSBRAIN");
 
         return str.Mid(1, str.Length() - 1); // Strip the initial "|"; 
+    }
+
+    void ApplyMutationMetaLocks()
+    {
+        // Metamutations - each newly active mutation has 20% chance to become locked
+        for(let i = 0; i < MutationRemovalsOnOffer.Size(); i++)
+        {
+            if(IsMutationActive("metamutation") && random[HM_GlobalEventHandler](0, 5) == 0)
+            {
+                MetaLockedMutations.Push(MutationRemovalsOnOffer[i]);
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ class HM_GlobalEventHandler: EventHandler
 
     Dictionary MutationStates; // Indexed by mutation key, values are: "None" (or not present), "Active" and "Removed"
     Array<string> MutationRemovalsOnOffer;
+    Array<string> MetaLockedMutations;
     Dictionary PerkStates; // Indexed by perk key, values are: "None" (or not present), "Active" and "Removed"
     Array<string> PerksOnOffer;
 

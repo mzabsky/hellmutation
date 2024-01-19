@@ -414,6 +414,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "metamutation",
+            "Metamutation",
+            HM_CAT_PLAYER,
+            "Each newly added mutation has a chance to be already unremovable."
+        );
+
+        AddMutationDefinition(
             "momentum",
             "Momentum",
             HM_CAT_CACODEMON,

@@ -138,7 +138,7 @@ class HM_MutationMenu : HM_ZFGenericMenu
             aButton = HM_ZFButton.Create
             (
                 (25, aLabel.GetPosY() + aLabel.GetHeight() + 10),
-                (500, bigFont.GetHeight ()),
+                (700, bigFont.GetHeight ()),
                 text: "",
                 command: "",
                 fnt: bigFont,
@@ -298,7 +298,11 @@ class HM_MutationMenu : HM_ZFGenericMenu
                 let pageInfo = pageInfos[indexInPage];
                 
                 let mutationTitle = mutationDefinition.Name;
-                if(globalHandler.CanMutationBeRemoved(mutationDefinition.Key))
+                if(globalHandler.IsMutationMetaLocked(mutationDefinition.Key))
+                {
+                    mutationTitle = String.format("%s - \c[Yellow]NEW!\c[Yellow]\c[White] \c[Teal]LOCKED BY METAMUTATION", mutationTitle);
+                }
+                else if(globalHandler.CanMutationBeRemoved(mutationDefinition.Key))
                 {
                     mutationTitle = String.format("%s - \c[Yellow]NEW!\c[Yellow]\c[White] \c[Green]CAN BE REMOVED", mutationTitle);
                 }

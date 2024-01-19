@@ -173,18 +173,25 @@ class HM_DnaMenu : HM_ZFGenericMenu
             HM_Definition mutationDefinition;
             globalHandler.GetMutationRemovalOnOffer(i, mutationDefinition);
 
-            if(globalHandler.IsMutationRemoved(mutationDefinition.Key))
+            if(globalHandler.CanRemoveMutation(mutationDefinition.Key))
             {
-                buttonColor = Font.CR_BLACK;
-            }
-            else {
                 buttonColor = Font.CR_WHITE;
             }
+            else {
+                buttonColor = Font.CR_BLACK;
+            }
+
+            let mutationButtonText = mutationDefinition.Name;
+            if(globalHandler.IsMutationMetaLocked(mutationDefinition.Key))
+            {
+                mutationButtonText = string.format("%s - \c[Teal]Locked by Metamutation", mutationButtonText);
+            }
+
             aButton = HM_ZFButton.Create
             (
                 (25, aLabel.GetPosY() + aLabel.GetHeight() + 15),
-                (300, bigFont.GetHeight ()),
-                text: mutationDefinition.Name,
+                (600, bigFont.GetHeight ()),
+                text: mutationButtonText,
                 cmdHandler: handler,
                 command: mutationDefinition.Key,
                 fnt: bigFont,
@@ -280,7 +287,7 @@ class HM_DnaMenu : HM_ZFGenericMenu
                     currentHighlightedMutationIndex = (currentHighlightedMutationIndex + 1 + mutationTitles.Size()) % mutationTitles.Size();
                     break;
                 case MKEY_Enter:
-                    if(currentHighlightedMutationIndex != -1)
+                    if(currentHighlightedMutationIndex != -1 && mutationTitles[currentHighlightedMutationIndex].GetTextColor() != Font.CR_BLACK)
                     {
                         HM_Definition mutationDefinition;
                         globalHandler.GetMutationRemovalOnOffer(currentHighlightedMutationIndex, mutationDefinition);

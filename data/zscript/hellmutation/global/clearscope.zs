@@ -1,22 +1,35 @@
 // Clearscope methods which can be called from both the UI and the game logic
 extend class HM_GlobalEventHandler
 {
-    clearscope bool IsMutationRemoved(string mutationName)
+    clearscope bool IsMutationRemoved(string mutationKey)
     {
-        let foundValue = MutationStates.At(mutationName.MakeLower());
+        let foundValue = MutationStates.At(mutationKey.MakeLower());
         let isRemoved = foundValue == "Removed";
-
-        //console.printf("IS MUTATION REMOVED %s %i", mutationName, isRemoved);
         return isRemoved;
     }
     
-    clearscope bool IsMutationActive(string mutationName)
+    clearscope bool IsMutationActive(string mutationKey)
     {
-        let foundValue = MutationStates.At(mutationName.MakeLower());
+        let foundValue = MutationStates.At(mutationKey.MakeLower());
         let isActive = foundValue == "Active";
-
-        //console.printf("IS MUTATION ACTIVE %s %i", mutationName, isActive);
         return isActive;
+    }
+
+    clearscope bool IsMutationMetaLocked(string mutationKey)
+    {
+        for(let i = 0; i < MetaLockedMutations.Size(); i++)
+        {
+            if(MetaLockedMutations[i] == mutationKey)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    clearscope bool CanRemoveMutation(string mutationKey)
+    {
+        return !IsMutationRemoved(mutationKey) && !IsMutationMetaLocked(mutationKey);
     }
 
     clearscope void GetMutationRemovalOnOffer(int index, out HM_Definition mutationDefinition) const
