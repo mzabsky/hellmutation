@@ -124,7 +124,7 @@ class HM_PlasmaBall : Actor
 
     override int DoSpecialDamage(Actor target, int damage, name damagetype)
     {
-        if(target != null && target.cursector != null && global.IsPerkActive("corrosionresonance") && target.cursector.damageamount > 0)
+        if(target != null && target.cursector != null && global.IsPerkActive("causticresonance") && target.cursector.damageamount > 0)
         {
             return super.DoSpecialDamage(target, damage, damagetype) * 3 / 2;
         }
