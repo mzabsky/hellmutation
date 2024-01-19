@@ -121,6 +121,16 @@ class HM_PlasmaBall : Actor
             PLSE ABCDE 4 Bright;
             Stop;
     }
+
+    override int DoSpecialDamage(Actor target, int damage, name damagetype)
+    {
+        if(target != null && target.cursector != null && global.IsPerkActive("corrosionresonance") && target.cursector.damageamount > 0)
+        {
+            return super.DoSpecialDamage(target, damage, damagetype) * 3 / 2;
+        }
+
+        return super.DoSpecialDamage(target, damage, damagetype);
+    }
 }
 
 class HM_PowerPlasmaBall : HM_PlasmaBall

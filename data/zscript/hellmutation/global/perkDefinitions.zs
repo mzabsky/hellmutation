@@ -32,11 +32,18 @@ extend class HM_GlobalEventHandler
             "Backpacks fill all ammo completely."
         );
 
-        AddPerkDefinition( // TODO
+        AddPerkDefinition(
             "coherentplasma",
             "Coherent Plasma",
             HM_CAT_PLASMAGUN,
-            "Plasma projectiles reflect off of surfaces."
+            "Plasma Rifle projectiles reflect off of surfaces."
+        );
+
+        AddPerkDefinition(
+            "corrosionresonance",
+            "Corrosion Resonance",
+            HM_CAT_PLASMAGUN,
+            "Plasma Rifle deals more damage to monsters who are standing on a damaging surface."
         );
 
         AddPerkDefinition(
