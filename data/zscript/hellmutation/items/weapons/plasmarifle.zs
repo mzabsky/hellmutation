@@ -36,6 +36,13 @@ class HM_PlasmaRifle : DoomWeapon replaces PlasmaRifle
             PLAS A -1;
         Stop;
     }
+    
+    // BeginPlay does not trigger properly during level transitions
+    override void Travelled()
+    {
+        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+        super.BeginPlay();
+    }
 
     action void HM_A_FirePlasma()
     {

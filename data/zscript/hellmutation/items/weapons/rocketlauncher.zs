@@ -54,6 +54,13 @@ class HM_RocketLauncher : DoomWeapon replaces RocketLauncher
             LAUN A -1;
             Stop;
     }
+    
+    // BeginPlay does not trigger properly during level transitions
+    override void Travelled()
+    {
+        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+        super.BeginPlay();
+    }
 
     action void HM_A_FireMissile()
     {

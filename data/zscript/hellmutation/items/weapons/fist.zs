@@ -1,7 +1,7 @@
 class HM_Fist : Weapon replaces Fist
 {
     mixin HM_GlobalRef;
-    
+
     default
     {
         Weapon.SlotNumber 1;
@@ -35,6 +35,13 @@ class HM_Fist : Weapon replaces Fist
             PUNG C 4;
             PUNG B 5 A_ReFire;
             Goto Ready;
+    }
+    
+    // BeginPlay does not trigger properly during level transitions
+    override void Travelled()
+    {
+        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+        super.BeginPlay();
     }
 
     // Deflecting Punch - Punching deflects projectiles in direction where the player is looking

@@ -46,6 +46,13 @@ class HM_Chaingun : Chaingun replaces Chaingun
             MGUN A -1;
             Stop;
     }
+    
+    // BeginPlay does not trigger properly during level transitions
+    override void Travelled()
+    {
+        global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
+        super.BeginPlay();
+    }
 
     action void HM_A_FireCGun()
     {
