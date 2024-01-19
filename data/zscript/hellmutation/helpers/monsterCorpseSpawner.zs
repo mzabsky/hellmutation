@@ -59,6 +59,7 @@ class MonsterCorpseSpawner : Actor
             if(finalState == null)
             {
                 Destroy();
+                return;
             }
 
 
