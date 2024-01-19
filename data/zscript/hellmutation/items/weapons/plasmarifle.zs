@@ -77,6 +77,8 @@ class HM_PlasmaRifle : DoomWeapon replaces PlasmaRifle
 
 class HM_PlasmaBall : Actor
 {
+    mixin HM_GlobalRef;
+    
     default
     {
         Radius 13;
@@ -91,10 +93,27 @@ class HM_PlasmaBall : Actor
         SeeSound "weapons/plasmaf";
         DeathSound "weapons/plasmax";
         Obituary "$OB_MPPLASMARIFLE";
+
+        //
+        //BounceCount 0;
+    }
+
+    override void PostBeginPlay()
+    {
+        if(global.IsPerkActive("coherentplasma"))
+        {
+            BounceCount = 2;
+            bBounceOnWalls = true;
+            bBounceOnFloors = true;
+            bBounceOnCeilings = true;
+            bUseBounceState = true;
+        }
     }
 
     states
     {
+        Bounce:
+            PLSE A 4 Bright { bHitOwner = true; } // The projectiles can hit the player who fired them once they bounce
         Spawn:
             PLSS AB 6 Bright;
             Loop;
