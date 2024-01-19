@@ -4,6 +4,7 @@ class HM_Player: DoomPlayer
 
     default
     {
+		Player.StartItem "HM_Fist";
         Player.StartItem "HM_Pistol";
         Player.StartItem "Clip", 50;
     }

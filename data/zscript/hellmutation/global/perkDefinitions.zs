@@ -11,7 +11,6 @@ extend class HM_GlobalEventHandler
             "As long as you have 200 health and armor, any damage you take is brutally increased and your rocket launcher fires much faster."
         );
 
-
         AddPerkDefinition( // TODO
             "bloodlust",
             "Bloodlust",
@@ -59,6 +58,14 @@ extend class HM_GlobalEventHandler
             "Coherent Plasma",
             HM_CAT_PLASMAGUN,
             "Plasma Rifle projectiles reflect off of surfaces."
+        );
+
+
+        AddPerkDefinition(
+            "deflectingpunch",
+            "Deflecting Punch",
+            HM_CAT_FIST,
+            "You can punch projectiles to redirect their flight."
         );
 
         AddPerkDefinition(
