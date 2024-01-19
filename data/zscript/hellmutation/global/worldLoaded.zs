@@ -80,6 +80,8 @@ extend class HM_GlobalEventHandler
         SpawnDoppelgangersCorpses();
 
         SpawnVileIncursion();
+
+        BriefRestHeal();
     }
 
     void ReplaceMonsters()
@@ -458,5 +460,17 @@ extend class HM_GlobalEventHandler
             continue;
         }
 
+    }
+
+    void BriefRestHeal()
+    {
+        for(let i = 0; i < Players.Size(); i++)
+        {
+            let pawn = Players[i].mo;
+            if(IsPerkActive("briefrest") && pawn && pawn.health < 150)
+            {
+                pawn.A_SetHealth(150);
+            }
+        }
     }
 }

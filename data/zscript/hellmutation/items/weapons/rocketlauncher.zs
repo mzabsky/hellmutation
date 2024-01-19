@@ -60,6 +60,18 @@ class HM_RocketLauncher : DoomWeapon replaces RocketLauncher
 
 class HM_PlayerRocket : Rocket
 {
+    mixin HM_GlobalRef;
+
     // Performance Bonus - count kills so that ammo can be refunded (in WorldThingDied)
     int KillCount;
+
+    override void PostBeginPlay()
+    {
+        if(global.IsPerkActive("tunedthrust"))
+        {
+            vel.x = vel.x * 2;
+            vel.y = vel.y * 2;
+            vel.z = vel.z * 2;
+        }
+    }
 }

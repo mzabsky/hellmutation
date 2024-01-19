@@ -26,6 +26,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "briefrest",
+            "Brief Rest",
+            HM_CAT_PLAYER,
+            "Heal up to 150 health after each level."
+        );
+
+        AddPerkDefinition(
             "carepackage",
             "Care Package",
             HM_CAT_PLAYER,
@@ -81,7 +88,7 @@ extend class HM_GlobalEventHandler
             "Once per level, you gain brief invulnerability if you would die."
         );
 
-        AddPerkDefinition( // TODO
+        AddPerkDefinition(
             "longbarrels",
             "Long Barrels",
             HM_CAT_CHAINGUN,
@@ -151,7 +158,7 @@ extend class HM_GlobalEventHandler
             "\c[Red]Chaingun ALT FIRE\c-: Fires explosive rounds, costs 2 bullets per shot."
         );
 
-        AddPerkDefinition( // TODO
+        AddPerkDefinition(
             "tunedthrust",
             "Tuned Thrust",
             HM_CAT_ROCKETLAUNCHER,
