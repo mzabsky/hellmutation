@@ -157,6 +157,16 @@ class HM_Player: DoomPlayer
             return 0;
         }
 
+        // All In - As long as the player has 200 health and armor, take much more damage
+        let isAllInOn = global.IsPerkActive("allin")
+            && Health >= 200
+            && CountInv("BasicArmor") == 200;
+        if(isAllInOn)
+        {
+            damage = damage * 2.5;
+        }
+
+        // Last Stand - Give a brief invulnerability shield if the player would die for the first time in a level
         if (damage >= Health && global.IsPerkActive("laststand") && GiveInventoryType("HM_LastStand") != null)
         {
             let result = super.DamageMobj(inflictor, source, Health - 1, mod, flags, angle);

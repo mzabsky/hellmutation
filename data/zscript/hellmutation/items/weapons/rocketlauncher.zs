@@ -1,5 +1,7 @@
 class HM_RocketLauncher : DoomWeapon replaces RocketLauncher
 {
+    mixin HM_GlobalRef;
+
     default
     {
         Weapon.SelectionOrder 2500;
@@ -24,8 +26,23 @@ class HM_RocketLauncher : DoomWeapon replaces RocketLauncher
             MISG A 1 A_Raise;
             Loop;
         Fire:
+            MISG B 0 {
+                // All In - as long as the player has 200 health and armor, use faster firing atk state
+                let isAllInOn = player && player.mo
+                    && invoker.global.IsPerkActive("allin")
+                    && player.mo.Health >= 200
+                    && player.mo.CountInv("BasicArmor") == 200;
+                return isAllInOn 
+                    ? ResolveState ("AllInFire") 
+                    : ResolveState(null);
+            }
             MISG B 8 A_GunFlash;
             MISG B 12 HM_A_FireMissile;
+            MISG B 0 A_ReFire;
+            Goto Ready;
+        AllInFire:
+            MISG B 4 A_GunFlash;
+            MISG B 6 HM_A_FireMissile;
             MISG B 0 A_ReFire;
             Goto Ready;
         Flash:
@@ -56,6 +73,25 @@ class HM_RocketLauncher : DoomWeapon replaces RocketLauncher
 
         SpawnPlayerMissile ("HM_PlayerRocket");
     }
+
+	// override State GetAtkState (bool hold)
+	// {
+    //     // All In - as long as the player has 200 health and armor, use faster firing atk state
+    //     let isAllInOn = player && player.mo
+    //         && global.IsPerkActive("allin")
+    //         && player.mo.Health >= 200
+    //         /*&& player.mo.CountInv("BasicArmor") == 200*/;
+    //     console.printf(
+    //         "all in %d %d %d => %d",
+    //         global.IsPerkActive("allin"),
+    //         player && player.mo && player.mo.Health,
+    //         player && player.mo && player.mo.CountInv("BasicArmor"),
+    //         isAllInOn
+    //     );
+	// 	return isAllInOn 
+    //         ? FindState ("AllInFire") 
+    //         : Super.GetAtkState(hold);
+	// }
 }
 
 class HM_PlayerRocket : Rocket

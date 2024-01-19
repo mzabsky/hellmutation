@@ -4,6 +4,14 @@ extend class HM_GlobalEventHandler
     {
         // Only chance perks appear here, basic perks are hard coded
 
+        AddPerkDefinition(
+            "allin",
+            "All In",
+            HM_CAT_ROCKETLAUNCHER,
+            "As long as you have 200 health and armor, any damage you take is brutally increased and your rocket launcher fires much faster."
+        );
+
+
         AddPerkDefinition( // TODO
             "bloodlust",
             "Bloodlust",
