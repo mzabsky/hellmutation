@@ -131,6 +131,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "suppressor",
+            "Suppressor",
+            HM_CAT_PISTOL,
+            "Pistol shots don't wake up monsters."
+        );
+
+        AddPerkDefinition(
             "torrentrounds",
             "Torrent Rounds",
             HM_CAT_CHAINGUN,

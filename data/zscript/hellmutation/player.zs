@@ -2,6 +2,12 @@ class HM_Player: DoomPlayer
 {
     mixin HM_GlobalRef;
 
+    default
+    {
+        Player.StartItem "HM_Pistol";
+        Player.StartItem "Clip", 50;
+    }
+
     // When the player has last spotted a gorgon protocol dummy
     int lastGorgonProtocolSpotted;
 

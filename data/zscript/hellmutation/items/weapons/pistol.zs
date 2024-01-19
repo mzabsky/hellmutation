@@ -1,7 +1,7 @@
 class HM_Pistol : Pistol replaces Pistol
 {
     mixin HM_GlobalRef;
-    
+
     default
     {
         Weapon.SelectionOrder 1900;
@@ -18,7 +18,10 @@ class HM_Pistol : Pistol replaces Pistol
     states
     {
         Ready:
-            PISG A 1 A_WeaponReady;
+            PISG A 1 {
+                A_WeaponReady();
+                invoker.bNoAlert = invoker.global.IsPerkActive("suppressor");
+            }
             Loop;
         Deselect:
             PISG A 1 A_Lower;
@@ -65,7 +68,10 @@ class HM_Pistol : Pistol replaces Pistol
             accurate = true;
         }
 
-        A_StartSound ("weapons/pistol", CHAN_WEAPON);
+        if(!invoker.global.IsPerkActive("suppressor"))
+        {
+            A_StartSound ("weapons/pistol", CHAN_WEAPON);
+        }
         HM_GunShot (accurate, BulletSlope ());
     }
 
