@@ -5,6 +5,7 @@ class HM_Dna: Inventory
 		  +COUNTITEM
 		  +INVENTORY.ALWAYSPICKUP
 		  +INVENTORY.FANCYPICKUPSOUND;
+			+INVENTORY.NEVERRESPAWN
       Inventory.Amount 1;
 		  Inventory.MaxAmount 999;
 		  Inventory.PickupMessage "Got DNA! You can remove a mutation now.";
