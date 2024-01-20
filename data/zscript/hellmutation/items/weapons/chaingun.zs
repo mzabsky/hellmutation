@@ -51,7 +51,7 @@ class HM_Chaingun : Chaingun replaces Chaingun
     override void Travelled()
     {
         global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
-        super.BeginPlay();
+        super.Travelled();
     }
 
     action void HM_A_FireCGun()

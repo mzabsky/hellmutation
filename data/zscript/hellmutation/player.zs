@@ -25,7 +25,7 @@ class HM_Player: DoomPlayer
     override void Travelled()
     {
         global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
-        super.BeginPlay();
+        super.Travelled();
     }
 
     override void PreTravelled()

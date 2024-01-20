@@ -59,7 +59,7 @@ class HM_RocketLauncher : DoomWeapon replaces RocketLauncher
     override void Travelled()
     {
         global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
-        super.BeginPlay();
+        super.Travelled();
     }
 
     action void HM_A_FireMissile()

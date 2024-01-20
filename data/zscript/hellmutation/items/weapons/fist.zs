@@ -41,7 +41,7 @@ class HM_Fist : Weapon replaces Fist
     override void Travelled()
     {
         global = HM_GlobalEventHandler(EventHandler.Find("HM_GlobalEventHandler"));
-        super.BeginPlay();
+        super.Travelled();
     }
 
     // Deflecting Punch - Punching deflects projectiles in direction where the player is looking
