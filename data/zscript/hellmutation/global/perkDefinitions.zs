@@ -76,6 +76,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "flaregun",
+            "Flare Gun",
+            HM_CAT_PLAYER,
+            "\c[Red]Pistol ALT FIRE\c-: Fires flares which make enemies take significantly more damage."
+        );
+
+        AddPerkDefinition(
             "focused",
             "Focused",
             HM_CAT_PLAYER,
