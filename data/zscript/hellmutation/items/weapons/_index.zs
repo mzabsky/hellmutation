@@ -3,3 +3,4 @@
 #include "./pistol.zs"
 #include "./plasmarifle.zs"
 #include "./rocketlauncher.zs"
+#include "./shotgun.zs"

@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             let killer = killTracker.killer;
 
-            console.printf("Kill Weapon: %s, Inflictor: %s", weapon.GetClassName(), e.inflictor.GetClassName());
+            console.printf("Kill Weapon: %s, Inflictor: %s, Victim: %s", weapon.GetClassName(), e.inflictor.GetClassName(), e.thing.GetClassName());
 
             if(weapon is 'Fist' && IsPerkActive("bloodlust"))
             {
@@ -39,6 +39,11 @@ extend class HM_GlobalEventHandler
             if(weapon is 'Chainsaw' && IsPerkActive("profitablecut"))
             {
                 e.thing.Spawn("HM_RandomAmmo", e.thing.pos);
+            }
+
+            if(weapon is 'Shotgun' && e.thing.bIsMonster)
+            {
+                HM_Player(killTracker.killer).lastShotgunKillTime = Level.Time;
             }
             
             // Performance Bonus - Rocket kills 5 monsters -> gets refunded

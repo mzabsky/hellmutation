@@ -132,6 +132,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "rampage",
+            "Rampage",
+            HM_CAT_SHOTGUN,
+            "Shotgun reloads slowly, but reloads instantly when it scores a kill."
+        );
+
+        AddPerkDefinition(
             "performancebonus",
             "Performance Bonus",
             HM_CAT_ROCKETLAUNCHER,

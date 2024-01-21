@@ -20,6 +20,9 @@ class HM_Player: DoomPlayer
 
     // The number of continuous Boreal Gaze stacked ticks
     int borealGazeTicks;
+
+    // Time of last kill with a Shotgun (for Rampage)
+    int lastShotgunKillTime;
     
     // This helps out the mixin, which does not trigger properly during level transitions
     override void Travelled()
