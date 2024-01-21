@@ -253,6 +253,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "discord",
+            "Discord",
+            HM_CAT_IMP,
+            "Imps can damage and kill other Imps. Whenever an Imp kills another monster, they become an Arch-imp."
+        );
+
+        AddMutationDefinition(
             "dominance",
             "Dominance",
             HM_CAT_CYBERDEMON,

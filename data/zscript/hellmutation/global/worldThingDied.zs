@@ -24,7 +24,7 @@ extend class HM_GlobalEventHandler
         {
             let killer = killTracker.killer;
 
-            console.printf("Kill Weapon: %s, Inflictor: %s, Victim: %s", weapon.GetClassName(), e.inflictor.GetClassName(), e.thing.GetClassName());
+            console.printf("Kill Killer: %s, Weapon: %s, Inflictor: %s, Victim: %s", killer.GetClassName(), weapon.GetClassName(), e.inflictor.GetClassName(), e.thing.GetClassName());
 
             if(weapon is 'Fist' && IsPerkActive("bloodlust"))
             {
@@ -56,6 +56,29 @@ extend class HM_GlobalEventHandler
                     Killer.GiveInventoryType("RocketAmmo");
                 }
             }
+        }
+        else
+        {
+            console.printf("Kill Inflictor: %s, Victim: %s", e.inflictor.GetClassName(), e.thing.GetClassName());
+        }
+
+        if(e.inflictor.target)
+        {
+            console.printf("Kill inflictor target %s %d VictimisMonstere: %d, Mutation: %d", e.inflictor.target.GetClassName(), e.inflictor.target.bCorpse, e.thing.bIsMonster, IsMutationActive("discord"));
+        }
+
+        // Discord - Imp killed another monster
+        if(
+            IsMutationActive("discord")
+            && e.inflictor is 'DoomImpBall'
+            && e.thing.bIsMonster
+            && e.inflictor.target
+            && !e.inflictor.target.bCorpse // is still alive
+            && e.inflictor.target.GetClassName() == "HM_DoomImp" // Is not upgraded yet by previous projectile
+        )
+        {
+            console.printf("doreplacement");
+            ReplaceActor(e.inflictor.target, "HM_ArchImp");
         }
 
         // Anger - Lost soul died -> set FAST on all Lost Souls in vision range

@@ -4,11 +4,15 @@ class HM_DoomImp : DoomImp replaces DoomImp // Replacement is handled by MH_Doom
 
     // The ArchImp replacement is done in the global handler
 
-    States
+    states
     {
         See:
             TROO A 0 {
+                // Brightfire - Imps are faster
                 bAlwaysFast = global.IsMutationActive("Brightfire");
+                
+                // Discord - Allow damaging other imps
+                bDoHarmSpecies = global.IsMutationActive("discord");
             }
             TROO AABBCCDD 3 FAST A_Chase;
             Loop;

@@ -29,7 +29,11 @@ class HM_ArchImp : DoomImp
             goto Spawn;
         See:
             HELN A 0 {
+                // Brightfire - Imps are faster
                 bAlwaysFast = global.IsMutationActive("Brightfire");
+                
+                // Discord - Allow damaging other imps
+                bDoHarmSpecies = global.IsMutationActive("discord");
             }
             HELN AABBCCDDEEFF 2 FAST ResurrectChase();
             loop;
