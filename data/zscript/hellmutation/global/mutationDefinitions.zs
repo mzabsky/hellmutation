@@ -302,6 +302,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "fleshinversion",
+            "Flesh Inversion",
+            HM_CAT_PLAYER,
+            "Swap current heath and armor after each level. This can't kill the player."
+        );
+
+        AddMutationDefinition(
             "geneticinstability",
             "Genetic Instability",
             HM_CAT_ALLMONSTERS,

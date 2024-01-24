@@ -82,6 +82,8 @@ extend class HM_GlobalEventHandler
         SpawnVileIncursion();
 
         BriefRestHeal();
+
+        FleshInversion();
     }
 
     void ReplaceMonsters()
@@ -470,6 +472,26 @@ extend class HM_GlobalEventHandler
             if(IsPerkActive("briefrest") && pawn && pawn.health < 150)
             {
                 pawn.A_SetHealth(150);
+            }
+        }
+    }
+
+    // Flesh Inversion - AT the beginning of each level, swap 
+    void FleshInversion()
+    {
+        for(let i = 0; i < Players.Size(); i++)
+        {
+            let pawn = Players[i].mo;
+            if(IsMutationActive("fleshinversion") && pawn && mapNumber > 0)
+            {
+                let previousHealth = pawn.Health;
+                let previousArmor = pawn.CountInv("BasicArmor");
+
+                pawn.TakeInventory("BasicArmor", previousArmor);
+
+                pawn.A_SetHealth(max(1, previousArmor));
+
+                pawn.GiveInventory("ArmorBonus", previousHealth);
             }
         }
     }
