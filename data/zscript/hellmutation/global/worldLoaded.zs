@@ -476,7 +476,7 @@ extend class HM_GlobalEventHandler
         }
     }
 
-    // Flesh Inversion - AT the beginning of each level, swap 
+    // Flesh Inversion - At the beginning of each level, swap health and armor
     void FleshInversion()
     {
         for(let i = 0; i < Players.Size(); i++)
@@ -489,7 +489,7 @@ extend class HM_GlobalEventHandler
 
                 pawn.TakeInventory("BasicArmor", previousArmor);
 
-                pawn.A_SetHealth(max(1, previousArmor));
+                pawn.A_SetHealth(max(1, previousArmor)); // Make sure not to kill the player
 
                 pawn.GiveInventory("ArmorBonus", previousHealth);
             }
