@@ -8,10 +8,11 @@ extend class HM_GlobalEventHandler
         if (e.damageSource == null)
         {
             // No source
+            console.printf("%f NoSource Thing damaged: %s, Damage: %d, Health: %d, Damage type: %s, Damage flags: %d", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.damageType, e.damageFlags);
 
             if (e.thing is "PlayerPawn")
             {
-                if(IsMutationActive("slimeborne"))
+                if(IsMutationActive("slimeborne") && e.damageType != "Crush")
                 {
                     let roll = Random(0, 100);
                     if(roll <= e.damage * 2)
@@ -27,8 +28,7 @@ extend class HM_GlobalEventHandler
         else
         {
             // Has damage source
-
-            console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Inflictor: %s, Source: %s, Source health %d, Damage type: %s", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.inflictor.GetClassName(), e.damageSource.GetClassName(), e.damageSource.health, e.damageType);
+            console.printf("%f Thing damaged: %s, Damage: %d, Health: %d, Inflictor: %s, Source: %s, Source health %d, Damage type: %s, Damage flags: %d", e.thing.FloorZ, e.thing.GetClassName(), e.damage, e.thing.health, e.inflictor.GetClassName(), e.damageSource.GetClassName(), e.damageSource.health, e.damageType, e.damageFlags);
 
             // Hematophagy
             if (e.inflictor is "Demon" && IsMutationActive("Hematophagy") && e.inflictor.health >= 0)

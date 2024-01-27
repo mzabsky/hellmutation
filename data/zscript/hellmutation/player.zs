@@ -191,6 +191,11 @@ class HM_Player: DoomPlayer
             return 0;
         }
 
+        if(mod == "Crush" && global.IsPerkActive("calciumregimen"))
+        {
+            return 0;
+        }
+
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
     }    
 }

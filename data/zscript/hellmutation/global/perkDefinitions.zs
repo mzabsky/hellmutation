@@ -40,6 +40,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "calciumregimen",
+            "Calcium Regimen",
+            HM_CAT_PLAYER,
+            "You are immune to crusher damage."
+        );
+
+        AddPerkDefinition(
             "carepackage",
             "Care Package",
             HM_CAT_PLAYER,
