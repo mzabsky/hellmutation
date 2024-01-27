@@ -69,6 +69,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "extremetanning",
+            "Extreme Tanning",
+            HM_CAT_BARREL,
+            "Barrels heal you instead of dealing damage."
+        );
+
+        AddPerkDefinition(
             "firstaid",
             "First Aid",
             HM_CAT_PLAYER,

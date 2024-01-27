@@ -184,6 +184,13 @@ class HM_Player: DoomPlayer
             return result;
         }
 
+        if(inflictor is 'ExplosiveBarrel' && global.IsPerkActive("extremetanning"))
+        {
+            GiveInventoryType('HM_HealGlitterGenerator');
+            GiveBody(damage);
+            return 0;
+        }
+
         return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
     }    
 }
