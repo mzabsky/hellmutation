@@ -142,10 +142,17 @@ extend class HM_GlobalEventHandler
             "performancebonus",
             "Performance Bonus",
             HM_CAT_ROCKETLAUNCHER,
-            "Each rocket which kills five or more monsters is refunded."
+            "Each rocket fired by you which kills five or more monsters is refunded."
         );
 
-        AddPerkDefinition( // TODO
+        AddPerkDefinition(
+            "precisionsurgery",
+            "Precision Surgery",
+            HM_CAT_CHAINSAW,
+            "Chainsaw deals triple damage and causes no pain."
+        );
+
+        AddPerkDefinition(
             "profitablecut",
             "Profitable Cut",
             HM_CAT_CHAINSAW,

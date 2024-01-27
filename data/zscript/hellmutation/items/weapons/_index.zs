@@ -1,4 +1,5 @@
 #include "./chaingun.zs"
+#include "./chainsaw.zs"
 #include "./fist.zs"
 #include "./pistol.zs"
 #include "./plasmarifle.zs"
