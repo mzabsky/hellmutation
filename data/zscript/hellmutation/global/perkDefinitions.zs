@@ -132,6 +132,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "mindfulness",
+            "Mindfulness",
+            HM_CAT_PLAYER,
+            "Take three times less self damage."
+        );
+
+        AddPerkDefinition(
             "nuclearnukage",
             "Nuclear Nukage",
             HM_CAT_BARREL,

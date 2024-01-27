@@ -161,6 +161,12 @@ class HM_Player: DoomPlayer
             return 0;
         }
 
+        // Mindfulness - Take three times less self damage
+        if (source == self && global.isPerkActive("mindfulness"))
+        {
+            damage /= 3;
+        }
+
         // All In - As long as the player has 200 health and armor, take much more damage
         let isAllInOn = global.IsPerkActive("allin")
             && Health >= 200
