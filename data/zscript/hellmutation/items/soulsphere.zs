@@ -4,12 +4,27 @@ class HM_SoulSphere: SoulSphere replaces SoulSphere
 
     override bool TryPickup (in out Actor toucher)
     {
-        let tryPickupResult = super.TryPickup(toucher);
-        if(tryPickupResult && global.IsPerkActive("megalomania"))
+        if(global.IsPerkActive("glory"))
         {
-            toucher.GiveInventoryType("megasphere");
+            MaxAmount = 300;
         }
-        
-        return tryPickupResult;
+        else
+        {
+            MaxAmount = 200;
+        }
+
+        let originalHealth = toucher.Health;
+        let originalArmor = toucher.CountInv("BasicArmor");
+
+        if(global.IsPerkActive("megalomania"))
+        {
+            toucher.GiveInventoryType("hm_megasphere");
+
+            return originalHealth <= MaxAmount || originalArmor <= MaxAmount;
+        }
+        else
+        {
+            return super.TryPickup(toucher);
+        }
     }
 }

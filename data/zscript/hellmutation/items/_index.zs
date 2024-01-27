@@ -10,6 +10,7 @@
 #include "./healthbonus.zs"
 #include "./keys.zs"
 #include "./medikit.zs"
+#include "./megalomania.zs"
 #include "./perkpoint.zs"
 #include "./soulsphere.zs"
 #include "./stimpack.zs"

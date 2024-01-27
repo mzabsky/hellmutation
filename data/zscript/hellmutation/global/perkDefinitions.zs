@@ -90,6 +90,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
+            "glory",
+            "Glory",
+            HM_CAT_PLAYER,
+            "Soulspheres, Megaspheres, Blue Armor and Bonuses heal up to 300 health and armor."
+        );
+
+        AddPerkDefinition(
             "highvoltage",
             "High Voltage",
             HM_CAT_PLASMAGUN,
