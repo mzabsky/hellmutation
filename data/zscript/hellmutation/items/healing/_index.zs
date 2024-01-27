@@ -1,0 +1,6 @@
+#include "./armorbonus.zs"
+#include "./healthbonus.zs"
+#include "./medikit.zs"
+#include "./megalomania.zs"
+#include "./soulsphere.zs"
+#include "./stimpack.zs"
