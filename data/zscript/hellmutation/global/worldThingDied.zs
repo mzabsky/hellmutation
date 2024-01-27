@@ -57,14 +57,12 @@ extend class HM_GlobalEventHandler
                 }
             }
         }
-        else
+        else if(e.inflictor)
         {
             console.printf("Kill Inflictor: %s, Victim: %s", e.inflictor.GetClassName(), e.thing.GetClassName());
         }
-
-        if(e.inflictor.target)
-        {
-            console.printf("Kill inflictor target %s %d VictimisMonstere: %d, Mutation: %d", e.inflictor.target.GetClassName(), e.inflictor.target.bCorpse, e.thing.bIsMonster, IsMutationActive("discord"));
+        else {
+            console.printf("Kill no Inflictor. Victim: %s", e.thing.GetClassName());
         }
 
         // Discord - Imp killed another monster
