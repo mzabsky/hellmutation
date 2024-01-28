@@ -184,6 +184,7 @@ class HM_Player: DoomPlayer
             return result;
         }
 
+        // Extreme Tanning - Barrel explosions heal player instead of dealing damage
         if(inflictor is 'ExplosiveBarrel' && global.IsPerkActive("extremetanning"))
         {
             GiveInventoryType('HM_HealGlitterGenerator');
@@ -191,6 +192,7 @@ class HM_Player: DoomPlayer
             return 0;
         }
 
+        // Calcium Regimen - Immune to crush damage
         if(mod == "Crush" && global.IsPerkActive("calciumregimen"))
         {
             return 0;
