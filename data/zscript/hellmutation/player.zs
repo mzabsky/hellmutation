@@ -155,7 +155,7 @@ class HM_Player: DoomPlayer
     override int DamageMobj (Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
     {
         // Safety Measures - Give RadSuit if not activated in this level yet
-        if (inflictor == null && global.IsPerkActive("safetymeasures") && GiveInventoryType("HM_SafetyMeasures") != null)
+        if (inflictor == null && mod != "Crush" && global.IsPerkActive("safetymeasures") && GiveInventoryType("HM_SafetyMeasures") != null)
         {
             GiveInventoryType("RadSuit");
             return 0;
