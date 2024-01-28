@@ -75,7 +75,6 @@ extend class HM_GlobalEventHandler
             && e.inflictor.target.GetClassName() == "HM_DoomImp" // Is not upgraded yet by previous projectile
         )
         {
-            console.printf("doreplacement");
             ReplaceActor(e.inflictor.target, "HM_ArchImp");
         }
 
@@ -105,6 +104,7 @@ extend class HM_GlobalEventHandler
             e.thing.A_AlertMonsters();
         }
 
+        // Dependence - Kill all dependent Lost Souls
         if(e.thing is 'HM_PainElemental' && IsMutationActive('dependence'))
         {
             HM_PainElemental(e.thing).DependenceDeath(e.damageSource);
@@ -125,6 +125,29 @@ extend class HM_GlobalEventHandler
                 {
                     cyberdemon.triumvirateMateB.DamageMobj(cyberdemon, e.damageSource, 9999, 'Triumvirate', HM_DMG_REDIRECTED);
                 }
+            }
+        }
+
+        // Betrayal - A monster killed another monster -> create an explosion of bonuses
+        if(e.thing && e.thing.target && e.thing.target.bIsMonster && e.thing.bIsMonster && IsPerkActive("betrayal")))
+        {
+            let victim = e.thing;
+            let maxHealth = GetDefaultByType(e.thing.GetClass()).health;
+
+            //console.printf("Viction max health: %d, Log: %f, LogN: %f, Sqrt: %f", maxHealth, log(double(maxhealth)), logN(double(maxHealth), 1.2) - 14, int(sqrt(double(maxHealth)) / 2));
+            let bonusCount = int(sqrt(double(maxHealth) / 2));
+            for(let i = 0; i < bonusCount; i++)
+            {
+                Class<Inventory> bonusClass = random[HM_GlobalEventHandler](0, 1) == 0 ? "HealthBonus" : "ArmorBonus";
+                let position = e.thing.Vec3Offset(
+                    random[HM_GlobalEventHandler](-victim.radius, victim.radius),
+                    random[HM_GlobalEventHandler](-victim.radius, victim.radius),
+                    random[HM_GlobalEventHandler](0, victim.height)
+                );
+                let bonus = e.thing.Spawn(bonusClass, position);
+                bonus.vel.x = (position.x - victim.pos.x) / 10;
+                bonus.vel.y = (position.y - victim.pos.y) / 10;
+                bonus.vel.z = (position.z - victim.pos.z) / 10;
             }
         }
     }

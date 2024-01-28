@@ -11,6 +11,13 @@ extend class HM_GlobalEventHandler
             "As long as you have 200 health and armor, any damage you take is brutally increased and your rocket launcher fires much faster."
         );
 
+        AddPerkDefinition(
+            "betrayal",
+            "Betrayal",
+            HM_CAT_ALLMONSTERS,
+            "Monsters killed by other monsters explode into a bounty of health an armor bonuses."
+        );
+
         AddPerkDefinition( // TODO
             "bloodlust",
             "Bloodlust",
