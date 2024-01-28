@@ -158,6 +158,8 @@ class HM_Player: DoomPlayer
         if (inflictor == null && mod != "Crush" && global.IsPerkActive("safetymeasures") && GiveInventoryType("HM_SafetyMeasures") != null)
         {
             GiveInventoryType("RadSuit");
+
+            // annull this instance of damage, the suit isn't in effect yet
             return 0;
         }
 
