@@ -5,6 +5,8 @@ class HM_Spectre : Spectre replaces Spectre
     mixin HM_Macropods;
     mixin HM_Unstoppable;
 
+    int lastDecloakTime;
+
     Default
     {
         Species "Demon";
@@ -21,7 +23,7 @@ class HM_Spectre : Spectre replaces Spectre
             Loop;
         Melee: 
             SARG EF 8 A_FaceTarget;
-            SARG G 8 A_SargAttack;
+            SARG G 8 SpectreAttack;
             Goto See;
         Pounce:
             SARG E 0 {
@@ -36,5 +38,60 @@ class HM_Spectre : Spectre replaces Spectre
             SARG N 3;
             SARG MLKJ 3;
             Goto See;
+    }
+
+    override void PostBeginPlay ()
+    {
+        // Born cloaked
+        lastDecloakTime = -9999;
+    }
+
+	override bool CanCollideWith(Actor other, bool passive)
+	{
+        if(other is 'PlayerPawn')
+        {
+            lastDecloakTime = Level.Time;
+        }
+
+        return super.CanCollideWith(other, passive);
+	}
+
+    override void Tick()
+    {
+        if(bSkullfly)
+        {
+            lastDecloakTime = Level.Time;
+        }
+
+        if(global.IsMutationActive("camouflagefinesse"))
+        {
+            let decloakThreshold = 70;
+            let ticksSinceDecloak = Level.time - lastDecloakTime;
+            if(ticksSinceDecloak < decloakThreshold)
+            {
+                A_SetRenderStyle(double(decloakThreshold - ticksSinceDecloak) / double(decloakThreshold) * 0.5, STYLE_Translucent);
+            }
+            else
+            {
+                A_SetRenderStyle(0, STYLE_None);
+            }
+        }
+
+        super.Tick();
+    }
+
+    override int DamageMobj (Actor inflictor, Actor source, int damage, Name mod, int flags, double angle)
+    {
+        lastDecloakTime = Level.Time;
+        return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+    }
+
+    void SpectreAttack()
+    {
+        if(target != null)
+        {
+            lastDecloakTime = Level.Time;
+        }
+        A_SargAttack();
     }
 }

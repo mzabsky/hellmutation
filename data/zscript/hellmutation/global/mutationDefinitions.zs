@@ -162,6 +162,13 @@ extend class HM_GlobalEventHandler
         );
 
         AddMutationDefinition(
+            "camouflagefinesse",
+            "Camouflage Finesse",
+            HM_CAT_PINKY,
+            "Spectres are completely invisible when they are not touching a player,\nattacking or being dealt damage."
+        );
+
+        AddMutationDefinition(
             "catastrophicreflux",
             "Catastrophic Reflux",
             HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
