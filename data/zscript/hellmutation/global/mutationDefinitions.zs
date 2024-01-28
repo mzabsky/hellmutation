@@ -468,6 +468,13 @@ extend class HM_GlobalEventHandler
             HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
             "Arch-Viles resurrect monsters continuously, without interruption."
         );
+
+        AddMutationDefinition(
+            "omnispectrality",
+            "Omnispectrality",
+            HM_CAT_PINKY,
+            "All pinkes are replaced with spectres."
+        );
         
         AddMutationDefinition(
             "overwhelmingfire",

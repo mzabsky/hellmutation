@@ -102,6 +102,11 @@ extend class HM_GlobalEventHandler
             {
                 ChanceReplaceActor(actor, 'HM_ArchImp', IsMutationActive("unholylegion") ? 17 * 3 : 17); // 1 in 5 with Unholy Legion, one in 15 otherwise
             }
+
+            if(actor.GetClass() == 'HM_Demon' && IsMutationActive("omnispectrality"))
+            {
+                ReplaceActor(actor, 'HM_Spectre');
+            }
         }
     }
 
