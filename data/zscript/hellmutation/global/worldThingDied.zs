@@ -129,7 +129,7 @@ extend class HM_GlobalEventHandler
         }
 
         // Betrayal - A monster killed another monster -> create an explosion of bonuses
-        if(e.thing && e.thing.target && e.thing.target.bIsMonster && e.thing.bIsMonster && IsPerkActive("betrayal")))
+        if(e.thing && e.thing.target && e.thing.target.bIsMonster && e.thing.bIsMonster && IsPerkActive("betrayal"))
         {
             let victim = e.thing;
             let maxHealth = GetDefaultByType(e.thing.GetClass()).health;
