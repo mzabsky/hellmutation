@@ -107,7 +107,7 @@ extend class HM_GlobalEventHandler
             "focused",
             "Focused",
             HM_CAT_PLAYER,
-            "Blur spheres affect you as if they were Soulspheres."
+            "Blur spheres affect you as if they were Soulspheres instead of their normal effect."
         );
 
         AddPerkDefinition(
@@ -167,13 +167,6 @@ extend class HM_GlobalEventHandler
         );
 
         AddPerkDefinition(
-            "rampage",
-            "Rampage",
-            HM_CAT_SHOTGUN,
-            "Shotgun reloads slowly, but reloads instantly when it scores a kill."
-        );
-
-        AddPerkDefinition(
             "performancebonus",
             "Performance Bonus",
             HM_CAT_ROCKETLAUNCHER,
@@ -192,6 +185,13 @@ extend class HM_GlobalEventHandler
             "Profitable Cut",
             HM_CAT_CHAINSAW,
             "Kills with Chainsaw drop random ammo."
+        );
+
+        AddPerkDefinition(
+            "rampage",
+            "Rampage",
+            HM_CAT_SHOTGUN,
+            "Shotgun reloads slowly, but reloads instantly when it scores a kill."
         );
 
         AddPerkDefinition(
