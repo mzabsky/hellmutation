@@ -3,52 +3,10 @@ class HM_Definition
     string Key;
     int MapNumber;
     string Name;
-    HM_Category Category;
+    Array<HM_Category> Categories;
     string Description;
     
 }
-
-// Categories for both mutations and perks
-enum HM_Category
-{
-    HM_CAT_DOOM2 = 1 << 0, // Only allowed if the current IWAD allows DOOM2's feature set (arch viles, super shotgun and stuff)
-    HM_CAT_NOFIRSTMAP = 1 << 1, // Can't appear in the first map in this save
-    HM_CAT_PLAYER = 1 << 2,
-    HM_CAT_DMGFLOOR = 1 << 3,
-    HM_CAT_BARREL = 1 << 4,
-
-    // Weapons
-    HM_CAT_FIST = 1 << 5,
-    HM_CAT_PISTOL = 1 << 6,
-    HM_CAT_CHAINSAW = 1 << 7,
-    HM_CAT_SHOTGUN = 1 << 8,
-    HM_CAT_SUPERSHOTGUN = 1 << 9,
-    HM_CAT_CHAINGUN = 1 << 10,
-    HM_CAT_ROCKETLAUNCHER = 1 << 11,
-    HM_CAT_PLASMAGUN = 1 << 12,
-    HM_CAT_BFG = 1 << 13,
-
-    HM_CAT_ALLMONSTERS = 1 << 14, // Affects all monsters
-
-    // Enemy types
-    HM_CAT_ZOMBIEMAN = 1 << 15,
-    HM_CAT_SHOTGUNNER = 1 << 16,
-    HM_CAT_CHAINGUNNER = 1 << 17,
-    HM_CAT_IMP = 1 << 18,
-    HM_CAT_PINKY = 1 << 19, // Spectres count as pinkys
-    HM_CAT_REVENANT = 1 << 20,
-    HM_CAT_CACODEMON = 1 << 21,
-    HM_CAT_LOSTSOUL = 1 << 22,
-    HM_CAT_PAINELEMENTAL = 1 << 23,
-    HM_CAT_HELLKNIGHT = 1 << 24,
-    HM_CAT_BARONOFHELL = 1 << 25,
-    HM_CAT_MANCUBUS = 1 << 26,
-    HM_CAT_ARCHVILE = 1 << 27,
-    HM_CAT_ARACHNOTRON = 1 << 28,
-    HM_CAT_SPIDERMASTERMIND = 1 << 29,
-    HM_CAT_CYBERDEMON = 1 << 30,
-    HM_CAT_BOSSBRAIN = 1 << 31
-};
 
 extend class HM_GlobalEventHandler
 {
@@ -59,657 +17,748 @@ extend class HM_GlobalEventHandler
         AddMutationDefinition(
             "abundance",
             "Abundance",
-            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubuses fire additional projectiles in each\nhorizontal direction."
+            "Mancubuses fire additional projectiles in each\nhorizontal direction.",
+            HM_CAT_DOOM2,
+            HM_CAT_MANCUBUS
         );
 
         AddMutationDefinition(
             "adrenaline",
             "Adrenaline",
-            HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER,
-            "Zombiemen, Shotgunners and their variants are more aggressive."
+            "Zombiemen, Shotgunners and their variants are more aggressive.",
+            HM_CAT_ZOMBIEMAN,
+            HM_CAT_SHOTGUNNER
         );
 
         AddMutationDefinition(
             "aethericritual",
             "Aetheric Ritual",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles do not require to be able to see a corpse\nto resurrect it."
+            "Arch-Viles do not require to be able to see a corpse\nto resurrect it.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "affinity",
             "Affinity",
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals have much more health, but take damage along with\ntheir Lost Souls."
+            "Pain Elementals have much more health, but take damage along with\ntheir Lost Souls.",
+            HM_CAT_DOOM2,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "ambushshield",
             "Ambush Shield",
-            HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
-            "Chaingunners get a brief invulnerability\nshield when they first open fire."
+            "Chaingunners get a brief invulnerability\nshield when they first open fire.",
+            HM_CAT_DOOM2,
+            HM_CAT_CHAINGUNNER
         );
 
         AddMutationDefinition(
             "anger",
             "Anger",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost Souls get angry when they see other monsters die."
+            "Lost Souls get angry when they see other monsters die.",
+            HM_CAT_LOSTSOUL,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "argenthydraulics",
             "Argent Hydraulics",
-            HM_CAT_ARACHNOTRON | HM_CAT_SPIDERMASTERMIND,
-            "Arachnotrons and Spider Masterminds walk much faster."
+            "Arachnotrons and Spider Masterminds walk much faster.",
+            HM_CAT_ARACHNOTRON,
+            HM_CAT_SPIDERMASTERMIND
         );
         
         AddMutationDefinition(
             "ascension",
             "Ascension",
-            HM_CAT_DOOM2 | HM_CAT_HELLKNIGHT,
-            "Hell Knights who score a hit on the player become Barons of Hell."
+            "Hell Knights who score a hit on the player become Barons of Hell.",
+            HM_CAT_DOOM2,
+            HM_CAT_HELLKNIGHT
         );
 
         AddMutationDefinition(
             "barrage",
             "Barrage",
-            HM_CAT_IMP,
-            "Imps fire three fireballs in a rapid barrage."
+            "Imps fire three fireballs in a rapid barrage.",
+            HM_CAT_IMP
         );
         
         AddMutationDefinition(
             "bigfuckingwomp",
             "Big Fucking Womp",
-            HM_CAT_CYBERDEMON | HM_CAT_SPIDERMASTERMIND,
-            "Cyberdemons and Spider Masterminds take much less damage from BFG9000."
+            "Cyberdemons and Spider Masterminds take much less damage from BFG9000.",
+            HM_CAT_CYBERDEMON,
+            HM_CAT_SPIDERMASTERMIND
         );
 
         AddMutationDefinition(
             "bloodtax",
             "Blood Tax",
-            HM_CAT_PLAYER,
-            "Player takes 25 damage when they pick up a keycard or a\nskull key (this damage cannot kill)."
+            "Player takes 25 damage when they pick up a keycard or a\nskull key (this damage cannot kill).",
+            HM_CAT_KEY
         );
 
         AddMutationDefinition(
             "borealgaze",
             "Boreal Gaze",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles progressively slow down their target with their flame attack."
+            "Arch-Viles progressively slow down their target with their flame attack.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "brightfire",
             "Brightfire",
-            HM_CAT_IMP,
-            "Imps and their variants are faster."
+            "Imps and their variants are faster and more aggressive.",
+            HM_CAT_IMP
         );
         
         AddMutationDefinition(
             "broodfabrication",
             "Brood Fabrication",
-            HM_CAT_DOOM2 | HM_CAT_SPIDERMASTERMIND,
-            "Spider Masterminds rapidly spawn Arachnotrons."
+            "Spider Masterminds rapidly spawn Arachnotrons.",
+            HM_CAT_DOOM2,
+            HM_CAT_SPIDERMASTERMIND
         );
 
         AddMutationDefinition(
             "cacoblasters",
             "Cacoblasters",
-            HM_CAT_CACODEMON,
-            "Cacodemons fire two additional projectiles."
+            "Cacodemons fire two additional projectiles.",
+            HM_CAT_CACODEMON
         );
 
         AddMutationDefinition(
             "camouflagefinesse",
             "Camouflage Finesse",
-            HM_CAT_PINKY,
-            "Spectres are completely invisible when they are not touching a player,\nattacking or being dealt damage."
+            "Spectres are completely invisible when they are not touching a player,\nattacking or being dealt damage.",
+            HM_CAT_PINKY
         );
 
         AddMutationDefinition(
             "catastrophicreflux",
             "Catastrophic Reflux",
-            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubuses cause a powerful explosion on death."
+            "Mancubuses cause a powerful explosion on death.",
+            HM_CAT_DOOM2,
+            HM_CAT_MANCUBUS
         );
 
         AddMutationDefinition(
             "closure",
             "Closure",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost Souls explode on death, dealing light area damage."
+            "Lost Souls explode on death, dealing light area damage.",
+            HM_CAT_LOSTSOUL,
+            HM_CAT_PAINELEMENTAL
         );
         
         AddMutationDefinition(
             "compassion",
             "Compassion",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls never attack each other."
+            "Lost souls never attack each other.",
+            HM_CAT_LOSTSOUL,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "craterhoof",
             "Craterhoof",
-            HM_CAT_CYBERDEMON,
-            "Cyberdemon hoof stomps damage and debilitate everything in\na moderate area."
+            "Cyberdemon hoof stomps damage and debilitate everything in\na moderate area.",
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "cyberneuralreflexes",
             "Cyber-Neural Reflexes",
-            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
-            "Arachnotrons immediately return fire when attacked."
+            "Arachnotrons immediately return fire when attacked.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARACHNOTRON
         );
 
         AddMutationDefinition(
             "dampingjaws",
             "Damping Jaws",
-            HM_CAT_CACODEMON,
-            "Damage from Cacodemons removes powerup effects from players."
+            "Damage from Cacodemons removes powerup effects from players.",
+            HM_CAT_CACODEMON
         );
 
         AddMutationDefinition(
             "decapitation",
             "Decapitation",
-            HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
-            "Zombiemen, Shotgunners, Chaingunners may spawn a lost soul\nafter dying, unless gibbed."
+            "Zombiemen, Shotgunners, Chaingunners may spawn a lost soul\nafter dying, unless gibbed.",
+            HM_CAT_ZOMBIEMAN,
+            HM_CAT_SHOTGUNNER,
+            HM_CAT_CHAINGUNNER
         );
 
         AddMutationDefinition(
             "decoys",
             "Decoys",
-            HM_CAT_DOOM2 | HM_CAT_REVENANT,
-            "Revenants may spawn a harmless decoy when they get hit."
+            "Revenants may spawn a harmless decoy when they get hit.",
+            HM_CAT_DOOM2,
+            HM_CAT_REVENANT
         );
 
         AddMutationDefinition(
             "defundedresearch",
             "Defunded Research",
-            HM_CAT_PLAYER,
-            "One less DNA might spawn in each level."
+            "One less DNA might spawn in each level.",
+            HM_CAT_META
         );
 
         AddMutationDefinition(
             "dejavu",
             "Deja Vu",
-            HM_CAT_ALLMONSTERS,
-            "Monsters might ambush you more than once!"
+            "Monsters might ambush you more than once!",
+            HM_CAT_ALLMONSTERS
         );
 
         AddMutationDefinition(
             "dependence",
             "Dependence",
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals spawn Lost Souls much faster, but they all\ndie when it dies."
+            "Pain Elementals spawn Lost Souls much faster, but they all\ndie when it dies.",
+            HM_CAT_DOOM2,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "desecration",
             "Desecration",
-            HM_CAT_IMP,
-            "Imps who score a hit on the player become Arch-Imps."
+            "Imps who score a hit on the player become Arch-Imps.",
+            HM_CAT_IMP
         );
 
         AddMutationDefinition(
             "desire",
             "Desire",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls charge at greater speed."
+            "Lost souls charge at greater speed.",
+            HM_CAT_LOSTSOUL,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "discord",
             "Discord",
-            HM_CAT_IMP,
-            "Imps can damage and kill other Imps. Whenever an Imp kills another monster, they become an Arch-imp."
+            "Imps can damage and kill other Imps. Whenever an Imp kills another monster, they become an Arch-imp.",
+            HM_CAT_IMP
         );
 
         AddMutationDefinition(
             "dominance",
             "Dominance",
-            HM_CAT_CYBERDEMON,
-            "Cyberdemons can attack while walking."
+            "Cyberdemons can attack while walking.",
+            HM_CAT_CYBERDEMON
         );
         
         AddMutationDefinition(
             "doppelgangers",
             "Doppelgangers",
-            HM_CAT_IMP | HM_CAT_ARCHVILE,
-            "A dead copy of each monster is spawned somewhere in the level."
+            "A dead copy of each monster is spawned somewhere in the level.",
+            HM_CAT_IMP,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "explosivesurprise",
             "Explosive Surprise",
-            HM_CAT_BARREL,
-            "Barrels may spawn a monster after exploding."
+            "Barrels may spawn a monster after exploding.",
+            HM_CAT_BARREL
         );
 
         AddMutationDefinition(
             "extendedaccelerators",
-            "Extended Acelerators",
-            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
-            "Arachnotron projectiles are much faster."
+            "Extended Accelerators",
+            "Arachnotron projectiles are much faster.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARACHNOTRON
         );
        
         AddMutationDefinition(
             "extremophilia",
             "Extremophilia",
-            HM_CAT_DMGFLOOR,
-            "Monsters recover some health each second on a damaging floor."
+            "Monsters recover some health each second on a damaging floor.",
+            HM_CAT_DMGFLOOR
         );
 
         AddMutationDefinition(
             "fistatrophy",
             "Fist Atrophy",
-            HM_CAT_DOOM2 | HM_CAT_REVENANT,
-            "Revenants always use their ranged attack instead of punching."
+            "Revenants always use their ranged attack instead of punching.",
+            HM_CAT_DOOM2,
+            HM_CAT_REVENANT
         );
 
         AddMutationDefinition(
             "fleshinversion",
             "Flesh Inversion",
-            HM_CAT_PLAYER,
-            "Swap current heath and armor after each level. This can't kill the player."
+            "Swap current heath and armor after each level. This can't kill the player.",
+            HM_CAT_PLAYER
         );
 
         AddMutationDefinition(
             "geneticinstability",
             "Genetic Instability",
-            HM_CAT_ALLMONSTERS,
-            "An additional mutation might affect the monsters in each level."
+            "An additional mutation might affect the monsters in each level.",
+            HM_CAT_META
         );
 
         AddMutationDefinition(
             "gorgonprotocol",
             "Gorgon Protocol",
-            HM_CAT_SPIDERMASTERMIND,
-            "Laying gaze on a Spider Mastermind rapidly immobilizes the player.\n Their speed and especially strafing become greatly reduced."
+            "Laying gaze on a Spider Mastermind rapidly immobilizes the player.\n Their speed and especially strafing become greatly reduced.",
+            HM_CAT_SPIDERMASTERMIND
         );
 
         AddMutationDefinition(
             "greaterritual",
             "Greater Ritual",
-            HM_CAT_IMP | HM_CAT_ARCHVILE,
-            "Arch-Imps and Arch-Viles can resurrect Arch-Imps, Arch-Viles,\nPain Elementals, Spider Masterminds and Cyberdemons."
+            "Arch-Imps and Arch-Viles can resurrect Arch-Imps, Arch-Viles,\nPain Elementals, Spider Masterminds and Cyberdemons.",
+            HM_CAT_IMP,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "hellscaress",
             "Hell's Caress",
-            HM_CAT_IMP | HM_CAT_REVENANT | HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nare much more powerful."
+            "Melee attacks of Imps, Revenants, Hell Knights, Barons of Hell \nare much more powerful.",
+            HM_CAT_IMP,
+            HM_CAT_REVENANT,
+            HM_CAT_HELLKNIGHT,
+            HM_CAT_BARONOFHELL
         );
 
         AddMutationDefinition(
             "hematophagy",
             "Hematophagy",
-            HM_CAT_PINKY,
-            "Pinkies and their variants become fully healed whenever they deal damage."
+            "Pinkies and their variants become fully healed whenever they deal damage.",
+            HM_CAT_PINKY
         );
 
         AddMutationDefinition(
             "highground",
             "High Ground",
-            HM_CAT_ZOMBIEMAN | HM_CAT_SHOTGUNNER | HM_CAT_CHAINGUNNER,
-            "Zombiemen, Shotgunners, Chaingunners and their variants\ndeal more damage when attacking from above."
+            "Zombiemen, Shotgunners, Chaingunners and their variants\ndeal more damage when attacking from above.",
+            HM_CAT_ZOMBIEMAN,
+            HM_CAT_SHOTGUNNER,
+            HM_CAT_CHAINGUNNER
         );
 
         AddMutationDefinition(
             "hypercognition",
             "Hypercognition",
-            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
-            "Arachnotrons lead their target when aiming."
+            "Arachnotrons lead their target when aiming.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARACHNOTRON
         );
 
         AddMutationDefinition(
             "hyperfuel",
             "Hyper-Fuel",
-            HM_CAT_REVENANT | HM_CAT_CYBERDEMON,
-            "All rockets and guided rockets fired by monsters are faster."
+            "All rockets and guided rockets fired by monsters are faster.",
+            HM_CAT_REVENANT,
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "hyperphagy",
             "Hyperphagy",
-            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubuses are more aggressive."
+            "Mancubuses are more aggressive.",
+            HM_CAT_DOOM2,
+            HM_CAT_MANCUBUS
         );
 
         AddMutationDefinition(
             "insomnia",
             "Insomnia",
-            HM_CAT_NOFIRSTMAP | HM_CAT_ALLMONSTERS,
-            "Monsters do not start the level asleep."
+            "Monsters do not start the level asleep.",
+            HM_CAT_NOFIRSTMAP,
+            HM_CAT_ALLMONSTERS
         );
        
         AddMutationDefinition(
             "kleptomania",
             "Kleptomania",
+            "Players lose all rockets and plasma ammo between levels.",
             HM_CAT_PLAYER,
-            "Players lose all rockets and plasma ammo between levels."
+            HM_CAT_AMMO
         );
 
         AddMutationDefinition(
             "lordsofchaos",
             "Lords of Chaos",
-            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Hell Knight and Baron of Hell projectile speed is\nchaotically randomized."
+            "Hell Knight and Baron of Hell projectile speed is\nchaotically randomized.",
+            HM_CAT_HELLKNIGHT,
+            HM_CAT_BARONOFHELL
         );
 
         AddMutationDefinition(
             "lordsofdarkness",
             "Lords of Darkness",
-            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Hell Knights and Barons of Hell take less damage\nwhile in darkness."
+            "Hell Knights and Barons of Hell take less damage\nwhile in darkness.",
+            HM_CAT_HELLKNIGHT,
+            HM_CAT_BARONOFHELL
         );
 
         AddMutationDefinition(
             "lordsofreality",
             "Lords of Reality",
-            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Hell Knight and Baron of Hell projectiles pass through\nother Hell Knights and Barons of Hell."
+            "Hell Knight and Baron of Hell projectiles pass through\nother Hell Knights and Barons of Hell.",
+            HM_CAT_HELLKNIGHT,
+            HM_CAT_BARONOFHELL
         );
 
         AddMutationDefinition(
             "lordsofsouls",
             "Lords of Souls",
-            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Players taking damage from Hell Knights and Barons of Hell\nmight cause a nearby monster to resurrect."
+            "Players taking damage from Hell Knights and Barons of Hell\nmight cause a nearby monster to resurrect.",
+            HM_CAT_HELLKNIGHT,
+            HM_CAT_BARONOFHELL
         );
 
         AddMutationDefinition(
             "lordsofvengeance",
             "Lords of Vengeance",
-            HM_CAT_HELLKNIGHT | HM_CAT_BARONOFHELL,
-            "Hell Knights and Barons of Hell get increasingly angry\nas they take damage."
+            "Hell Knights and Barons of Hell get increasingly angry\nas they take damage.",
+            HM_CAT_HELLKNIGHT,
+            HM_CAT_BARONOFHELL
         );
 
         AddMutationDefinition(
             "macropods",
             "Macropods",
-            HM_CAT_PINKY,
-            "Pinkies and Spectres can pounce from a distance, and across gaps."
+            "Pinkies and Spectres can pounce from a distance, and across gaps.",
+            HM_CAT_PINKY
         );
 
         AddMutationDefinition(
             "metamutation",
             "Metamutation",
-            HM_CAT_PLAYER,
-            "Each newly added mutation has a chance to be already unremovable."
+            "Each newly added mutation has a chance to be already unremovable.",
+            HM_CAT_META
         );
 
         AddMutationDefinition(
             "momentum",
             "Momentum",
-            HM_CAT_CACODEMON,
-            "Cacodemons attack faster the faster they are moving."
+            "Cacodemons attack faster the faster they are moving.",
+            HM_CAT_CACODEMON
         );
 
         AddMutationDefinition(
             "napalmpayload",
             "Napalm Payload",
-            HM_CAT_DOOM2| HM_CAT_MANCUBUS,
-            "Mancubuses spread fire with their attacks."
+            "Mancubuses spread fire with their attacks.",
+            HM_CAT_DOOM2,
+            HM_CAT_MANCUBUS
         );
 
         AddMutationDefinition(
             "obesity",
             "Obesity",
-            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubuses have more health."
+            "Mancubuses have more health.",
+            HM_CAT_DOOM2,
+            HM_CAT_MANCUBUS
         );
 
         AddMutationDefinition(
             "obsession",
             "Obsession",
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals spawn a Lost Soul whenever they flinch with pain."
+            "Pain Elementals spawn a Lost Soul whenever they flinch with pain.",
+            HM_CAT_DOOM2,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "odiousritual",
             "Odious Ritual",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles resurrect monsters continuously, without interruption."
+            "Arch-Viles resurrect monsters continuously, without interruption.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "omnispectrality",
             "Omnispectrality",
-            HM_CAT_PINKY,
-            "All pinkes are replaced with spectres."
+            "All pinkes are replaced with spectres.",
+            HM_CAT_PINKY
         );
         
         AddMutationDefinition(
             "overwhelmingfire",
             "Overwhelming Fire",
-            HM_CAT_DOOM2 | HM_CAT_ARACHNOTRON,
-            "Arachnotron fire rate continuously ramps up as they fire."
+            "Arachnotron fire rate continuously ramps up as they fire.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARACHNOTRON
         );
 
         AddMutationDefinition(
             "phylactery",
             "Phylactery",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles cannot die as long as the last monster they\nresurrected is alive."
+            "Arch-Viles cannot die as long as the last monster they\nresurrected is alive.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
         
         AddMutationDefinition(
             "pomodorosustenance",
             "Pomodoro Sustenance",
-            HM_CAT_CACODEMON,
-            "Dying Cacodemons heal other monsters around where they crash."
+            "Dying Cacodemons heal other monsters around where they crash.",
+            HM_CAT_CACODEMON
         );
         
         AddMutationDefinition(
             "trauma",
             "Trauma",
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals spawn along with several Lost Souls."
+            "Pain Elementals spawn along with several Lost Souls.",
+            HM_CAT_DOOM2,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "pride",
             "Pride",
-            HM_CAT_LOSTSOUL | HM_CAT_PAINELEMENTAL,
-            "Lost souls deal and take much more damage."
+            "Lost souls deal and take much more damage.",
+            HM_CAT_LOSTSOUL,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "promotion",
             "Promotion",
-            HM_CAT_ZOMBIEMAN,
-            "Basic Zombiemen who score a hit on the player become Shotgunners."
+            "Basic Zombiemen who score a hit on the player become Shotgunners.",
+            HM_CAT_ZOMBIEMAN
         );
 
         AddMutationDefinition(
             "rage",
             "Rage",
-            HM_CAT_PINKY,
-            "Pinkies and Spectres are faster."
+            "Pinkies and Spectres are faster.",
+            HM_CAT_PINKY
         );
 
         AddMutationDefinition(
             "rapidspin",
             "Rapid Spin",
-            HM_CAT_DOOM2 | HM_CAT_CHAINGUNNER,
-            "Chaingunners react faster."
+            "Chaingunners react faster.",
+            HM_CAT_DOOM2,
+            HM_CAT_CHAINGUNNER
         );
 
         AddMutationDefinition(
             "reachingritual",
             "Reaching Ritual",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles can resurrect monsters from a greater distance."
+            "Arch-Viles can resurrect monsters from a greater distance.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "reactivecamouflage",
             "Reactive Camouflage",
-            HM_CAT_PINKY,
-            "Pinkies become spectral when damaged."
+            "Pinkies become spectral when damaged.",
+            HM_CAT_PINKY
         );
 
         AddMutationDefinition(
             "regality",
             "Regality",
-            HM_CAT_CYBERDEMON,
-            "Cyberdemons deal devastating damage to other monsters\nand take very little damage from other monsters."
+            "Cyberdemons deal devastating damage to other monsters\nand take very little damage from other monsters.",
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "regret",
             "Regret",
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Pain Elementals failing to spawn a Lost Soul cause an explosion."
+            "Pain Elementals failing to spawn a Lost Soul cause an explosion.",
+            HM_CAT_DOOM2,
+            HM_CAT_PAINELEMENTAL
         );
 
         AddMutationDefinition(
             "rhythmofwar",
             "Rhythm of War",
-            HM_CAT_CYBERDEMON,
-            "Whenever a Cyberdemon attacks, all other monsters fire as well."
+            "Whenever a Cyberdemon attacks, all other monsters fire as well.",
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "rushedritual",
             "Rushed Ritual",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Viles resurrect monsters faster, but with less health."
+            "Arch-Viles resurrect monsters faster, but with less health.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "sacrifice",
             "Sacrifice",
-            HM_CAT_IMP | HM_CAT_ARCHVILE,
-            "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters."
+            "Arch-Viles and Arch-Imps redirect some of the damage they \nwould take to other nearby monsters.",
+            HM_CAT_IMP,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "scorchinggaze",
             "Scorching Gaze",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Vile flames deal moderate damage."
+            "Arch-Vile flames deal moderate damage.",
+            HM_CAT_DOOM2,
+            HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "sirenicgaze",
             "Sirenic Gaze",
-            HM_CAT_DOOM2 | HM_CAT_ARCHVILE,
-            "Arch-Vile attack pulls its victim towards it."
+            "Arch-Vile attack pulls its victim towards it.",
+            HM_CAT_DOOM2,HM_CAT_ARCHVILE
         );
 
         AddMutationDefinition(
             "slimeborne",
             "Slimeborne",
-            HM_CAT_DMGFLOOR,
-            "Player losing health to a damaging floor might cause Pinkies to spawn."
+            "Player losing health to a damaging floor might cause Pinkies to spawn.",
+            HM_CAT_DMGFLOOR
         );
 
         AddMutationDefinition(
             "sovereignty",
             "Sovereignty",
-            HM_CAT_DOOM2 | HM_CAT_CYBERDEMON,
-            "Cyberdemons have a chance to shoot a Hell Cube instead of a rocket."
+            "Cyberdemons have a chance to shoot a Hell Cube instead of a rocket.",
+            HM_CAT_DOOM2,
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "stormtroopers",
             "Stormtroopers",
-            HM_CAT_ZOMBIEMAN,
-            "Basic Zombiemen are significantly more accurate."
+            "Basic Zombiemen are significantly more accurate.",
+            HM_CAT_ZOMBIEMAN
         );
 
         AddMutationDefinition(
             "torrentcannons",
             "Torrent Cannons",
-            HM_CAT_CHAINGUNNER | HM_CAT_SPIDERMASTERMIND,
-            "Chaingunners and Spider Masterminds fire explosive rounds."
+            "Chaingunners and Spider Masterminds fire explosive rounds.",
+            HM_CAT_CHAINGUNNER,
+            HM_CAT_SPIDERMASTERMIND
         );
 
         AddMutationDefinition(
             "triumvirate",
             "Triumvirate",
-            HM_CAT_CYBERDEMON,
-            "Cyberdemons spawn as a trio, sharing a single health pool."
+            "Cyberdemons spawn as a trio, sharing a single health pool.",
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "tyranny",
             "Tyranny",
-            HM_CAT_CYBERDEMON,
-            "Cyberdemons get increasingly angry as their target evades them."
+            "Cyberdemons get increasingly angry as their target evades them.",
+            HM_CAT_CYBERDEMON
         );
 
         AddMutationDefinition(
             "unholylegion",
             "Unholy Legion",
-            HM_CAT_IMP,
-            "Arch-Imps replace Imps three times as frequently."
+            "Arch-Imps replace Imps three times as frequently.",
+            HM_CAT_IMP
         );
 
         AddMutationDefinition(
             "unstoppable",
             "Unstoppable",
-            HM_CAT_PINKY,
-            "Pinkies and their variants are almost immune to pain."
+            "Pinkies and their variants are almost immune to pain.",
+            HM_CAT_PINKY
         );
 
         AddMutationDefinition(
             "unyielding",
             "Unyelding",
-            HM_CAT_CACODEMON,
-            "Cacodemons are more resistant to pain."
+            "Cacodemons are more resistant to pain.",
+            HM_CAT_CACODEMON
         );
 
         AddMutationDefinition(
             "vileincursion",
             "Vile Incursion",
-            HM_CAT_DOOM2 | HM_CAT_NOFIRSTMAP,
-            "An additional Arch-Vile spawns somewhere in each level."
+            "An additional Arch-Vile spawns somewhere in each level.",
+            HM_CAT_DOOM2,
+            HM_CAT_NOFIRSTMAP
         );
 
         AddMutationDefinition(
             "vitalitylimit",
             "Vitality Limit",
-            HM_CAT_PLAYER,
-            "Player health over 100 slowly degenerates."
+            "Player health over 100 slowly degenerates.",
+            HM_CAT_PLAYER
         );
         
         AddMutationDefinition(
             "walloffire",
             "Wall of Fire",
-            HM_CAT_DOOM2 | HM_CAT_MANCUBUS,
-            "Mancubus projectiles spread vertically as well as horizontally."
+            "Mancubus projectiles spread vertically as well as horizontally.",
+            HM_CAT_DOOM2,
+            HM_CAT_MANCUBUS
         );
 
         AddMutationDefinition(
             "workplacesafety",
             "Workplace Safety",
-            HM_CAT_BARREL,
-            "Removes all explosive barrels."
+            "Removes all explosive barrels.",
+            HM_CAT_BARREL
         );
 
         AddMutationDefinition(
             "zeal",
             "Zeal",
-            HM_CAT_DOOM2 | HM_CAT_PAINELEMENTAL,
-            "Whenever a Pain Elemental spawns a Lost Soul, all\nthe Lost Souls spawned by it immediately charge."
+            "Whenever a Pain Elemental spawns a Lost Soul, all\nthe Lost Souls spawned by it immediately charge.",
+            HM_CAT_DOOM2,
+            HM_CAT_PAINELEMENTAL
         );
     }
     
-    private void AddMutationDefinition(string key, string name, HM_Category category, string description)
+    private void AddMutationDefinition(
+        string key,
+        string name,
+        string description,
+        HM_Category category1 = HM_CAT_NONE,
+        HM_Category category2 = HM_CAT_NONE,
+        HM_Category category3 = HM_CAT_NONE,
+        HM_Category category4 = HM_CAT_NONE
+    )
     {
         let mutationDefinition = new("HM_Definition");
         mutationDefinition.Key = key;
         mutationDefinition.Name = name;
         mutationDefinition.MapNumber = 0;
-        mutationDefinition.Category = category;
         mutationDefinition.Description = description;
+
+        if(category1 != HM_CAT_NONE)
+        {
+            mutationDefinition.Categories.Push(category1);
+        }
+
+        if(category2 != HM_CAT_NONE)
+        {
+            mutationDefinition.Categories.Push(category2);
+        }
+
+        if(category3 != HM_CAT_NONE)
+        {
+            mutationDefinition.Categories.Push(category3);
+        }
+
+        if(category4 != HM_CAT_NONE)
+        {
+            mutationDefinition.Categories.Push(category4);
+        }
+
         MutationDefinitions.Push(mutationDefinition);
+
+        if(!ValidateCategoryOrder(mutationDefinition.Categories))
+        {
+            console.printf("...adding %s", mutationDefinition.Key);
+        }
     }
 }
 

@@ -62,7 +62,8 @@ extend class HM_GlobalEventHandler
 
     int ChooseByCategories(Array<HM_Definition> options, int numberOfOptionsToChoose, string optionLabel, Array<string> blockedOptionKeys, Array<HM_Definition> chosenOptions)
     {
-        let activeCategories = GetCategoriesForCurrentLevel();
+        Array<HM_Category> activeCategories;
+        GetCategoriesForCurrentLevel(activeCategories);
 
         /*console.printf("Active:");
         DictionaryIterator dictIt = DictionaryIterator.Create(ActiveMutations);
@@ -82,12 +83,12 @@ extend class HM_GlobalEventHandler
         {
             let currentOption = options[i];
 
-            if(currentOption.Category & HM_CAT_DOOM2 > 0 && !hasDoom2)
+            if(HasCategory(currentOption.Categories, HM_CAT_DOOM2) && !hasDoom2)
             {
                 continue;
             }
 
-            if(currentOption.Category & HM_CAT_NOFIRSTMAP > 0 && mapNumber == 0)
+            if(HasCategory(currentOption.Categories, HM_CAT_NOFIRSTMAP) && mapNumber == 0)
             {
                 continue;
             }
@@ -109,10 +110,10 @@ extend class HM_GlobalEventHandler
                 continue;
             }
 
-            if(!(currentOption.Category & activeCategories))
+            if(!AreCategoriesOverlapping(activeCategories, currentOption.Categories))
             {
                 // Does not apply to anything in the current level
-                console.printf("Rejected not applicable %s: %s", optionLabel, currentOption.key, CategoryToString(activeCategories));
+                console.printf("Rejected not applicable %s: %s", optionLabel, currentOption.key);
                 continue;
             }
 
@@ -120,7 +121,7 @@ extend class HM_GlobalEventHandler
         }
 
         // We will try to choose mutations that don't overlap
-        HM_Category chosenCategories = 0;
+        Array<HM_Category> chosenCategories;
         numberOfOptionsToChoose = min(numberOfOptionsToChoose, appropriateOptions.Size());
         let i = 0;
         while(chosenOptions.Size() < numberOfOptionsToChoose)
@@ -143,11 +144,11 @@ extend class HM_GlobalEventHandler
                 // - Offer variety (do not overlap each other)
                 let candidateIndex = random[HM_GlobalEventHandler](0, appropriateOptions.Size() - 1);
                 candidateOption = appropriateOptions[candidateIndex];
-                if(chosenCategories & candidateOption.Category)
+                if(AreCategoriesOverlapping(chosenCategories, candidateOption.Categories))
                 {
                     // Overlaps already selected mutations -> discard
                     
-                    console.printf("#%d Rejected %s because of overlap: %s, current categories: %s", i, optionLabel, candidateOption.key, CategoryToString(chosenCategories));
+                    console.printf("#%d Rejected %s because of overlap: %s, current categories: %s, candidate categories: %s", i, optionLabel, candidateOption.key, CategoryToString(chosenCategories), CategoryToString(candidateOption.Categories));
                     continue;
                 }
             }
@@ -181,8 +182,11 @@ extend class HM_GlobalEventHandler
 
             //console.printf("Chosen categories before: %s", HM_CategoryToString(chosenCategories));
             
-            chosenCategories = (chosenCategories | candidateOption.Category)
-                & ~(HM_CAT_DOOM2 | HM_CAT_NOFIRSTMAP); // These categories don't count as overlaps
+            // Accumulate the categories to detect overlaps
+            MergeInCategories(chosenCategories, candidateOption.Categories);
+
+            //chosenCategories = (chosenCategories | candidateOption.Category)
+            //    & ~(HM_CAT_DOOM2 | HM_CAT_NOFIRSTMAP); // These categories don't count as overlaps
 
             console.printf("#%d Accepted %s: %s, Current accepted categories: %s", i, optionLabel, candidateOption.Key, CategoryToString(chosenCategories));
 
@@ -192,10 +196,19 @@ extend class HM_GlobalEventHandler
         return chosenOptions.Size();
     }
 
-    HM_Category GetCategoriesForCurrentLevel()
+    void GetCategoriesForCurrentLevel(Array<HM_Category> activeCategories)
     {
         // These are always active
-        HM_Category activeCategories = HM_CAT_PLAYER | HM_CAT_ALLMONSTERS | HM_CAT_PISTOL | HM_CAT_FIST;
+        activeCategories.Push(HM_CAT_META);
+        activeCategories.Push(HM_CAT_PLAYER);
+        activeCategories.Push(HM_CAT_HEALTH);
+        activeCategories.Push(HM_CAT_ARMOR);
+        activeCategories.Push(HM_CAT_AMMO);
+
+        activeCategories.Push(HM_CAT_FIST);
+        activeCategories.Push(HM_CAT_PISTOL);
+        
+        activeCategories.Push(HM_CAT_ALLMONSTERS);
 
         // Does the sector have a damaging floor?
         for (let i = 0; i < Level.sectors.Size(); i++)
@@ -203,7 +216,8 @@ extend class HM_GlobalEventHandler
             // One sector with damaging floor is enough
             if(Level.sectors[i].damageamount > 0)
             {
-                activeCategories |= HM_CAT_DMGFLOOR;
+                activeCategories.Push(HM_CAT_DMGFLOOR);
+                break;
             }
         }
 
@@ -216,15 +230,13 @@ extend class HM_GlobalEventHandler
                 continue;
             }
 
-            if(player.FindInventory('Shotgun') != null) activeCategories |= HM_CAT_SHOTGUN;
-            if(player.FindInventory('SuperShotgun') != null) activeCategories |= HM_CAT_SUPERSHOTGUN;
-            if(player.FindInventory('Chaingun') != null) activeCategories |= HM_CAT_CHAINGUN;
-            if(player.FindInventory('RocketLauncher') != null) activeCategories |= HM_CAT_ROCKETLAUNCHER;
-            if(player.FindInventory('PlasmaRifle') != null) activeCategories |= HM_CAT_PLASMAGUN;
-            if(player.FindInventory('Bfg9000') != null) activeCategories |= HM_CAT_BFG;
+            if(player.FindInventory('Shotgun') != null) activeCategories.Push(HM_CAT_SHOTGUN);
+            if(player.FindInventory('SuperShotgun') != null) activeCategories.Push(HM_CAT_SUPERSHOTGUN);
+            if(player.FindInventory('Chaingun') != null) activeCategories.Push(HM_CAT_CHAINGUN);
+            if(player.FindInventory('RocketLauncher') != null) activeCategories.Push(HM_CAT_ROCKETLAUNCHER);
+            if(player.FindInventory('PlasmaRifle') != null) activeCategories.Push(HM_CAT_PLASMAGUN);
+            if(player.FindInventory('Bfg9000') != null) activeCategories.Push(HM_CAT_BFG);
         }
-
-        // current species categories, and barrels
 
         // Each actor category has to accumulate 100 points to activate (to prevent a single imp from making irrelevant imp categories appear)
         Map<HM_Category, int> categoryMap;
@@ -259,6 +271,15 @@ extend class HM_GlobalEventHandler
             else if(current is "SpiderMastermind") categoryMap.Insert(HM_CAT_SPIDERMASTERMIND, categoryMap.Get(HM_CAT_SPIDERMASTERMIND) + 100);
             else if(current is "Cyberdemon") categoryMap.Insert(HM_CAT_CYBERDEMON, categoryMap.Get(HM_CAT_CYBERDEMON) + 100);
             else if(current is "BossBrain") categoryMap.Insert(HM_CAT_BOSSBRAIN, categoryMap.Get(HM_CAT_BOSSBRAIN) + 100);
+            
+            else if(current is "BlurSphere") categoryMap.Insert(HM_CAT_BLURSPHERE, categoryMap.Get(HM_CAT_BLURSPHERE) + 100);
+            else if(current is "SoulSphere") categoryMap.Insert(HM_CAT_SOULSPHERE, categoryMap.Get(HM_CAT_SOULSPHERE) + 100);
+            else if(current is "MegaSphere") categoryMap.Insert(HM_CAT_MEGASPHERE, categoryMap.Get(HM_CAT_MEGASPHERE) + 100);
+            else if(current is "Backpack") categoryMap.Insert(HM_CAT_BACKPACK, categoryMap.Get(HM_CAT_BACKPACK) + 100);
+            else if(current is "Berserk") categoryMap.Insert(HM_CAT_BERSERK, categoryMap.Get(HM_CAT_BERSERK) + 100);
+            else if(current is "RadSuit") categoryMap.Insert(HM_CAT_RADSUIT, categoryMap.Get(HM_CAT_RADSUIT) + 100);
+            
+            else if(current is "RedCard" || current is "BlueCard" || current is "YellowCard" || current is "RedSkull" || current is "BlueSkull" || current is "YellowSkull") categoryMap.Insert(HM_CAT_KEY, categoryMap.Get(HM_CAT_KEY) + 100);
         }
 
         MapIterator<HM_Category, int> mapIt;
@@ -271,55 +292,71 @@ extend class HM_GlobalEventHandler
 
             if(currentScore >= 100)
             {
-                activeCategories |= currentCategory;
+                activeCategories.Push(currentCategory);
             }
 
-            //console.printf("score %s => %d", HM_CategoryToString(currentCategory), currentScore);
+            console.printf("score %d => %d", currentCategory, currentScore);
         }
 
         console.printf("Categories for map: %s", CategoryToString(activeCategories));
-
-        return activeCategories;
     }
 
-    string CategoryToString(HM_Category category)
+    string CategoryToString(Array<HM_Category> categories)
     {
-        if(category == 0)
+        if(categories.Size() == 0)
         {
-            return "0";
+            return "None";
         }
 
         let str = "";
-        if(category & HM_CAT_DOOM2) str.AppendFormat("|DOOM2");
-        if(category & HM_CAT_PLAYER) str.AppendFormat("|PLAYER");
-        if(category & HM_CAT_DMGFLOOR) str.AppendFormat("|DMGFLOOR");
-        if(category & HM_CAT_BARREL) str.AppendFormat("|BARREL");
-        if(category & HM_CAT_FIST) str.AppendFormat("|FIST");
-        if(category & HM_CAT_PISTOL) str.AppendFormat("|PISTOL");
-        if(category & HM_CAT_SHOTGUN) str.AppendFormat("|SHOTGUN");
-        if(category & HM_CAT_SUPERSHOTGUN) str.AppendFormat("|SUPERSHOTGUN");
-        if(category & HM_CAT_CHAINGUN) str.AppendFormat("|CHAINGUN");
-        if(category & HM_CAT_ROCKETLAUNCHER) str.AppendFormat("|ROCKETLAUNCHER");
-        if(category & HM_CAT_PLASMAGUN) str.AppendFormat("|PLASMAGUN");
-        if(category & HM_CAT_BFG) str.AppendFormat("|BFG");
-        if(category & HM_CAT_ALLMONSTERS) str.AppendFormat("|ALLMONSTERS");
-        if(category & HM_CAT_ZOMBIEMAN) str.AppendFormat("|ZOMBIEMAN");
-        if(category & HM_CAT_SHOTGUNNER) str.AppendFormat("|SHOTGUNNER");
-        if(category & HM_CAT_CHAINGUNNER) str.AppendFormat("|CHAINGUNNER");
-        if(category & HM_CAT_IMP) str.AppendFormat("|IMP");
-        if(category & HM_CAT_PINKY) str.AppendFormat("|PINKY");
-        if(category & HM_CAT_REVENANT) str.AppendFormat("|REVENANT");
-        if(category & HM_CAT_CACODEMON) str.AppendFormat("|CACODEMON");
-        if(category & HM_CAT_LOSTSOUL) str.AppendFormat("|LOSTSOUL");
-        if(category & HM_CAT_PAINELEMENTAL) str.AppendFormat("|PAINELEMENTAL");
-        if(category & HM_CAT_HELLKNIGHT) str.AppendFormat("|HELLKNIGHT");
-        if(category & HM_CAT_BARONOFHELL) str.AppendFormat("|BARONOFHELL");
-        if(category & HM_CAT_MANCUBUS) str.AppendFormat("|MANCUBUS");
-        if(category & HM_CAT_ARCHVILE) str.AppendFormat("|ARCHVILE");
-        if(category & HM_CAT_ARACHNOTRON) str.AppendFormat("|ARACHNOTRON");
-        if(category & HM_CAT_SPIDERMASTERMIND) str.AppendFormat("|SPIDERMASTERMIND");
-        if(category & HM_CAT_CYBERDEMON) str.AppendFormat("|CYBERDEMON");
-        if(category & HM_CAT_BOSSBRAIN) str.AppendFormat("|BOSSBRAIN");
+        if(HasCategory(categories, HM_CAT_NONE)) str.AppendFormat("|NONE");
+
+        if(HasCategory(categories, HM_CAT_DOOM2)) str.AppendFormat("|DOOM2");
+        if(HasCategory(categories, HM_CAT_NOFIRSTMAP)) str.AppendFormat("|NOFIRSTMAP");
+
+        if(HasCategory(categories, HM_CAT_META)) str.AppendFormat("|META");
+        if(HasCategory(categories, HM_CAT_PLAYER)) str.AppendFormat("|PLAYER");
+        if(HasCategory(categories, HM_CAT_DMGFLOOR)) str.AppendFormat("|DMGFLOOR");
+        if(HasCategory(categories, HM_CAT_BARREL)) str.AppendFormat("|BARREL");
+        if(HasCategory(categories, HM_CAT_HEALTH)) str.AppendFormat("|HEALTH");
+        if(HasCategory(categories, HM_CAT_ARMOR)) str.AppendFormat("|ARMOR");
+        if(HasCategory(categories, HM_CAT_AMMO)) str.AppendFormat("|AMMO");
+
+        if(HasCategory(categories, HM_CAT_FIST)) str.AppendFormat("|FIST");
+        if(HasCategory(categories, HM_CAT_PISTOL)) str.AppendFormat("|PISTOL");
+        if(HasCategory(categories, HM_CAT_SHOTGUN)) str.AppendFormat("|SHOTGUN");
+        if(HasCategory(categories, HM_CAT_SUPERSHOTGUN)) str.AppendFormat("|SUPERSHOTGUN");
+        if(HasCategory(categories, HM_CAT_CHAINGUN)) str.AppendFormat("|CHAINGUN");
+        if(HasCategory(categories, HM_CAT_ROCKETLAUNCHER)) str.AppendFormat("|ROCKETLAUNCHER");
+        if(HasCategory(categories, HM_CAT_PLASMAGUN)) str.AppendFormat("|PLASMAGUN");
+        if(HasCategory(categories, HM_CAT_BFG)) str.AppendFormat("|BFG");
+
+        if(HasCategory(categories, HM_CAT_ALLMONSTERS)) str.AppendFormat("|ALLMONSTERS");
+        if(HasCategory(categories, HM_CAT_ZOMBIEMAN)) str.AppendFormat("|ZOMBIEMAN");
+        if(HasCategory(categories, HM_CAT_SHOTGUNNER)) str.AppendFormat("|SHOTGUNNER");
+        if(HasCategory(categories, HM_CAT_CHAINGUNNER)) str.AppendFormat("|CHAINGUNNER");
+        if(HasCategory(categories, HM_CAT_IMP)) str.AppendFormat("|IMP");
+        if(HasCategory(categories, HM_CAT_PINKY)) str.AppendFormat("|PINKY");
+        if(HasCategory(categories, HM_CAT_REVENANT)) str.AppendFormat("|REVENANT");
+        if(HasCategory(categories, HM_CAT_CACODEMON)) str.AppendFormat("|CACODEMON");
+        if(HasCategory(categories, HM_CAT_LOSTSOUL)) str.AppendFormat("|LOSTSOUL");
+        if(HasCategory(categories, HM_CAT_PAINELEMENTAL)) str.AppendFormat("|PAINELEMENTAL");
+        if(HasCategory(categories, HM_CAT_HELLKNIGHT)) str.AppendFormat("|HELLKNIGHT");
+        if(HasCategory(categories, HM_CAT_BARONOFHELL)) str.AppendFormat("|BARONOFHELL");
+        if(HasCategory(categories, HM_CAT_MANCUBUS)) str.AppendFormat("|MANCUBUS");
+        if(HasCategory(categories, HM_CAT_ARCHVILE)) str.AppendFormat("|ARCHVILE");
+        if(HasCategory(categories, HM_CAT_ARACHNOTRON)) str.AppendFormat("|ARACHNOTRON");
+        if(HasCategory(categories, HM_CAT_SPIDERMASTERMIND)) str.AppendFormat("|SPIDERMASTERMIND");
+        if(HasCategory(categories, HM_CAT_CYBERDEMON)) str.AppendFormat("|CYBERDEMON");
+        if(HasCategory(categories, HM_CAT_BOSSBRAIN)) str.AppendFormat("|BOSSBRAIN");
+
+        if(HasCategory(categories, HM_CAT_BLURSPHERE)) str.AppendFormat("|BLURSPHERE");
+        if(HasCategory(categories, HM_CAT_SOULSPHERE)) str.AppendFormat("|SOULSPHERE");
+        if(HasCategory(categories, HM_CAT_MEGASPHERE)) str.AppendFormat("|MEGASPHERE");
+        if(HasCategory(categories, HM_CAT_BACKPACK)) str.AppendFormat("|BACKPACK");
+        if(HasCategory(categories, HM_CAT_BERSERK)) str.AppendFormat("|BERSERK");
+        if(HasCategory(categories, HM_CAT_RADSUIT)) str.AppendFormat("|RADSUIT");
+        if(HasCategory(categories, HM_CAT_KEY)) str.AppendFormat("|KEY");
 
         return str.Mid(1, str.Length() - 1); // Strip the initial "|"; 
     }

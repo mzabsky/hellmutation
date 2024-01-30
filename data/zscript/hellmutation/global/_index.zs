@@ -5,6 +5,7 @@
 #include "./dnaSpawning.zs"
 #include "./helpers.zs"
 
+#include "./categories.zs"
 #include "./mutationDefinitions.zs"
 #include "./perkDefinitions.zs"
 
