@@ -14,7 +14,7 @@ enum HM_Category
     HM_CAT_BARREL = 10004, // Explosive barrels
     HM_CAT_HEALTH = 10005,
     HM_CAT_ARMOR = 10006,
-    HM_CAT_AMMO = 10006,
+    HM_CAT_AMMO = 10007,
 
     // Weapons
     HM_CAT_FIST = 20001,
