@@ -132,6 +132,76 @@ extend class HM_GlobalEventHandler
         return true;
     }
 
+    string CategoriesToString(Array<HM_Category> categories)
+    {
+        if(categories.Size() == 0)
+        {
+            return "EMPTY";
+        }
+
+        let str = "";
+        for(let i = 0; i < categories.Size(); i++)
+        {
+            str.AppendFormat("|%s", CategoryToString(categories[i]));
+        }
+
+        return str.Mid(1, str.Length() - 1); // Strip the initial "|"; 
+    }
+
+    string CategoryToString(HM_Category category)
+    {
+        if((category == HM_CAT_NONE)) return ("NONE");
+
+        if((category == HM_CAT_DOOM2)) return ("DOOM2");
+        if((category == HM_CAT_NOFIRSTMAP)) return ("NOFIRSTMAP");
+
+        if((category == HM_CAT_META)) return ("META");
+        if((category == HM_CAT_PLAYER)) return ("PLAYER");
+        if((category == HM_CAT_DMGFLOOR)) return ("DMGFLOOR");
+        if((category == HM_CAT_BARREL)) return ("BARREL");
+        if((category == HM_CAT_HEALTH)) return ("HEALTH");
+        if((category == HM_CAT_ARMOR)) return ("ARMOR");
+        if((category == HM_CAT_AMMO)) return ("AMMO");
+
+        if((category == HM_CAT_FIST)) return ("FIST");
+        if((category == HM_CAT_PISTOL)) return ("PISTOL");
+        if((category == HM_CAT_SHOTGUN)) return ("SHOTGUN");
+        if((category == HM_CAT_SUPERSHOTGUN)) return ("SUPERSHOTGUN");
+        if((category == HM_CAT_CHAINGUN)) return ("CHAINGUN");
+        if((category == HM_CAT_ROCKETLAUNCHER)) return ("ROCKETLAUNCHER");
+        if((category == HM_CAT_PLASMAGUN)) return ("PLASMAGUN");
+        if((category == HM_CAT_BFG)) return ("BFG");
+
+        if((category == HM_CAT_ALLMONSTERS)) return ("ALLMONSTERS");
+        if((category == HM_CAT_ZOMBIEMAN)) return ("ZOMBIEMAN");
+        if((category == HM_CAT_SHOTGUNNER)) return ("SHOTGUNNER");
+        if((category == HM_CAT_CHAINGUNNER)) return ("CHAINGUNNER");
+        if((category == HM_CAT_IMP)) return ("IMP");
+        if((category == HM_CAT_PINKY)) return ("PINKY");
+        if((category == HM_CAT_REVENANT)) return ("REVENANT");
+        if((category == HM_CAT_CACODEMON)) return ("CACODEMON");
+        if((category == HM_CAT_LOSTSOUL)) return ("LOSTSOUL");
+        if((category == HM_CAT_PAINELEMENTAL)) return ("PAINELEMENTAL");
+        if((category == HM_CAT_HELLKNIGHT)) return ("HELLKNIGHT");
+        if((category == HM_CAT_BARONOFHELL)) return ("BARONOFHELL");
+        if((category == HM_CAT_MANCUBUS)) return ("MANCUBUS");
+        if((category == HM_CAT_ARCHVILE)) return ("ARCHVILE");
+        if((category == HM_CAT_ARACHNOTRON)) return ("ARACHNOTRON");
+        if((category == HM_CAT_SPIDERMASTERMIND)) return ("SPIDERMASTERMIND");
+        if((category == HM_CAT_CYBERDEMON)) return ("CYBERDEMON");
+        if((category == HM_CAT_BOSSBRAIN)) return ("BOSSBRAIN");
+
+        if((category == HM_CAT_BLURSPHERE)) return ("BLURSPHERE");
+        if((category == HM_CAT_SOULSPHERE)) return ("SOULSPHERE");
+        if((category == HM_CAT_MEGASPHERE)) return ("MEGASPHERE");
+        if((category == HM_CAT_BACKPACK)) return ("BACKPACK");
+        if((category == HM_CAT_BERSERK)) return ("BERSERK");
+        if((category == HM_CAT_RADSUIT)) return ("RADSUIT");
+        if((category == HM_CAT_KEY)) return ("KEY");
+
+        return string.format("UNKNOWN(%d)", category);
+    }
+
     // bool AddCategoriesTo(Array<HM_Category> from, Array<HM_Category> to)
     // {
     //     for(let i = 0; i < from.Size(); i++)

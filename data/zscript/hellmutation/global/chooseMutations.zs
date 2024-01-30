@@ -106,7 +106,7 @@ extend class HM_GlobalEventHandler
             // a bit less predictable
             if(IsMutationRemoved(currentOption.key) && random[HM_GlobalEventHandler](0, 4) > 0) // TODO: Make applicable to perks
             {
-                console.printf("Rejected already picked %s: %s, Current chosen categories: %s", optionLabel, currentOption.key, CategoryToString(activeCategories));
+                console.printf("Rejected already picked %s: %s, Current chosen categories: %s", optionLabel, currentOption.key, CategoriesToString(activeCategories));
                 continue;
             }
 
@@ -148,7 +148,7 @@ extend class HM_GlobalEventHandler
                 {
                     // Overlaps already selected mutations -> discard
                     
-                    console.printf("#%d Rejected %s because of overlap: %s, current categories: %s, candidate categories: %s", i, optionLabel, candidateOption.key, CategoryToString(chosenCategories), CategoryToString(candidateOption.Categories));
+                    console.printf("#%d Rejected %s because of overlap: %s, current categories: %s, candidate categories: %s", i, optionLabel, candidateOption.key, CategoriesToString(chosenCategories), CategoriesToString(candidateOption.Categories));
                     continue;
                 }
             }
@@ -180,7 +180,7 @@ extend class HM_GlobalEventHandler
                 continue;
             }
 
-            //console.printf("Chosen categories before: %s", HM_CategoryToString(chosenCategories));
+            //console.printf("Chosen categories before: %s", HM_CategoriesToString(chosenCategories));
             
             // Accumulate the categories to detect overlaps
             MergeInCategories(chosenCategories, candidateOption.Categories);
@@ -188,7 +188,7 @@ extend class HM_GlobalEventHandler
             //chosenCategories = (chosenCategories | candidateOption.Category)
             //    & ~(HM_CAT_DOOM2 | HM_CAT_NOFIRSTMAP); // These categories don't count as overlaps
 
-            console.printf("#%d Accepted %s: %s, Current accepted categories: %s", i, optionLabel, candidateOption.Key, CategoryToString(chosenCategories));
+            console.printf("#%d Accepted %s: %s, Current accepted categories: %s", i, optionLabel, candidateOption.Key, CategoriesToString(chosenCategories));
 
             chosenOptions.Push(candidateOption);
         }
@@ -298,67 +298,7 @@ extend class HM_GlobalEventHandler
             console.printf("score %d => %d", currentCategory, currentScore);
         }
 
-        console.printf("Categories for map: %s", CategoryToString(activeCategories));
-    }
-
-    string CategoryToString(Array<HM_Category> categories)
-    {
-        if(categories.Size() == 0)
-        {
-            return "None";
-        }
-
-        let str = "";
-        if(HasCategory(categories, HM_CAT_NONE)) str.AppendFormat("|NONE");
-
-        if(HasCategory(categories, HM_CAT_DOOM2)) str.AppendFormat("|DOOM2");
-        if(HasCategory(categories, HM_CAT_NOFIRSTMAP)) str.AppendFormat("|NOFIRSTMAP");
-
-        if(HasCategory(categories, HM_CAT_META)) str.AppendFormat("|META");
-        if(HasCategory(categories, HM_CAT_PLAYER)) str.AppendFormat("|PLAYER");
-        if(HasCategory(categories, HM_CAT_DMGFLOOR)) str.AppendFormat("|DMGFLOOR");
-        if(HasCategory(categories, HM_CAT_BARREL)) str.AppendFormat("|BARREL");
-        if(HasCategory(categories, HM_CAT_HEALTH)) str.AppendFormat("|HEALTH");
-        if(HasCategory(categories, HM_CAT_ARMOR)) str.AppendFormat("|ARMOR");
-        if(HasCategory(categories, HM_CAT_AMMO)) str.AppendFormat("|AMMO");
-
-        if(HasCategory(categories, HM_CAT_FIST)) str.AppendFormat("|FIST");
-        if(HasCategory(categories, HM_CAT_PISTOL)) str.AppendFormat("|PISTOL");
-        if(HasCategory(categories, HM_CAT_SHOTGUN)) str.AppendFormat("|SHOTGUN");
-        if(HasCategory(categories, HM_CAT_SUPERSHOTGUN)) str.AppendFormat("|SUPERSHOTGUN");
-        if(HasCategory(categories, HM_CAT_CHAINGUN)) str.AppendFormat("|CHAINGUN");
-        if(HasCategory(categories, HM_CAT_ROCKETLAUNCHER)) str.AppendFormat("|ROCKETLAUNCHER");
-        if(HasCategory(categories, HM_CAT_PLASMAGUN)) str.AppendFormat("|PLASMAGUN");
-        if(HasCategory(categories, HM_CAT_BFG)) str.AppendFormat("|BFG");
-
-        if(HasCategory(categories, HM_CAT_ALLMONSTERS)) str.AppendFormat("|ALLMONSTERS");
-        if(HasCategory(categories, HM_CAT_ZOMBIEMAN)) str.AppendFormat("|ZOMBIEMAN");
-        if(HasCategory(categories, HM_CAT_SHOTGUNNER)) str.AppendFormat("|SHOTGUNNER");
-        if(HasCategory(categories, HM_CAT_CHAINGUNNER)) str.AppendFormat("|CHAINGUNNER");
-        if(HasCategory(categories, HM_CAT_IMP)) str.AppendFormat("|IMP");
-        if(HasCategory(categories, HM_CAT_PINKY)) str.AppendFormat("|PINKY");
-        if(HasCategory(categories, HM_CAT_REVENANT)) str.AppendFormat("|REVENANT");
-        if(HasCategory(categories, HM_CAT_CACODEMON)) str.AppendFormat("|CACODEMON");
-        if(HasCategory(categories, HM_CAT_LOSTSOUL)) str.AppendFormat("|LOSTSOUL");
-        if(HasCategory(categories, HM_CAT_PAINELEMENTAL)) str.AppendFormat("|PAINELEMENTAL");
-        if(HasCategory(categories, HM_CAT_HELLKNIGHT)) str.AppendFormat("|HELLKNIGHT");
-        if(HasCategory(categories, HM_CAT_BARONOFHELL)) str.AppendFormat("|BARONOFHELL");
-        if(HasCategory(categories, HM_CAT_MANCUBUS)) str.AppendFormat("|MANCUBUS");
-        if(HasCategory(categories, HM_CAT_ARCHVILE)) str.AppendFormat("|ARCHVILE");
-        if(HasCategory(categories, HM_CAT_ARACHNOTRON)) str.AppendFormat("|ARACHNOTRON");
-        if(HasCategory(categories, HM_CAT_SPIDERMASTERMIND)) str.AppendFormat("|SPIDERMASTERMIND");
-        if(HasCategory(categories, HM_CAT_CYBERDEMON)) str.AppendFormat("|CYBERDEMON");
-        if(HasCategory(categories, HM_CAT_BOSSBRAIN)) str.AppendFormat("|BOSSBRAIN");
-
-        if(HasCategory(categories, HM_CAT_BLURSPHERE)) str.AppendFormat("|BLURSPHERE");
-        if(HasCategory(categories, HM_CAT_SOULSPHERE)) str.AppendFormat("|SOULSPHERE");
-        if(HasCategory(categories, HM_CAT_MEGASPHERE)) str.AppendFormat("|MEGASPHERE");
-        if(HasCategory(categories, HM_CAT_BACKPACK)) str.AppendFormat("|BACKPACK");
-        if(HasCategory(categories, HM_CAT_BERSERK)) str.AppendFormat("|BERSERK");
-        if(HasCategory(categories, HM_CAT_RADSUIT)) str.AppendFormat("|RADSUIT");
-        if(HasCategory(categories, HM_CAT_KEY)) str.AppendFormat("|KEY");
-
-        return str.Mid(1, str.Length() - 1); // Strip the initial "|"; 
+        console.printf("Categories for map: %s", CategoriesToString(activeCategories));
     }
 
     void ApplyMutationMetaLocks()
